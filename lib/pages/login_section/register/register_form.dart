@@ -1,0 +1,119 @@
+import 'package:flutter/material.dart';
+import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/widgets/buttons.dart';
+import 'package:football_next_gen/widgets/texts.dart';
+import 'package:go_router/go_router.dart';
+
+class RegisterForm extends StatefulWidget{
+  const RegisterForm({super.key});
+
+  @override
+  State<StatefulWidget> createState() => RegisterFormState();
+}
+
+
+class RegisterFormState extends State<RegisterForm>{
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 50.0),
+        child: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            children: [
+              Expanded(
+                flex: 1,
+                child: titleSection(),
+              ),
+              Expanded(
+                flex: 1,
+                child:subtitleSection(),
+              ),
+              Expanded(
+                flex: 3,
+                child:cardSection(),
+              ),
+              Expanded(
+                flex: 1,
+                child:backToLoginSection(),
+              )
+
+            ],
+          ),
+        )
+    );
+  }
+
+  Widget titleSection(){
+    return Column(
+      children: [
+        TextH1(
+          text: getCurrentLanguageValue(ENTER_IN) ?? "",
+          textAlign: TextAlign.center,
+        ),
+        TextH1(
+          text: getCurrentLanguageValue(FOOTBALL_NEXT_GEN) ?? "",
+          textAlign: TextAlign.center,
+        ),
+      ],
+    );
+  }
+
+  Widget subtitleSection(){
+    return Text16(
+      text: getCurrentLanguageValue(REGISTER_SUBTITLE) ?? "",
+      textAlign: TextAlign.center,
+    );
+  }
+
+
+  Widget cardSection(){
+    return Column(
+       children: [
+         ActionButton(
+             onPressed: (){},
+             text: getCurrentLanguageValue(SPORTS_CENTER) ?? "",
+             rowLayout: false,
+             showPrefixIcon: true,
+             svgPrefixIcon: ImagesConstants.sportsCenterImg,
+             height: 134,
+         ),
+
+         Padding(
+           padding: const EdgeInsets.only(top: 20),
+           child: ActionButton(
+             onPressed: (){},
+             text: getCurrentLanguageValue(PARENT) ?? "",
+             rowLayout: false,
+             showPrefixIcon: true,
+             svgPrefixIcon: ImagesConstants.parentImg,
+             height: 134,
+           ),
+         )
+       ],
+    );
+  }
+
+  Widget backToLoginSection() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(right: 5),
+          child: Text16(
+            text: getCurrentLanguageValue(ALREDY_HAVE_ACCOUNT) ?? "",
+          ),
+        ),
+        NavigationText(
+          text: getCurrentLanguageValue(ACCEDI) ?? "",
+          onTap: (){
+            context.pop();
+          },
+        ),
+      ],
+    );
+  }
+
+
+}
