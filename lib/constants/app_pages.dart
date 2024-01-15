@@ -3,6 +3,8 @@ enum AppPage {
   register,
   recoverPassword,
   recoverPasswordConfirmed,
+  sportsCenterRegister,
+  parentRegister
 }
 
 extension AppPageExtension on AppPage {
@@ -16,6 +18,10 @@ extension AppPageExtension on AppPage {
         return "/recover_password";
       case AppPage.recoverPasswordConfirmed:
         return "/recover_password_confirmed";
+      case AppPage.sportsCenterRegister:
+        return "/sports_center_register";
+      case AppPage.parentRegister:
+        return "/parent_register";
     }
   }
 
@@ -29,7 +35,10 @@ extension AppPageExtension on AppPage {
         return "RecoverPasswordPage";
       case AppPage.recoverPasswordConfirmed:
         return "RecoverPasswordConfirmedPage";
-
+      case AppPage.sportsCenterRegister:
+        return "SportsCenterRegisterPage";
+      case AppPage.parentRegister:
+        return "ParentRegisterPage";
     }
   }
 
@@ -43,6 +52,10 @@ extension AppPageExtension on AppPage {
         return "Recupera Password";
       case AppPage.recoverPasswordConfirmed:
         return "Recupero Password Confermato";
+      case AppPage.sportsCenterRegister:
+        return "Registrazione";
+      case AppPage.parentRegister:
+        return "Registrazione";
     }
   }
 }

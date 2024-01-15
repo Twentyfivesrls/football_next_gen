@@ -20,40 +20,33 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50.0),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: titleSection(),
-              ),
-              Expanded(
-                flex: 2,
-                child:subtitleSection(),
-              ),
-              Expanded(
-                flex: 4,
-                child:formSection(),
-              ),
-              Expanded(
-                flex: 1,
-                child:backToLoginSection(),
-              )
-
-            ],
-          ),
+    return  Column(
+      children: [
+        Expanded(
+          flex: 1,
+          child: titleSection(),
+        ),
+        Expanded(
+          flex: 2,
+          child:subtitleSection(),
+        ),
+        Expanded(
+          flex: 4,
+          child:formSection(),
+        ),
+        Expanded(
+          flex: 1,
+          child:backToLoginSection(),
         )
+      ],
     );
   }
 
   Widget titleSection(){
     return TextH1(
-          text: getCurrentLanguageValue(RECOVER_PASSWORD_TITLE) ?? "",
-          textAlign: TextAlign.center,
-        );
+      text: getCurrentLanguageValue(RECOVER_PASSWORD_TITLE) ?? "",
+      textAlign: TextAlign.center,
+    );
   }
 
   Widget subtitleSection(){
@@ -70,8 +63,8 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
       child: Column(
         children: [
           InputWidget(
-              controller: emailController,
-              hintText: getCurrentLanguageValue(EMAIL) ?? "",
+            controller: emailController,
+            hintText: getCurrentLanguageValue(EMAIL) ?? "",
           ),
 
           Padding(

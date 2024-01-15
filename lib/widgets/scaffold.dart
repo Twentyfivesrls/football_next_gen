@@ -26,7 +26,7 @@ class ScaffoldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // drawer: appBar >= 2 ? DrawerWidgetV2() : null,
-     //   appBar: appBar == 0 ? null : appBar == 1 ? appbarSenzaActionsV2(context, title) : appbarConActionsV2(title, context),
+      //   appBar: appBar == 0 ? null : appBar == 1 ? appbarSenzaActionsV2(context, title) : appbarConActionsV2(title, context),
 
         backgroundColor: hasBackgroundColor == true
             ? white
@@ -34,8 +34,11 @@ class ScaffoldWidget extends StatelessWidget {
         bottomNavigationBar: bottomNavigationBar,
         resizeToAvoidBottomInset: false,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: body,
+            padding: const EdgeInsets.symmetric(vertical: 80,horizontal: 20),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width,
+              child: body,
+            )
         )
     );
   }

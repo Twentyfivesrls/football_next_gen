@@ -92,7 +92,6 @@ class InputWidget extends StatelessWidget{
               fontSize: fontSize,
               color: textColor,
             ),
-
             obscureText: obscureText,
             enabled: enabled,
             textInputAction: textInputAction,

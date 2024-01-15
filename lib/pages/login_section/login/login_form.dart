@@ -23,25 +23,21 @@ class LoginFormState extends State<LoginForm>{
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 50.0),
-      child: Form(
-          key: _formKey,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                loginTitleSection(),
-                inputSection(),
-                forgotPasswordSection(),
-                loginButtonSection(),
-                registerSection(),
-                loginWithGoogleOrSpidSection(),
-              ],
-            ),
-          )
+    return  Form(
+      key: _formKey,
+      child:  Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          loginTitleSection(),
+          inputSection(),
+          forgotPasswordSection(),
+          loginButtonSection(),
+          registerSection(),
+          loginWithGoogleOrSpidSection(),
+        ],
       ),
+
+
     );
   }
 

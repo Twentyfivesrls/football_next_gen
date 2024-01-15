@@ -5,6 +5,8 @@ import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../constants/app_pages.dart';
+
 class RegisterForm extends StatefulWidget{
   const RegisterForm({super.key});
 
@@ -16,32 +18,27 @@ class RegisterForm extends StatefulWidget{
 class RegisterFormState extends State<RegisterForm>{
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 50.0),
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            children: [
-              Expanded(
-                flex: 1,
-                child: titleSection(),
-              ),
-              Expanded(
-                flex: 1,
-                child:subtitleSection(),
-              ),
-              Expanded(
-                flex: 3,
-                child:cardSection(),
-              ),
-              Expanded(
-                flex: 1,
-                child:backToLoginSection(),
-              )
-
-            ],
-          ),
+    return  Column(
+      children: [
+        Expanded(
+          flex: 1,
+          child: titleSection(),
+        ),
+        Expanded(
+          flex: 1,
+          child:subtitleSection(),
+        ),
+        Expanded(
+          flex: 3,
+          child:cardSection(),
+        ),
+        Expanded(
+          flex: 1,
+          child:backToLoginSection(),
         )
+
+      ],
+
     );
   }
 
@@ -70,28 +67,32 @@ class RegisterFormState extends State<RegisterForm>{
 
   Widget cardSection(){
     return Column(
-       children: [
-         ActionButton(
-             onPressed: (){},
-             text: getCurrentLanguageValue(SPORTS_CENTER) ?? "",
-             rowLayout: false,
-             showPrefixIcon: true,
-             svgPrefixIcon: ImagesConstants.sportsCenterImg,
-             height: 134,
-         ),
+      children: [
+        ActionButton(
+          onPressed: (){
+            GoRouter.of(context).push(AppPage.sportsCenterRegister.path);
+          },
+          text: getCurrentLanguageValue(SPORTS_CENTER) ?? "",
+          rowLayout: false,
+          showPrefixIcon: true,
+          svgPrefixIcon: ImagesConstants.sportsCenterImg,
+          height: 134,
+        ),
 
-         Padding(
-           padding: const EdgeInsets.only(top: 20),
-           child: ActionButton(
-             onPressed: (){},
-             text: getCurrentLanguageValue(PARENT) ?? "",
-             rowLayout: false,
-             showPrefixIcon: true,
-             svgPrefixIcon: ImagesConstants.parentImg,
-             height: 134,
-           ),
-         )
-       ],
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: ActionButton(
+            onPressed: (){
+              GoRouter.of(context).push(AppPage.parentRegister.path);
+            },
+            text: getCurrentLanguageValue(PARENT) ?? "",
+            rowLayout: false,
+            showPrefixIcon: true,
+            svgPrefixIcon: ImagesConstants.parentImg,
+            height: 134,
+          ),
+        )
+      ],
     );
   }
 
@@ -108,7 +109,7 @@ class RegisterFormState extends State<RegisterForm>{
         NavigationText(
           text: getCurrentLanguageValue(ACCEDI) ?? "",
           onTap: (){
-            context.pop();
+            GoRouter.of(context).go(AppPage.login.path);
           },
         ),
       ],

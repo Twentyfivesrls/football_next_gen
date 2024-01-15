@@ -7,6 +7,7 @@ String? getCurrentLanguageValue(String field) {
 const String LOGIN = "Login";
 const String EMAIL = "Email";
 const String PASSWORD = "Password";
+const String PASSWORD_CONFIRM = "Conferma password";
 const String FORGOT_PASSWORD = "Password dimenticata?";
 const String ACCEDI = "Accedi";
 const String DONT_HAVE_ACCOUNT = "Non hai un account?";
@@ -26,6 +27,25 @@ const String SEND = "Invia";
 const String BACK_TO_LOGIN = "Torna alla pagina di";
 const String EMAIL_SENDED = "Email inviata";
 const String RECOVER_PASSWORD_CONFIRMED_SUBTITLE = "Abbiamo inviato le istruzioni per il cambio password al tuo indirizzo email. Controlla la tua casella di posta e segui i passaggi indicati per completare il processo.";
+const String REGISTER = "Registrazione";
+const String PARENT_DATA = "Dati Genitore";
+const String CHILD_DATA = "Dati Figlio";
+const String FIRSTNAME = "Nome";
+const String LASTNAME = "Cognome";
+const String PHONENUMBER = "Telefono";
+const String CITY = "Città";
+const String UPLOAD_A_DOCUMENT = "Carica un documento";
+const String UPLOAD_DOCUMENT = "Carica documento";
+const String UPLOAD_DOCUMENT_SUBTITLE = "Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF";
+const String USERNAME = "Username";
+const String DATE = "Data di nascita";
+const String ACCEPT = "accetto i";
+const String TERMS_OF_SERVICE = "Termini e le condizioni indicate";
+const String CREATE_ACCOUNT = "Crea account";
+const String BACK_TO = "Torna alla";
+const String ACCOUNT_CHOICE = "Scelta account";
+const String SPORT_CENTER_NAME = "Nome Centro";
+
 
 
 
@@ -33,11 +53,7 @@ const String RECOVER_PASSWORD_CONFIRMED_SUBTITLE = "Abbiamo inviato le istruzion
 
 //old
 const String SIGNUP = "Registrati";
-const String FIRSTNAME = "Nome";
-const String LASTNAME = "Cognome";
-const String PHONENUMBER = "Telefono";
 const String CITIES_OF_INTEREST = "Città di interesse";
-const String REGISTER = "Registrazione";
 const String FORGOT_PASS_DESC = "Scrivi l'indirizzo email con cui ti sei registrato e ti invieremo un link di recupero";
 const String RECOVER_PASSWORD = "Recupera";
 const String SIGNIN = "Accedi";
@@ -59,7 +75,6 @@ const String ORDER_BY = "Ordina per:";
 const String NO_DEMISES = "Nessun decesso trovato";
 const String NO_PRODUCTS = "Nessun prodotto trovato";
 const String SEARCH_DEMISES = "Cerca per cognome";
-const String DATE = "Data";
 const String SEARCH_CITY = "Cerca un comune";
 const String ENABLE_NOTIFICATIONS = "Abilita le notifiche";
 const String NO_NOTIFICATION_FOUND = "Non hai ancora ricevuto notifiche";
@@ -130,18 +145,31 @@ final Map<String, String> LANG_IT = {
   SEND:"Invia",
   BACK_TO_LOGIN:"Torna alla pagina di",
   EMAIL_SENDED:"Email inviata",
-
+  REGISTER:"Registrazione",
+  PARENT_DATA:"Dati Genitore",
+  CHILD_DATA:"dati Figlio",
+  FIRSTNAME:"Nome",
+  LASTNAME:"Cognome",
+  CITY:"Città",
+  PHONENUMBER:"Telefono",
+  PASSWORD_CONFIRM:"Conferma password",
+  UPLOAD_A_DOCUMENT:"Carica un documento",
+  UPLOAD_DOCUMENT:"Carica documento",
+  UPLOAD_DOCUMENT_SUBTITLE:"Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF",
+  USERNAME:"Username",
+  DATE:"Data di nascita",
+  ACCEPT:"Accetto i",
+  TERMS_OF_SERVICE:"Termini e le condizioni indicate",
+  CREATE_ACCOUNT:"Crea account",
+  BACK_TO:"Torna alla",
+  ACCOUNT_CHOICE:"Scelta account",
+  SPORT_CENTER_NAME:"Nome Centro",
 
 
 
 
 
   //old
-  REGISTER:"Registrazione",
-  FIRSTNAME:"Nome",
-  LASTNAME:"Cognome",
-  CITIES_OF_INTEREST:"Città di interesse",
-  PHONENUMBER:"Telefono",
   FORGOT_PASS_DESC:"Scrivi l'indirizzo email con cui ti sei registrato e ti invieremo un link di recupero",
   RECOVER_PASSWORD:"Recupera",
   SIGNUP:"Registrati",
@@ -168,7 +196,6 @@ final Map<String, String> LANG_IT = {
   NO_DEMISES:"Nessun decesso trovato",
   NO_PRODUCTS:"Nessun prodotto trovato",
   SEARCH_DEMISES:"Cerca per cognome",
-  DATE:"Data",
   SEARCH_CITY:"Cerca un comune",
   ENABLE_NOTIFICATIONS:"Abilita le notifiche",
   NO_NOTIFICATION_FOUND:"Non hai ancora ricevuto notifiche",

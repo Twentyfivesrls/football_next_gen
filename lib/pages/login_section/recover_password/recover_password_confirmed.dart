@@ -12,24 +12,18 @@ class RecoverPasswordConfirmed extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      body: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 50.0),
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 7,
-                  child:messageSection(),
-                ),
-                Expanded(
-                  flex: 1,
-                  child:backToLoginSection(context),
-                ),
-              ],
-            ),
-          )
-      )
+      body: Column(
+        children: [
+          Expanded(
+            flex: 7,
+            child:messageSection(),
+          ),
+          Expanded(
+            flex: 1,
+            child:backToLoginSection(context),
+          ),
+        ],
+      ),
     );
   }
 
@@ -43,14 +37,14 @@ class RecoverPasswordConfirmed extends StatelessWidget{
           width: 100,
           height: 100,
         ),
-        
+
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: TextH1(
-              text: getCurrentLanguageValue(EMAIL_SENDED) ?? "",
+            text: getCurrentLanguageValue(EMAIL_SENDED) ?? "",
           ),
         ),
-        
+
         Text16(
           text: getCurrentLanguageValue(RECOVER_PASSWORD_CONFIRMED_SUBTITLE) ?? "",
           textAlign: TextAlign.center,

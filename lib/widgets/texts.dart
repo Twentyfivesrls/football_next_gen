@@ -67,6 +67,72 @@ class Text16 extends StatelessWidget {
   }
 }
 
+class Text12 extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final bool? underline;
+  final FontWeight fontWeight;
+  final TextAlign textAlign;
+
+
+  const Text12({super.key,
+    required this.text,
+    this.textColor = black25,
+    this.underline,
+    this.fontWeight = FontWeight.w500,
+    this.textAlign = TextAlign.start
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+        text,
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: 12,
+          color: textColor,
+          fontWeight: fontWeight,
+          decoration: (underline != null && underline!)
+              ? TextDecoration.underline
+              : null,
+        )
+    );
+  }
+}
+
+class Text18 extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final bool? underline;
+  final FontWeight fontWeight;
+  final TextAlign textAlign;
+
+
+  const Text18({super.key,
+    required this.text,
+    this.textColor = black25,
+    this.underline,
+    this.fontWeight = FontWeight.w600,
+    this.textAlign = TextAlign.start
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+        text,
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: 20,
+          color: textColor,
+          fontWeight: fontWeight,
+          decoration: (underline != null && underline!)
+              ? TextDecoration.underline
+              : null,
+        )
+    );
+  }
+}
+
 class NavigationText extends StatelessWidget {
   final String text;
   final Color textColor;
@@ -74,8 +140,7 @@ class NavigationText extends StatelessWidget {
   final FontWeight fontWeight;
   final TextAlign textAlign;
   final Function() onTap;
-
-
+  final double fontSize;
 
   const NavigationText({super.key,
     required this.text,
@@ -83,6 +148,7 @@ class NavigationText extends StatelessWidget {
     this.underline = TextDecoration.underline,
     this.fontWeight = FontWeight.w600,
     this.textAlign = TextAlign.start,
+    this.fontSize = 16,
     required this.onTap
   });
 
@@ -94,7 +160,7 @@ class NavigationText extends StatelessWidget {
           text,
           textAlign: textAlign,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: fontSize,
             color: textColor,
             fontWeight: fontWeight,
             decoration: underline

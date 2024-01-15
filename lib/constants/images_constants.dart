@@ -9,5 +9,6 @@ class ImagesConstants{
   static String sportsCenterImg = '${baseUrl}sports_and_outdoors.svg';
   static String parentImg = '${baseUrl}breastfeeding.svg';
   static String checkCircleImg = '${baseUrl}check_circle.svg';
+  static String uploadImg = '${baseUrl}upload.svg';
 
 }
