@@ -100,7 +100,7 @@ class Text12 extends StatelessWidget {
   }
 }
 
-class Text18 extends StatelessWidget {
+class Text20 extends StatelessWidget {
   final String text;
   final Color textColor;
   final bool? underline;
@@ -108,7 +108,7 @@ class Text18 extends StatelessWidget {
   final TextAlign textAlign;
 
 
-  const Text18({super.key,
+  const Text20({super.key,
     required this.text,
     this.textColor = black25,
     this.underline,

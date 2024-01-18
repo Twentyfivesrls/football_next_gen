@@ -12,7 +12,7 @@ class DividerWidget extends StatelessWidget{
   const DividerWidget({
     super.key,
     this.height = 0,
-    this.thickness = 0.5,
+    this.thickness = 0.3,
     this.indent = 0,
     this.endIndent = 0,
     this.color = black25

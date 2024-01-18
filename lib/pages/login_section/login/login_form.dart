@@ -84,7 +84,9 @@ class LoginFormState extends State<LoginForm>{
 
   Widget loginButtonSection() {
     return ActionButton(
-      onPressed: (){},
+      onPressed: (){
+        GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+      },
       text: getCurrentLanguageValue(ACCEDI) ?? "",
     );
   }

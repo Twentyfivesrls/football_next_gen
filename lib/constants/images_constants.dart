@@ -10,5 +10,19 @@ class ImagesConstants{
   static String parentImg = '${baseUrl}breastfeeding.svg';
   static String checkCircleImg = '${baseUrl}check_circle.svg';
   static String uploadImg = '${baseUrl}upload.svg';
+  static String teamsImg = '${baseUrl}groups.svg';
+  static String eventsImg = '${baseUrl}emoji_events.svg';
+  static String exerciseImg = '${baseUrl}exercise.svg';
+  static String sportsCenterProfileImg = '${baseUrl}sports_center_profile.svg';
+  static String editImg = '${baseUrl}edit.svg';
+  static String flatwareImg = '${baseUrl}flatware.svg';
+  static String footballImg = '${baseUrl}football.svg';
+  static String localCafeImg = '${baseUrl}local_cafe.svg';
+  static String locationImg = '${baseUrl}location_on.svg';
+  static String emailImg = '${baseUrl}mail.svg';
+  static String phoneImg = '${baseUrl}phone.svg';
+  static String saunaImg = '${baseUrl}sauna.svg';
+  static String basketImg = '${baseUrl}sports_basketball.svg';
+  static String tennisImg = '${baseUrl}sports_tennis.svg';
 
 }

@@ -42,13 +42,11 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
   TextEditingController childPasswordController = TextEditingController();
   TextEditingController childConfirmPasswordController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
         child: Column(
           children: [
-            titleSection(),
             parentFormSection(),
             uploadDocumentSection(),
             childSection(),
@@ -57,13 +55,6 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
             goBackSection()
           ],
         )
-    );
-  }
-
-  Widget titleSection() {
-    return TextH1(
-      text: getCurrentLanguageValue(REGISTER) ?? "",
-      textAlign: TextAlign.center,
     );
   }
 
@@ -197,7 +188,9 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: ActionButton(
-        onPressed: (){},
+        onPressed: (){
+          GoRouter.of(context).push(AppPage.insertOtp.path);
+        },
         text: getCurrentLanguageValue(CREATE_ACCOUNT) ?? "",
       ),
     );

@@ -11,7 +11,7 @@ class RecoverPassword extends StatefulWidget{
 class RecoverPasswordState extends State<RecoverPassword> {
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldWidget(
+    return ScaffoldWidget(
       body: RecoverPasswordForm(),
     );
   }

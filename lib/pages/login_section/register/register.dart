@@ -11,8 +11,8 @@ class Register extends StatefulWidget{
 class RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return const ScaffoldWidget(
-        body: RegisterForm(),
+    return ScaffoldWidget(
+        body: const RegisterForm(),
     );
   }
 }

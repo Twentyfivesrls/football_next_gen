@@ -44,7 +44,7 @@ class ChildDataForm extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
 
-          Text18(
+          Text20(
             text: getCurrentLanguageValue(PARENT_DATA) ?? "",
           ),
 

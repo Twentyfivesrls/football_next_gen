@@ -45,6 +45,27 @@ const String CREATE_ACCOUNT = "Crea account";
 const String BACK_TO = "Torna alla";
 const String ACCOUNT_CHOICE = "Scelta account";
 const String SPORT_CENTER_NAME = "Nome Centro";
+const String INSERT_OTP = "Inserisci OTP";
+const String INSERT_OTP_SUBTITLE = "Inserisci il codice OTP ricevuto tramite SMS";
+const String VERIFY = "Verifica";
+const String SMS_NOT_RECEIVED = "Non hai ricevuto l'SMS?";
+const String NEW_OTP_REQUEST = "Richiedi nuovo OTP";
+const String CONFIRMATION_OCCURRED = "Conferma avvenuta";
+const String CONFIRMATION_OCCURRED_SUBTITLE = "Il tuo numero di telefono è stato verificato con successo";
+const String EXERCISES = "Allenamenti";
+const String TEAMS = "Squadre";
+const String EVENTS = "Tornei";
+const String VIEW_PROFILE = "Visualizza il tuo profilo";
+const String EDIT_PROFILE = "Modifica profilo";
+const String CONTACTS = "Contatti";
+const String NUMBER = "Numero";
+const String SPORTS = "Sport praticati";
+const String EXTRA_SERVICES = "Servizi extra";
+const String FIELDS = "Campi";
+const String MAP = "Mappa";
+const String MAP_TITLE = "Visualizza la mappa del centro sportivo";
+
+
 
 
 
@@ -164,6 +185,27 @@ final Map<String, String> LANG_IT = {
   BACK_TO:"Torna alla",
   ACCOUNT_CHOICE:"Scelta account",
   SPORT_CENTER_NAME:"Nome Centro",
+  INSERT_OTP:"Inserisci OTP",
+  INSERT_OTP_SUBTITLE:"Inserisci il codice OTP ricevuto tramite SMS",
+  VERIFY:"Verifica",
+  SMS_NOT_RECEIVED:"Non hai ricevuto l'SMS?",
+  NEW_OTP_REQUEST:"Richiedi nuovo OTP",
+  CONFIRMATION_OCCURRED:"Conferma avvenuta",
+  CONFIRMATION_OCCURRED_SUBTITLE:"Il tuo numero di telefono è stato verificato con successo",
+  TEAMS:"Squadre",
+  EXERCISES:"Allenamenti",
+  EVENTS:"Tornei",
+  VIEW_PROFILE:"Visualizza il tuo profilo",
+  EDIT_PROFILE:"Modifica profilo",
+  CONTACTS:"Contatti",
+  NUMBER:"Numero",
+  SPORTS:"Sport praticati",
+  EXTRA_SERVICES:"Servizi extra",
+  FIELDS:"Campi",
+  MAP:"Mappa",
+  MAP_TITLE:"Visualizza la mappa del centro sportivo",
+
+
 
 
 

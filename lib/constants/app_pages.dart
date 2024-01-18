@@ -4,7 +4,11 @@ enum AppPage {
   recoverPassword,
   recoverPasswordConfirmed,
   sportsCenterRegister,
-  parentRegister
+  parentRegister,
+  insertOtp,
+  otpVerified,
+  homeSportsCenter,
+  sportsCenterProfile
 }
 
 extension AppPageExtension on AppPage {
@@ -22,6 +26,14 @@ extension AppPageExtension on AppPage {
         return "/sports_center_register";
       case AppPage.parentRegister:
         return "/parent_register";
+      case AppPage.insertOtp:
+        return "/insert_otp";
+      case AppPage.otpVerified:
+        return "/otp_verified";
+      case AppPage.homeSportsCenter:
+        return "/home_sports_center";
+      case AppPage.sportsCenterProfile:
+        return "/sports_center_profile";
     }
   }
 
@@ -39,6 +51,14 @@ extension AppPageExtension on AppPage {
         return "SportsCenterRegisterPage";
       case AppPage.parentRegister:
         return "ParentRegisterPage";
+      case AppPage.insertOtp:
+        return "InsertOtpPage";
+      case AppPage.otpVerified:
+        return "OtpVerified";
+        case AppPage.homeSportsCenter:
+        return "HomeSportsCenter";
+        case AppPage.sportsCenterProfile:
+        return "SportsCenterProfile";
     }
   }
 
@@ -49,13 +69,21 @@ extension AppPageExtension on AppPage {
       case AppPage.register:
         return "Registrazione";
       case AppPage.recoverPassword:
-        return "Recupera Password";
+        return "Password dimenticata";
       case AppPage.recoverPasswordConfirmed:
         return "Recupero Password Confermato";
       case AppPage.sportsCenterRegister:
         return "Registrazione";
       case AppPage.parentRegister:
         return "Registrazione";
+      case AppPage.insertOtp:
+        return "Inserisci OTP";
+      case AppPage.otpVerified:
+        return "Conferma avvenuta";
+        case AppPage.homeSportsCenter:
+        return "Home";
+      case AppPage.sportsCenterProfile:
+        return "Profilo";
     }
   }
 }

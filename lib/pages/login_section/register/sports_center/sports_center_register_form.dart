@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/pages/login_section/register/sports_center/widgets/sports_center_data.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../constants/app_pages.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/language.dart';
@@ -34,19 +33,12 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
     return SingleChildScrollView(
         child: Column(
           children: [
-            titleSection(),
             formSection(),
             checkboxSection(),
             createAccountButtonSection(),
             goBackSection()
           ],
         )
-    );
-  }
-  Widget titleSection() {
-    return TextH1(
-      text: getCurrentLanguageValue(REGISTER) ?? "",
-      textAlign: TextAlign.center,
     );
   }
 
@@ -109,7 +101,9 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: ActionButton(
-        onPressed: (){},
+        onPressed: (){
+          GoRouter.of(context).push(AppPage.insertOtp.path);
+        },
         text: getCurrentLanguageValue(CREATE_ACCOUNT) ?? "",
       ),
     );

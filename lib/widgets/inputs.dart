@@ -8,6 +8,8 @@ class InputWidget extends StatelessWidget{
 
   final double verticalPadding; //0
   final double horizontalPadding; //0
+  final double horizontalContentPadding; //12
+  final double verticalContentPadding; //15
   final double fontSize; //16
   final double hintSize; //16
   final double borderRadius; //4
@@ -60,7 +62,9 @@ class InputWidget extends StatelessWidget{
     this.labelFontWeight = FontWeight.w600,
     this.iconOnTap,
     this.showSuffixIcon = false,
-    this.suffixIcon
+    this.suffixIcon,
+    this.horizontalContentPadding = 12,
+    this.verticalContentPadding = 15,
   });
 
   @override
@@ -98,6 +102,8 @@ class InputWidget extends StatelessWidget{
             controller: controller,
             onEditingComplete: () => node.nextFocus(),
             decoration: InputDecoration(
+              fillColor: white,
+              filled: true,
               enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(borderRadius),
                   borderSide: BorderSide(
@@ -116,7 +122,7 @@ class InputWidget extends StatelessWidget{
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
-              contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 12),
+              contentPadding: EdgeInsets.symmetric(vertical: verticalContentPadding,horizontal: horizontalContentPadding),
               hintText: hintText,
               hintStyle: TextStyle(
                   color: hintColor,
