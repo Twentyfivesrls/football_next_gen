@@ -3,9 +3,9 @@ import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/group_entity.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widget/groups_list.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widget/tournament_info.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../constants/colors.dart';
 import '../../../constants/images_constants.dart';
 import '../../../widgets/buttons.dart';
@@ -33,6 +33,12 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
     GroupEntity(),
     GroupEntity(),
   ];
+  final String category = 'Juniores (Under 18)';
+  final String rules = 'Ogni partita consiste in due tempi da 45 minuti.Rigori in caso di pareggio alla fine dei tempi regolamentari.Massimo di 15 giocatori per squadra.Cartellino rosso diretto per comportamento antisportivo.';
+  final String typology = 'Torneo ad eliminazione diretta';
+  final String info = 'Il Torneo Calcio d\'Eccellenza è aperto a squadre giovanili di club e scuole calcio.Premi per la squadra vincitrice e il miglior giocatore.Il torneo si tiene presso gli impianti sportivi XYZ in data [data].';
+  final String email = 'info@torneocalciodelleccellenza.com';
+  final String phone = '+39 123 456 789';
 
   @override
   void initState() {
@@ -58,6 +64,8 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
         title: getCurrentLanguageValue(TOURNAMENT_DETAIL) ?? "",
         trailingIcon: Icons.home,
         paddingTop: 0,
+        paddingLeft: 0,
+        paddingRight: 0,
         goHome: (){
           GoRouter.of(context).go(AppPage.homeSportsCenter.path);
         },
@@ -101,10 +109,16 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
                       ],
                     ),
                   ),
-                  secondTab: const Column(
-                    children: [
-                      Center(child: Text('egg'),)
-                    ],
+                  secondTab: SingleChildScrollView(
+                    child: TournamentInfo(
+                        edit: (){},
+                        category: category,
+                        typology: typology,
+                        rules: rules,
+                        info: info,
+                        email: email,
+                        phone: phone
+                    ),
                   )
               ),
             ),
@@ -116,27 +130,30 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
 
 
   Widget newGroupsButtonSection(){
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
-          child: ActionButton(
-            onPressed: (){
-              GoRouter.of(context).push(AppPage.addTournament.path);
-            },
-            text: getCurrentLanguageValue(ADD_GROUPS) ?? "",
-            backgroundColor: white,
-            borderColor: textProfileGrey,
-            rowLayout: false,
-            height: 114,
-            showPrefixIcon: true,
-            textColor: textProfileGrey,
-            svgPrefixIcon: ImagesConstants.addCircleImg,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 30),
+            child: ActionButton(
+              onPressed: (){
+                GoRouter.of(context).push(AppPage.addTournament.path);
+              },
+              text: getCurrentLanguageValue(ADD_GROUPS) ?? "",
+              backgroundColor: white,
+              borderColor: textProfileGrey,
+              rowLayout: false,
+              height: 114,
+              showPrefixIcon: true,
+              textColor: textProfileGrey,
+              svgPrefixIcon: ImagesConstants.addCircleImg,
+            ),
           ),
-        ),
 
-        const DividerWidget(),
-      ],
+          const DividerWidget(),
+        ],
+      ),
     );
   }
 

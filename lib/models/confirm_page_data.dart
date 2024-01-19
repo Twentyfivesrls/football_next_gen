@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,47 +21,46 @@ class ConfirmPageData{
     required this.onTap,
   });
 
-  factory ConfirmPageData.addTeamConfirmed(context) =>
+  factory ConfirmPageData.addTeamConfirmed(BuildContext context) =>
       ConfirmPageData(
           titleText: getCurrentLanguageValue(TEAM_CREATED) ?? "",
           navigationText: getCurrentLanguageValue(TEAM_DETAIL) ?? "",
           bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.teamDetail.path);
+            context.go(AppPage.teamDetail.path);
             },
       );
 
-  factory ConfirmPageData.addTournamentConfirmed(context) =>
+  factory ConfirmPageData.addTournamentConfirmed(BuildContext context) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(TOURNAMENT_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
-          GoRouter.of(context).go(AppPage.tournamentDetail.path);
+          context.go(AppPage.tournamentDetail.path);
         },
       );
 
-
-  factory ConfirmPageData.recoverPassConfirmed(context) =>
+  factory ConfirmPageData.recoverPassConfirmed(BuildContext context) =>
       ConfirmPageData(
           titleText: getCurrentLanguageValue(EMAIL_SENDED) ?? "",
           navigationText: getCurrentLanguageValue(LOGIN) ?? "",
           bottomText: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.teamDetail.path);
+            context.go(AppPage.teamDetail.path);
             },
         showSubtitle: true,
         subtitleText: getCurrentLanguageValue(RECOVER_PASSWORD_CONFIRMED_SUBTITLE) ?? "",
       );
 
 
-  factory ConfirmPageData.otpConfirmed(context) =>
+  factory ConfirmPageData.otpConfirmed(BuildContext context) =>
       ConfirmPageData(
           titleText: getCurrentLanguageValue(CONFIRMATION_OCCURRED) ?? "",
           navigationText: getCurrentLanguageValue(LOGIN) ?? "",
           bottomText: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.teamDetail.path);
+            context.go(AppPage.teamDetail.path);
             },
         showSubtitle: true,
         subtitleText: getCurrentLanguageValue(CONFIRMATION_OCCURRED_SUBTITLE) ?? "",

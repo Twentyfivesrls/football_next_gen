@@ -88,6 +88,13 @@ const String TOURNAMENT_CREATED = "Torneo creato con successo!";
 const String TOURNAMENT_DETAIL = "Dettagli torneo";
 const String ADD_GROUPS = "Crea nuovo girone";
 const String EMPTY_GROUPS_LIST = "Non sono ancora stati creati dei gironi.";
+const String RULES = "Regole";
+const String OTHER_INFO = "Ulteriori info";
+const String EMAIL_CONTACT = "Contatto email";
+const String PHONE_CONTACT = "Contatto telefonico";
+const String CATEGORY = "Categoria";
+const String TYPOLOGY = "Tiplogia";
+const String POSTER = "Locandina";
 
 
 
@@ -252,6 +259,13 @@ final Map<String, String> LANG_IT = {
   TOURNAMENT_DETAIL:"Dettagli torneo",
   ADD_GROUPS:"Crea nuovo girone",
   EMPTY_GROUPS_LIST:"Non sono ancora stati creati dei gironi.",
+  TYPOLOGY:"Tipologia",
+  CATEGORY:"Categoria",
+  PHONE_CONTACT:"Contatto telefonico",
+  EMAIL_CONTACT:"Contatto email",
+  RULES:"Regole",
+  OTHER_INFO:"Ulteriori info",
+  POSTER:"Locandina",
 
 
 

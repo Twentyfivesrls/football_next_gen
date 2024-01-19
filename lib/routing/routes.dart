@@ -1,9 +1,7 @@
 import 'package:football_next_gen/models/confirm_page_data.dart';
 import 'package:football_next_gen/pages/login_section/login/login.dart';
 import 'package:football_next_gen/pages/login_section/recover_password/recover_password.dart';
-import 'package:football_next_gen/pages/login_section/recover_password/recover_password_confirmed.dart';
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
-import 'package:football_next_gen/pages/login_section/register/otp_verified.dart';
 import 'package:football_next_gen/pages/sports_center/home_sports_center.dart';
 import 'package:football_next_gen/pages/sports_center/profile/sports_center_profile.dart';
 import 'package:football_next_gen/pages/sports_center/teams/add_team.dart';
@@ -17,7 +15,6 @@ import '../pages/login_section/register/register.dart';
 import '../pages/login_section/register/sports_center/sports_center.dart';
 import '../pages/sports_center/teams/team_detail.dart';
 import '../pages/sports_center/teams/teams_list.dart';
-import '../pages/sports_center/teams/widgets/add_team_confirmed.dart';
 
 
 class RouterManager {
@@ -46,11 +43,6 @@ class RouterManager {
       ),
 
       GoRoute(
-          path: "/recover_password_confirmed",
-          builder: (context, state) => const RecoverPasswordConfirmed()
-      ),
-
-      GoRoute(
           path: "/sports_center_register",
           builder: (context, state) => const SportsCenterRegister()
       ),
@@ -63,11 +55,6 @@ class RouterManager {
       GoRoute(
           path: "/insert_otp",
           builder: (context, state) => const InsertOtp()
-      ),
-
-      GoRoute(
-          path: "/otp_verified",
-          builder: (context, state) => const OtpVerified()
       ),
 
       GoRoute(
@@ -88,11 +75,6 @@ class RouterManager {
       GoRoute(
           path: "/add_team",
           builder: (context, state) => AddTeam()
-      ),
-
-      GoRoute(
-          path: "/add_team_confirmed",
-          builder: (context, state) => const AddTeamConfirmed()
       ),
 
       GoRoute(

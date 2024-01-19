@@ -77,7 +77,7 @@ class ConfirmPage extends StatelessWidget{
         NavigationText(
           text: data.navigationText ?? "",
           onTap: (){
-            data.onTap;
+            data.onTap();
           },
         ),
       ],

@@ -14,19 +14,22 @@ class GroupsList extends StatelessWidget{
   @override
 
   Widget build(BuildContext context) {
-    return  Column(
-      children: [
-        Visibility(
-            visible: groups.isEmpty,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Text16(
-                text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
-              ),
-            )
-        ),
-        ...groups.map((e) => groupsList(e,context)),
-      ],
+    return  Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        children: [
+          Visibility(
+              visible: groups.isEmpty,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: Text16(
+                  text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
+                ),
+              )
+          ),
+          ...groups.map((e) => groupsList(e,context)),
+        ],
+      ),
     );
   }
 

@@ -67,7 +67,7 @@ class AddTeamState extends State<AddTeam>{
         
         ActionButton(
             onPressed: (){
-              context.go(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context));
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context));
             },
             text: getCurrentLanguageValue(ADD_TEAM) ?? "",
         ),
