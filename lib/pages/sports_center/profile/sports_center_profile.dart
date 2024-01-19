@@ -5,13 +5,18 @@ import 'package:football_next_gen/models/sport.dart';
 import 'package:football_next_gen/models/sport_field.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/extra_services.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/maps.dart';
-import 'package:football_next_gen/pages/sports_center/profile/widgets/profile_chips.dart';
+import 'package:football_next_gen/widgets/tabbar.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/profile_contacts.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/profile_header.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/profile_sports.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/sports_field.dart';
-import 'package:football_next_gen/pages/sports_center/profile/widgets/tabbar_view.dart';
+import 'package:football_next_gen/widgets/tabbar_view.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../constants/app_pages.dart';
+import '../../../constants/colors.dart';
+import '../../../widgets/texts.dart';
 
 class SportsCenterProfile extends StatefulWidget{
   const SportsCenterProfile({super.key});
@@ -69,6 +74,12 @@ class SportsCenterProfileState extends State<SportsCenterProfile>  with TickerPr
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+        goBack: (){
+          context.pop();
+        },
+        goHome: (){
+          GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+        },
         appBar: 2,
         paddingRight: 0,
         paddingLeft: 0,
@@ -91,9 +102,25 @@ class SportsCenterProfileState extends State<SportsCenterProfile>  with TickerPr
                   editProfile: (){},
                 ),
 
-                ProfileChips(
+                TabbarWidget(
                   tabController: tabController,
                   activeIndex: activeIndex,
+                  tabs: <Widget>[
+                    Tab(
+                      child: Text16(
+                        text: 'Informazioni',
+                        fontWeight: activeIndex == 0 ? FontWeight.w600: FontWeight.w500,
+                        textColor: activeIndex == 0 ? primary : textProfileGrey,
+                      ),
+                    ),
+                    Tab(
+                      child: Text16(
+                        text: 'Media',
+                        fontWeight: activeIndex == 1 ? FontWeight.w600: FontWeight.w500,
+                        textColor: activeIndex == 1 ? primary : textProfileGrey,
+                      ),
+                    ),
+                  ],
 
                 ),
 

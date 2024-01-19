@@ -34,6 +34,8 @@ class InputWidget extends StatelessWidget{
   final double labelPaddingTop;
   final double labelPaddingRight;
   final double labelPaddingLeft;
+  final int minLines;
+  final int maxLines;
 
   InputWidget({
     super.key,
@@ -65,6 +67,8 @@ class InputWidget extends StatelessWidget{
     this.suffixIcon,
     this.horizontalContentPadding = 12,
     this.verticalContentPadding = 15,
+    this.minLines = 1,
+    this.maxLines = 1,
   });
 
   @override
@@ -96,6 +100,9 @@ class InputWidget extends StatelessWidget{
               fontSize: fontSize,
               color: textColor,
             ),
+
+            maxLines: maxLines,
+            minLines: minLines,
             obscureText: obscureText,
             enabled: enabled,
             textInputAction: textInputAction,

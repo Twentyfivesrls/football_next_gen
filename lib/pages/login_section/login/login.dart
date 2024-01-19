@@ -12,6 +12,8 @@ class LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+        goBack: (){},
+        goHome: (){},
         body: WillPopScope(
           onWillPop: () async => false,
           child: const LoginForm(),

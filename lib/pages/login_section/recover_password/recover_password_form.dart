@@ -6,6 +6,7 @@ import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../constants/app_pages.dart';
+import '../../../models/confirm_page_data.dart';
 
 class RecoverPasswordForm extends StatefulWidget{
   const RecoverPasswordForm({super.key});
@@ -71,7 +72,9 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
             padding: const EdgeInsets.only(top: 60),
             child: ActionButton(
               onPressed: (){
-                GoRouter.of(context).go(AppPage.recoverPasswordConfirmed.path);
+             //   GoRouter.of(context).go(AppPage.recoverPasswordConfirmed.path);
+                context.go(AppPage.confirmPage.path, extra: ConfirmPageData.recoverPassConfirmed(context));
+
               },
               text: getCurrentLanguageValue(SEND) ?? "",
             ),

@@ -3,16 +3,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
-import '../../../constants/app_pages.dart';
-import '../../../constants/language.dart';
-import '../../../widgets/texts.dart';
+import '../../../../constants/app_pages.dart';
+import '../../../../constants/language.dart';
+import '../../../../widgets/texts.dart';
 
-class OtpVerified extends StatelessWidget{
-  const OtpVerified({super.key});
+
+class AddTeamConfirmed extends StatelessWidget{
+  const AddTeamConfirmed({super.key});
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      goBack: (){},
+      goBack: (){
+        context.pop();
+      },
       goHome: (){},
       body: Column(
         children: [
@@ -43,14 +46,10 @@ class OtpVerified extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: TextH1(
-            text: getCurrentLanguageValue(CONFIRMATION_OCCURRED) ?? "",
+            text: getCurrentLanguageValue(TEAM_CREATED) ?? "",
+            textAlign: TextAlign.center,
           ),
         ),
-
-        Text16(
-          text: getCurrentLanguageValue(CONFIRMATION_OCCURRED_SUBTITLE) ?? "",
-          textAlign: TextAlign.center,
-        )
       ],
     );
   }
@@ -62,13 +61,13 @@ class OtpVerified extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.only(right: 5),
           child: Text16(
-            text: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
+            text: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
           ),
         ),
         NavigationText(
-          text: getCurrentLanguageValue(LOGIN) ?? "",
+          text: getCurrentLanguageValue(TEAM_DETAIL) ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.login.path);
+            GoRouter.of(context).go(AppPage.teamDetail.path);
           },
         ),
       ],

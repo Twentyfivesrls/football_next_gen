@@ -15,6 +15,8 @@ class ParentRegisterState extends State<ParentRegister>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+        goBack: (){},
+        goHome: (){},
         paddingTop: 0,
         appBar: 1,
         title: AppPage.parentRegister.toTitle,

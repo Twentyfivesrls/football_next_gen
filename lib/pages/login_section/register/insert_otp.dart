@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../constants/app_pages.dart';
 import '../../../constants/language.dart';
+import '../../../models/confirm_page_data.dart';
 import '../../../widgets/texts.dart';
 
 class InsertOtp extends StatefulWidget{
@@ -21,6 +22,8 @@ class InsertOtpState extends State<InsertOtp>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+        goBack: (){},
+        goHome: (){},
         body: Column(
           children: [
             Expanded(
@@ -97,7 +100,9 @@ class InsertOtpState extends State<InsertOtp>{
   Widget buttonSection(){
     return ActionButton(
         onPressed: (){
-          GoRouter.of(context).go(AppPage.otpVerified.path);
+       //   GoRouter.of(context).go(AppPage.otpVerified.path);
+          context.go(AppPage.confirmPage.path, extra: ConfirmPageData.otpConfirmed(context));
+
         },
         text: getCurrentLanguageValue(VERIFY) ?? "",
     );

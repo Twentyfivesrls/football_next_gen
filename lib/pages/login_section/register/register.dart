@@ -12,7 +12,9 @@ class RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-        body: const RegisterForm(),
+      goBack: (){},
+      goHome: (){},
+      body: const RegisterForm(),
     );
   }
 }

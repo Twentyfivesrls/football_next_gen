@@ -8,16 +8,18 @@ class InfoBoxWidget extends StatelessWidget{
   final String text;
   final String labelText;
   final bool showBottomText;
+  final bool showIcon;
   final String svgIcon;
   final Color textColor;
 
   const InfoBoxWidget({
     super.key,
     this.text = '',
-    required this.svgIcon,
+    this.svgIcon = '',
     required this.labelText,
     this.showBottomText = true,
-    this.textColor = textProfileGrey
+    this.textColor = textProfileGrey,
+    this.showIcon = true
   });
 
   @override
@@ -28,13 +30,16 @@ class InfoBoxWidget extends StatelessWidget{
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            SvgPicture.asset(svgIcon),
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Text16(
+            Visibility(
+              visible: showIcon,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: SvgPicture.asset(svgIcon),
+                )
+            ),
+            Text16(
                 text: labelText,
                 fontWeight: FontWeight.w600,
-              ),
             )
           ],
         ),
@@ -42,7 +47,8 @@ class InfoBoxWidget extends StatelessWidget{
           visible: showBottomText,
           child: Padding(
             padding: const EdgeInsets.only(top: 5),
-            child: Text16(text: text,textColor: textColor,),
+            child: Text16
+              (text: text,textColor: textColor,),
           ),
         )
       ],

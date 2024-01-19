@@ -64,6 +64,30 @@ const String EXTRA_SERVICES = "Servizi extra";
 const String FIELDS = "Campi";
 const String MAP = "Mappa";
 const String MAP_TITLE = "Visualizza la mappa del centro sportivo";
+const String ADD_NEW_TEAM = "Crea nuova squadra";
+const String ADD_TEAM = "Crea squadra";
+const String NO_TEAMS = "Non sono ancora state create delle squadre.";
+const String TEAM_NAME = "Nome società";
+const String COACH = "Allenatore";
+const String MANAGER = "Dirigente";
+const String DESCRIPTION = "Descrizione";
+const String UPLOAD_LOGO = "Carica il logo";
+const String UPLOAD_IMAGE = "Carica immagine";
+const String UPLOAD_LOGO_SUBTITLE = "Carica l’immagine del logo della squadra. I formati accettati sono JPG, PNG e SVG";
+const String TEAM_CREATED = "Squadra creata con successo!";
+const String GO_TO_PAGE = "Vai alla pagina";
+const String TEAM_DETAIL = "Dettagli squadra";
+const String INFO = "Informazioni";
+const String LOGO = "Logo";
+const String EMPTY_TEAMS_LIST = "Non sono ancora state create delle squadre.";
+const String ADD_TOURNAMENT = "Crea nuovo torneo";
+const String EMPTY_TOURNAMENTS_LIST = "Non sono ancora stati creati dei tornei.";
+const String UPLOAD_POSTER = "Carica locandina";
+const String UPLOAD_POSTER_SUBTITLE = "Carica l'immagine della locandina. I formati accettati sono JPG, PNG e PDF";
+const String TOURNAMENT_CREATED = "Torneo creato con successo!";
+const String TOURNAMENT_DETAIL = "Dettagli torneo";
+const String ADD_GROUPS = "Crea nuovo girone";
+const String EMPTY_GROUPS_LIST = "Non sono ancora stati creati dei gironi.";
 
 
 
@@ -204,6 +228,31 @@ final Map<String, String> LANG_IT = {
   FIELDS:"Campi",
   MAP:"Mappa",
   MAP_TITLE:"Visualizza la mappa del centro sportivo",
+  ADD_NEW_TEAM:"Crea nuova squadra",
+  ADD_TEAM:"Crea squadra",
+  NO_TEAMS:"Non sono ancora state create delle squadre.",
+  TEAM_NAME:"Nome società",
+  COACH:"Allenatore",
+  MANAGER:"Dirigente",
+  DESCRIPTION:"Descrizione",
+  UPLOAD_LOGO:"Carica il logo",
+  UPLOAD_IMAGE:"Carica immagine",
+  UPLOAD_LOGO_SUBTITLE:"Carica l’immagine del logo della squadra. I formati accettati sono JPG, PNG e SVG",
+  TEAM_CREATED:"Squadra creata con successo!",
+  GO_TO_PAGE:"Vai alla pagina",
+  TEAM_DETAIL:"Dettagli squadra",
+  INFO:"Informazioni",
+  LOGO:"Logo",
+  EMPTY_TEAMS_LIST:"Non sono ancora state create delle squadre.",
+  EMPTY_TOURNAMENTS_LIST:"Non sono ancora stati creati dei tornei.",
+  ADD_TOURNAMENT:"Crea nuovo torneo",
+  UPLOAD_POSTER:"Carica locandina",
+  UPLOAD_POSTER_SUBTITLE:"Carica l'immagine della locandina. I formati accettati sono JPG, PNG e PDF",
+  TOURNAMENT_CREATED:"Torneo creato con successo!",
+  TOURNAMENT_DETAIL:"Dettagli torneo",
+  ADD_GROUPS:"Crea nuovo girone",
+  EMPTY_GROUPS_LIST:"Non sono ancora stati creati dei gironi.",
+
 
 
 

@@ -1,8 +1,6 @@
-import 'package:expand_tap_area/expand_tap_area.dart';
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/texts.dart';
-import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';
 
 whiteAppbar(BuildContext context, String title) {
@@ -26,15 +24,16 @@ appbarWithActions(
     bool showSearchInput,
     TextEditingController searchController,
     String hintText,
+    bool showTrailingIcon,
+    Function() backOnTap,
+    Function() goHome,
     ) {
   return AppBar(
     elevation: 0,
     leading: Visibility(
       visible: showBackIcon,
       child: GestureDetector(
-        onTap: () {
-          context.pop();
-        },
+        onTap: backOnTap,
         child:const Icon(
           Icons.arrow_back_ios,
           color: white,
@@ -51,12 +50,51 @@ appbarWithActions(
         text: title,
         textColor: white
     ),
-    centerTitle: true, actions: [
-    IconButton(
-        color: white,
-        icon: Icon(trailingIcon),
-        onPressed: (){}
-    )
-  ],
+    centerTitle: false,
+    actions: [
+      Visibility(
+        visible: showTrailingIcon,
+        child: IconButton(
+            color: white,
+            icon: Icon(trailingIcon),
+            onPressed: goHome
+        ),
+      )
+    ],
+  );
+}
+
+appbarWithoutActions(
+    String title,
+    BuildContext context,
+    IconData trailingIcon,
+    bool showSearchInput,
+    TextEditingController searchController,
+    String hintText,
+    Function() goHome,
+
+    ) {
+  return AppBar(
+    elevation: 0,
+    automaticallyImplyLeading: false,
+    centerTitle: false,
+    title: showSearchInput ? InputWidget(
+        controller: searchController,
+        hintText: hintText
+    ) :
+    TextH1(
+        text: title,
+        textColor: white
+    ),
+    iconTheme: const IconThemeData(color: white),
+    backgroundColor: primary,
+    actions: [
+     IconButton(
+            color: white,
+            icon: Icon(trailingIcon,color: white,),
+            onPressed: goHome
+        ),
+
+    ],
   );
 }

@@ -8,7 +8,15 @@ enum AppPage {
   insertOtp,
   otpVerified,
   homeSportsCenter,
-  sportsCenterProfile
+  sportsCenterProfile,
+  teamsList,
+  addTeam,
+  addTeamConfirmed,
+  teamDetail,
+  tournamentsList,
+  addTournament,
+  tournamentDetail,
+  confirmPage
 }
 
 extension AppPageExtension on AppPage {
@@ -34,6 +42,22 @@ extension AppPageExtension on AppPage {
         return "/home_sports_center";
       case AppPage.sportsCenterProfile:
         return "/sports_center_profile";
+      case AppPage.teamsList:
+        return "/teams_list";
+      case AppPage.addTeam:
+        return "/add_team";
+      case AppPage.teamDetail:
+        return "/team_detail";
+      case AppPage.addTeamConfirmed:
+        return "/add_team_confirmed";
+      case AppPage.tournamentsList:
+        return "/tournaments_list";
+      case AppPage.addTournament:
+        return "/add_tournament";
+      case AppPage.tournamentDetail:
+        return "/tournament_detail";
+      case AppPage.confirmPage:
+        return "/confirm_page";
     }
   }
 
@@ -55,10 +79,27 @@ extension AppPageExtension on AppPage {
         return "InsertOtpPage";
       case AppPage.otpVerified:
         return "OtpVerified";
-        case AppPage.homeSportsCenter:
+      case AppPage.homeSportsCenter:
         return "HomeSportsCenter";
-        case AppPage.sportsCenterProfile:
+      case AppPage.sportsCenterProfile:
         return "SportsCenterProfile";
+      case AppPage.teamsList:
+        return "TeamsList";
+      case AppPage.addTeam:
+        return "AddTeam";
+      case AppPage.addTeamConfirmed:
+        return "AddTeamConfirmed";
+      case AppPage.teamDetail:
+        return "TeamDetail";
+      case AppPage.tournamentsList:
+        return "TournamentsList";
+      case AppPage.addTournament:
+        return "AddTournament";
+      case AppPage.tournamentDetail:
+        return "TournamentDetail";
+      case AppPage.confirmPage:
+        return "ConfirmPage";
+
     }
   }
 
@@ -80,10 +121,26 @@ extension AppPageExtension on AppPage {
         return "Inserisci OTP";
       case AppPage.otpVerified:
         return "Conferma avvenuta";
-        case AppPage.homeSportsCenter:
+      case AppPage.homeSportsCenter:
         return "Home";
       case AppPage.sportsCenterProfile:
         return "Profilo";
+      case AppPage.teamsList:
+        return "Squadre";
+      case AppPage.addTeam:
+        return "Nuova squadra";
+      case AppPage.teamDetail:
+        return "Dettagli squadra";
+      case AppPage.addTeamConfirmed:
+        return "Conferma";
+      case AppPage.tournamentsList:
+        return "Tornei";
+      case AppPage.addTournament:
+        return "Nuovo torneo";
+      case AppPage.tournamentDetail:
+        return "Dettaglio torneo";
+      case AppPage.confirmPage:
+        return "Conferma";
     }
   }
 }

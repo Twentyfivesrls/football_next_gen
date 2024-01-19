@@ -12,6 +12,8 @@ class RecoverPasswordConfirmed extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+      goBack: (){},
+      goHome: (){},
       body: Column(
         children: [
           Expanded(

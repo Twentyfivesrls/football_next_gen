@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
-import 'package:go_router/go_router.dart';
-import '../../../constants/app_pages.dart';
-import '../../../constants/language.dart';
 import '../../../widgets/texts.dart';
+import '../models/confirm_page_data.dart';
 
-class OtpVerified extends StatelessWidget{
-  const OtpVerified({super.key});
+class ConfirmPage extends StatelessWidget{
+
+  final ConfirmPageData data;
+
+
+  const ConfirmPage({super.key, required this.data});
+
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
@@ -22,7 +25,7 @@ class OtpVerified extends StatelessWidget{
           ),
           Expanded(
             flex: 1,
-            child:backToLoginSection(context),
+            child:backSection(context),
           ),
         ],
       ),
@@ -43,35 +46,43 @@ class OtpVerified extends StatelessWidget{
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: TextH1(
-            text: getCurrentLanguageValue(CONFIRMATION_OCCURRED) ?? "",
+            text: data.titleText,
+            textAlign: TextAlign.center,
           ),
         ),
-
-        Text16(
-          text: getCurrentLanguageValue(CONFIRMATION_OCCURRED_SUBTITLE) ?? "",
-          textAlign: TextAlign.center,
+        Visibility(
+          visible: data.showSubtitle,
+          child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Text16(
+                text: data.subtitleText ?? "",
+                textAlign: TextAlign.center,
+              )
+          ),
         )
       ],
     );
   }
 
-  Widget backToLoginSection(context) {
+  Widget backSection(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 5),
           child: Text16(
-            text: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
+            text: data.bottomText,
           ),
         ),
         NavigationText(
-          text: getCurrentLanguageValue(LOGIN) ?? "",
+          text: data.navigationText ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.login.path);
+            data.onTap;
           },
         ),
       ],
     );
   }
+
+
 }

@@ -22,6 +22,8 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
+        goHome: (){},
+        goBack: (){},
         appBar: 2,
         paddingTop: 30,
       //  showSearchInput: true,
@@ -75,7 +77,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-             // GoRouter.of(context).push(AppPage.sportsCenterRegister.path);
+             GoRouter.of(context).push(AppPage.tournamentsList.path);
             },
             text: getCurrentLanguageValue(EVENTS) ?? "",
             rowLayout: false,
@@ -99,7 +101,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
         ),
         ActionButton(
           onPressed: (){
-           // GoRouter.of(context).push(AppPage.sportsCenterRegister.path);
+           GoRouter.of(context).push(AppPage.teamsList.path);
           },
           text: getCurrentLanguageValue(TEAMS) ?? "",
           rowLayout: false,

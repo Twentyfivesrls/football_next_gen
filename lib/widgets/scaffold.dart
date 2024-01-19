@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';
 import 'appbars.dart';
 
@@ -13,6 +14,7 @@ class ScaffoldWidget extends StatelessWidget {
   final bool hasBackgroundColor;
   final bool showBackIcon;
   final bool showSearchInput;
+  final bool showTrailingIcon;
   final double paddingTop;
   final double paddingBottom;
   final double paddingLeft;
@@ -20,6 +22,8 @@ class ScaffoldWidget extends StatelessWidget {
   final IconData trailingIcon;
   TextEditingController? searchController;
   final String hintText;
+  Function() goHome;
+  Function() goBack;
 
   ScaffoldWidget({
     Key? key,
@@ -38,6 +42,9 @@ class ScaffoldWidget extends StatelessWidget {
     this.showSearchInput = false,
     this.hintText = "",
     this.searchController,
+    required this.goHome,
+    this.showTrailingIcon = true,
+    required this.goBack
 
   }) : super(key: key);
 
@@ -47,6 +54,15 @@ class ScaffoldWidget extends StatelessWidget {
       // drawer: appBar >= 2 ? DrawerWidgetV2() : null,
         appBar: appBar == 0 ? null :
         appBar == 1 ? whiteAppbar(context, title) :
+        appBar == 2 ? appbarWithoutActions(
+          title,
+          context,
+          trailingIcon,
+          showSearchInput,
+          searchController = TextEditingController(),
+          hintText,
+          goHome,
+        ) :
         appbarWithActions(
             title,
             context,
@@ -55,6 +71,10 @@ class ScaffoldWidget extends StatelessWidget {
             showSearchInput,
             searchController = TextEditingController(),
             hintText,
+            showTrailingIcon,
+            goBack,
+          goHome,
+
         ),
         backgroundColor: hasBackgroundColor == true
             ? white

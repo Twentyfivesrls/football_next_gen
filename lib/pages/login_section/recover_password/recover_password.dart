@@ -12,7 +12,9 @@ class RecoverPasswordState extends State<RecoverPassword> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      body: RecoverPasswordForm(),
+      goBack: (){},
+      goHome: (){},
+      body: const RecoverPasswordForm(),
     );
   }
 }

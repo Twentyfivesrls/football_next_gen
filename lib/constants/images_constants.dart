@@ -24,5 +24,8 @@ class ImagesConstants{
   static String saunaImg = '${baseUrl}sauna.svg';
   static String basketImg = '${baseUrl}sports_basketball.svg';
   static String tennisImg = '${baseUrl}sports_tennis.svg';
+  static String teamLogoImg = '${baseUrl}team_logo.svg';
+  static String addCircleImg = '${baseUrl}add_circle.svg';
+  static String groupsImg = '${baseUrl}partner_exchange.svg';
 
 }
