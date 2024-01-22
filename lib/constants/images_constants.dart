@@ -27,5 +27,7 @@ class ImagesConstants{
   static String teamLogoImg = '${baseUrl}team_logo.svg';
   static String addCircleImg = '${baseUrl}add_circle.svg';
   static String groupsImg = '${baseUrl}partner_exchange.svg';
+  static String addCircleBlueImg = '${baseUrl}add_circle_blue.svg';
+  static String closeImg = '${baseUrl}close.svg';
 
 }

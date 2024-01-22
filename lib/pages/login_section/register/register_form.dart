@@ -70,7 +70,7 @@ class RegisterFormState extends State<RegisterForm>{
       children: [
         ActionButton(
           onPressed: (){
-            GoRouter.of(context).push(AppPage.sportsCenterRegister.path);
+            context.push(AppPage.sportsCenterRegister.path);
           },
           text: getCurrentLanguageValue(SPORTS_CENTER) ?? "",
           rowLayout: false,
@@ -83,7 +83,7 @@ class RegisterFormState extends State<RegisterForm>{
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
             onPressed: (){
-              GoRouter.of(context).push(AppPage.parentRegister.path);
+              context.push(AppPage.parentRegister.path);
             },
             text: getCurrentLanguageValue(PARENT) ?? "",
             rowLayout: false,
@@ -109,7 +109,7 @@ class RegisterFormState extends State<RegisterForm>{
         NavigationText(
           text: getCurrentLanguageValue(ACCEDI) ?? "",
           onTap: (){
-            GoRouter.of(context).go(AppPage.login.path);
+            context.go(AppPage.login.path);
           },
         ),
       ],

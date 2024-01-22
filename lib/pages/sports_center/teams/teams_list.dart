@@ -37,7 +37,7 @@ class TeamListState extends State<TeamsList>{
         },
         paddingTop: 0,
         goHome: (){
-          GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+          context.go(AppPage.homeSportsCenter.path);
         },
         title: getCurrentLanguageValue(TEAMS) ?? "",
         trailingIcon: Icons.home,
@@ -68,7 +68,7 @@ class TeamListState extends State<TeamsList>{
     return TeamCard(
       team:team,
       goToDetail: (){
-        GoRouter.of(context).push(AppPage.teamDetail.path);
+        context.push(AppPage.teamDetail.path);
       },
     );
   }
@@ -79,7 +79,7 @@ class TeamListState extends State<TeamsList>{
 
         ActionButton(
           onPressed: (){
-            GoRouter.of(context).push(AppPage.addTeam.path);
+            context.push(AppPage.addTeam.path);
           },
           text: getCurrentLanguageValue(ADD_TEAM) ?? "",
           backgroundColor: white,

@@ -5,7 +5,9 @@ import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
 import 'package:football_next_gen/pages/sports_center/home_sports_center.dart';
 import 'package:football_next_gen/pages/sports_center/profile/sports_center_profile.dart';
 import 'package:football_next_gen/pages/sports_center/teams/add_team.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/add_group.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/add_tournament.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/group_detail.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/tournament_detail.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/tournaments_list.dart';
 import 'package:football_next_gen/widgets/confirm_page.dart';
@@ -31,15 +33,15 @@ class RouterManager {
       // Go_router default goes to "/" page
       GoRoute(
           path: "/",
-          builder: (context, state) => const Login()
+          builder: (context, state) => Login()
       ),
       GoRoute(
           path: "/register",
-          builder: (context, state) => const Register()
+          builder: (context, state) => Register()
       ),
       GoRoute(
           path: "/recover_password",
-          builder: (context, state) => const RecoverPassword()
+          builder: (context, state) => RecoverPassword()
       ),
 
       GoRoute(
@@ -95,6 +97,16 @@ class RouterManager {
       GoRoute(
           path: "/tournament_detail",
           builder: (context, state) => const TournamentDetail()
+      ),
+
+      GoRoute(
+          path: "/group_detail",
+          builder: (context, state) => const GroupDetail()
+      ),
+
+      GoRoute(
+          path: "/add_group",
+          builder: (context, state) => const AddGroup()
       ),
 
 

@@ -44,7 +44,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
       padding: const EdgeInsets.only(bottom: 20),
       child: GestureDetector(
         onTap: (){
-           GoRouter.of(context).push(AppPage.sportsCenterProfile.path);
+          context.push(AppPage.sportsCenterProfile.path);
         },
         child: CardWidget(
             child: Row(
@@ -77,7 +77,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-             GoRouter.of(context).push(AppPage.tournamentsList.path);
+              context.push(AppPage.tournamentsList.path);
             },
             text: getCurrentLanguageValue(EVENTS) ?? "",
             rowLayout: false,
@@ -101,7 +101,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
         ),
         ActionButton(
           onPressed: (){
-           GoRouter.of(context).push(AppPage.teamsList.path);
+            context.push(AppPage.teamsList.path);
           },
           text: getCurrentLanguageValue(TEAMS) ?? "",
           rowLayout: false,

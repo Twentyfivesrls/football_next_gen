@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/group_entity.dart';
-import 'package:football_next_gen/pages/sports_center/tournaments/widget/groups_list.dart';
-import 'package:football_next_gen/pages/sports_center/tournaments/widget/tournament_info.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widgets/groups_list.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widgets/tournament_info.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/colors.dart';
@@ -27,11 +28,10 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
   late final TabController tabController;
   int activeIndex = 0;
   var groups = [
-    GroupEntity(),
-    GroupEntity(),
-    GroupEntity(),
-    GroupEntity(),
-    GroupEntity(),
+    GroupEntity(matches: []),
+    GroupEntity(matches: []),
+    GroupEntity(matches: []),
+    GroupEntity(matches: []),
   ];
   final String category = 'Juniores (Under 18)';
   final String rules = 'Ogni partita consiste in due tempi da 45 minuti.Rigori in caso di pareggio alla fine dei tempi regolamentari.Massimo di 15 giocatori per squadra.Cartellino rosso diretto per comportamento antisportivo.';
@@ -39,6 +39,7 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
   final String info = 'Il Torneo Calcio d\'Eccellenza è aperto a squadre giovanili di club e scuole calcio.Premi per la squadra vincitrice e il miglior giocatore.Il torneo si tiene presso gli impianti sportivi XYZ in data [data].';
   final String email = 'info@torneocalciodelleccellenza.com';
   final String phone = '+39 123 456 789';
+  final String title = 'Torneo iper mega super incredibile - Under 19 - Cosenza';
 
   @override
   void initState() {
@@ -67,13 +68,32 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
         paddingLeft: 0,
         paddingRight: 0,
         goHome: (){
-          GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+          context.go(AppPage.homeSportsCenter.path);
         },
         goBack: (){
           context.go(AppPage.tournamentsList.path);
         },
         body: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: TextH1(text: title),
+                  ),
+                  Expanded(
+                      flex: 1,
+                      child: Align(
+                          alignment: Alignment.topRight,
+                          child: SvgPicture.asset(ImagesConstants.editImg))
+                  )
+                ],
+              ),
+            ),
+
             TabbarWidget(
               tabController: tabController,
               activeIndex: activeIndex,
@@ -127,8 +147,6 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
     );
   }
 
-
-
   Widget newGroupsButtonSection(){
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -138,7 +156,7 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: ActionButton(
               onPressed: (){
-                GoRouter.of(context).push(AppPage.addTournament.path);
+                context.push(AppPage.addGroup.path);
               },
               text: getCurrentLanguageValue(ADD_GROUPS) ?? "",
               backgroundColor: white,
@@ -156,5 +174,4 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
       ),
     );
   }
-
 }

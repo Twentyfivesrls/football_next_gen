@@ -78,7 +78,7 @@ class SportsCenterProfileState extends State<SportsCenterProfile>  with TickerPr
           context.pop();
         },
         goHome: (){
-          GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+          context.go(AppPage.homeSportsCenter.path);
         },
         appBar: 2,
         paddingRight: 0,

@@ -101,7 +101,7 @@ class InsertOtpState extends State<InsertOtp>{
     return ActionButton(
         onPressed: (){
        //   GoRouter.of(context).go(AppPage.otpVerified.path);
-          context.go(AppPage.confirmPage.path, extra: ConfirmPageData.otpConfirmed(context));
+          context.push(AppPage.confirmPage.path, extra: ConfirmPageData.otpConfirmed(context));
 
         },
         text: getCurrentLanguageValue(VERIFY) ?? "",

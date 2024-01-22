@@ -30,7 +30,7 @@ class TeamDetailState extends State<TeamDetail>{
          context.go(AppPage.teamsList.path);
        },
        goHome: (){
-         GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+         context.go(AppPage.homeSportsCenter.path);
        },
      paddingTop: 30,
      trailingIcon: Icons.home,
@@ -61,7 +61,7 @@ class TeamDetailState extends State<TeamDetail>{
 
         GestureDetector(
           onTap: (){
-            GoRouter.of(context).push(AppPage.addTeam.path);
+            context.push(AppPage.addTeam.path);
             },
           child: SvgPicture.asset(
               ImagesConstants.editImg

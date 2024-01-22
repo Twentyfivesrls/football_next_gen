@@ -23,7 +23,7 @@ class TournamentEntity {
 
   @override
   String toString() {
-    return 'SportEntity{'
+    return 'TournamentEntity{'
         'name: $name, '
         'typology: $typology'
         'phone: $phone, '

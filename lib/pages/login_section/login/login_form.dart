@@ -77,7 +77,7 @@ class LoginFormState extends State<LoginForm>{
     return NavigationText(
       text: getCurrentLanguageValue(FORGOT_PASSWORD) ?? "",
       onTap: (){
-        GoRouter.of(context).push(AppPage.recoverPassword.path);
+        context.push(AppPage.recoverPassword.path);
       },
     );
   }
@@ -85,7 +85,7 @@ class LoginFormState extends State<LoginForm>{
   Widget loginButtonSection() {
     return ActionButton(
       onPressed: (){
-        GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+        context.go(AppPage.homeSportsCenter.path);
       },
       text: getCurrentLanguageValue(ACCEDI) ?? "",
     );
@@ -104,7 +104,7 @@ class LoginFormState extends State<LoginForm>{
         NavigationText(
           text: getCurrentLanguageValue(CREATE_ONE) ?? "",
           onTap: (){
-            GoRouter.of(context).push(AppPage.register.path);
+            context.push(AppPage.register.path);
           },
         ),
       ],

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:go_router/go_router.dart';
-
 import '../constants/language.dart';
 
 class ConfirmPageData{
@@ -31,6 +30,18 @@ class ConfirmPageData{
             },
       );
 
+
+  factory ConfirmPageData.addGroupConfirmed(BuildContext context) =>
+      ConfirmPageData(
+        titleText: getCurrentLanguageValue(GROUP_CREATED) ?? "",
+        navigationText: getCurrentLanguageValue(GROUP_DETAIL) ?? "",
+        bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
+        onTap: (){
+          context.push(AppPage.groupDetail.path);
+        },
+      );
+
+
   factory ConfirmPageData.addTournamentConfirmed(BuildContext context) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",
@@ -47,7 +58,7 @@ class ConfirmPageData{
           navigationText: getCurrentLanguageValue(LOGIN) ?? "",
           bottomText: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
           onTap: (){
-            context.go(AppPage.teamDetail.path);
+            context.go(AppPage.login.path);
             },
         showSubtitle: true,
         subtitleText: getCurrentLanguageValue(RECOVER_PASSWORD_CONFIRMED_SUBTITLE) ?? "",
@@ -60,7 +71,7 @@ class ConfirmPageData{
           navigationText: getCurrentLanguageValue(LOGIN) ?? "",
           bottomText: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
           onTap: (){
-            context.go(AppPage.teamDetail.path);
+            context.go(AppPage.login.path);
             },
         showSubtitle: true,
         subtitleText: getCurrentLanguageValue(CONFIRMATION_OCCURRED_SUBTITLE) ?? "",

@@ -9,7 +9,7 @@ class SportFieldEntity {
 
   @override
   String toString() {
-    return 'SportEntity{name: $name, svgIcon: $svgIcon, fieldsNumber: $fieldsNumber}';
+    return 'SportFieldEntity{name: $name, svgIcon: $svgIcon, fieldsNumber: $fieldsNumber}';
   }
 
   SportFieldEntity copyWith({

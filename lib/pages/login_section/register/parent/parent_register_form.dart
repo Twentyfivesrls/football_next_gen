@@ -189,7 +189,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
       padding: const EdgeInsets.only(top: 50),
       child: ActionButton(
         onPressed: (){
-          GoRouter.of(context).push(AppPage.insertOtp.path);
+          context.push(AppPage.insertOtp.path);
         },
         text: getCurrentLanguageValue(CREATE_ACCOUNT) ?? "",
       ),
@@ -213,7 +213,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
               NavigationText(
                 text: getCurrentLanguageValue(ACCEDI) ?? "",
                 onTap: (){
-                  GoRouter.of(context).go(AppPage.login.path);
+                  context.go(AppPage.login.path);
                 },
               ),
             ],
@@ -240,7 +240,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
               text: getCurrentLanguageValue(ACCOUNT_CHOICE) ?? "",
               underline: TextDecoration.none,
               onTap: (){
-                GoRouter.of(context).go(AppPage.register.path);
+                context.go(AppPage.register.path);
               },
             ),
           ],

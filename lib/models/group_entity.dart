@@ -1,46 +1,35 @@
 
+import 'match_entity.dart';
+
 class GroupEntity {
-  final String? date;
-  final String? place;
-  final String? hour;
+  final List<MatchEntity> matches;
 
 
-
-  GroupEntity({ this.date,  this.place, this.hour});
+  GroupEntity({ required this.matches});
 
   @override
   String toString() {
-    return 'SportEntity{name: $date, coach: $place, description: $hour}';
+    return 'GroupEntity{groups: $matches,}';
   }
 
   GroupEntity copyWith({
-    String? date,
-    String? hour,
-    String? place,
+    List<MatchEntity>? matches,
   }) {
     return GroupEntity(
-      date: date ?? this.date,
-      hour: hour ?? this.hour,
-      place: place ?? this.place,
+      matches: matches ?? this.matches,
     );
   }
 
   factory GroupEntity.fromJson(Map<String, dynamic> json) => GroupEntity(
-    date: json["date"] ?? "",
-    hour: json["v"] ?? "",
-    place: json["place"] ?? "",
+    matches: json["matches"] ?? [],
   );
 
   Map<String, dynamic> toJson() => {
-    "date": date,
-    "hour": hour,
-    "place": place,
+    "matches": matches,
   };
 
   factory GroupEntity.defaultVal() => GroupEntity(
-    date: "",
-    hour: "",
-    place: "",
+    matches: [],
   );
 
   @override
@@ -48,8 +37,8 @@ class GroupEntity {
       identical(this, other) ||
           other is GroupEntity &&
               runtimeType == other.runtimeType &&
-              place == other.place;
+              matches == other.matches;
 
   @override
-  int get hashCode => place.hashCode;
+  int get hashCode => matches.hashCode;
 }

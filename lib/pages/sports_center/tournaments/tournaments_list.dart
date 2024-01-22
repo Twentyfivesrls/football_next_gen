@@ -3,7 +3,7 @@ import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/tournament.dart';
-import 'package:football_next_gen/pages/sports_center/tournaments/widget/tournament_card.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widgets/tournament_card.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
@@ -72,7 +72,7 @@ class TournamentsListState extends State<TournamentsList>{
         },
         paddingTop: 0,
         goHome: (){
-          GoRouter.of(context).go(AppPage.homeSportsCenter.path);
+          context.go(AppPage.homeSportsCenter.path);
         },
         title: AppPage.tournamentsList.toTitle,
         trailingIcon: Icons.home,
@@ -103,7 +103,7 @@ class TournamentsListState extends State<TournamentsList>{
     return TournamentCard(
       tournament:tournament,
       goToDetail: (){
-        GoRouter.of(context).push(AppPage.tournamentDetail.path);
+        context.push(AppPage.tournamentDetail.path);
       },
     );
   }
@@ -114,7 +114,7 @@ class TournamentsListState extends State<TournamentsList>{
 
         ActionButton(
           onPressed: (){
-            GoRouter.of(context).push(AppPage.addTournament.path);
+            context.push(AppPage.addTournament.path);
           },
           text: getCurrentLanguageValue(ADD_TOURNAMENT) ?? "",
           backgroundColor: white,

@@ -38,7 +38,7 @@ const String UPLOAD_A_DOCUMENT = "Carica un documento";
 const String UPLOAD_DOCUMENT = "Carica documento";
 const String UPLOAD_DOCUMENT_SUBTITLE = "Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF";
 const String USERNAME = "Username";
-const String DATE = "Data di nascita";
+const String DATE = "Data";
 const String ACCEPT = "accetto i";
 const String TERMS_OF_SERVICE = "Termini e le condizioni indicate";
 const String CREATE_ACCOUNT = "Crea account";
@@ -64,7 +64,7 @@ const String EXTRA_SERVICES = "Servizi extra";
 const String FIELDS = "Campi";
 const String MAP = "Mappa";
 const String MAP_TITLE = "Visualizza la mappa del centro sportivo";
-const String ADD_NEW_TEAM = "Crea nuova squadra";
+const String ADD_NEW_TEAM = "Crea una nuova squadra";
 const String ADD_TEAM = "Crea squadra";
 const String NO_TEAMS = "Non sono ancora state create delle squadre.";
 const String TEAM_NAME = "Nome società";
@@ -95,6 +95,15 @@ const String PHONE_CONTACT = "Contatto telefonico";
 const String CATEGORY = "Categoria";
 const String TYPOLOGY = "Tiplogia";
 const String POSTER = "Locandina";
+const String HOME_TEAM = "Squadra in casa";
+const String AWAY_TEAM = "Squadra in trasferta";
+const String HOUR = "Ora";
+const String PLACE = "Luogo";
+const String ADD_MATCH = "Aggiungi partita";
+const String ADD_GROUP = "Crea girone";
+const String GROUP_DETAIL = 'Dettagli girone';
+const String GROUP_CREATED = "Girone creato con successo!";
+
 
 
 
@@ -136,7 +145,6 @@ const String INSERT_PHOTO = "Tocca per caricare una foto";
 const String CREATE_DEMISE = "Inserisci decesso";
 const String CREATE_PRODUCT = "Inserisci prodotto";
 const String SELECT_PRODUCT = "Seleziona prodotti";
-
 const String INSERT_DEMISE = "Inserisci nuovo decesso";
 const String INSERT_PRODUCT = "Inserisci nuovo prodotto";
 const String RELATIVE_DETAIL = "Dati parenti";
@@ -209,7 +217,7 @@ final Map<String, String> LANG_IT = {
   UPLOAD_DOCUMENT:"Carica documento",
   UPLOAD_DOCUMENT_SUBTITLE:"Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF",
   USERNAME:"Username",
-  DATE:"Data di nascita",
+  DATE:"Data",
   ACCEPT:"Accetto i",
   TERMS_OF_SERVICE:"Termini e le condizioni indicate",
   CREATE_ACCOUNT:"Crea account",
@@ -235,7 +243,7 @@ final Map<String, String> LANG_IT = {
   FIELDS:"Campi",
   MAP:"Mappa",
   MAP_TITLE:"Visualizza la mappa del centro sportivo",
-  ADD_NEW_TEAM:"Crea nuova squadra",
+  ADD_NEW_TEAM:"Crea una nuova squadra",
   ADD_TEAM:"Crea squadra",
   NO_TEAMS:"Non sono ancora state create delle squadre.",
   TEAM_NAME:"Nome società",
@@ -266,8 +274,14 @@ final Map<String, String> LANG_IT = {
   RULES:"Regole",
   OTHER_INFO:"Ulteriori info",
   POSTER:"Locandina",
-
-
+  HOME_TEAM:"Squadra in casa",
+  AWAY_TEAM:"Squadra in trasferta",
+  HOUR:"Ora",
+  PLACE:"Luogo",
+  ADD_MATCH:"Aggiungi partita",
+  ADD_GROUP:"Crea girone",
+  GROUP_DETAIL:"Dettagli girone",
+  GROUP_CREATED:"Girone creato con successo!",
 
 
 

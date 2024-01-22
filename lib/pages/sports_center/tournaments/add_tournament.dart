@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
-import 'package:football_next_gen/pages/sports_center/tournaments/widget/add_tournament_form.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widgets/add_tournament_form.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/colors.dart';
@@ -65,7 +65,7 @@ class AddTournamentState extends State<AddTournament>{
         ),
         ActionButton(
           onPressed: (){
-            context.go(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context));
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context));
           },
           text: "Crea torneo",
         ),

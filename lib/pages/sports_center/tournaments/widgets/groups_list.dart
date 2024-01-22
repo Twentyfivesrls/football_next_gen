@@ -38,7 +38,7 @@ class GroupsList extends StatelessWidget{
       name: 'Girone 1',
       group: group,
       goToDetail: (){
-        GoRouter.of(context).push(AppPage.tournamentDetail.path);
+        context.push(AppPage.groupDetail.path);
       },
     );
   }

@@ -8,13 +8,8 @@ import 'package:go_router/go_router.dart';
 import '../../../constants/app_pages.dart';
 import '../../../models/confirm_page_data.dart';
 
-class RecoverPasswordForm extends StatefulWidget{
-  const RecoverPasswordForm({super.key});
-  @override
-  State<StatefulWidget> createState() => RecoverPasswordFormState();
-}
 
-class RecoverPasswordFormState extends State<RecoverPasswordForm>{
+class RecoverPasswordForm extends StatelessWidget{
 
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -33,11 +28,11 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
         ),
         Expanded(
           flex: 4,
-          child:formSection(),
+          child:formSection(context),
         ),
         Expanded(
           flex: 1,
-          child:backToLoginSection(),
+          child:backToLoginSection(context),
         )
       ],
     );
@@ -58,7 +53,7 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
     );
   }
 
-  Widget formSection(){
+  Widget formSection(BuildContext context){
     return Form(
       key: _formKey,
       child: Column(
@@ -73,8 +68,7 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
             child: ActionButton(
               onPressed: (){
              //   GoRouter.of(context).go(AppPage.recoverPasswordConfirmed.path);
-                context.go(AppPage.confirmPage.path, extra: ConfirmPageData.recoverPassConfirmed(context));
-
+                context.push(AppPage.confirmPage.path, extra: ConfirmPageData.recoverPassConfirmed(context));
               },
               text: getCurrentLanguageValue(SEND) ?? "",
             ),
@@ -84,7 +78,7 @@ class RecoverPasswordFormState extends State<RecoverPasswordForm>{
     );
   }
 
-  Widget backToLoginSection() {
+  Widget backToLoginSection(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -8,7 +8,7 @@ class ExtraServiceEntity {
 
   @override
   String toString() {
-    return 'SportEntity{name: $name, svgIcon: $svgIcon}';
+    return 'ExtraServiceEntity{name: $name, svgIcon: $svgIcon}';
   }
 
   ExtraServiceEntity copyWith({

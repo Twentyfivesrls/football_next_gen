@@ -13,7 +13,9 @@ enum AppPage {
   tournamentsList,
   addTournament,
   tournamentDetail,
-  confirmPage
+  confirmPage,
+  addGroup,
+  groupDetail
 }
 
 extension AppPageExtension on AppPage {
@@ -49,6 +51,10 @@ extension AppPageExtension on AppPage {
         return "/tournament_detail";
       case AppPage.confirmPage:
         return "/confirm_page";
+      case AppPage.groupDetail:
+        return "/group_detail";
+      case AppPage.addGroup:
+        return "/add_group";
     }
   }
 
@@ -84,6 +90,10 @@ extension AppPageExtension on AppPage {
         return "TournamentDetail";
       case AppPage.confirmPage:
         return "ConfirmPage";
+      case AppPage.addGroup:
+        return "AddGroup";
+      case AppPage.groupDetail:
+        return "GroupDetail";
 
     }
   }
@@ -120,6 +130,10 @@ extension AppPageExtension on AppPage {
         return "Dettaglio torneo";
       case AppPage.confirmPage:
         return "Conferma";
+      case AppPage.addGroup:
+        return "Nuovo girone";
+      case AppPage.groupDetail:
+        return "Dettagli girone";
     }
   }
 }

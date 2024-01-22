@@ -11,7 +11,7 @@ class TeamEntity {
 
   @override
   String toString() {
-    return 'SportEntity{name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo}';
+    return 'TeamEntity{name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo}';
   }
 
   TeamEntity copyWith({
