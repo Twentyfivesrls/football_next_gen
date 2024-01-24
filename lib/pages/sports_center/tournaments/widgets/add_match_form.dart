@@ -65,14 +65,14 @@ class AddMatchForm extends StatelessWidget{
           ),
 
           InputWidget(
-            labelPaddingTop: 30,
+            labelPaddingTop: 20,
             controller: awayTeamController,
             labelText: getCurrentLanguageValue(AWAY_TEAM) ?? "",
             hintText: getCurrentLanguageValue(AWAY_TEAM) ?? "",
           ),
 
           Padding(
-            padding: const EdgeInsets.only(top: 30),
+            padding: const EdgeInsets.only(top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -91,19 +91,19 @@ class AddMatchForm extends StatelessWidget{
           ),
 
           InputWidget(
-            labelPaddingTop: 30,
+            labelPaddingTop: 20,
             controller: placeController,
             labelText: getCurrentLanguageValue(PLACE) ?? "",
             hintText: getCurrentLanguageValue(PLACE) ?? "",
           ),
           InputWidget(
-            labelPaddingTop: 30,
+            labelPaddingTop: 20,
             controller: dateController,
             labelText: getCurrentLanguageValue(DATE) ?? "",
             hintText: getCurrentLanguageValue(DATE) ?? "",
           ),
           InputWidget(
-            labelPaddingTop: 30,
+            labelPaddingTop: 20,
             controller: hourController,
             labelText: getCurrentLanguageValue(HOUR) ?? "",
             hintText: getCurrentLanguageValue(HOUR) ?? "",
@@ -113,8 +113,6 @@ class AddMatchForm extends StatelessWidget{
             padding: EdgeInsets.only(top: 30),
             child: DividerWidget(),
           ),
-
-
         ],
       ),
     );

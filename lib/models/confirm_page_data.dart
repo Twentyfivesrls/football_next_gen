@@ -42,6 +42,17 @@ class ConfirmPageData{
       );
 
 
+  factory ConfirmPageData.addTrainingConfirmed(BuildContext context) =>
+      ConfirmPageData(
+        titleText: getCurrentLanguageValue(TRAINING_CREATED) ?? "",
+        navigationText: getCurrentLanguageValue(TRAINING_DETAIL) ?? "",
+        bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
+        onTap: (){
+          context.push(AppPage.trainingDetail.path);
+        },
+      );
+
+
   factory ConfirmPageData.addTournamentConfirmed(BuildContext context) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",

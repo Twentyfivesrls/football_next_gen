@@ -15,7 +15,10 @@ enum AppPage {
   tournamentDetail,
   confirmPage,
   addGroup,
-  groupDetail
+  groupDetail,
+  trainingsList,
+  addTraining,
+  trainingDetail
 }
 
 extension AppPageExtension on AppPage {
@@ -55,6 +58,12 @@ extension AppPageExtension on AppPage {
         return "/group_detail";
       case AppPage.addGroup:
         return "/add_group";
+      case AppPage.trainingsList:
+        return "/trainings_list";
+      case AppPage.addTraining:
+        return "/add_training";
+      case AppPage.trainingDetail:
+        return "/training_detail";
     }
   }
 
@@ -94,6 +103,12 @@ extension AppPageExtension on AppPage {
         return "AddGroup";
       case AppPage.groupDetail:
         return "GroupDetail";
+      case AppPage.trainingsList:
+        return "TrainingsList";
+      case AppPage.addTraining:
+        return "AddTraining";
+        case AppPage.trainingDetail:
+        return "Training Detail";
 
     }
   }
@@ -134,6 +149,12 @@ extension AppPageExtension on AppPage {
         return "Nuovo girone";
       case AppPage.groupDetail:
         return "Dettagli girone";
+      case AppPage.trainingsList:
+        return "Allenamenti";
+      case AppPage.addTraining:
+        return "Aggiungi allenamento";
+        case AppPage.trainingDetail:
+        return "Dettagli allenamento";
     }
   }
 }

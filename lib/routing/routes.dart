@@ -10,6 +10,8 @@ import 'package:football_next_gen/pages/sports_center/tournaments/add_tournament
 import 'package:football_next_gen/pages/sports_center/tournaments/group_detail.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/tournament_detail.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/tournaments_list.dart';
+import 'package:football_next_gen/pages/sports_center/trainings/add_training.dart';
+import 'package:football_next_gen/pages/sports_center/trainings/trainings_list.dart';
 import 'package:football_next_gen/widgets/confirm_page.dart';
 import 'package:go_router/go_router.dart';
 import '../pages/login_section/register/parent/parent_register.dart';
@@ -17,6 +19,7 @@ import '../pages/login_section/register/register.dart';
 import '../pages/login_section/register/sports_center/sports_center.dart';
 import '../pages/sports_center/teams/team_detail.dart';
 import '../pages/sports_center/teams/teams_list.dart';
+import '../pages/sports_center/trainings/training_detail.dart';
 
 
 class RouterManager {
@@ -107,6 +110,21 @@ class RouterManager {
       GoRoute(
           path: "/add_group",
           builder: (context, state) => const AddGroup()
+      ),
+
+      GoRoute(
+          path: "/trainings_list",
+          builder: (context, state) => const TrainingsList()
+      ),
+
+      GoRoute(
+          path: "/add_training",
+          builder: (context, state) => const AddTraining()
+      ),
+
+      GoRoute(
+          path: "/training_detail",
+          builder: (context, state) => const TrainingDetail()
       ),
 
 

@@ -90,7 +90,7 @@ class InputWidget extends StatelessWidget{
             textAlign: labelAlign,
           ),
         ),
-        Padding(
+        Container(
           padding: EdgeInsets.symmetric(
               horizontal: horizontalPadding,
               vertical: verticalPadding

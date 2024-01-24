@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:football_next_gen/routing/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:localization/localization.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,15 @@ class MyApp extends StatelessWidget {
 
   Widget materialApp(GoRouter goRouter){
     return MaterialApp.router(
+    /*    localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: <Locale>[
+          Locale('it', 'IT'),
+          Locale('en', 'US'),
+        ], */
         title: 'Football Next Gen',
         theme: ThemeData(
           fontFamily: 'Montserrat',

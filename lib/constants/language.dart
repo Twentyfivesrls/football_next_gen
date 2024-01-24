@@ -103,6 +103,13 @@ const String ADD_MATCH = "Aggiungi partita";
 const String ADD_GROUP = "Crea girone";
 const String GROUP_DETAIL = 'Dettagli girone';
 const String GROUP_CREATED = "Girone creato con successo!";
+const String ADD_TRAINING = "Aggiungi allenamento";
+const String FILTERS = "Filtri";
+const String FIELD = "Campo";
+const String TEAM = "Squadra";
+const String EVENT_REPETITION = "Ripetizione evento";
+const String TRAINING_DETAIL = "Dettagli allenamento";
+const String TRAINING_CREATED = "Allenamento creato con successo!";
 
 
 
@@ -282,6 +289,13 @@ final Map<String, String> LANG_IT = {
   ADD_GROUP:"Crea girone",
   GROUP_DETAIL:"Dettagli girone",
   GROUP_CREATED:"Girone creato con successo!",
+  ADD_TRAINING:"Aggiungi allenamento",
+  FILTERS:"Filtri",
+  FIELD:"Campo",
+  TEAM:"Squadra",
+  EVENT_REPETITION:"Ripetizione evento",
+  TRAINING_CREATED:"Allenamento creato con successo!",
+  TRAINING_DETAIL:"Dettagli allenamento",
 
 
 

@@ -29,5 +29,6 @@ class ImagesConstants{
   static String groupsImg = '${baseUrl}partner_exchange.svg';
   static String addCircleBlueImg = '${baseUrl}add_circle_blue.svg';
   static String closeImg = '${baseUrl}close.svg';
+  static String filterImg = '${baseUrl}filter_list.svg';
 
 }

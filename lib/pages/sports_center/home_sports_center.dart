@@ -90,7 +90,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-             // GoRouter.of(context).push(AppPage.sportsCenterRegister.path);
+              context.push(AppPage.trainingsList.path);
             },
             text: getCurrentLanguageValue(EXERCISES) ?? "",
             rowLayout: false,

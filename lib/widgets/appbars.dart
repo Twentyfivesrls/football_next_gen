@@ -46,7 +46,7 @@ appbarWithActions(
         controller: searchController,
         hintText: hintText
     ) :
-    TextH1(
+    Text20(
         text: title,
         textColor: white
     ),
@@ -82,7 +82,7 @@ appbarWithoutActions(
         controller: searchController,
         hintText: hintText
     ) :
-    TextH1(
+    Text20(
         text: title,
         textColor: white
     ),
