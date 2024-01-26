@@ -47,7 +47,7 @@ class ParentDataForm extends StatelessWidget{
 
           Padding(
             padding: const EdgeInsets.only(top: 50),
-            child: Text20(
+            child: Text18(
                 text: getCurrentLanguageValue(PARENT_DATA) ?? "",
             ),
           ),

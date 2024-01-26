@@ -54,7 +54,7 @@ class TeamDetailState extends State<TeamDetail>{
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text20(
+        Text18(
           text: getCurrentLanguageValue(INFO) ??"",
           textColor: primary,
         ),
@@ -77,7 +77,7 @@ class TeamDetailState extends State<TeamDetail>{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text16(
+          Text14(
               text: getCurrentLanguageValue(LOGO) ?? "",
             fontWeight: FontWeight.w600,
           ),

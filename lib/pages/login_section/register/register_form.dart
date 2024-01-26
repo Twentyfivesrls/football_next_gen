@@ -58,7 +58,7 @@ class RegisterFormState extends State<RegisterForm>{
   }
 
   Widget subtitleSection(){
-    return Text16(
+    return Text14(
       text: getCurrentLanguageValue(REGISTER_SUBTITLE) ?? "",
       textAlign: TextAlign.center,
     );
@@ -102,7 +102,7 @@ class RegisterFormState extends State<RegisterForm>{
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 5),
-          child: Text16(
+          child: Text14(
             text: getCurrentLanguageValue(ALREDY_HAVE_ACCOUNT) ?? "",
           ),
         ),

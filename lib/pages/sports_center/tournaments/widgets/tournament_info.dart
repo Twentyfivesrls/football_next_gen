@@ -37,7 +37,7 @@ class TournamentInfo extends StatelessWidget{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text20(
+              Text18(
                 text: getCurrentLanguageValue(INFO) ?? "",
                 textColor: primary,
               ),
@@ -106,7 +106,7 @@ class TournamentInfo extends StatelessWidget{
 
           Padding(
             padding: const EdgeInsets.only(top: 30,bottom: 5),
-            child: Text16(
+            child: Text14(
               text: getCurrentLanguageValue(POSTER) ?? "",
               fontWeight: FontWeight.w600,
             ),

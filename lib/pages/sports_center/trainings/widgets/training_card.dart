@@ -45,7 +45,7 @@ class TrainingCard extends StatelessWidget{
 
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text20(text: name,textColor: white,),
+                  child: Text18(text: name,textColor: white,),
                 ),
 
                 Padding(
@@ -56,11 +56,11 @@ class TrainingCard extends StatelessWidget{
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(right: 5),
-                            child: Text16(text: getCurrentLanguageValue(HOUR) ?? "",textColor: white,),
+                            child: Text14(text: getCurrentLanguageValue(HOUR) ?? "",textColor: white,),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 10),
-                            child: Text16(text: training.hour,textColor: white,fontWeight: FontWeight.w600,),
+                            child: Text14(text: training.hour,textColor: white,fontWeight: FontWeight.w600,),
                           ),
                         ],
                       ),
@@ -69,12 +69,12 @@ class TrainingCard extends StatelessWidget{
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: Text16(text: getCurrentLanguageValue(FIELD) ?? "",textColor: white,),
+                            child: Text14(text: getCurrentLanguageValue(FIELD) ?? "",textColor: white,),
                           ),
 
                           Padding(
                             padding: const EdgeInsets.only(left: 5),
-                            child: Text16(text: training.field,textColor: white,fontWeight: FontWeight.w600,),
+                            child: Text14(text: training.field,textColor: white,fontWeight: FontWeight.w600,),
                           ),
                         ],
                       ),

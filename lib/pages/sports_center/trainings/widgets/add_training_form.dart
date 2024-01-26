@@ -63,7 +63,7 @@ class AddTrainingForm extends StatelessWidget{
           child: CheckboxWidget(
               isChecked: isChecked,
               onChanged: onChanged,
-              title: Text16(
+              title: Text14(
                   text: getCurrentLanguageValue(EVENT_REPETITION) ?? "",
 
               ),

@@ -34,7 +34,7 @@ class WeekdayChip extends StatelessWidget {
             color: isSelected ? primary : secondary),
         child: Align(
             alignment: Alignment.center,
-            child: Text12(
+            child: Text10(
               text: text,
               textColor: isSelected ? white : black25,
             )),

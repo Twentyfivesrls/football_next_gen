@@ -2,8 +2,10 @@ import 'package:football_next_gen/models/confirm_page_data.dart';
 import 'package:football_next_gen/pages/login_section/login/login.dart';
 import 'package:football_next_gen/pages/login_section/recover_password/recover_password.dart';
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
+import 'package:football_next_gen/pages/settings/reset_password.dart';
 import 'package:football_next_gen/pages/sports_center/home_sports_center.dart';
 import 'package:football_next_gen/pages/sports_center/profile/sports_center_profile.dart';
+import 'package:football_next_gen/pages/settings/settings.dart';
 import 'package:football_next_gen/pages/sports_center/teams/add_team.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/add_group.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/add_tournament.dart';
@@ -19,6 +21,7 @@ import '../pages/login_section/register/register.dart';
 import '../pages/login_section/register/sports_center/sports_center.dart';
 import '../pages/sports_center/teams/team_detail.dart';
 import '../pages/sports_center/teams/teams_list.dart';
+import '../pages/sports_center/trainings/filters.dart';
 import '../pages/sports_center/trainings/training_detail.dart';
 
 
@@ -125,6 +128,21 @@ class RouterManager {
       GoRoute(
           path: "/training_detail",
           builder: (context, state) => const TrainingDetail()
+      ),
+
+      GoRoute(
+          path: "/filters",
+          builder: (context, state) => const Filters()
+      ),
+
+      GoRoute(
+          path: "/settings",
+          builder: (context, state) => const Settings()
+      ),
+
+     GoRoute(
+          path: "/reset_password",
+          builder: (context, state) => const ResetPassword()
       ),
 
 

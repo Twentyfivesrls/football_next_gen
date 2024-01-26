@@ -46,7 +46,7 @@ class RecoverPasswordForm extends StatelessWidget{
   }
 
   Widget subtitleSection(){
-    return Text16(
+    return Text14(
       text: getCurrentLanguageValue(RECOVER_PASSWORD_SUBTITLE) ?? "",
       textAlign: TextAlign.center,
       fontWeight: FontWeight.w500,
@@ -84,7 +84,7 @@ class RecoverPasswordForm extends StatelessWidget{
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 5),
-          child: Text16(
+          child: Text14(
             text: getCurrentLanguageValue(BACK_TO_LOGIN) ?? "",
           ),
         ),

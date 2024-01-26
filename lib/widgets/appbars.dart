@@ -46,7 +46,7 @@ appbarWithActions(
         controller: searchController,
         hintText: hintText
     ) :
-    Text20(
+    Text18(
         text: title,
         textColor: white
     ),
@@ -72,6 +72,7 @@ appbarWithoutActions(
     TextEditingController searchController,
     String hintText,
     Function() goHome,
+    bool showTrailingIcon,
 
     ) {
   return AppBar(
@@ -82,18 +83,21 @@ appbarWithoutActions(
         controller: searchController,
         hintText: hintText
     ) :
-    Text20(
+    Text18(
         text: title,
         textColor: white
     ),
     iconTheme: const IconThemeData(color: white),
     backgroundColor: primary,
     actions: [
-     IconButton(
-            color: white,
-            icon: Icon(trailingIcon,color: white,),
-            onPressed: goHome
-        ),
+     Visibility(
+       visible: showTrailingIcon,
+       child: IconButton(
+              color: white,
+              icon: Icon(trailingIcon,color: white,),
+              onPressed: goHome
+          ),
+     ),
 
     ],
   );

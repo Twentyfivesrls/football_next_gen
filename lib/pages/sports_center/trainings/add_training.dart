@@ -63,7 +63,7 @@ class AddTrainingState extends State<AddTraining>{
   Widget headerSection(){
     return Padding(
       padding: const EdgeInsets.only(top: 30),
-      child: Text20(
+      child: Text18(
         text: 'Allenamento - $date',
         fontWeight: FontWeight.w500,
       ),

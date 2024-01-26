@@ -54,7 +54,7 @@ class ConfirmPage extends StatelessWidget{
           visible: data.showSubtitle,
           child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Text16(
+              child: Text14(
                 text: data.subtitleText ?? "",
                 textAlign: TextAlign.center,
               )
@@ -70,7 +70,7 @@ class ConfirmPage extends StatelessWidget{
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 5),
-          child: Text16(
+          child: Text14(
             text: data.bottomText,
           ),
         ),

@@ -99,14 +99,14 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
               activeIndex: activeIndex,
               tabs: <Widget>[
                 Tab(
-                  child: Text16(
+                  child: Text14(
                     text: 'Gironi',
                     fontWeight: activeIndex == 0 ? FontWeight.w600: FontWeight.w500,
                     textColor: activeIndex == 0 ? primary : textProfileGrey,
                   ),
                 ),
                 Tab(
-                  child: Text16(
+                  child: Text14(
                     text: 'Informazioni',
                     fontWeight: activeIndex == 1 ? FontWeight.w600: FontWeight.w500,
                     textColor: activeIndex == 1 ? primary : textProfileGrey,

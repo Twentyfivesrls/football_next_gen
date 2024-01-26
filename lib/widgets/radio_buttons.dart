@@ -21,7 +21,7 @@ class RadioButtonWidget extends StatelessWidget {
     return ListTile(
       horizontalTitleGap: 0,
       contentPadding: EdgeInsets.zero,
-      title: Text16(text: title),
+      title: Text14(text: title),
       leading: Radio(
         activeColor: primary,
         overlayColor: MaterialStateProperty.all(white),

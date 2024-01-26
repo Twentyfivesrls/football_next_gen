@@ -16,7 +16,10 @@ class ActionButton extends StatelessWidget{
   final FontWeight fontWeight;
   final String? svgPrefixIcon;
   final bool showPrefixIcon;
+  final String? svgSuffixIcon;
+  final bool showSuffixIcon;
   final bool rowLayout;
+  final MainAxisAlignment mainAxisAlignment;
 
   const ActionButton({
     super.key,
@@ -30,7 +33,10 @@ class ActionButton extends StatelessWidget{
     this.height = 60,
     this.svgPrefixIcon,
     this.showPrefixIcon = false,
-    this.rowLayout = true
+    this.rowLayout = true,
+    this.mainAxisAlignment = MainAxisAlignment.center,
+    this.svgSuffixIcon,
+    this.showSuffixIcon = false,
   });
 
   @override
@@ -40,6 +46,7 @@ class ActionButton extends StatelessWidget{
       height: height,
       child: FilledButton(
           style: ButtonStyle(
+              padding: MaterialStateProperty.all<EdgeInsets>(EdgeInsets.zero),
               backgroundColor: MaterialStateColor.resolveWith((states) => backgroundColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
@@ -52,19 +59,30 @@ class ActionButton extends StatelessWidget{
           ),
           onPressed: onPressed,
           child: rowLayout ? Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: mainAxisAlignment,
             children: [
-              Visibility(
-                visible: showPrefixIcon,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: SvgPicture.asset(svgPrefixIcon ?? ""),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Visibility(
+                    visible: showPrefixIcon,
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: SvgPicture.asset(svgPrefixIcon ?? ""),
+                    ),
+                  ),
+                  Text14(
+                    text: text,
+                    fontWeight: fontWeight,
+                    textColor: textColor,
+                  ),
+                ],
               ),
-              Text16(
-                text: text,
-                fontWeight: fontWeight,
-                textColor: textColor,
+
+
+              Visibility(
+                visible: showSuffixIcon,
+                child: SvgPicture.asset(svgSuffixIcon ?? ""),
               ),
             ],
           ) : Column(
@@ -78,7 +96,7 @@ class ActionButton extends StatelessWidget{
                   child: SvgPicture.asset(svgPrefixIcon ?? ""),
                 ),
               ),
-              Text16(
+              Text14(
                 text: text,
                 fontWeight: fontWeight,
                 textColor: textColor,

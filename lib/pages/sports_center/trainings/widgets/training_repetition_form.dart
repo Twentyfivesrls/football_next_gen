@@ -62,7 +62,7 @@ class TrainingRepetitionForm extends StatelessWidget {
         children: [
           const Padding(
             padding: EdgeInsets.only(bottom: 10),
-            child: Text16(
+            child: Text14(
               text: "Ripeti ogni",
               fontWeight: FontWeight.w600,
             ),
@@ -80,13 +80,13 @@ class TrainingRepetitionForm extends StatelessWidget {
                     controller: repetitionController,
                   )
               ),
-              const Text16(text: "settimana/e"),
+              const Text14(text: "settimana/e"),
             ],
           ),
 
           const Padding(
             padding: EdgeInsets.only(top: 30,bottom: 10),
-            child: Text16(
+            child: Text14(
               text: "Si ripete",
               fontWeight: FontWeight.w600,
             ),
@@ -105,7 +105,7 @@ class TrainingRepetitionForm extends StatelessWidget {
 
           const Padding(
             padding: EdgeInsets.only(top: 30),
-            child: Text16(
+            child: Text14(
               text: "Fine",
               fontWeight: FontWeight.w600,
             ),
@@ -166,7 +166,7 @@ class TrainingRepetitionForm extends StatelessWidget {
                         controller: occurrenceController,
                       )
                   ),
-                  const Text16(text: 'occorrenza/e')
+                  const Text14(text: 'occorrenza/e')
                 ],
               ),
             ],

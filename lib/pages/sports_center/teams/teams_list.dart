@@ -51,7 +51,7 @@ class TeamListState extends State<TeamsList>{
                     visible: teams.isEmpty,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 20),
-                      child: Text16(
+                      child: Text14(
                         text: getCurrentLanguageValue(EMPTY_TEAMS_LIST) ?? "",
                       ),
                     )

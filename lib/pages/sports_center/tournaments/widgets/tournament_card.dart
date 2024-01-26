@@ -42,7 +42,7 @@ class TournamentCard extends StatelessWidget{
 
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text20(text: tournament.name,textColor: white,),
+                  child: Text18(text: tournament.name,textColor: white,),
                 )
 
               ],

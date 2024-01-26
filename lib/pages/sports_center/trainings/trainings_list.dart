@@ -43,7 +43,7 @@ class TrainingListState extends State<TrainingsList> {
       title: AppPage.trainingsList.toTitle,
       trailingIcon: Icons.home,
       goHome: () {
-        context.pop();
+        context.go(AppPage.homeSportsCenter.path);
       },
       goBack: () {},
       body: SingleChildScrollView(
@@ -111,12 +111,17 @@ class TrainingListState extends State<TrainingsList> {
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(right: 5),
-          child: Text16(
-            text: getCurrentLanguageValue(FILTERS) ?? "",
-            textColor: primary,
-            fontWeight: FontWeight.w600,
+        GestureDetector(
+          onTap: (){
+            context.push(AppPage.filters.path);
+          },
+          child: Padding(
+            padding: const EdgeInsets.only(right: 5),
+            child: Text14(
+              text: getCurrentLanguageValue(FILTERS) ?? "",
+              textColor: primary,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         SvgPicture.asset(ImagesConstants.filterImg)

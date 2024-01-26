@@ -26,7 +26,7 @@ class Maps extends StatelessWidget{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text20(
+              Text18(
                 text: getCurrentLanguageValue(MAP) ?? "",
                 textColor: primary,
               ),

@@ -107,14 +107,14 @@ class SportsCenterProfileState extends State<SportsCenterProfile>  with TickerPr
                   activeIndex: activeIndex,
                   tabs: <Widget>[
                     Tab(
-                      child: Text16(
+                      child: Text14(
                         text: 'Informazioni',
                         fontWeight: activeIndex == 0 ? FontWeight.w600: FontWeight.w500,
                         textColor: activeIndex == 0 ? primary : textProfileGrey,
                       ),
                     ),
                     Tab(
-                      child: Text16(
+                      child: Text14(
                         text: 'Media',
                         fontWeight: activeIndex == 1 ? FontWeight.w600: FontWeight.w500,
                         textColor: activeIndex == 1 ? primary : textProfileGrey,

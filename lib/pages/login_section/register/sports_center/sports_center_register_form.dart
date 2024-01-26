@@ -82,7 +82,7 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 2),
-                child: Text12(text: getCurrentLanguageValue(ACCEPT) ?? ""),
+                child: Text10(text: getCurrentLanguageValue(ACCEPT) ?? ""),
               ),
               NavigationText(
                 text: getCurrentLanguageValue(TERMS_OF_SERVICE) ?? "",
@@ -119,7 +119,7 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: Text16(
+                child: Text14(
                   text: getCurrentLanguageValue(ALREDY_HAVE_ACCOUNT) ?? "",
                 ),
               ),
@@ -145,7 +145,7 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 5),
-              child: Text16(
+              child: Text14(
                 text: getCurrentLanguageValue(BACK_TO) ?? "",
               ),
             ),

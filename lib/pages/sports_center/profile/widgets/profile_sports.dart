@@ -29,7 +29,7 @@ class ProfileSports extends StatelessWidget{
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text20(
+              Text18(
                 text: getCurrentLanguageValue(SPORTS) ?? "",
                 textColor: primary,
               ),

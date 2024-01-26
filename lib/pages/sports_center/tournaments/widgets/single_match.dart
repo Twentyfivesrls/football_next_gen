@@ -24,7 +24,7 @@ class SingleMatch extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text20(text: title, textColor: primary),
+              Text18(text: title, textColor: primary),
               SvgPicture.asset(ImagesConstants.editImg)
             ],
           ),
@@ -39,14 +39,14 @@ class SingleMatch extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Align(
                   alignment: Alignment.center,
-                  child: Text16(
+                  child: Text14(
                     text: match.homeTeam,
                     textAlign: TextAlign.center,
                   )),
             ),
           ),
         ),
-        const Text20(text: "VS", textColor: primary),
+        const Text18(text: "VS", textColor: primary),
 
         Container(
           padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
@@ -58,7 +58,7 @@ class SingleMatch extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               child: Align(
                   alignment: Alignment.center,
-                  child: Text16(
+                  child: Text14(
                     text: match.awayTeam,
                     textAlign: TextAlign.center,
                   )),

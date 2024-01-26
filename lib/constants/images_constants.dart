@@ -30,5 +30,7 @@ class ImagesConstants{
   static String addCircleBlueImg = '${baseUrl}add_circle_blue.svg';
   static String closeImg = '${baseUrl}close.svg';
   static String filterImg = '${baseUrl}filter_list.svg';
+  static String lockImg = '${baseUrl}lock_reset.svg';
+  static String chevronRightImg = '${baseUrl}chevron_right.svg';
 
 }

@@ -52,6 +52,15 @@ class ConfirmPageData{
         },
       );
 
+  factory ConfirmPageData.resetPasswordConfirmed(BuildContext context) =>
+      ConfirmPageData(
+        titleText: getCurrentLanguageValue(RESET_PASSWORD_CONFIRMED) ?? "",
+        navigationText: AppPage.settings.toTitle,
+        bottomText: getCurrentLanguageValue(GO_BACK_TO) ?? "",
+        onTap: (){
+          context.go(AppPage.settings.path);
+        },
+      );
 
   factory ConfirmPageData.addTournamentConfirmed(BuildContext context) =>
       ConfirmPageData(

@@ -58,7 +58,7 @@ class TrainingDetailState extends State<TrainingDetail> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text20(
+        Text18(
           text: getCurrentLanguageValue(INFO) ?? "",
           textColor: primary,
         ),

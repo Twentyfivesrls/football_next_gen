@@ -23,7 +23,7 @@ class TextH1 extends StatelessWidget {
         text,
         textAlign: textAlign,
         style: TextStyle(
-          fontSize: 24,
+          fontSize: 22,
           color: textColor,
           fontWeight: fontWeight,
           decoration: (underline != null && underline!)
@@ -34,7 +34,7 @@ class TextH1 extends StatelessWidget {
   }
 }
 
-class Text16 extends StatelessWidget {
+class Text18 extends StatelessWidget {
   final String text;
   final Color textColor;
   final bool? underline;
@@ -42,73 +42,7 @@ class Text16 extends StatelessWidget {
   final TextAlign textAlign;
 
 
-  const Text16({super.key,
-    required this.text,
-    this.textColor = black25,
-    this.underline,
-    this.fontWeight = FontWeight.w500,
-    this.textAlign = TextAlign.start
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-        text,
-        textAlign: textAlign,
-        style: TextStyle(
-          fontSize: 16,
-          color: textColor,
-          fontWeight: fontWeight,
-          decoration: (underline != null && underline!)
-              ? TextDecoration.underline
-              : null,
-        )
-    );
-  }
-}
-
-class Text12 extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final bool? underline;
-  final FontWeight fontWeight;
-  final TextAlign textAlign;
-
-
-  const Text12({super.key,
-    required this.text,
-    this.textColor = black25,
-    this.underline,
-    this.fontWeight = FontWeight.w500,
-    this.textAlign = TextAlign.start
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-        text,
-        textAlign: textAlign,
-        style: TextStyle(
-          fontSize: 12,
-          color: textColor,
-          fontWeight: fontWeight,
-          decoration: (underline != null && underline!)
-              ? TextDecoration.underline
-              : null,
-        )
-    );
-  }
-}
-
-class Text20 extends StatelessWidget {
-  final String text;
-  final Color textColor;
-  final bool? underline;
-  final FontWeight fontWeight;
-  final TextAlign textAlign;
-
-
-  const Text20({super.key,
+  const Text18({super.key,
     required this.text,
     this.textColor = black25,
     this.underline,
@@ -122,7 +56,7 @@ class Text20 extends StatelessWidget {
         text,
         textAlign: textAlign,
         style: TextStyle(
-          fontSize: 20,
+          fontSize: 18,
           color: textColor,
           fontWeight: fontWeight,
           decoration: (underline != null && underline!)
@@ -132,6 +66,77 @@ class Text20 extends StatelessWidget {
     );
   }
 }
+
+class Text14 extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final bool? underline;
+  final FontWeight fontWeight;
+  final TextAlign textAlign;
+
+
+  const Text14({super.key,
+    required this.text,
+    this.textColor = black25,
+    this.underline,
+    this.fontWeight = FontWeight.w500,
+    this.textAlign = TextAlign.start
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+        text,
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: 14,
+          color: textColor,
+          fontWeight: fontWeight,
+          decoration: (underline != null && underline!)
+              ? TextDecoration.underline
+              : null,
+        )
+    );
+  }
+}
+
+class Text10 extends StatelessWidget {
+  final String text;
+  final Color textColor;
+  final bool? underline;
+  final FontWeight fontWeight;
+  final TextAlign textAlign;
+
+
+  const Text10({super.key,
+    required this.text,
+    this.textColor = black25,
+    this.underline,
+    this.fontWeight = FontWeight.w500,
+    this.textAlign = TextAlign.start
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+        text,
+        textAlign: textAlign,
+        style: TextStyle(
+          fontSize: 10,
+          color: textColor,
+          fontWeight: fontWeight,
+          decoration: (underline != null && underline!)
+              ? TextDecoration.underline
+              : null,
+        )
+    );
+  }
+}
+
+
+
+
+
 
 class NavigationText extends StatelessWidget {
   final String text;
@@ -148,7 +153,7 @@ class NavigationText extends StatelessWidget {
     this.underline = TextDecoration.underline,
     this.fontWeight = FontWeight.w600,
     this.textAlign = TextAlign.start,
-    this.fontSize = 16,
+    this.fontSize = 14,
     required this.onTap
   });
 
@@ -204,7 +209,7 @@ class InputText extends StatelessWidget {
           text,
           textAlign: textAlign,
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 14,
             color: textColor,
             fontWeight: fontWeight,
           )

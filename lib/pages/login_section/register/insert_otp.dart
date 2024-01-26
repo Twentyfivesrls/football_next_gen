@@ -66,7 +66,7 @@ class InsertOtpState extends State<InsertOtp>{
 
 
   Widget subtitleSection(){
-    return Text16(
+    return Text14(
       text: getCurrentLanguageValue(INSERT_OTP_SUBTITLE) ?? "",
       fontWeight: FontWeight.w600,
       textAlign: TextAlign.center,
@@ -111,7 +111,7 @@ class InsertOtpState extends State<InsertOtp>{
   Widget otpRequestSection(){
     return Column(
       children: [
-        Text16(
+        Text14(
             text: getCurrentLanguageValue(SMS_NOT_RECEIVED) ?? "",
         ),
         Padding(

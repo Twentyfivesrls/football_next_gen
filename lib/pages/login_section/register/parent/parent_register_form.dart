@@ -92,13 +92,13 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 20,bottom: 5),
-            child: Text16(
+            child: Text14(
               text: getCurrentLanguageValue(UPLOAD_DOCUMENT) ?? "",
               fontWeight: FontWeight.w600,
             ),
           ),
 
-          Text12(
+          Text10(
             text: getCurrentLanguageValue(UPLOAD_DOCUMENT_SUBTITLE) ?? "",
           ),
 
@@ -168,7 +168,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 2),
-                  child: Text12(text: getCurrentLanguageValue(ACCEPT) ?? ""),
+                  child: Text10(text: getCurrentLanguageValue(ACCEPT) ?? ""),
                 ),
                 NavigationText(
                   text: getCurrentLanguageValue(TERMS_OF_SERVICE) ?? "",
@@ -206,7 +206,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 5),
-                child: Text16(
+                child: Text14(
                   text: getCurrentLanguageValue(ALREDY_HAVE_ACCOUNT) ?? "",
                 ),
               ),
@@ -232,7 +232,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 5),
-              child: Text16(
+              child: Text14(
                 text: getCurrentLanguageValue(BACK_TO) ?? "",
               ),
             ),

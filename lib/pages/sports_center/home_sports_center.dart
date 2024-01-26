@@ -22,7 +22,9 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-        goHome: (){},
+        goHome: (){
+          context.push(AppPage.settings.path);
+        },
         goBack: (){},
         appBar: 2,
         paddingTop: 30,
@@ -49,16 +51,16 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
         child: CardWidget(
             child: Row(
               children: [
-                SvgPicture.asset(ImagesConstants.sportsCenterProfileImg),
+                SvgPicture.asset(ImagesConstants.sportsCenterProfileImg,height: 60,width: 60,),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TextH1(text: sportsCenterName),
+                      Text18(text: sportsCenterName),
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
-                        child: Text16(text: getCurrentLanguageValue(VIEW_PROFILE) ?? ""),
+                        child: Text14(text: getCurrentLanguageValue(VIEW_PROFILE) ?? ""),
                       ),
                     ],
                   ),

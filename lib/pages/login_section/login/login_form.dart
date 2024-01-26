@@ -97,7 +97,7 @@ class LoginFormState extends State<LoginForm>{
       children: [
         Padding(
           padding: const EdgeInsets.only(right: 5),
-          child: Text16(
+          child: Text14(
             text: getCurrentLanguageValue(DONT_HAVE_ACCOUNT) ?? "",
           ),
         ),
@@ -114,7 +114,7 @@ class LoginFormState extends State<LoginForm>{
   Widget loginWithGoogleOrSpidSection() {
     return Column(
       children: [
-        Text16(
+        Text14(
           text: getCurrentLanguageValue(OR) ?? "",
           textColor: cancelGrey,
           fontWeight: FontWeight.w500,

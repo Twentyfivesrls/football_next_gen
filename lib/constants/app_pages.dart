@@ -18,7 +18,10 @@ enum AppPage {
   groupDetail,
   trainingsList,
   addTraining,
-  trainingDetail
+  trainingDetail,
+  filters,
+  settings,
+  resetPassword
 }
 
 extension AppPageExtension on AppPage {
@@ -64,6 +67,12 @@ extension AppPageExtension on AppPage {
         return "/add_training";
       case AppPage.trainingDetail:
         return "/training_detail";
+      case AppPage.filters:
+        return "/filters";
+      case AppPage.settings:
+        return "/settings";
+      case AppPage.resetPassword:
+        return "/reset_password";
     }
   }
 
@@ -107,8 +116,14 @@ extension AppPageExtension on AppPage {
         return "TrainingsList";
       case AppPage.addTraining:
         return "AddTraining";
-        case AppPage.trainingDetail:
+      case AppPage.trainingDetail:
         return "Training Detail";
+      case AppPage.filters:
+        return "Filters";
+      case AppPage.settings:
+        return "Settings";
+      case AppPage.resetPassword:
+        return "Reset Password";
 
     }
   }
@@ -153,8 +168,14 @@ extension AppPageExtension on AppPage {
         return "Allenamenti";
       case AppPage.addTraining:
         return "Aggiungi allenamento";
-        case AppPage.trainingDetail:
+      case AppPage.trainingDetail:
         return "Dettagli allenamento";
+      case AppPage.filters:
+        return "Filtri";
+      case AppPage.settings:
+        return "Impostazioni";
+      case AppPage.resetPassword:
+        return "Reset password";
     }
   }
 }

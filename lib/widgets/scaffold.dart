@@ -55,24 +55,25 @@ class ScaffoldWidget extends StatelessWidget {
         appBar: appBar == 0 ? null :
         appBar == 1 ? whiteAppbar(context, title) :
         appBar == 2 ? appbarWithoutActions(
-          title,
-          context,
-          trailingIcon,
-          showSearchInput,
-          searchController = TextEditingController(),
-          hintText,
-          goHome,
-        ) :
-        appbarWithActions(
             title,
             context,
-            showBackIcon,
             trailingIcon,
             showSearchInput,
             searchController = TextEditingController(),
             hintText,
-            showTrailingIcon,
-            goBack,
+            goHome,
+            showTrailingIcon
+        ) :
+        appbarWithActions(
+          title,
+          context,
+          showBackIcon,
+          trailingIcon,
+          showSearchInput,
+          searchController = TextEditingController(),
+          hintText,
+          showTrailingIcon,
+          goBack,
           goHome,
 
         ),
@@ -83,10 +84,10 @@ class ScaffoldWidget extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: Padding(
             padding: EdgeInsets.only(
-                top: paddingTop,
-                bottom: paddingBottom,
-                right: paddingRight,
-                left: paddingLeft,
+              top: paddingTop,
+              bottom: paddingBottom,
+              right: paddingRight,
+              left: paddingLeft,
             ),
             child: SizedBox(
               width: MediaQuery.of(context).size.width,

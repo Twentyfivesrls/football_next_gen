@@ -110,6 +110,15 @@ const String TEAM = "Squadra";
 const String EVENT_REPETITION = "Ripetizione evento";
 const String TRAINING_DETAIL = "Dettagli allenamento";
 const String TRAINING_CREATED = "Allenamento creato con successo!";
+const String FILTERS_RESET = "Resetta tutti i filtri";
+const String GENERAL = "Generali";
+const String RESET_PASSWORD = "Reset password";
+const String RESET_PASS_HEADER = "Al fine di proteggere il tuo account, assicurati che la tua password rispetti i seguenti criteri:";
+const String OLD_PASSWORD = "Vecchia password";
+const String NEW_PASSWORD = "Nuova password";
+const String CONFIRM_NEW_PASSWORD = "Conferma nuova password";
+const String RESET_PASSWORD_CONFIRMED = "Password cambiata con successo!";
+const String GO_BACK_TO = "Torna alla pagina";
 
 
 
@@ -296,6 +305,15 @@ final Map<String, String> LANG_IT = {
   EVENT_REPETITION:"Ripetizione evento",
   TRAINING_CREATED:"Allenamento creato con successo!",
   TRAINING_DETAIL:"Dettagli allenamento",
+  FILTERS_RESET:"Resetta tutti i filtri",
+  GENERAL:"Generali",
+  RESET_PASSWORD:"Reset password",
+  RESET_PASS_HEADER:"Al fine di proteggere il tuo account, assicurati che la tua password rispetti i seguenti criteri:",
+  NEW_PASSWORD:"Nuova password",
+  OLD_PASSWORD:"Vecchia password",
+  CONFIRM_NEW_PASSWORD:"Conferma nuova password",
+  RESET_PASSWORD_CONFIRMED:"Password cambiata con successo!",
+  GO_BACK_TO:"Torna alla pagina",
 
 
 

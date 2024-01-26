@@ -39,7 +39,7 @@ class ProfileHeader extends StatelessWidget{
 
           Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: Text16(text: profileDesc),
+            child: Text14(text: profileDesc),
           ),
 
           Padding(

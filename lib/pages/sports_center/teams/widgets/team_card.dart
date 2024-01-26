@@ -48,7 +48,7 @@ class TeamCard extends StatelessWidget{
 
                 Padding(
                   padding: const EdgeInsets.only(top: 5),
-                  child: Text20(text: team.name,textColor: white,),
+                  child: Text18(text: team.name,textColor: white,),
                 )
 
               ],

@@ -88,13 +88,13 @@ class AddTournamentForm extends StatelessWidget{
         ),
         Padding(
           padding: const EdgeInsets.only(bottom: 10,top: 20),
-          child: Text16(
+          child: Text14(
             text: getCurrentLanguageValue(UPLOAD_POSTER) ?? "",
             fontWeight: FontWeight.w600,
           ),
         ),
 
-        Text12(
+        Text10(
           text: getCurrentLanguageValue(UPLOAD_POSTER_SUBTITLE) ?? "",
         ),
 

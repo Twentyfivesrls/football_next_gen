@@ -17,7 +17,7 @@ class GroupCard extends StatelessWidget{
   Widget build(BuildContext context) {
     return Container(
       height: 168,
-      padding: const EdgeInsets.only(top: 30),
+      margin: const EdgeInsets.only(top: 30),
       child: GestureDetector(
         onTap: goToDetail,
         child: Card(
@@ -44,7 +44,7 @@ class GroupCard extends StatelessWidget{
 
                 Padding(
                   padding: const EdgeInsets.only(top: 10),
-                  child: Text20(text: name,textColor: white,),
+                  child: Text18(text: name,textColor: white,),
                 )
 
               ],

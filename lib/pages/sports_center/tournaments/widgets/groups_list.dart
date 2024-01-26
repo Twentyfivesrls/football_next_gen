@@ -22,7 +22,7 @@ class GroupsList extends StatelessWidget{
               visible: groups.isEmpty,
               child: Padding(
                 padding: const EdgeInsets.only(top: 20),
-                child: Text16(
+                child: Text14(
                   text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
                 ),
               )

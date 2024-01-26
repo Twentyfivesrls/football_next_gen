@@ -37,7 +37,7 @@ class InfoBoxWidget extends StatelessWidget{
                   child: SvgPicture.asset(svgIcon),
                 )
             ),
-            Text16(
+            Text14(
                 text: labelText,
                 fontWeight: FontWeight.w600,
             )
@@ -47,7 +47,7 @@ class InfoBoxWidget extends StatelessWidget{
           visible: showBottomText,
           child: Padding(
             padding: const EdgeInsets.only(top: 5),
-            child: Text16
+            child: Text14
               (text: text,textColor: textColor,),
           ),
         )

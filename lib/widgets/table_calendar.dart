@@ -25,7 +25,7 @@ class TableCalendarWidget extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return Card(
-      margin: const EdgeInsets.all(0),
+      margin: EdgeInsets.zero,
       elevation: 4,
       child: TableCalendar(
         onPageChanged: onPageChanged,
