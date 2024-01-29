@@ -21,7 +21,9 @@ enum AppPage {
   trainingDetail,
   filters,
   settings,
-  resetPassword
+  resetPassword,
+  addPost,
+  postDetail
 }
 
 extension AppPageExtension on AppPage {
@@ -73,6 +75,10 @@ extension AppPageExtension on AppPage {
         return "/settings";
       case AppPage.resetPassword:
         return "/reset_password";
+      case AppPage.addPost:
+        return "/add_post";
+      case AppPage.postDetail:
+        return "/post_detail";
     }
   }
 
@@ -124,6 +130,10 @@ extension AppPageExtension on AppPage {
         return "Settings";
       case AppPage.resetPassword:
         return "Reset Password";
+      case AppPage.addPost:
+        return "Add Post";
+      case AppPage.postDetail:
+        return "Post Detail";
 
     }
   }
@@ -176,6 +186,10 @@ extension AppPageExtension on AppPage {
         return "Impostazioni";
       case AppPage.resetPassword:
         return "Reset password";
+      case AppPage.addPost:
+        return "Nuovo post";
+      case AppPage.postDetail:
+        return "Post";
     }
   }
 }

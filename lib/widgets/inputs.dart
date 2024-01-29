@@ -100,7 +100,6 @@ class InputWidget extends StatelessWidget{
               fontSize: fontSize,
               color: textColor,
             ),
-
             maxLines: maxLines,
             minLines: minLines,
             obscureText: obscureText,

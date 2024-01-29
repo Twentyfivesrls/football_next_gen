@@ -10,6 +10,7 @@ import '../../../constants/colors.dart';
 import '../../../constants/language.dart';
 import '../../../models/confirm_page_data.dart';
 import '../../../widgets/buttons.dart';
+import '../../../widgets/dialog.dart';
 
 enum RadioButtons { mai, data, dopo }
 
@@ -45,8 +46,20 @@ class AddTrainingState extends State<AddTraining>{
       title: AppPage.addTraining.toTitle,
       goHome: (){},
       goBack: (){
-        context.pop();
-      },
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return DialogWidget(
+                title: 'Avviso',
+                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
+                confirmText: 'Elimina allenamento',
+                cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                onConfirm: () {
+                  context.go(AppPage.trainingsList.path);
+                },
+              );
+            });
+        },
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -151,8 +164,20 @@ class AddTrainingState extends State<AddTraining>{
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
             onPressed: () {
-              context.pop();
-            },
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return DialogWidget(
+                      title: 'Avviso',
+                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
+                      confirmText: 'Elimina allenamento',
+                      cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                      onConfirm: () {
+                        context.go(AppPage.trainingsList.path);
+                      },
+                    );
+                  });
+              },
             text: getCurrentLanguageValue(CANCEL) ?? "",
             backgroundColor: cancelGrey,
             borderColor: cancelGrey,

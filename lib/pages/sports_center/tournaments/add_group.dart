@@ -8,6 +8,7 @@ import '../../../constants/images_constants.dart';
 import '../../../constants/language.dart';
 import '../../../models/confirm_page_data.dart';
 import '../../../widgets/buttons.dart';
+import '../../../widgets/dialog.dart';
 
 
 class TextEditingControllerGroup {
@@ -52,8 +53,20 @@ class AddGroupState extends State<AddGroup> {
       appBar: 3,
       goHome: () {},
       goBack: () {
-        context.pop();
-      },
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return DialogWidget(
+                title: 'Avviso',
+                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
+                confirmText: 'Elimina girone',
+                cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                onConfirm: () {
+                  context.go(AppPage.tournamentDetail.path);
+                },
+              );
+            });
+        },
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -125,8 +138,20 @@ class AddGroupState extends State<AddGroup> {
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
             onPressed: () {
-              context.pop();
-            },
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return DialogWidget(
+                      title: 'Avviso',
+                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
+                      confirmText: 'Elimina girone',
+                      cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                      onConfirm: () {
+                        context.go(AppPage.tournamentDetail.path);
+                      },
+                    );
+                  });
+              },
             text: getCurrentLanguageValue(CANCEL) ?? "",
             backgroundColor: cancelGrey,
             borderColor: cancelGrey,

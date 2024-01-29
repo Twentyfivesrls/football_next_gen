@@ -4,6 +4,8 @@ import 'package:football_next_gen/pages/login_section/recover_password/recover_p
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
 import 'package:football_next_gen/pages/settings/reset_password.dart';
 import 'package:football_next_gen/pages/sports_center/home_sports_center.dart';
+import 'package:football_next_gen/pages/sports_center/profile/post/add_post.dart';
+import 'package:football_next_gen/pages/sports_center/profile/post/post_detail.dart';
 import 'package:football_next_gen/pages/sports_center/profile/sports_center_profile.dart';
 import 'package:football_next_gen/pages/settings/settings.dart';
 import 'package:football_next_gen/pages/sports_center/teams/add_team.dart';
@@ -143,6 +145,17 @@ class RouterManager {
      GoRoute(
           path: "/reset_password",
           builder: (context, state) => const ResetPassword()
+      ),
+
+
+     GoRoute(
+          path: "/add_post",
+          builder: (context, state) => const AddPost()
+      ),
+
+      GoRoute(
+          path: "/post_detail",
+          builder: (context, state) => const PostDetail()
       ),
 
 

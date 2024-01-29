@@ -58,7 +58,7 @@ class ConfirmPageData{
         navigationText: AppPage.settings.toTitle,
         bottomText: getCurrentLanguageValue(GO_BACK_TO) ?? "",
         onTap: (){
-          context.go(AppPage.settings.path);
+          context.push(AppPage.settings.path);
         },
       );
 
@@ -69,6 +69,16 @@ class ConfirmPageData{
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
           context.go(AppPage.tournamentDetail.path);
+        },
+      );
+
+  factory ConfirmPageData.addPostConfirmed(BuildContext context) =>
+      ConfirmPageData(
+        titleText: getCurrentLanguageValue(POST_CREATED) ?? "",
+        navigationText: getCurrentLanguageValue(MEDIA) ?? "",
+        bottomText: getCurrentLanguageValue(BACK_TO_SECTION) ?? "",
+        onTap: (){
+          context.push(AppPage.postDetail.path);
         },
       );
 

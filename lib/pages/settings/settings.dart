@@ -4,6 +4,7 @@ import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
+import 'package:football_next_gen/widgets/dialog.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
@@ -24,7 +25,7 @@ class SettingsState extends State<Settings>{
         showTrailingIcon: false,
         goHome: (){},
         goBack: (){
-          context.pop();
+          context.go(AppPage.homeSportsCenter.path);
         },
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
@@ -60,11 +61,8 @@ class SettingsState extends State<Settings>{
                 svgSuffixIcon: ImagesConstants.chevronRightImg,
             ),
           ),
-
-
         ],
       ),
-
     );
   }
 
@@ -72,8 +70,20 @@ class SettingsState extends State<Settings>{
   Widget buttonSection() {
     return ActionButton(
       onPressed: () {
-        context.go(AppPage.login.path);
-      },
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return DialogWidget(
+                  title: getCurrentLanguageValue(LOGOUT) ?? "",
+                  message: 'Desideri veramente effettuare il logout?',
+                  confirmText: 'Si, effettua il logout',
+                  cancelText: 'No, resta connesso',
+                  onConfirm: () {
+                    context.go(AppPage.login.path);
+                  },
+              );
+            });
+        },
       text: getCurrentLanguageValue(LOGOUT) ?? "",
       backgroundColor: secondary,
       borderColor: secondary,

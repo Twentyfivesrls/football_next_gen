@@ -26,11 +26,14 @@ class ImagesConstants{
   static String tennisImg = '${baseUrl}sports_tennis.svg';
   static String teamLogoImg = '${baseUrl}team_logo.svg';
   static String addCircleImg = '${baseUrl}add_circle.svg';
+  static String addCircleWhiteImg = '${baseUrl}add_circle_white.svg';
   static String groupsImg = '${baseUrl}partner_exchange.svg';
   static String addCircleBlueImg = '${baseUrl}add_circle_blue.svg';
   static String closeImg = '${baseUrl}close.svg';
   static String filterImg = '${baseUrl}filter_list.svg';
   static String lockImg = '${baseUrl}lock_reset.svg';
   static String chevronRightImg = '${baseUrl}chevron_right.svg';
+  static String postImg = '${baseUrl}post_img.png';
+  static String exclamationCircle = '${baseUrl}exclamation_circle.svg';
 
 }

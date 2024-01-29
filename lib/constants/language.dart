@@ -119,6 +119,13 @@ const String NEW_PASSWORD = "Nuova password";
 const String CONFIRM_NEW_PASSWORD = "Conferma nuova password";
 const String RESET_PASSWORD_CONFIRMED = "Password cambiata con successo!";
 const String GO_BACK_TO = "Torna alla pagina";
+const String ADD_POST = "Nuovo post";
+const String PHOTO_AND_VIDEO = "Foto e video";
+const String ACCEPTED_FORMATS = "I formati accettati sono JPG, PNG e SVG";
+const String NEXT = "Procedi";
+const String BACK_TO_SECTION = "Torna alla sezione";
+const String MEDIA = "Media";
+const String POST_CREATED = "Post creato con successo!";
 
 
 
@@ -314,6 +321,13 @@ final Map<String, String> LANG_IT = {
   CONFIRM_NEW_PASSWORD:"Conferma nuova password",
   RESET_PASSWORD_CONFIRMED:"Password cambiata con successo!",
   GO_BACK_TO:"Torna alla pagina",
+  ADD_POST:"Nuovo post",
+  PHOTO_AND_VIDEO:"Foto e video",
+  ACCEPTED_FORMATS:"I formati accettati sono JPG, PNG e SVG",
+  NEXT:"Procedi",
+  BACK_TO_SECTION:"Torna alla sezione",
+  MEDIA:"Media",
+  POST_CREATED:"Post creato con successo!",
 
 
 

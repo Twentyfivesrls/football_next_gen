@@ -7,11 +7,12 @@ import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../constants/language.dart';
-import '../../../widgets/texts.dart';
+import '../../../widgets/dialog.dart';
 
 class AddTeam extends StatefulWidget{
+  const AddTeam({super.key});
+
   @override
   State<StatefulWidget> createState() => AddTeamState();
 
@@ -28,7 +29,19 @@ class AddTeamState extends State<AddTeam>{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       goBack: (){
-        context.pop();
+        showDialog(
+            context: context,
+            builder: (BuildContext context){
+              return DialogWidget(
+                title: 'Avviso',
+                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
+                confirmText: 'Elimina squadra',
+                cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                onConfirm: () {
+                  context.go(AppPage.teamsList.path);
+                },
+              );
+            });
       },
       paddingTop: 30,
       appBar: 3,
@@ -36,12 +49,12 @@ class AddTeamState extends State<AddTeam>{
       title: AppPage.addTeam.toTitle,
       goHome: (){},
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            formSection(),
-            buttonsSection()
-          ],
-        )
+          child: Column(
+            children: [
+              formSection(),
+              buttonsSection()
+            ],
+          )
       ),
     );
   }
@@ -64,22 +77,34 @@ class AddTeamState extends State<AddTeam>{
           padding: EdgeInsets.symmetric(vertical: 50),
           child: DividerWidget(),
         ),
-        
+
         ActionButton(
-            onPressed: (){
-              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context));
-            },
-            text: getCurrentLanguageValue(ADD_TEAM) ?? "",
+          onPressed: (){
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context));
+          },
+          text: getCurrentLanguageValue(ADD_TEAM) ?? "",
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
-              onPressed: (){
-                context.pop();
-              },
-              text: getCurrentLanguageValue(CANCEL) ?? "",
-              backgroundColor: cancelGrey,
-              borderColor: cancelGrey,
+            onPressed: (){
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context){
+                    return DialogWidget(
+                      title: 'Avviso',
+                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
+                      confirmText: 'Elimina squadra',
+                      cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                      onConfirm: () {
+                        context.go(AppPage.teamsList.path);
+                      },
+                    );
+                  });
+            },
+            text: getCurrentLanguageValue(CANCEL) ?? "",
+            backgroundColor: cancelGrey,
+            borderColor: cancelGrey,
           ),
         ),
 
