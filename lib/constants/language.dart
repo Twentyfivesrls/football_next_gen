@@ -126,6 +126,10 @@ const String NEXT = "Procedi";
 const String BACK_TO_SECTION = "Torna alla sezione";
 const String MEDIA = "Media";
 const String POST_CREATED = "Post creato con successo!";
+const String BIRTHDAY = "Data di nascita";
+const String SELECT_DATE = "Seleziona data";
+const String EDIT = "Modifica";
+const String DELETE = "Elimina";
 
 
 
@@ -230,7 +234,7 @@ final Map<String, String> LANG_IT = {
   EMAIL_SENDED:"Email inviata",
   REGISTER:"Registrazione",
   PARENT_DATA:"Dati Genitore",
-  CHILD_DATA:"dati Figlio",
+  CHILD_DATA:"Dati Figlio",
   FIRSTNAME:"Nome",
   LASTNAME:"Cognome",
   CITY:"Città",
@@ -328,6 +332,10 @@ final Map<String, String> LANG_IT = {
   BACK_TO_SECTION:"Torna alla sezione",
   MEDIA:"Media",
   POST_CREATED:"Post creato con successo!",
+  BIRTHDAY:"Data di nascita",
+  SELECT_DATE:"Seleziona data",
+  EDIT:"Modifica",
+  DELETE:"Elimina",
 
 
 

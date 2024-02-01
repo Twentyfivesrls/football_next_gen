@@ -91,7 +91,7 @@ class TournamentsListState extends State<TournamentsList>{
                       ),
                     )
                 ),
-                ...teams.map((e) => teamsListSection(e)),
+                ...teams.map((e) => tournamentsListSection(e)),
               ],
             ),
           ),
@@ -99,7 +99,7 @@ class TournamentsListState extends State<TournamentsList>{
     );
   }
 
-  Widget teamsListSection(TournamentEntity tournament){
+  Widget tournamentsListSection(TournamentEntity tournament){
     return TournamentCard(
       tournament:tournament,
       goToDetail: (){

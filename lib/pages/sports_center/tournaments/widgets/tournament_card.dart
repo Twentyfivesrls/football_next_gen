@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/language.dart';
 import '../../../../models/tournament.dart';
 
 class TournamentCard extends StatelessWidget{
@@ -25,16 +26,28 @@ class TournamentCard extends StatelessWidget{
               borderRadius: BorderRadius.circular(8)
           ),
           color: primary,
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
+          child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Align(
+                 Align(
                     alignment: Alignment.topRight,
-                    child: Icon(
-                        Icons.more_vert,
-                        color: white
+                    child: PopupMenuButton(
+                      padding: const EdgeInsets.only(right: 10),
+                      elevation: 5,
+                      splashRadius: 1,
+                      icon: const Icon(Icons.more_vert,color: white,),
+                      itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                        PopupMenuItem(
+                            onTap: (){},
+                            value: getCurrentLanguageValue(EDIT),
+                            child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
+                        ),
+                        PopupMenuItem(
+                            onTap: (){},
+                            value: getCurrentLanguageValue(DELETE),
+                            child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
+                        ),
+                      ],
                     )
                 ),
 
@@ -49,7 +62,7 @@ class TournamentCard extends StatelessWidget{
             ),
           ),
         ),
-      ),
+
     );
   }
 }

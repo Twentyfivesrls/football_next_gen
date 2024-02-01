@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/group_entity.dart';
-import 'package:football_next_gen/pages/sports_center/tournaments/widgets/groups_list.dart';
+import 'package:football_next_gen/pages/sports_center/tournaments/widgets/group_card.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/tournament_info.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
@@ -125,7 +125,7 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
 
                         newGroupsButtonSection(),
 
-                        GroupsList(groups: groups)
+                        ...groups.map((e) => groupsListSection(e)),
                       ],
                     ),
                   ),
@@ -174,4 +174,19 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
       ),
     );
   }
+
+
+  Widget groupsListSection(GroupEntity group){
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: GroupCard(
+        group:group,
+        name: 'Girone 1',
+        goToDetail: (){
+          context.push(AppPage.groupDetail.path);
+        },
+      ),
+    );
+  }
+
 }

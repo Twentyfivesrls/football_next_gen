@@ -6,6 +6,7 @@ import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/widgets/info_box.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
+import 'package:football_next_gen/widgets/popup_menu.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +26,28 @@ class PostDetailState extends State<PostDetail> {
   bool selected = false;
   bool edit = false;
   final TextEditingController descriptionController = TextEditingController();
+/* List <PopupMenuItem> items = [
+    PopupMenuItem(
+      child: Text14(text: getCurrentLanguageValue(EDIT) ?? ""),
+      value: getCurrentLanguageValue(EDIT),
+      onTap: (){
+        setState(() {
+          edit = !edit;
+        });
+      },
+    ),
+
+    PopupMenuItem(
+      child: Text14(text: getCurrentLanguageValue(DELETE) ?? ""),
+      value: getCurrentLanguageValue(DELETE),
+      onTap: (){},
+    ),
+  ]; */
+
+  List<String> list = [
+    'Modifica',
+    'Elimina'
+  ];
 
   @override
   void initState() {
@@ -73,11 +96,31 @@ class PostDetailState extends State<PostDetail> {
             )
           ],
         ),
-        const Icon(
-          Icons.more_vert,
-          color: black25,
-          size: 25,
-        )
+
+        PopupMenuButton(
+          elevation: 5,
+          icon: const Icon(Icons.more_vert,color: black25,),
+          itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+            PopupMenuItem(
+                onTap: (){
+                  setState(() {
+                    edit = !edit;
+                  });
+                },
+                value: getCurrentLanguageValue(EDIT),
+                child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
+            ),
+            PopupMenuItem(
+                onTap: (){},
+                value: getCurrentLanguageValue(DELETE),
+                child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
+            ),
+          ],
+        ),
+
+     /*   PopupMenuWidget(
+            items: items,
+        ) */
       ],
     );
   }
@@ -99,11 +142,11 @@ class PostDetailState extends State<PostDetail> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                onTap: (){
-                  setState(() {
-                    selected = !selected;
-                  });
-                },
+                  onTap: (){
+                    setState(() {
+                      selected = !selected;
+                    });
+                  },
                   child: Icon(
                     selected ? Icons.favorite : Icons.favorite_border_outlined,
                     color: selected ? Colors.red : black25,
@@ -111,18 +154,12 @@ class PostDetailState extends State<PostDetail> {
                   )
               ),
               GestureDetector(
-                onTap: (){
-                  setState(() {
-                    edit = !edit;
-                  });
-                },
-                  child: Visibility(
-                    visible: !edit,
-                    child: const Icon(
+                  onTap: (){},
+                  child: const Icon(
                       Icons.share_outlined,
                       color: black25,
                       size: 25,
-                    ),
+
                   )
               ),
             ],
@@ -138,13 +175,13 @@ class PostDetailState extends State<PostDetail> {
         ),
 
         Visibility(
-          visible: edit,
+            visible: edit,
             child: InputWidget(
-                labelText: getCurrentLanguageValue(DESCRIPTION) ?? "",
-                controller: descriptionController,
-                hintText: getCurrentLanguageValue(DESCRIPTION) ?? "",
-                minLines: 4,
-                maxLines: 20,
+              labelText: getCurrentLanguageValue(DESCRIPTION) ?? "",
+              controller: descriptionController,
+              hintText: getCurrentLanguageValue(DESCRIPTION) ?? "",
+              minLines: 4,
+              maxLines: 20,
             )
         ),
 

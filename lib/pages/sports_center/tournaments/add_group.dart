@@ -35,7 +35,6 @@ class AddGroupState extends State<AddGroup> {
   TextEditingController dateController = TextEditingController();
   TextEditingController hourController = TextEditingController();
   List<TextEditingControllerGroup> matchList = List.empty(growable: true);
-  int counter = 1;
 
 
   @override
@@ -72,7 +71,7 @@ class AddGroupState extends State<AddGroup> {
           children: [
             ...matchList.map((e) =>
                 AddMatchForm(
-                    matchTitle: "Partita $counter",
+                    matchTitle: "Partita 1",
                     awayTeamController: awayTeamController,
                     homeTeamController: homeTeamController,
                     placeController: placeController,
@@ -104,7 +103,6 @@ class AddGroupState extends State<AddGroup> {
         child: ActionButton(
           onPressed: () {
             setState(() {
-              counter = counter+1;
               matchList.add(TextEditingControllerGroup());
             });
           },

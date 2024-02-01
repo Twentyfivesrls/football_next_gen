@@ -15,6 +15,7 @@ class InputWidget extends StatelessWidget{
   final double borderRadius; //4
   final Color textColor;
   Color? hintColor = opaqueBlack25;
+  Color? iconColor = opaqueBlack25;
   final String hintText;
   final FontWeight hintWeight;
   TextInputAction textInputAction;
@@ -36,6 +37,8 @@ class InputWidget extends StatelessWidget{
   final double labelPaddingLeft;
   final int minLines;
   final int maxLines;
+  final Function() onTap;
+  final bool readOnly;
 
   InputWidget({
     super.key,
@@ -51,6 +54,7 @@ class InputWidget extends StatelessWidget{
     this.enabled = true,
     this.textColor = black25,
     this.hintColor,
+    this.iconColor,
     this.borderRadius = 4,
     this.labelText = '',
     this.labelColor = black25,
@@ -69,6 +73,8 @@ class InputWidget extends StatelessWidget{
     this.verticalContentPadding = 15,
     this.minLines = 1,
     this.maxLines = 1,
+    this.onTap = emptyFunction,
+    this.readOnly = false,
   });
 
   @override
@@ -100,6 +106,8 @@ class InputWidget extends StatelessWidget{
               fontSize: fontSize,
               color: textColor,
             ),
+            readOnly: readOnly,
+            onTap: onTap,
             maxLines: maxLines,
             minLines: minLines,
             obscureText: obscureText,
@@ -142,7 +150,7 @@ class InputWidget extends StatelessWidget{
                     onTap: iconOnTap,
                     child: Icon(
                         suffixIcon,
-                        color: opaqueBlack25
+                        color: iconColor
                     )
                 ),
               ) : null,
@@ -154,4 +162,7 @@ class InputWidget extends StatelessWidget{
     );
   }
 }
+
+
+emptyFunction(){}
 

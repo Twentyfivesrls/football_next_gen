@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import '../../../../../constants/language.dart';
 import '../../../../../widgets/inputs.dart';
@@ -18,6 +19,8 @@ class ChildDataForm extends StatelessWidget{
   final bool obscureTextPass;
   final IconData suffixIconPassword;
   final IconData suffixIconConfirmPassword;
+  final Function() iconOnTap;
+  final Function() inputOnTap;
 
   ChildDataForm({
     super.key,
@@ -34,6 +37,8 @@ class ChildDataForm extends StatelessWidget{
     required this.obscureTextPass,
     required this.suffixIconPassword,
     required this.suffixIconConfirmPassword,
+    required this.iconOnTap,
+    required this.inputOnTap,
   });
 
   @override
@@ -45,7 +50,7 @@ class ChildDataForm extends StatelessWidget{
         children: [
 
           Text18(
-            text: getCurrentLanguageValue(PARENT_DATA) ?? "",
+            text: getCurrentLanguageValue(CHILD_DATA) ?? "",
           ),
 
 
@@ -65,9 +70,16 @@ class ChildDataForm extends StatelessWidget{
 
           InputWidget(
             controller: dateController,
-            hintText: getCurrentLanguageValue(DATE) ?? "",
-            labelText: getCurrentLanguageValue(DATE) ?? "",
+            hintText: getCurrentLanguageValue(BIRTHDAY) ?? "",
+            labelText: getCurrentLanguageValue(BIRTHDAY) ?? "",
             labelPaddingTop: 20,
+            showSuffixIcon: true,
+            suffixIcon: Icons.calendar_today,
+            iconOnTap: iconOnTap,
+            readOnly: true,
+            onTap: inputOnTap,
+            iconColor: black25,
+
           ),
 
           InputWidget(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_holo_date_picker/date_picker.dart';
+import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/pages/login_section/register/parent/widgets/child_data.dart';
@@ -10,6 +12,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../constants/app_pages.dart';
 import '../../../../constants/language.dart';
 import '../../../../widgets/texts.dart';
+import 'package:intl/intl.dart';
 
 class ParentRegisterForm extends StatefulWidget{
   const ParentRegisterForm({super.key});
@@ -23,6 +26,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
   var confirmPasswordVisible = false;
   var parentPasswordVisible = false;
   var parentConfirmPasswordVisible = false;
+  var datePicked;
 
   //PARENT FORM
   final parentKey = GlobalKey<FormState>();
@@ -126,6 +130,48 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
 
   Widget childSection() {
     return ChildDataForm(
+      iconOnTap: () async {
+        datePicked = await DatePicker.showSimpleDatePicker(
+          context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(1900),
+          lastDate: DateTime.now(),
+          dateFormat: "dd-MMMM-yyyy",
+          locale: DateTimePickerLocale.it,
+          titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+          cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+          confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+          textColor: black25,
+        );
+        if(datePicked != null){
+          String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+
+          setState(() {
+            childDateController.text = formattedDate;
+          });
+        }
+      },
+      inputOnTap: ()async {
+        datePicked = await DatePicker.showSimpleDatePicker(
+            context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now(),
+            dateFormat: "dd-MMMM-yyyy",
+            locale: DateTimePickerLocale.it,
+            titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+            cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+            confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+            textColor: black25
+        );
+        if(datePicked != null){
+          String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+
+          setState(() {
+            childDateController.text = formattedDate;
+          });
+        }
+      },
       formKey: childKey,
       confirmPasswordController: childConfirmPasswordController,
       passwordController: childPasswordController,
