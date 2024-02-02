@@ -4,6 +4,7 @@ import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/pages/sports_center/teams/widgets/team_card.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
+import 'package:football_next_gen/widgets/choice_chip.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
@@ -11,42 +12,85 @@ import 'package:go_router/go_router.dart';
 import '../../../constants/app_pages.dart';
 import '../../../models/team_entity.dart';
 
-class TeamsList extends StatefulWidget{
+class TeamsList extends StatefulWidget {
   const TeamsList({super.key});
+
   @override
   State<StatefulWidget> createState() => TeamListState();
-
 }
 
-class TeamListState extends State<TeamsList>{
-
+class TeamListState extends State<TeamsList> {
   var teams = [
-    TeamEntity(name: 'FC Eggbird', manager: 'dwqqdq', coach: 'wdw', description: 'rvdff', svgLogo: ImagesConstants.teamLogoImg),
-    TeamEntity(name: 'AS Piedi', manager: 'qwdqw', coach: 'wqwa', description: 'egg',svgLogo: ImagesConstants.teamLogoImg),
-    TeamEntity(name: 'Gro Gro', manager: 'wdqd', coach: 'qfqef',  description: 'safg',svgLogo: ImagesConstants.teamLogoImg),
-    TeamEntity(name: 'Gro Gro', manager: 'wdqd', coach: 'qfqef',  description: 'safg',svgLogo: ImagesConstants.teamLogoImg),
+    TeamEntity(
+        name: 'US Tigri Tuonanti',
+        manager: 'Manager',
+        coach: 'Coach',
+        description: 'Descrizione',
+        svgLogo: ImagesConstants.teamLogoImg,
+        isHomeTeam: true),
+    TeamEntity(
+        name: 'Nome molto molto molto lungo di prova',
+        manager: 'Manager',
+        coach: 'Coach',
+        description: 'Descrizione',
+        svgLogo: ImagesConstants.teamLogoImg,
+        isHomeTeam: false
+    ),
+    TeamEntity(
+        name: 'Team 3',
+        manager: 'Manager',
+        coach: 'Coach',
+        description: 'Descrizione',
+        svgLogo: ImagesConstants.teamLogoImg,
+        isHomeTeam: true
+    ),
+    TeamEntity(
+        name: 'Team 4',
+        manager: 'Manager',
+        coach: 'Coach',
+        description: 'Descrizione',
+        svgLogo: ImagesConstants.teamLogoImg,
+        isHomeTeam: true
+    ),
+
+    TeamEntity(
+        name: 'Team 5',
+        manager: 'Manager',
+        coach: 'Coach',
+        description: 'Descrizione',
+        svgLogo: ImagesConstants.teamLogoImg,
+        isHomeTeam: false
+    ),
   ];
 
+  List<String> textList = [
+    'Tutte',
+    'In casa',
+    'In trasferta',
+  ];
+  List<bool> chipsSituation = [
+    true,
+    false,
+    false,
+  ];
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         appBar: 2,
-        goBack: (){
-          context.pop();
-        },
+        goBack: () {context.pop();},
         paddingTop: 0,
-        goHome: (){
-          context.go(AppPage.homeSportsCenter.path);
-        },
+        goHome: () {context.go(AppPage.homeSportsCenter.path);},
         title: getCurrentLanguageValue(TEAMS) ?? "",
         trailingIcon: Icons.home,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 30),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 newTeamButtonSection(),
+                chipsSection(),
                 Visibility(
                     visible: teams.isEmpty,
                     child: Padding(
@@ -54,31 +98,28 @@ class TeamListState extends State<TeamsList>{
                       child: Text14(
                         text: getCurrentLanguageValue(EMPTY_TEAMS_LIST) ?? "",
                       ),
-                    )
-                ),
+                    )),
                 ...teams.map((e) => teamsListSection(e)),
               ],
             ),
           ),
-        )
-    );
+        ));
   }
 
-  Widget teamsListSection(TeamEntity team){
+  Widget teamsListSection(TeamEntity team) {
     return TeamCard(
-      team:team,
-      goToDetail: (){
+      team: team,
+      goToDetail: () {
         context.push(AppPage.teamDetail.path);
       },
     );
   }
 
-  Widget newTeamButtonSection(){
+  Widget newTeamButtonSection() {
     return Column(
       children: [
-
         ActionButton(
-          onPressed: (){
+          onPressed: () {
             context.push(AppPage.addTeam.path);
           },
           text: getCurrentLanguageValue(ADD_TEAM) ?? "",
@@ -90,12 +131,22 @@ class TeamListState extends State<TeamsList>{
           textColor: textProfileGrey,
           svgPrefixIcon: ImagesConstants.addCircleImg,
         ),
-
         const Padding(
-          padding: EdgeInsets.only(top: 30),
+          padding: EdgeInsets.symmetric(vertical: 30),
           child: DividerWidget(),
         ),
       ],
     );
+  }
+
+  Widget chipsSection() {
+    return ChoiceChipListWidget(
+        chipsSituation: chipsSituation,
+        textList: textList,
+        changeSelection: (List<bool> value) {
+          setState(() {
+            chipsSituation = value;
+          });
+        });
   }
 }

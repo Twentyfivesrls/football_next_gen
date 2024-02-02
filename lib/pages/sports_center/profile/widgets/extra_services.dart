@@ -41,14 +41,17 @@ class ExtraServices extends StatelessWidget{
             ],
           ),
 
-          Column(
-            children: services.map((e) => service(e)).toList(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 30),
+            child: Column(
+              children: services.map((e) => service(e)).toList(),
+            ),
           ),
 
-          const Padding(
+        /*  const Padding(
             padding: EdgeInsets.only(top: 30),
             child: DividerWidget(),
-          )
+          )*/
         ],
       ),
     );

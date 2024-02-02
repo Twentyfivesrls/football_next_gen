@@ -6,21 +6,20 @@ import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 
-class AddTeamForm extends StatelessWidget{
+class HomeTeamForm extends StatelessWidget{
   TextEditingController nameController;
   TextEditingController managerController;
   TextEditingController descriptionController;
   TextEditingController coachController;
   final Function() uploadLogo;
 
-  AddTeamForm({
+  HomeTeamForm({
     super.key,
     required this.nameController,
     required this.coachController,
     required this.managerController,
     required this.descriptionController,
     required this.uploadLogo,
-
   });
 
   @override
@@ -28,10 +27,13 @@ class AddTeamForm extends StatelessWidget{
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          InputWidget(
-            controller: nameController,
-            labelText: "Nome società*",
-            hintText: getCurrentLanguageValue(TEAM_NAME) ?? "" ,
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: InputWidget(
+              controller: nameController,
+              labelText: "Nome società*",
+              hintText: getCurrentLanguageValue(TEAM_NAME) ?? "" ,
+            ),
           ),
 
           Padding(

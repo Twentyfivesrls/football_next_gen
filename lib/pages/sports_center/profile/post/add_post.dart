@@ -28,6 +28,7 @@ class AddPostState extends State<AddPost>{
     return ScaffoldWidget(
         paddingTop: 30,
         appBar: 3,
+        title: AppPage.addPost.toTitle,
         showTrailingIcon: false,
         goHome: (){},
         goBack: (){

@@ -53,7 +53,7 @@ class AutocompleteWidget extends StatelessWidget {
           RawAutocomplete<String>(
             optionsBuilder: (TextEditingValue textEditingValue) {
               return kOptions.where((String option) {
-                return option.contains(textEditingValue.text.toLowerCase());
+                return option.toLowerCase().contains(textEditingValue.text.toLowerCase());
               });
             },
             fieldViewBuilder: (
@@ -62,36 +62,33 @@ class AutocompleteWidget extends StatelessWidget {
                 FocusNode focusNode,
                 VoidCallback onFieldSubmitted,
                 ) {
-              return Container(
-
-                child: TextFormField(
-                  controller: textEditingController,
-                  focusNode: focusNode,
-                  onFieldSubmitted: (String value) {
-                    onFieldSubmitted();
-                  },
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: white,
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(color: opaqueBlack25)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        borderSide: BorderSide(color: opaqueBlack25)),
-                    errorBorder: OutlineInputBorder(
+              return TextFormField(
+                controller: textEditingController,
+                focusNode: focusNode,
+                onFieldSubmitted: (String value) {
+                  onFieldSubmitted();
+                },
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: white,
+                  enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: opaqueBlack25)),
+                  focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(4),
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 12),
-                    hintText: hintText,
-                    hintStyle: TextStyle(
-                        color: opaqueBlack25,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500),
+                      borderSide: BorderSide(color: opaqueBlack25)),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
                   ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 15,horizontal: 12),
+                  hintText: hintText,
+                  hintStyle: TextStyle(
+                      color: opaqueBlack25,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500),
                 ),
               );
             },

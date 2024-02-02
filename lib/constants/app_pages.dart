@@ -161,7 +161,7 @@ extension AppPageExtension on AppPage {
       case AppPage.addTeam:
         return "Nuova squadra";
       case AppPage.teamDetail:
-        return "Conferma";
+        return "Dettagli squadra";
       case AppPage.tournamentsList:
         return "Tornei";
       case AppPage.addTournament:

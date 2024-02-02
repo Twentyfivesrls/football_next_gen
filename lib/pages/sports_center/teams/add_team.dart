@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/models/confirm_page_data.dart';
-import 'package:football_next_gen/pages/sports_center/teams/widgets/add_team_form.dart';
+import 'package:football_next_gen/pages/sports_center/teams/widgets/away_team_form.dart';
+import 'package:football_next_gen/pages/sports_center/teams/widgets/home_team_form.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/divider.dart';
+import 'package:football_next_gen/widgets/dropdown_menu.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/language.dart';
 import '../../../widgets/dialog.dart';
+const List<String> list = <String>['Squadra in casa', 'Squadra in trasferta'];
 
 class AddTeam extends StatefulWidget{
   const AddTeam({super.key});
@@ -24,6 +27,8 @@ class AddTeamState extends State<AddTeam>{
   TextEditingController coachController = TextEditingController();
   TextEditingController managerController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  bool showHome = true;
+  String dropdownValue = list.first;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +55,22 @@ class AddTeamState extends State<AddTeam>{
       goHome: (){},
       body: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              formSection(),
+
+              dropdownSection(),
+
+
+              Visibility(
+                  visible: showHome,
+                  child: homeTeamSection()
+              ),
+
+              Visibility(
+                  visible: !showHome,
+                  child: awayTeamSection()
+              ),
+
               buttonsSection()
             ],
           )
@@ -59,9 +78,35 @@ class AddTeamState extends State<AddTeam>{
     );
   }
 
+  Widget dropdownSection() {
+    return DropdownMenuWidget(
+        onSelected: (String? value){
+          setState(() {
+            dropdownValue = value!;
+            if(value == list[0]){
+              showHome = true;
+            }else{
+              showHome = false;
+            }
+          });
+        },
+        initialSelection: list.first,
+        list: list
+    );
+  }
 
-  Widget formSection() {
-    return AddTeamForm(
+  Widget awayTeamSection() {
+    return AwayTeamForm(
+      nameController: nameController,
+      coachController: coachController,
+      managerController: managerController,
+      descriptionController: descriptionController,
+      uploadLogo: () {  },
+    );
+  }
+
+  Widget homeTeamSection() {
+    return HomeTeamForm(
       nameController: nameController,
       coachController: coachController,
       managerController: managerController,

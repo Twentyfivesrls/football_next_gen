@@ -116,6 +116,7 @@ class InputWidget extends StatelessWidget{
             controller: controller,
             onEditingComplete: () => node.nextFocus(),
             decoration: InputDecoration(
+              suffixIconColor: opaqueBlack25,
               fillColor: white,
               filled: true,
               enabledBorder: OutlineInputBorder(
@@ -155,7 +156,6 @@ class InputWidget extends StatelessWidget{
                 ),
               ) : null,
             ),
-
           ),
         ),
       ],

@@ -54,8 +54,7 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
 
   var services = [
     ExtraServiceEntity(name: 'Bar', svgIcon: ImagesConstants.localCafeImg),
-    ExtraServiceEntity(
-        name: 'Ristorante', svgIcon: ImagesConstants.flatwareImg),
+    ExtraServiceEntity(name: 'Ristorante', svgIcon: ImagesConstants.flatwareImg),
     ExtraServiceEntity(name: 'Sauna', svgIcon: ImagesConstants.saunaImg),
   ];
 
@@ -76,7 +75,7 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 2, vsync: this);
+    tabController = TabController(length: 3, vsync: this);
     tabController.addListener(() {
       setState(() {
         activeIndex = tabController.index;
@@ -134,15 +133,26 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
                     ),
                     Tab(
                       child: Text14(
-                        text: 'Media',
+                        text: 'Post',
                         fontWeight: activeIndex == 1
                             ? FontWeight.w600
                             : FontWeight.w500,
                         textColor: activeIndex == 1 ? primary : textProfileGrey,
                       ),
                     ),
+
+                    Tab(
+                      child: Text14(
+                        text: 'Media',
+                        fontWeight: activeIndex == 2
+                            ? FontWeight.w600
+                            : FontWeight.w500,
+                        textColor: activeIndex == 2 ? primary : textProfileGrey,
+                      ),
+                    ),
                   ],
                 ),
+
                 Expanded(
                   child: TabbarViewWidget(
                       tabController: tabController,
@@ -159,10 +169,10 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
                             SportsField(fields: fields, editSports: () {}),
                             ExtraServices(
                                 editSports: () {}, services: services),
-                            Maps(
+                           /* Maps(
                               editMap: () {},
                               viewMap: () {},
-                            )
+                            )*/
                           ],
                         ),
                       ),
@@ -203,6 +213,9 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
                             ],
                           ),
                         ),
+                      thirdTab: SingleChildScrollView(
+                        child: Center(),
+                      ),
                       )),
 
               ],

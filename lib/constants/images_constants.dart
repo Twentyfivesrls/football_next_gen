@@ -35,5 +35,6 @@ class ImagesConstants{
   static String chevronRightImg = '${baseUrl}chevron_right.svg';
   static String postImg = '${baseUrl}post_img.png';
   static String exclamationCircle = '${baseUrl}exclamation_circle.svg';
+  static String homeTeamImg = '${baseUrl}home_team.svg';
 
 }

@@ -5,13 +5,21 @@ class TeamEntity {
   final String description;
   final String manager;
   final String svgLogo;
+  final bool isHomeTeam;
 
 
-  TeamEntity({required this.svgLogo, required this.coach,required this.description,required this.manager, required this.name});
+  TeamEntity({
+    required this.svgLogo,
+    required this.coach,
+    required this.description,
+    required this.manager,
+    required this.name,
+    required this.isHomeTeam
+  });
 
   @override
   String toString() {
-    return 'TeamEntity{name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo}';
+    return 'TeamEntity{name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo, isHomeTeam: $isHomeTeam}';
   }
 
   TeamEntity copyWith({
@@ -20,6 +28,7 @@ class TeamEntity {
     String? description,
     String? manager,
     String? svgLogo,
+    bool? isHomeTeam,
   }) {
     return TeamEntity(
       name: name ?? this.name,
@@ -27,6 +36,7 @@ class TeamEntity {
       description: description ?? this.description,
       manager: manager ?? this.manager,
       svgLogo: svgLogo ?? this.svgLogo,
+      isHomeTeam: isHomeTeam ?? this.isHomeTeam,
     );
   }
 
@@ -36,6 +46,7 @@ class TeamEntity {
     description: json["description"] ?? "",
     manager: json["manager"] ?? "",
     svgLogo: json["svgLogo"] ?? "",
+    isHomeTeam: json["isHomeTeam"] ?? false,
   );
 
   Map<String, dynamic> toJson() => {
@@ -44,7 +55,7 @@ class TeamEntity {
     "description": description,
     "manager": manager,
     "svgLogo": svgLogo,
-
+    "isHomeTeam": isHomeTeam,
   };
 
   factory TeamEntity.defaultVal() => TeamEntity(
@@ -53,6 +64,7 @@ class TeamEntity {
     description: "",
     manager: "",
     svgLogo: "",
+    isHomeTeam: false,
   );
 
   @override

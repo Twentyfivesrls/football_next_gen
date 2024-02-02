@@ -55,13 +55,15 @@ class FiltersState extends State<Filters> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.only(top: 30),
               child: AutocompleteWidget(
                 kOptions: fieldsList,
                 hintText: 'Seleziona campo/i',
                 labelText: getCurrentLanguageValue(FIELD) ?? "",
               ),
             ),
+
+
           ],
         ),
       ),
@@ -73,11 +75,17 @@ class FiltersState extends State<Filters> {
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 30),
-          child: Text14(
-              text: getCurrentLanguageValue(FILTERS_RESET) ?? "",
-              underline: true,
-              fontWeight: FontWeight.w600,
-           ),
+          child: GestureDetector(
+            onTap: (){
+              setState(() {
+              });
+            },
+            child: Text14(
+                text: getCurrentLanguageValue(FILTERS_RESET) ?? "",
+                underline: true,
+                fontWeight: FontWeight.w600,
+             ),
+          ),
         ),
         ActionButton(
           onPressed: () {

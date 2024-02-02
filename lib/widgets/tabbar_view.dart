@@ -6,12 +6,14 @@ class TabbarViewWidget extends StatelessWidget{
   TabController tabController;
   Widget firstTab;
   Widget secondTab;
+  Widget thirdTab;
 
   TabbarViewWidget({
     super.key,
     required this.tabController,
     required this.firstTab,
-    required this.secondTab
+    required this.secondTab,
+    this.thirdTab = const Center()
   });
 
   @override
@@ -20,7 +22,8 @@ class TabbarViewWidget extends StatelessWidget{
         controller: tabController,
         children: <Widget>[
           firstTab,
-          secondTab
+          secondTab,
+          thirdTab
         ],
       );
   }

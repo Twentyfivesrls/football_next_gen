@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/team_entity.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import '../../../../constants/colors.dart';
@@ -28,26 +29,41 @@ class TeamCard extends StatelessWidget{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Align(
-                  alignment: Alignment.topRight,
-                  child: PopupMenuButton(
-                    padding: const EdgeInsets.only(right: 10),
-                    elevation: 5,
-                    splashRadius: 1,
-                    icon: const Icon(Icons.more_vert,color: white,),
-                    itemBuilder: (BuildContext context) => <PopupMenuEntry>[
-                      PopupMenuItem(
-                          onTap: (){},
-                          value: getCurrentLanguageValue(EDIT),
-                          child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
-                      ),
-                      PopupMenuItem(
-                          onTap: (){},
-                          value: getCurrentLanguageValue(DELETE),
-                          child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
-                      ),
-                    ],
-                  )
+
+
+
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+
+                  Visibility(
+                    visible: team.isHomeTeam,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: SvgPicture.asset(ImagesConstants.homeTeamImg),
+                    ),
+                  ),
+
+
+                   PopupMenuButton(
+                        elevation: 5,
+                        splashRadius: 1,
+                        icon: const Icon(Icons.more_vert,color: white,),
+                        itemBuilder: (BuildContext context) => <PopupMenuEntry>[
+                          PopupMenuItem(
+                              onTap: (){},
+                              value: getCurrentLanguageValue(EDIT),
+                              child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
+                          ),
+                          PopupMenuItem(
+                              onTap: (){},
+                              value: getCurrentLanguageValue(DELETE),
+                              child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
+                          ),
+                        ],
+                      )
+                ],
               ),
 
               Container(
@@ -60,8 +76,8 @@ class TeamCard extends StatelessWidget{
               ),
 
               Padding(
-                padding: const EdgeInsets.only(top: 5),
-                child: Text18(text: team.name,textColor: white,),
+                padding: const EdgeInsets.only(top: 5,left: 20,right: 20),
+                child: Text18(text: team.name,textColor: white,textAlign: TextAlign.center,),
               )
             ],
           ),
