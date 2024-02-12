@@ -74,7 +74,7 @@ class RouterManager {
 
       GoRoute(
           path: "/sports_center_profile",
-          builder: (context, state) => const SportsCenterProfile()
+          builder: (context, state) => SportsCenterProfile()
       ),
 
       GoRoute(

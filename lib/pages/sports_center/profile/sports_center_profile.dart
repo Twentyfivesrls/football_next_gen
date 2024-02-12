@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/profile/profile_bloc.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/extra_service.dart';
 import 'package:football_next_gen/models/file_entity.dart';
@@ -17,19 +19,32 @@ import '../../../constants/app_pages.dart';
 import '../../../constants/colors.dart';
 import '../../../widgets/texts.dart';
 
-class SportsCenterProfile extends StatefulWidget {
-  const SportsCenterProfile({super.key});
+
+
+
+class SportsCenterProfile extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+     return BlocProvider(
+         create: (_) => ProfileCubit(),
+         child: const SportsCenterProfileWidget(),
+     );
+  }
+
+}
+
+
+class SportsCenterProfileWidget extends StatefulWidget {
+  const SportsCenterProfileWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => SportsCenterProfileState();
 }
 
-class SportsCenterProfileState extends State<SportsCenterProfile> with TickerProviderStateMixin {
-  final String profileName = "Sport Center srl";
-  final String profileDesc = "Il playground urbano per gli appassionati di sport! Dai il massimo su campi misti di calcio, tennis, basket e altro ancora. Benvenuto nel nostro mondo di divertimento e competizione!";
-  final String address = "Via Vattelapesca, 22 - Roma, Italia";
-  final String phone = "+39 3406484620";
-  final String email = "sportcenter@mail.com";
+class SportsCenterProfileState extends State<SportsCenterProfileWidget> with TickerProviderStateMixin {
+
+  ProfileCubit get _profileCubit => context.read<ProfileCubit>();
+
   var sports = [
     SportEntity(name: 'Calcio', svgIcon: ImagesConstants.footballImg),
     SportEntity(name: 'Basket', svgIcon: ImagesConstants.basketImg),
@@ -78,6 +93,7 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
         activeIndex = tabController.index;
       });
     });
+    _profileCubit.fetchUserProfile();
   }
 
   @override
@@ -88,6 +104,7 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
 
   @override
   Widget build(BuildContext context) {
+
     return ScaffoldWidget(
         goBack: () {context.pop();},
         goHome: () {context.go(AppPage.homeSportsCenter.path);},
@@ -103,67 +120,83 @@ class SportsCenterProfileState extends State<SportsCenterProfile> with TickerPro
         body: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ProfileHeader(
-                  profileName: profileName,
-                  profileDesc: profileDesc,
-                  editProfile: () {},
-                ),
-                TabBarWidget(
-                  tabController: tabController,
-                  activeIndex: activeIndex,
-                  tabs: <Widget>[
-                    Tab(
-                      child: Text14(
-                        text: 'Informazioni',
-                        fontWeight: activeIndex == 0 ? FontWeight.w600 : FontWeight.w500,
-                        textColor: activeIndex == 0 ? primary : textProfileGrey,
+            child: BlocBuilder<ProfileCubit,ProfilePageState>(
+              builder: (_,state) {
+                if(state is ProfilePageLoading){
+                  return const CircularProgressIndicator();
+                } else if (state is ProfilePageLoaded){
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ProfileHeader(
+                        profileName: state.profile.profileName,
+                        profileDesc: state.profile.profileDesc,
+                        editProfile: () {},
                       ),
-                    ),
-                    Tab(
-                      child: Text14(
-                        text: 'Post',
-                        fontWeight: activeIndex == 1 ? FontWeight.w600 : FontWeight.w500,
-                        textColor: activeIndex == 1 ? primary : textProfileGrey,
-                      ),
-                    ),
+                      TabBarWidget(
+                        tabController: tabController,
+                        activeIndex: activeIndex,
+                        tabs: <Widget>[
+                          Tab(
+                            child: Text14(
+                              text: 'Informazioni',
+                              fontWeight: activeIndex == 0 ? FontWeight.w600 : FontWeight.w500,
+                              textColor: activeIndex == 0 ? primary : textProfileGrey,
+                            ),
+                          ),
+                          Tab(
+                            child: Text14(
+                              text: 'Post',
+                              fontWeight: activeIndex == 1 ? FontWeight.w600 : FontWeight.w500,
+                              textColor: activeIndex == 1 ? primary : textProfileGrey,
+                            ),
+                          ),
 
-                    Tab(
-                      child: Text14(
-                        text: 'Media',
-                        fontWeight: activeIndex == 2 ? FontWeight.w600 : FontWeight.w500,
-                        textColor: activeIndex == 2 ? primary : textProfileGrey,
+                          Tab(
+                            child: Text14(
+                              text: 'Media',
+                              fontWeight: activeIndex == 2 ? FontWeight.w600 : FontWeight.w500,
+                              textColor: activeIndex == 2 ? primary : textProfileGrey,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
 
-                Expanded(
-                    child: TabbarViewWidget(
-                      tabController: tabController,
-                      firstTab: InfoTab(
-                          address: address,
-                          phone: phone,
-                          email: email,
-                          fields: fields,
-                          sports: sports,
-                          services: services
+                      Expanded(
+                          child: TabbarViewWidget(
+                              tabController: tabController,
+                              firstTab: InfoTab(
+                                  address: state.profile.address,
+                                  phone: state.profile.phone,
+                                  email: state.profile.email,
+                                  fields: fields,
+                                  sports: sports,
+                                  services: services
+                              ),
+                              secondTab: PostTab(
+                                  images: images,
+                                  addPost: () {context.push(AppPage.addPost.path);},
+                                  goToDetail: (){context.push(AppPage.postDetail.path);}
+                              ),
+                              thirdTab: MediaTab(
+                                addFile: (){},
+                                date: date,
+                                files: files,
+                              )
+                          )
                       ),
-                      secondTab: PostTab(
-                          images: images,
-                          addPost: () {context.push(AppPage.addPost.path);},
-                          goToDetail: (){context.push(AppPage.postDetail.path);}
-                      ),
-                      thirdTab: MediaTab(
-                        addFile: (){},
-                        date: date,
-                        files: files,
-                      )
-                    )
-                ),
-              ],
+                    ],
+                  );
+                } else{
+                  // here the state is error
+                  return Center(
+                    child: Text18(
+                      text: (state as ProfilePageError).error.toString(),
+                    ),
+                  );
+                }
+
+              }
             ),
           ),
         )
