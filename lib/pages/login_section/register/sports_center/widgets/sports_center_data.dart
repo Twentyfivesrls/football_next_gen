@@ -65,6 +65,7 @@ class SportCenterData extends StatelessWidget{
               controller: phoneController,
               hintText: getCurrentLanguageValue(PHONENUMBER) ?? "",
               labelText: getCurrentLanguageValue(PHONENUMBER) ?? "",
+              keyboard: TextInputType.number,
               labelPaddingTop: 20,
             ),
 

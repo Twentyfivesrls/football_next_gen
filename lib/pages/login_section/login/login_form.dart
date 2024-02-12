@@ -114,7 +114,7 @@ class LoginFormState extends State<LoginForm>{
   Widget loginWithGoogleOrSpidSection() {
     return Column(
       children: [
-        Text14(
+       /* Text14(
           text: getCurrentLanguageValue(OR) ?? "",
           textColor: cancelGrey,
           fontWeight: FontWeight.w500,
@@ -139,7 +139,7 @@ class LoginFormState extends State<LoginForm>{
           svgPrefixIcon: ImagesConstants.spidImg,
           backgroundColor: lightBlue,
           borderColor: lightBlue,
-        )
+        )*/
       ],
     );
   }

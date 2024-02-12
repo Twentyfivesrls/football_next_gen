@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/widgets/texts.dart';
-
 import '../constants/colors.dart';
 
 class AutocompleteWidget extends StatelessWidget {

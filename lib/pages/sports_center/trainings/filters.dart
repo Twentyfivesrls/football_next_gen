@@ -5,6 +5,7 @@ import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/language.dart';
+import '../../../models/team_entity.dart';
 import '../../../widgets/autocomplete.dart';
 import '../../../widgets/buttons.dart';
 
@@ -21,12 +22,12 @@ class FiltersState extends State<Filters> {
     'AS Football Club',
     'Soccer Team FC',
   ];
-
   static const List<String> fieldsList = <String>[
     'Campo A1',
     'Campo A2',
     'Campo A3',
   ];
+  List<TeamEntity> selectedTeams = [];
 
   @override
   Widget build(BuildContext context) {
@@ -62,8 +63,6 @@ class FiltersState extends State<Filters> {
                 labelText: getCurrentLanguageValue(FIELD) ?? "",
               ),
             ),
-
-
           ],
         ),
       ),

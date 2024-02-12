@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import 'divider.dart';
 
-class TabbarWidget extends StatelessWidget{
+class TabBarWidget extends StatelessWidget{
   TabController tabController;
   int activeIndex;
   final List<Widget> tabs;
 
-  TabbarWidget({super.key, required this.tabController, required this.activeIndex, required this.tabs});
+  TabBarWidget({super.key, required this.tabController, required this.activeIndex, required this.tabs});
 
   @override
   Widget build(BuildContext context) {

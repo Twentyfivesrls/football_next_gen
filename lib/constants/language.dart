@@ -130,6 +130,8 @@ const String BIRTHDAY = "Data di nascita";
 const String SELECT_DATE = "Seleziona data";
 const String EDIT = "Modifica";
 const String DELETE = "Elimina";
+const String UPLOADS = "Caricamenti";
+const String ADD_FILE = "Carica file";
 
 
 
@@ -336,6 +338,8 @@ final Map<String, String> LANG_IT = {
   SELECT_DATE:"Seleziona data",
   EDIT:"Modifica",
   DELETE:"Elimina",
+  UPLOADS:"Caricamenti",
+  ADD_FILE:"Carica file",
 
 
 

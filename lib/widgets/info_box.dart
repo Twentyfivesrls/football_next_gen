@@ -9,6 +9,7 @@ class InfoBoxWidget extends StatelessWidget{
   final String labelText;
   final bool showBottomText;
   final bool showIcon;
+  final bool underline;
   final String svgIcon;
   final Color textColor;
 
@@ -19,7 +20,8 @@ class InfoBoxWidget extends StatelessWidget{
     required this.labelText,
     this.showBottomText = true,
     this.textColor = textProfileGrey,
-    this.showIcon = true
+    this.showIcon = true,
+    this.underline = false
   });
 
   @override
@@ -40,6 +42,7 @@ class InfoBoxWidget extends StatelessWidget{
             Text14(
                 text: labelText,
                 fontWeight: FontWeight.w600,
+                underline: underline,
             )
           ],
         ),

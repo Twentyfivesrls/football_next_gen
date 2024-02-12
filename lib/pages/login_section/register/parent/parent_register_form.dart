@@ -109,7 +109,8 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: ActionButton(
-              onPressed: (){},
+              onPressed: () {
+              },
               text: getCurrentLanguageValue(UPLOAD_DOCUMENT) ?? "",
               backgroundColor: secondary,
               textColor: primary,

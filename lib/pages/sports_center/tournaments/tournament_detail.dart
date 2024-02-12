@@ -94,7 +94,7 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
               ),
             ),
 
-            TabbarWidget(
+            TabBarWidget(
               tabController: tabController,
               activeIndex: activeIndex,
               tabs: <Widget>[
