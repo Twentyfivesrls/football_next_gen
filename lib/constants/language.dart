@@ -132,6 +132,7 @@ const String EDIT = "Modifica";
 const String DELETE = "Elimina";
 const String UPLOADS = "Caricamenti";
 const String ADD_FILE = "Carica file";
+const String GROUP_NAME = "Nome girone";
 
 
 
@@ -340,6 +341,7 @@ final Map<String, String> LANG_IT = {
   DELETE:"Elimina",
   UPLOADS:"Caricamenti",
   ADD_FILE:"Carica file",
+  GROUP_NAME:"Nome girone",
 
 
 

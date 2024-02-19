@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:football_next_gen/bloc/group/group_bloc.dart';
+import 'package:football_next_gen/bloc/tournaments/single_tournament_bloc.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/group_entity.dart';
@@ -15,24 +18,44 @@ import '../../../widgets/tabbar.dart';
 import '../../../widgets/tabbar_view.dart';
 import '../../../widgets/texts.dart';
 
-class TournamentDetail extends StatefulWidget{
-  const TournamentDetail({super.key});
+class TournamentDetail extends StatelessWidget{
+
+  final String tournamentId;
+  const TournamentDetail({super.key, required this.tournamentId});
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => SingleTournamentCubit(),
+        ),
+        BlocProvider(
+          create: (_) => GroupCubit(),
+        )
+      ],
+      child: TournamentDetailWidget(tournamentId: tournamentId),
+    );
+  }
+}
+
+
+class TournamentDetailWidget extends StatefulWidget{
+  final String tournamentId;
+  const TournamentDetailWidget({super.key, required this.tournamentId});
 
   @override
   State<StatefulWidget> createState() => TournamentDetailState();
 
 }
 
-class TournamentDetailState extends State<TournamentDetail> with TickerProviderStateMixin{
+class TournamentDetailState extends State<TournamentDetailWidget> with TickerProviderStateMixin{
 
   late final TabController tabController;
+  SingleTournamentCubit get _tournamentCubit => context.read<SingleTournamentCubit>();
+  GroupCubit get _groupCubit => context.read<GroupCubit>();
   int activeIndex = 0;
-  var groups = [
-    GroupEntity(matches: []),
-    GroupEntity(matches: []),
-    GroupEntity(matches: []),
-    GroupEntity(matches: []),
-  ];
+
   final String category = 'Juniores (Under 18)';
   final String rules = 'Ogni partita consiste in due tempi da 45 minuti.Rigori in caso di pareggio alla fine dei tempi regolamentari.Massimo di 15 giocatori per squadra.Cartellino rosso diretto per comportamento antisportivo.';
   final String typology = 'Torneo ad eliminazione diretta';
@@ -45,6 +68,9 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
   void initState() {
     super.initState();
     tabController = TabController(length: 2, vsync: this);
+    _tournamentCubit.fetchTournament(widget.tournamentId);
+    _groupCubit.fetchGroup();
+    print(widget.tournamentId);
     tabController.addListener(() {
       setState(() {
         activeIndex = tabController.index;
@@ -120,14 +146,30 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
               child: TabbarViewWidget(
                   tabController: tabController,
                   firstTab: SingleChildScrollView(
-                    child: Column(
-                      children: [
-
-                        newGroupsButtonSection(),
-
-                        ...groups.map((e) => groupsListSection(e)),
-                      ],
-                    ),
+                  child: BlocBuilder<GroupCubit,GroupPageState>(
+                     builder: (_,state) {
+                       if (state is GroupPageLoading) {
+                         return const Center(
+                             child: CircularProgressIndicator());
+                       }
+                       else if (state is GroupPageLoaded) {
+                         return Column(
+                           children: [
+                             newGroupsButtonSection(),
+                             ...state.groups.map((e) => groupsListSection(e)),
+                           ],
+                         );
+                       }
+                       else{
+                         // here the state is error
+                         return Center(
+                           child: Text18(
+                             text: (state as GroupPageError).error.toString(),
+                           ),
+                         );
+                       }
+                     }
+                    )
                   ),
                   secondTab: SingleChildScrollView(
                     child: TournamentInfo(
@@ -156,7 +198,7 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: ActionButton(
               onPressed: (){
-                context.push(AppPage.addGroup.path);
+                context.push(AppPage.addGroup.path, extra: widget.tournamentId);
               },
               text: getCurrentLanguageValue(ADD_GROUPS) ?? "",
               backgroundColor: white,
@@ -175,15 +217,14 @@ class TournamentDetailState extends State<TournamentDetail> with TickerProviderS
     );
   }
 
-
-  Widget groupsListSection(GroupEntity group){
+  Widget groupsListSection(GroupEntityDtoForList group){
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GroupCard(
         group:group,
-        name: 'Girone 1',
+        name: group.groupName,
         goToDetail: (){
-          context.push(AppPage.groupDetail.path);
+          context.push(AppPage.groupDetail.path, extra: {"id": group.id, "tournamentId": widget.tournamentId});
         },
       ),
     );

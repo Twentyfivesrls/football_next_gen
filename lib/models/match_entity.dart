@@ -59,15 +59,6 @@ class MatchEntity {
     "title": title,
   };
 
-  factory MatchEntity.defaultVal() => MatchEntity(
-    homeTeam: "",
-    awayTeam: "",
-    place: "",
-    date: "",
-    hour: "",
-    title: "",
-  );
-
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -77,4 +68,15 @@ class MatchEntity {
 
   @override
   int get hashCode => homeTeam.hashCode;
+
+
+  factory MatchEntity.defaultValue() => MatchEntity(
+      homeTeam: "homeTeam",
+      awayTeam: "awayTeam",
+      place: "place",
+      date: "date",
+      hour: "hour",
+      title: 'title',
+  );
 }
+

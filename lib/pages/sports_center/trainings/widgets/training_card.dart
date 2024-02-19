@@ -8,11 +8,10 @@ import '../../../../widgets/texts.dart';
 
 class TrainingCard extends StatelessWidget{
 
-  final TrainingEntity training;
-  final String name;
+  final TrainingEntityDtoForList training;
   final Function() goToDetail;
 
-  const TrainingCard({super.key, required this.training, required this.goToDetail, required this.name});
+  const TrainingCard({super.key, required this.training, required this.goToDetail});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +56,7 @@ class TrainingCard extends StatelessWidget{
 
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text18(text: name,textColor: white,),
+                child: Text18(text: training.name,textColor: white,),
               ),
 
               Padding(

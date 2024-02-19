@@ -1,4 +1,8 @@
 
+import 'dart:async';
+
+import 'package:football_next_gen/constants/images_constants.dart';
+
 class SportFieldEntity {
   final String name;
   final String svgIcon;
@@ -51,4 +55,13 @@ class SportFieldEntity {
 
   @override
   int get hashCode => name.hashCode;
+
+
+  factory SportFieldEntity.defaultValue() => SportFieldEntity(
+    svgIcon: ImagesConstants.footballImg,
+    name: "name",
+    fieldsNumber: 'fieldsNumber',
+  );
+
+
 }

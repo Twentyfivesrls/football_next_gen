@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/match/match_bloc.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/single_match.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
@@ -11,47 +13,47 @@ import '../../../constants/language.dart';
 import '../../../models/match_entity.dart';
 import '../../../widgets/buttons.dart';
 
-class GroupDetail extends StatefulWidget {
-  const GroupDetail({super.key});
+
+class GroupDetail extends StatelessWidget{
+
+  final String id;
+  final String tournamentId;
+
+  const GroupDetail({super.key, required this.id, required this.tournamentId});
+
+  @override
+  Widget build(BuildContext context) {
+    return  BlocProvider(
+      create: (_) => MatchCubit(),
+      child: GroupDetailWidget(tournamentId: tournamentId, id: id,),
+
+    );
+  }
+}
+
+
+class GroupDetailWidget extends StatefulWidget {
+  final String id;
+  final String tournamentId;
+
+  const GroupDetailWidget({super.key, required this.id, required this.tournamentId});
+
   @override
   State<StatefulWidget> createState() => GroupDetailState();
 }
 
-class GroupDetailState extends State<GroupDetail> {
+class GroupDetailState extends State<GroupDetailWidget> {
+
+
+  MatchCubit get _matchCubit => context.read<MatchCubit>();
 
   final String groupTitle = 'Girone 1';
-  final String matchTitle = 'Partita 1';
-  final List<MatchEntity> matches = [
-    MatchEntity(homeTeam: 'homeTeam',
-        awayTeam: 'awayTeam',
-        place: 'place',
-        date: 'date',
-        hour: 'hour',
-        title: 'Partita 1'
-    ),
-    MatchEntity(homeTeam: 'homeTeam',
-        awayTeam: 'awayTeam',
-        place: 'place',
-        date: 'date',
-        hour: 'hour',
-        title: 'Partita 2'
-    ),
-    MatchEntity(homeTeam: 'homeTeam',
-        awayTeam: 'awayTeam',
-        place: 'place',
-        date: 'date',
-        hour: 'hour',
-        title: 'Partita 3'
-    ),
-    MatchEntity(
-        homeTeam: 'homeTeam',
-        awayTeam: 'awayTeam',
-        place: 'place',
-        date: 'date',
-        hour: 'hour',
-        title: 'Partita 4'
-    )
-  ];
+
+  @override
+  void initState() {
+    _matchCubit.fetchMatch();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,16 +69,33 @@ class GroupDetailState extends State<GroupDetail> {
         context.go(AppPage.homeSportsCenter.path);
       },
       goBack: () {
-        context.push(AppPage.tournamentDetail.path);
+        context.push(AppPage.tournamentDetail.path, extra: widget.tournamentId);
       },
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            titleSection(),
-            ...matches.map((e) => matchListSection(e)),
-            newMatchButtonSection()
-          ],
-        ),
+        child: BlocBuilder<MatchCubit,MatchPageState>(
+            builder: (_,state) {
+              if (state is MatchPageLoading) {
+                return const Center(
+                    child: CircularProgressIndicator());
+              }
+              else if (state is MatchPageLoaded) {
+                return Column(
+                  children: [
+                    titleSection(),
+                    ...state.matches.map((e) => matchListSection(e)),
+                    newMatchButtonSection()
+                  ],
+                );
+              }
+              else {
+                // here the state is error
+                return Center(
+                  child: Text18(
+                    text: (state as MatchPageError).error.toString(),
+                  ),
+                );
+              }}
+        )
       ),
     );
   }
@@ -84,7 +103,6 @@ class GroupDetailState extends State<GroupDetail> {
   Widget matchListSection(MatchEntity match) {
     return SingleMatch(
       match: match,
-      title: matchTitle,
     );
   }
 

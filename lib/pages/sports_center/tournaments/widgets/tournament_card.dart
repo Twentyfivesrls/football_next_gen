@@ -8,7 +8,7 @@ import '../../../../models/tournament.dart';
 
 class TournamentCard extends StatelessWidget{
 
-  final TournamentEntity tournament;
+  final TournamentEntityDtoForList tournament;
   final Function() goToDetail;
 
   const TournamentCard({super.key, required this.tournament, required this.goToDetail});

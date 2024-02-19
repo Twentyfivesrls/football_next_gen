@@ -1,5 +1,30 @@
+import 'package:football_next_gen/constants/images_constants.dart';
+
+class TeamEntityDtoForList {
+  final String id;
+  final String name;
+  final bool isHomeTeam;
+  final String svgLogo;
+
+
+  TeamEntityDtoForList({
+    required this.id,
+    required this.name,
+    required this.isHomeTeam,
+    required this.svgLogo
+
+  });
+
+  factory TeamEntityDtoForList.defaultValue({bool isHome = true}) => TeamEntityDtoForList(
+      id: "1",
+      name: "name",
+      svgLogo: ImagesConstants.teamLogoImg,
+      isHomeTeam: isHome
+  );
+}
 
 class TeamEntity {
+  final String id;
   final String name;
   final String coach;
   final String description;
@@ -10,6 +35,7 @@ class TeamEntity {
 
   TeamEntity({
     required this.svgLogo,
+    required this.id,
     required this.coach,
     required this.description,
     required this.manager,
@@ -19,10 +45,11 @@ class TeamEntity {
 
   @override
   String toString() {
-    return 'TeamEntity{name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo, isHomeTeam: $isHomeTeam}';
+    return 'TeamEntity{id: $id,name: $name, coach: $coach, description: $description , manager: $manager, svgLogo: $svgLogo, isHomeTeam: $isHomeTeam}';
   }
 
   TeamEntity copyWith({
+    String? id,
     String? name,
     String? coach,
     String? description,
@@ -31,6 +58,7 @@ class TeamEntity {
     bool? isHomeTeam,
   }) {
     return TeamEntity(
+      id: id ?? this.id,
       name: name ?? this.name,
       coach: coach ?? this.coach,
       description: description ?? this.description,
@@ -41,6 +69,7 @@ class TeamEntity {
   }
 
   factory TeamEntity.fromJson(Map<String, dynamic> json) => TeamEntity(
+    id: json["id"] ?? "",
     name: json["name"] ?? "",
     coach: json["coach"] ?? "",
     description: json["description"] ?? "",
@@ -50,6 +79,7 @@ class TeamEntity {
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "name": name,
     "coach": coach,
     "description": description,
@@ -58,13 +88,14 @@ class TeamEntity {
     "isHomeTeam": isHomeTeam,
   };
 
-  factory TeamEntity.defaultVal() => TeamEntity(
-    name: "",
-    coach: "",
-    description: "",
-    manager: "",
-    svgLogo: "",
-    isHomeTeam: false,
+  factory TeamEntity.defaultValue() => TeamEntity(
+    id: "id",
+    name: "name",
+    coach: "coach",
+    description: "description",
+    manager: "manager",
+    svgLogo: "svgLogo",
+    isHomeTeam: true,
   );
 
   @override

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football_next_gen/bloc/training/trainings_bloc.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/training_card.dart';
 import 'package:football_next_gen/widgets/divider.dart';
@@ -14,24 +16,39 @@ import '../../../constants/language.dart';
 import '../../../models/training_entity.dart';
 import '../../../widgets/buttons.dart';
 
-class TrainingsList extends StatefulWidget {
+class TrainingsList extends StatelessWidget{
   const TrainingsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => TrainingsCubit(),
+      child: const TrainingsListWidget(),
+    );
+  }
+}
+
+class TrainingsListWidget extends StatefulWidget {
+  const TrainingsListWidget({super.key});
 
   @override
   State<StatefulWidget> createState() => TrainingListState();
 }
 
-class TrainingListState extends State<TrainingsList> {
+class TrainingListState extends State<TrainingsListWidget> {
+
+  TrainingsCubit get _trainingsCubit => context.read<TrainingsCubit>();
+
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay = DateTime.now();
   DateTime kFirstDay = DateTime.now();
-  final String teamName = "US Tigri Tuonanti";
-  final List<TrainingEntity> trainings = [
-    TrainingEntity(name: 'name', date: 'date', hour: '13:30', field: '3A', info: 'info'),
-    TrainingEntity(name: 'name', date: 'date', hour: '13:30', field: '3A', info: 'info'),
-    TrainingEntity(name: 'name', date: 'date', hour: '13:30', field: '3A', info: 'info'),
-    TrainingEntity(name: 'name', date: 'date', hour: '13:30', field: '3A', info: 'info'),
-  ];
+
+
+  @override
+  void initState() {
+    _trainingsCubit.fetchTrainings();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,40 +64,58 @@ class TrainingListState extends State<TrainingsList> {
       },
       goBack: () {},
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30),
-              child: filters(),
-            ),
-            TableCalendarWidget(
-              kFirstDay: kFirstDay,
-              kLastDay: kLastDay,
-              focusedDay: _focusedDay,
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
-              selectedDayPredicate: (day) {
-                return isSameDay(_selectedDay, day);
-              },
-              onDaySelected: (selectedDay, focusedDay) {
-                if (!isSameDay(_selectedDay, selectedDay)) {
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                }
-              },
-            ),
-            newTrainingButtonSection(),
+        child: BlocBuilder<TrainingsCubit,TrainingsPageState>(
+            builder: (_,state) {
+              if(state is TrainingsPageLoading){
+                return const Center(child: CircularProgressIndicator());
+              }
+              else if(state is TrainingsPageLoaded){
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 30),
+                      child: filters(),
+                    ),
+                    TableCalendarWidget(
+                      kFirstDay: kFirstDay,
+                      kLastDay: kLastDay,
+                      focusedDay: _focusedDay,
+                      onPageChanged: (focusedDay) {
+                        _focusedDay = focusedDay;
+                      },
+                      selectedDayPredicate: (day) {
+                        return isSameDay(_selectedDay, day);
+                      },
+                      onDaySelected: (selectedDay, focusedDay) {
+                        if (!isSameDay(_selectedDay, selectedDay)) {
+                          setState(() {
+                            _selectedDay = selectedDay;
+                            _focusedDay = focusedDay;
+                          });
+                        }
+                      },
+                    ),
+                    newTrainingButtonSection(),
 
-            ...trainings.map((e) => trainingList(e)),
+                    ...state.trainings.map((e) => trainingList(e)),
 
-          ],
-        ),
+                  ],
+                );
+              }
+              else{
+                // here the state is error
+                return Center(
+                  child: Text18(
+                    text: (state as TrainingsPageError).error.toString(),
+                  ),
+                );
+              }
+            }
+        )
       ),
     );
   }
+
 
   Widget newTrainingButtonSection() {
     return Column(
@@ -129,12 +164,11 @@ class TrainingListState extends State<TrainingsList> {
     );
   }
 
-  Widget trainingList (TrainingEntity training){
+  Widget trainingList (TrainingEntityDtoForList training){
     return TrainingCard(
-      name: teamName,
       training: training,
       goToDetail: (){
-        context.push(AppPage.trainingDetail.path);
+        context.push(AppPage.trainingDetail.path, extra: training.id);
       },
     );
   }

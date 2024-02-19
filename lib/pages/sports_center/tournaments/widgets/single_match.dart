@@ -10,9 +10,8 @@ import '../../../../constants/language.dart';
 
 class SingleMatch extends StatelessWidget {
   final MatchEntity match;
-  final String title;
 
-  const SingleMatch({super.key, required this.match, required this.title});
+  const SingleMatch({super.key, required this.match});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +23,7 @@ class SingleMatch extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text18(text: title, textColor: primary),
+              Text18(text: match.title, textColor: primary),
               SvgPicture.asset(ImagesConstants.editImg)
             ],
           ),

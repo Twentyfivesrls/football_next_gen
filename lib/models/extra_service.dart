@@ -1,4 +1,8 @@
 
+import 'dart:async';
+
+import 'package:football_next_gen/constants/images_constants.dart';
+
 class ExtraServiceEntity {
   final String name;
   final String svgIcon;
@@ -46,4 +50,9 @@ class ExtraServiceEntity {
 
   @override
   int get hashCode => name.hashCode;
+  factory ExtraServiceEntity.defaultValue() => ExtraServiceEntity(
+    svgIcon: ImagesConstants.localCafeImg,
+    name: "name",
+  );
+
 }

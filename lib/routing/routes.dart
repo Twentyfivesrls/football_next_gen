@@ -74,7 +74,7 @@ class RouterManager {
 
       GoRoute(
           path: "/sports_center_profile",
-          builder: (context, state) => SportsCenterProfile()
+          builder: (context, state) => const SportsCenterProfile()
       ),
 
       GoRoute(
@@ -84,12 +84,17 @@ class RouterManager {
 
       GoRoute(
           path: "/add_team",
-          builder: (context, state) => AddTeam()
+          builder: (context, state) => const AddTeam()
       ),
 
       GoRoute(
           path: "/team_detail",
-          builder: (context, state) => const TeamDetail()
+          builder: (context, state)  {
+            var extraObject = state.extra as dynamic;
+            var id = extraObject['id'] ?? "";
+            var isHome = extraObject['isHome'] ?? true;
+            return TeamDetail(id: id, isHome: isHome);
+          }
       ),
 
       GoRoute(
@@ -99,22 +104,29 @@ class RouterManager {
 
       GoRoute(
           path: "/add_tournament",
-          builder: (context, state) => AddTournament()
+          builder: (context, state) => const AddTournament()
       ),
 
       GoRoute(
           path: "/tournament_detail",
-          builder: (context, state) => const TournamentDetail()
+          builder: (context, state) {
+            return TournamentDetail(tournamentId: state.extra as String);
+          }
       ),
 
       GoRoute(
           path: "/group_detail",
-          builder: (context, state) => const GroupDetail()
+          builder: (context, state) {
+            var extraObject = state.extra as dynamic;
+            var id = extraObject['id'] ?? "";
+            var tournamentId = extraObject['tournamentId'] ?? "";
+            return GroupDetail(id: id, tournamentId: tournamentId);
+          }
       ),
 
       GoRoute(
           path: "/add_group",
-          builder: (context, state) => const AddGroup()
+          builder: (context, state) => AddGroup(id: state.extra as String)
       ),
 
       GoRoute(
@@ -129,7 +141,7 @@ class RouterManager {
 
       GoRoute(
           path: "/training_detail",
-          builder: (context, state) => const TrainingDetail()
+          builder: (context, state) => TrainingDetail(id: state.extra as String)
       ),
 
       GoRoute(
@@ -142,13 +154,13 @@ class RouterManager {
           builder: (context, state) => const Settings()
       ),
 
-     GoRoute(
+      GoRoute(
           path: "/reset_password",
           builder: (context, state) => const ResetPassword()
       ),
 
 
-     GoRoute(
+      GoRoute(
           path: "/add_post",
           builder: (context, state) => const AddPost()
       ),

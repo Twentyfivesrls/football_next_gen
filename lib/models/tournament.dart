@@ -1,5 +1,21 @@
 
+class TournamentEntityDtoForList {
+  final String id;
+  final String name;
+
+  TournamentEntityDtoForList({
+    required this.id,
+    required this.name,
+   });
+
+  factory TournamentEntityDtoForList.defaultValue() => TournamentEntityDtoForList(
+    id: "1",
+    name: "name"
+  );
+}
+
 class TournamentEntity {
+  final String id;
   final String name;
   final String typology;
   final String category;
@@ -9,8 +25,8 @@ class TournamentEntity {
   final String info;
   final String poster;
 
-
   TournamentEntity({
+    required this.id,
     required this.typology,
     required this.category,
     required this.phone,
@@ -24,6 +40,7 @@ class TournamentEntity {
   @override
   String toString() {
     return 'TournamentEntity{'
+        'id: $id, '
         'name: $name, '
         'typology: $typology'
         'phone: $phone, '
@@ -35,6 +52,7 @@ class TournamentEntity {
   }
 
   TournamentEntity copyWith({
+    String? id,
     String? name,
     String? typology,
     String? phone,
@@ -45,6 +63,7 @@ class TournamentEntity {
     String? category,
   }) {
     return TournamentEntity(
+      id: id ?? this.id,
       name: name ?? this.name,
       typology: typology ?? this.typology,
       phone: phone ?? this.phone,
@@ -57,6 +76,7 @@ class TournamentEntity {
   }
 
   factory TournamentEntity.fromJson(Map<String, dynamic> json) => TournamentEntity(
+    id: json["id"] ?? "",
     name: json["name"] ?? "",
     typology: json["typology"] ?? "",
     phone: json["phone"] ?? "",
@@ -68,6 +88,7 @@ class TournamentEntity {
   );
 
   Map<String, dynamic> toJson() => {
+    "id": id,
     "name": name,
     "typology": typology,
     "phone": phone,
@@ -79,15 +100,16 @@ class TournamentEntity {
 
   };
 
-  factory TournamentEntity.defaultVal() => TournamentEntity(
-    name: "",
-    typology: "",
-    phone: "",
-    email: "",
-    rules: "",
-    info: "",
-    poster: "",
-    category: "",
+  factory TournamentEntity.defaultValue() => TournamentEntity(
+    id: "id",
+    name: "name",
+    typology: "typology",
+    phone: "phone",
+    email: "email",
+    rules: "rules",
+    info: "info",
+    poster: "poster",
+    category: "category",
   );
 
   @override
@@ -99,4 +121,5 @@ class TournamentEntity {
 
   @override
   int get hashCode => name.hashCode;
+
 }

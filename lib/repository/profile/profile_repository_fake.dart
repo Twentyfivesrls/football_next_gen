@@ -17,9 +17,9 @@ class ProfileRepositoryFake {
 
 
   Future<ProfileEntity> fetchProfile(){
-    sleep(const Duration(seconds:5));
+    //sleep(const Duration(seconds:5));
     // trying with dummy data
-    //return Future.value(ProfileEntity.defaultValue());
+    return Future.value(ProfileEntity.defaultValue());
     // trying with exception
     throw Exception("Sono un cazzo di messaggio di errore");
   }

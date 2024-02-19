@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/add_match_form.dart';
+import 'package:football_next_gen/widgets/divider.dart';
+import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/colors.dart';
@@ -10,7 +12,6 @@ import '../../../models/confirm_page_data.dart';
 import '../../../widgets/buttons.dart';
 import '../../../widgets/dialog.dart';
 
-
 class TextEditingControllerGroup {
   TextEditingController homeTeamController = TextEditingController();
   TextEditingController awayTeamController = TextEditingController();
@@ -19,9 +20,10 @@ class TextEditingControllerGroup {
   TextEditingController hourController = TextEditingController();
 }
 
-
 class AddGroup extends StatefulWidget {
-  const AddGroup({super.key});
+
+  final String id;
+  const AddGroup({super.key, required this.id});
 
   @override
   State<StatefulWidget> createState() => AddGroupState();
@@ -34,8 +36,8 @@ class AddGroupState extends State<AddGroup> {
   TextEditingController placeController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController hourController = TextEditingController();
+  TextEditingController groupNameController = TextEditingController();
   List<TextEditingControllerGroup> matchList = List.empty(growable: true);
-
 
   @override
   void initState() {
@@ -61,7 +63,7 @@ class AddGroupState extends State<AddGroup> {
                 confirmText: 'Elimina girone',
                 cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                 onConfirm: () {
-                  context.go(AppPage.tournamentDetail.path);
+                  context.go(AppPage.tournamentDetail.path, extra: widget.id);
                 },
               );
             });
@@ -69,6 +71,9 @@ class AddGroupState extends State<AddGroup> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+
+            groupNameSection(),
+
             ...matchList.map((e) =>
                 AddMatchForm(
                     matchTitle: "Partita 1",
@@ -96,6 +101,22 @@ class AddGroupState extends State<AddGroup> {
     );
   }
 
+  Widget groupNameSection(){
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30),
+          child: InputWidget(
+            controller: groupNameController,
+            hintText: getCurrentLanguageValue(GROUP_NAME) ?? "",
+            labelText: getCurrentLanguageValue(GROUP_NAME) ?? "",
+          ),
+        ),
+        const DividerWidget(),
+      ],
+    );
+  }
+
   Widget newMatchButtonSection() {
     return
       Padding(
@@ -114,7 +135,6 @@ class AddGroupState extends State<AddGroup> {
           showPrefixIcon: true,
           textColor: textProfileGrey,
           svgPrefixIcon: ImagesConstants.addCircleImg,
-
         ),
       );
   }
@@ -126,8 +146,7 @@ class AddGroupState extends State<AddGroup> {
           padding: const EdgeInsets.only(top: 60),
           child: ActionButton(
             onPressed: () {
-              context.push(AppPage.confirmPage.path,
-                  extra: ConfirmPageData.addGroupConfirmed(context));
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context));
             },
             text: getCurrentLanguageValue(ADD_GROUP) ?? "",
           ),
@@ -145,7 +164,7 @@ class AddGroupState extends State<AddGroup> {
                       confirmText: 'Elimina girone',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
-                        context.go(AppPage.tournamentDetail.path);
+                        context.go(AppPage.tournamentDetail.path, extra: widget.id);
                       },
                     );
                   });

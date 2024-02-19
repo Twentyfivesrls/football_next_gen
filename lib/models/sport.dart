@@ -1,3 +1,4 @@
+import 'package:football_next_gen/constants/images_constants.dart';
 
 class SportEntity {
   final String name;
@@ -5,6 +6,7 @@ class SportEntity {
 
 
   SportEntity({required this.name,required this.svgIcon});
+
 
   @override
   String toString() {
@@ -46,4 +48,13 @@ class SportEntity {
 
   @override
   int get hashCode => name.hashCode;
+
+  factory SportEntity.defaultValue() => SportEntity(
+    svgIcon: ImagesConstants.footballImg,
+    name: "name",
+  );
+
 }
+
+
+
