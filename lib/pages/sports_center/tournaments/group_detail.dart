@@ -62,12 +62,13 @@ class GroupDetailState extends State<GroupDetailWidget> {
       paddingRight: 0,
       paddingLeft: 0,
       paddingTop: 0,
-      showTrailingIcon: true,
+      showFirstTrailingIcon: true,
       title: AppPage.groupDetail.toTitle,
-      trailingIcon: Icons.home,
-      goHome: () {
+      firstTrailingIcon: Icons.home,
+      firstTrailingIconOnTap: () {
         context.go(AppPage.homeSportsCenter.path);
       },
+      secondTrailingIconOnTap: (){},
       goBack: () {
         context.push(AppPage.tournamentDetail.path, extra: widget.tournamentId);
       },

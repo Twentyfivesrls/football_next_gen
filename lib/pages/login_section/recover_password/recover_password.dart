@@ -8,7 +8,8 @@ class RecoverPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       goBack: (){},
-      goHome: (){},
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       body: RecoverPasswordForm(),
     );
   }

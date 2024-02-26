@@ -33,7 +33,7 @@ class AddTournamentState extends State<AddTournament>{
     return ScaffoldWidget(
       appBar: 3,
       paddingTop: 0,
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       title: AppPage.addTournament.toTitle,
       goBack: (){
         showDialog(
@@ -50,7 +50,8 @@ class AddTournamentState extends State<AddTournament>{
               );
             });
       },
-      goHome: (){},
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       body: SingleChildScrollView(
         child: Column(
           children: [

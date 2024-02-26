@@ -16,7 +16,8 @@ class ConfirmPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       goBack: (){},
-      goHome: (){},
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       body: Column(
         children: [
           Expanded(

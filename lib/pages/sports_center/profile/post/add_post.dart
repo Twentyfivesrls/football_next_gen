@@ -13,7 +13,10 @@ import '../../../../widgets/dialog.dart';
 import '../../../../widgets/divider.dart';
 
 class AddPost extends StatefulWidget{
-  const AddPost({super.key});
+
+  final String returnPage;
+
+  const AddPost({super.key, required this.returnPage});
 
   @override
   State<StatefulWidget> createState() => AddPostState();
@@ -29,9 +32,10 @@ class AddPostState extends State<AddPost>{
         paddingTop: 30,
         appBar: 3,
         title: AppPage.addPost.toTitle,
-        showTrailingIcon: false,
-        goHome: (){},
-        goBack: (){
+        showFirstTrailingIcon: false,
+        firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
+      goBack: (){
           showDialog(
               context: context,
               builder: (BuildContext context){
@@ -41,7 +45,7 @@ class AddPostState extends State<AddPost>{
                   confirmText: 'Elimina post',
                   cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                   onConfirm: () {
-                    context.go(AppPage.sportsCenterProfile.path);
+                    context.go(widget.returnPage);
                   },
                 );
               });
@@ -116,7 +120,7 @@ class AddPostState extends State<AddPost>{
                       confirmText: 'Elimina post',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
-                        context.go(AppPage.sportsCenterProfile.path);
+                        context.go(widget.returnPage);
                       },
                     );
                   });

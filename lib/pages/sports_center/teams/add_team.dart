@@ -50,9 +50,10 @@ class AddTeamState extends State<AddTeam>{
       },
       paddingTop: 30,
       appBar: 3,
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       title: AppPage.addTeam.toTitle,
-      goHome: (){},
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,4 +1,7 @@
 import 'package:football_next_gen/models/confirm_page_data.dart';
+import 'package:football_next_gen/pages/child/home_child.dart';
+import 'package:football_next_gen/pages/child/menu_child.dart';
+import 'package:football_next_gen/pages/child/profile/child_profile.dart';
 import 'package:football_next_gen/pages/login_section/login/login.dart';
 import 'package:football_next_gen/pages/login_section/recover_password/recover_password.dart';
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
@@ -162,13 +165,38 @@ class RouterManager {
 
       GoRoute(
           path: "/add_post",
-          builder: (context, state) => const AddPost()
+          builder: (context, state) {
+            return AddPost(returnPage: state.extra as String);
+          }
       ),
 
       GoRoute(
           path: "/post_detail",
-          builder: (context, state) => const PostDetail()
+          builder: (context, state) {
+            var extraObject = state.extra as dynamic;
+            var id = extraObject['id'] ?? "";
+            var path = extraObject['path'] ?? "";
+            return PostDetail(id: id, returnPage: path);
+          }
+
+
       ),
+
+      GoRoute(
+          path: "/home_child",
+          builder: (context, state) => const HomeChild()
+      ),
+
+      GoRoute(
+          path: "/menu_child",
+          builder: (context, state) => const MenuChild()
+      ),
+
+      GoRoute(
+          path: "/child_profile",
+          builder: (context, state) => const ChildProfile()
+      ),
+
 
 
       GoRoute(

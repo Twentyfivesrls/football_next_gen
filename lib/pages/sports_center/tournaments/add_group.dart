@@ -48,11 +48,12 @@ class AddGroupState extends State<AddGroup> {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       paddingTop: 0,
       title: AppPage.addGroup.toTitle,
       appBar: 3,
-      goHome: () {},
+      firstTrailingIconOnTap: () {},
+      secondTrailingIconOnTap: (){},
       goBack: () {
         showDialog(
             context: context,

@@ -22,9 +22,10 @@ class SettingsState extends State<Settings>{
       paddingTop: 30,
       title: AppPage.settings.toTitle,
       appBar: 3,
-        showTrailingIcon: false,
-        goHome: (){},
-        goBack: (){
+        showFirstTrailingIcon: false,
+        firstTrailingIconOnTap: (){},
+       secondTrailingIconOnTap: (){},
+      goBack: (){
           context.go(AppPage.homeSportsCenter.path);
         },
       bottomNavigationBar: Padding(

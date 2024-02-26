@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import '../constants/colors.dart';
 import 'appbars.dart';
 
@@ -14,15 +13,18 @@ class ScaffoldWidget extends StatelessWidget {
   final bool hasBackgroundColor;
   final bool showBackIcon;
   final bool showSearchInput;
-  final bool showTrailingIcon;
+  final bool showFirstTrailingIcon;
+  final bool showSecondTrailingIcon;
   final double paddingTop;
   final double paddingBottom;
   final double paddingLeft;
   final double paddingRight;
-  final IconData trailingIcon;
+  final IconData firstTrailingIcon;
+  final IconData secondTrailingIcon;
   TextEditingController? searchController;
   final String hintText;
-  Function() goHome;
+  Function() firstTrailingIconOnTap;
+  Function() secondTrailingIconOnTap;
   Function() goBack;
 
   ScaffoldWidget({
@@ -38,12 +40,15 @@ class ScaffoldWidget extends StatelessWidget {
     this.paddingRight = 20,
     this.paddingLeft = 20,
     this.showBackIcon = true,
-    this.trailingIcon = Icons.settings,
+    this.firstTrailingIcon = Icons.settings,
+    this.secondTrailingIcon = Icons.settings,
     this.showSearchInput = false,
     this.hintText = "",
     this.searchController,
-    required this.goHome,
-    this.showTrailingIcon = true,
+    required this.firstTrailingIconOnTap,
+    required this.secondTrailingIconOnTap,
+    this.showFirstTrailingIcon = true,
+    this.showSecondTrailingIcon = false,
     required this.goBack
 
   }) : super(key: key);
@@ -57,24 +62,27 @@ class ScaffoldWidget extends StatelessWidget {
         appBar == 2 ? appbarWithoutActions(
             title,
             context,
-            trailingIcon,
+            firstTrailingIcon,
             showSearchInput,
             searchController = TextEditingController(),
             hintText,
-            goHome,
-            showTrailingIcon
+            firstTrailingIconOnTap,
+            showFirstTrailingIcon
         ) :
         appbarWithActions(
           title,
           context,
           showBackIcon,
-          trailingIcon,
+          firstTrailingIcon,
+          secondTrailingIcon,
           showSearchInput,
           searchController = TextEditingController(),
           hintText,
-          showTrailingIcon,
+          showFirstTrailingIcon,
+          showSecondTrailingIcon,
           goBack,
-          goHome,
+          firstTrailingIconOnTap,
+          secondTrailingIconOnTap,
 
         ),
         backgroundColor: hasBackgroundColor == true

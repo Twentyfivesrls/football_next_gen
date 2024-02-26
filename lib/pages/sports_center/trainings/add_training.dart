@@ -42,9 +42,10 @@ class AddTrainingState extends State<AddTraining>{
     return ScaffoldWidget(
       paddingTop: 0,
       appBar: 3,
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       title: AppPage.addTraining.toTitle,
-      goHome: (){},
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       goBack: (){
         showDialog(
             context: context,

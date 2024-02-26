@@ -89,13 +89,14 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
     return ScaffoldWidget(
         appBar: 3,
         title: getCurrentLanguageValue(TOURNAMENT_DETAIL) ?? "",
-        trailingIcon: Icons.home,
+        firstTrailingIcon: Icons.home,
         paddingTop: 0,
         paddingLeft: 0,
         paddingRight: 0,
-        goHome: (){
+        firstTrailingIconOnTap: (){
           context.go(AppPage.homeSportsCenter.path);
         },
+        secondTrailingIconOnTap: (){},
         goBack: (){
           context.go(AppPage.tournamentsList.path);
         },

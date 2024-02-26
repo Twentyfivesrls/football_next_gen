@@ -34,11 +34,12 @@ class ResetPasswordState extends State<ResetPassword> {
       appBar: 3,
       paddingTop: 0,
       showBackIcon: true,
-      trailingIcon: Icons.home,
+      firstTrailingIcon: Icons.home,
       title: AppPage.resetPassword.toTitle,
-      goHome: () {
+      firstTrailingIconOnTap: () {
         context.go(AppPage.homeSportsCenter.path);
       },
+      secondTrailingIconOnTap: (){},
       goBack: () {
         context.pop();
       },

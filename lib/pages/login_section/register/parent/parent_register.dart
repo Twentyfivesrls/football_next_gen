@@ -16,7 +16,8 @@ class ParentRegisterState extends State<ParentRegister>{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         goBack: (){},
-        goHome: (){},
+        firstTrailingIconOnTap: (){},
+        secondTrailingIconOnTap: (){},
         paddingTop: 0,
         appBar: 1,
         title: AppPage.parentRegister.toTitle,

@@ -20,13 +20,16 @@ appbarWithActions(
     String title,
     BuildContext context,
     bool showBackIcon,
-    IconData trailingIcon,
+    IconData firstTrailingIcon,
+    IconData secondTrailingIcon,
     bool showSearchInput,
     TextEditingController searchController,
     String hintText,
-    bool showTrailingIcon,
+    bool showFirstTrailingIcon,
+    bool showSecondTrailingIcon,
     Function() backOnTap,
-    Function() goHome,
+    Function() firstTrailingIconOnTap,
+    Function() secondTrailingIconOnTap,
     ) {
   return AppBar(
     elevation: 0,
@@ -51,13 +54,22 @@ appbarWithActions(
         textColor: white
     ),
     centerTitle: false,
+    titleSpacing: 0,
     actions: [
       Visibility(
-        visible: showTrailingIcon,
+        visible: showFirstTrailingIcon,
         child: IconButton(
             color: white,
-            icon: Icon(trailingIcon),
-            onPressed: goHome
+            icon: Icon(firstTrailingIcon),
+            onPressed: firstTrailingIconOnTap
+        ),
+      ),
+      Visibility(
+        visible: showSecondTrailingIcon,
+        child: IconButton(
+            color: white,
+            icon: Icon(secondTrailingIcon),
+            onPressed: secondTrailingIconOnTap
         ),
       )
     ],

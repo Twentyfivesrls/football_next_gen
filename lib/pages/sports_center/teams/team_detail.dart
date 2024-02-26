@@ -56,11 +56,13 @@ class TeamDetailState extends State<TeamDetailWidget>{
         goBack: (){
           context.go(AppPage.teamsList.path);
         },
-        goHome: (){
+        firstTrailingIconOnTap: (){
           context.go(AppPage.homeSportsCenter.path);
         },
+        secondTrailingIconOnTap: (){},
+
         paddingTop: 30,
-        trailingIcon: Icons.home,
+        firstTrailingIcon: Icons.home,
         showBackIcon: true,
         appBar: 3,
         title: AppPage.teamDetail.toTitle,

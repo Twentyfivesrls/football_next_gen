@@ -5,6 +5,11 @@ enum AppPage {
   sportsCenterRegister,
   parentRegister,
   insertOtp,
+  settings,
+  resetPassword,
+  confirmPage,
+
+  //SPORT CENTER
   homeSportsCenter,
   sportsCenterProfile,
   teamsList,
@@ -13,17 +18,19 @@ enum AppPage {
   tournamentsList,
   addTournament,
   tournamentDetail,
-  confirmPage,
   addGroup,
   groupDetail,
   trainingsList,
   addTraining,
   trainingDetail,
   filters,
-  settings,
-  resetPassword,
   addPost,
-  postDetail
+  postDetail,
+
+  //CHILD
+  homeChild,
+  menuChild,
+  childProfile
 }
 
 extension AppPageExtension on AppPage {
@@ -79,6 +86,12 @@ extension AppPageExtension on AppPage {
         return "/add_post";
       case AppPage.postDetail:
         return "/post_detail";
+      case AppPage.homeChild:
+        return "/home_child";
+      case AppPage.menuChild:
+        return "/menu_child";
+        case AppPage.childProfile:
+        return "/child_profile";
     }
   }
 
@@ -134,6 +147,12 @@ extension AppPageExtension on AppPage {
         return "Add Post";
       case AppPage.postDetail:
         return "Post Detail";
+      case AppPage.homeChild:
+        return "Home Child";
+      case AppPage.menuChild:
+        return "Menu Child";
+        case AppPage.childProfile:
+        return "Child Profile";
 
     }
   }
@@ -190,6 +209,12 @@ extension AppPageExtension on AppPage {
         return "Nuovo post";
       case AppPage.postDetail:
         return "Post";
+      case AppPage.homeChild:
+        return "Home";
+      case AppPage.menuChild:
+        return "Menu";
+        case AppPage.childProfile:
+        return "Profile";
     }
   }
 }

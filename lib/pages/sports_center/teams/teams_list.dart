@@ -57,9 +57,10 @@ class TeamListState extends State<TeamsListWidget> {
         appBar: 2,
         goBack: () {context.pop();},
         paddingTop: 0,
-        goHome: () {context.go(AppPage.homeSportsCenter.path);},
+        firstTrailingIconOnTap: () {context.go(AppPage.homeSportsCenter.path);},
+        secondTrailingIconOnTap: (){},
         title: getCurrentLanguageValue(TEAMS) ?? "",
-        trailingIcon: Icons.home,
+        firstTrailingIcon: Icons.home,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 30),

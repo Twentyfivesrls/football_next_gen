@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/models/post_entity.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/images_constants.dart';
 import '../../../../constants/language.dart';
@@ -9,9 +10,9 @@ import '../widgets/images_gallery.dart';
 
 class PostTab extends StatelessWidget{
 
-  final List<ImageEntity> images;
+  final List<PostEntityDtoForList> images;
   final Function() addPost;
-  final Function() goToDetail;
+  final Function(String) goToDetail;
 
   const PostTab({super.key, required this.images, required this.addPost, required this.goToDetail});
 
@@ -44,7 +45,7 @@ class PostTab extends StatelessWidget{
               padding: const EdgeInsets.only(top: 20),
               child: ImagesGallery(
                   images: images,
-                  onTap: goToDetail
+                  onTap: (tapped) {goToDetail(tapped);}
               )
           )
         ],

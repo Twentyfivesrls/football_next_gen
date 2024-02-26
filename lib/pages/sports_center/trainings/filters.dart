@@ -34,9 +34,10 @@ class FiltersState extends State<Filters> {
     return ScaffoldWidget(
       appBar: 2,
       paddingTop: 0,
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       title: AppPage.filters.toTitle,
-      goHome: () {},
+      firstTrailingIconOnTap: () {},
+      secondTrailingIconOnTap: (){},
       goBack: () {},
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),

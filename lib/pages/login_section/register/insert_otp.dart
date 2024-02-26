@@ -23,7 +23,8 @@ class InsertOtpState extends State<InsertOtp>{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         goBack: (){},
-        goHome: (){},
+        firstTrailingIconOnTap: (){},
+        secondTrailingIconOnTap: (){},
         body: Column(
           children: [
             Expanded(

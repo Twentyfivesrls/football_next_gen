@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_next_gen/bloc/profile/extra_services_bloc.dart';
+import 'package:football_next_gen/bloc/profile/post_list_bloc.dart';
 import 'package:football_next_gen/bloc/profile/profile_bloc.dart';
 import 'package:football_next_gen/bloc/profile/sport_fields_bloc.dart';
 import 'package:football_next_gen/bloc/profile/sports_bloc.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/file_entity.dart';
-import 'package:football_next_gen/models/image_entity.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/info_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/media_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/post_tab.dart';
@@ -38,6 +38,10 @@ class SportsCenterProfile extends StatelessWidget {
         BlocProvider(
           create: (_) => ExtraServicesCubit(),
         ),
+
+        BlocProvider(
+          create: (_) => PostListCubit(),
+        ),
       ],
       child: const SportsCenterProfileWidget(),
     );
@@ -56,17 +60,8 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   SportCubit get _sportCubit => context.read<SportCubit>();
   SportFieldsCubit get _sportFieldsCubit => context.read<SportFieldsCubit>();
   ExtraServicesCubit get _extraServicesCubit => context.read<ExtraServicesCubit>();
+  PostListCubit get _postCubit => context.read<PostListCubit>();
 
-  var images = [
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-    ImageEntity(imageUrl: ImagesConstants.postImg),
-  ];
   var files = [
     FileEntity(url: '',name: 'Comunicazione_avviso.pdf'),
     FileEntity(url: '',name: 'Comunicazione_avviso.pdf'),
@@ -89,6 +84,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
     _sportCubit.fetchUserSports();
     _sportFieldsCubit.fetchUserFields();
     _extraServicesCubit.fetchUserServices();
+    _postCubit.fetchUserPostLists();
   }
 
   @override
@@ -102,14 +98,13 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
 
     return ScaffoldWidget(
         goBack: () {context.pop();},
-        goHome: () {context.go(AppPage.homeSportsCenter.path);},
+        firstTrailingIconOnTap: () {context.go(AppPage.homeSportsCenter.path);},
+        secondTrailingIconOnTap: (){},
         appBar: 2,
         paddingRight: 0,
         paddingLeft: 0,
         paddingTop: 0,
-        paddingBottom: 0,
-        trailingIcon: Icons.home,
-
+        firstTrailingIcon: Icons.home,
         body: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height,
@@ -123,6 +118,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileHeader(
+                          imageProfile: ImagesConstants.sportsCenterProfileImg,
                           profileName: state.profile.profileName,
                           profileDesc: state.profile.profileDesc,
                           editProfile: () {},
@@ -217,10 +213,26 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                                     }
                                   },
                                 ),
-                                secondTab: PostTab(
-                                    images: images,
-                                    addPost: () {context.push(AppPage.addPost.path);},
-                                    goToDetail: (){context.push(AppPage.postDetail.path);}
+                                secondTab: BlocBuilder<PostListCubit,PostListPageState>(
+                                    builder: (_,postState) {
+                                      if(postState is PostListPageLoading){
+                                        return const Center(child: CircularProgressIndicator());
+                                      }
+                                      else if(postState is PostListPageLoaded){
+                                        return PostTab(
+                                            images: postState.posts,
+                                            addPost: () {context.push(AppPage.addPost.path,  extra: AppPage.sportsCenterProfile.path);},
+                                            goToDetail: (tapped){context.push(AppPage.postDetail.path, extra: {"id":tapped, "path":AppPage.sportsCenterProfile.path});}
+                                        );
+                                      }
+                                      else{
+                                        // here the state is error
+                                        return Center(
+                                          child: Text18(
+                                            text: (postState as PostListPageError).error.toString(),
+                                          ),
+                                        );
+                                      }}
                                 ),
                                 thirdTab: MediaTab(
                                   addFile: (){},

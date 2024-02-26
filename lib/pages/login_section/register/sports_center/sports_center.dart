@@ -15,7 +15,8 @@ class SportsCenterRegisterState extends State<SportsCenterRegister>{
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-        goHome: (){},
+        firstTrailingIconOnTap: (){},
+        secondTrailingIconOnTap: (){},
         goBack: (){},
         paddingTop: 0,
         appBar: 1,

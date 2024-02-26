@@ -8,7 +8,8 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         goBack: (){},
-        goHome: (){},
+        firstTrailingIconOnTap: (){},
+        secondTrailingIconOnTap: (){},
         body: WillPopScope(
           onWillPop: () async => false,
           child: const LoginForm(),

@@ -10,11 +10,13 @@ class ProfileHeader extends StatelessWidget{
 
   final String profileName;
   final String profileDesc;
+  final String imageProfile;
   final Function() editProfile;
 
   const ProfileHeader({
     super.key,
     required this.profileName,
+    required this.imageProfile,
     required this.profileDesc,
     required this.editProfile
   });
@@ -27,7 +29,7 @@ class ProfileHeader extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SvgPicture.asset(
-            ImagesConstants.sportsCenterProfileImg,
+            imageProfile,
             height: 120,
             width: 120,
           ),

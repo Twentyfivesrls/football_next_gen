@@ -83,11 +83,24 @@ class LoginFormState extends State<LoginForm>{
   }
 
   Widget loginButtonSection() {
-    return ActionButton(
-      onPressed: (){
-        context.go(AppPage.homeSportsCenter.path);
-      },
-      text: getCurrentLanguageValue(ACCEDI) ?? "",
+    return Column(
+      children: [
+        ActionButton(
+          onPressed: (){
+            context.go(AppPage.homeSportsCenter.path);
+          },
+          text: getCurrentLanguageValue(ACCEDI) ?? "",
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: ActionButton(
+            onPressed: (){
+              context.go(AppPage.homeChild.path);
+            },
+            text: "Bambino",
+          ),
+        ),
+      ],
     );
   }
 

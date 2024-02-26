@@ -53,11 +53,12 @@ class TrainingDetailState extends State<TrainingDetailWidget> {
     return ScaffoldWidget(
       paddingTop: 30,
       title: AppPage.trainingDetail.toTitle,
-      trailingIcon: Icons.home,
+      firstTrailingIcon: Icons.home,
       appBar: 3,
-      goHome: () {
+      firstTrailingIconOnTap: () {
         context.go(AppPage.homeSportsCenter.path);
       },
+      secondTrailingIconOnTap: (){},
       goBack: () {
         context.go(AppPage.trainingsList.path);
       },

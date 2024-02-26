@@ -30,7 +30,6 @@ class TrainingsList extends StatelessWidget{
 
 class TrainingsListWidget extends StatefulWidget {
   const TrainingsListWidget({super.key});
-
   @override
   State<StatefulWidget> createState() => TrainingListState();
 }
@@ -58,10 +57,11 @@ class TrainingListState extends State<TrainingsListWidget> {
       appBar: 2,
       paddingTop: 0,
       title: AppPage.trainingsList.toTitle,
-      trailingIcon: Icons.home,
-      goHome: () {
+      firstTrailingIcon: Icons.home,
+      firstTrailingIconOnTap: () {
         context.go(AppPage.homeSportsCenter.path);
       },
+      secondTrailingIconOnTap: (){},
       goBack: () {},
       body: SingleChildScrollView(
         child: BlocBuilder<TrainingsCubit,TrainingsPageState>(

@@ -51,9 +51,10 @@ class TournamentsListState extends State<TournamentsListWidget>{
         appBar: 2,
         goBack: (){context.pop();},
         paddingTop: 0,
-        goHome: (){context.go(AppPage.homeSportsCenter.path);},
+        firstTrailingIconOnTap: (){context.go(AppPage.homeSportsCenter.path);},
+        secondTrailingIconOnTap: (){},
         title: AppPage.tournamentsList.toTitle,
-        trailingIcon: Icons.home,
+        firstTrailingIcon: Icons.home,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.only(top: 30),

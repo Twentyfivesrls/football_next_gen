@@ -1,31 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football_next_gen/bloc/profile/single_post_bloc.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/widgets/info_box.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
-import 'package:football_next_gen/widgets/popup_menu.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../widgets/buttons.dart';
 
-class PostDetail extends StatefulWidget {
-  const PostDetail({super.key});
+class PostDetail extends StatelessWidget{
+
+  final String id;
+  final String returnPage;
+
+  const PostDetail({super.key, required this.id, required this.returnPage});
+
+  @override
+  Widget build(BuildContext context) {
+    return  BlocProvider(
+      create: (_) => SinglePostCubit(),
+      child: PostDetailWidget(id: id, returnPage: returnPage,),
+
+    );
+  }
+}
+
+class PostDetailWidget extends StatefulWidget {
+  final String id;
+  final String returnPage;
+
+  const PostDetailWidget({super.key, required this.id, required this.returnPage});
 
   @override
   State<StatefulWidget> createState() => PostDetailState();
 }
 
-class PostDetailState extends State<PostDetail> {
+class PostDetailState extends State<PostDetailWidget> {
+
+  SinglePostCubit get _postCubit => context.read<SinglePostCubit>();
+
+
   final String sportsCenterName = 'Sport Center srl';
-  final String date = '13 agosto 2024';
-  final String description = 'Il talento in azione! 🚀⚽ Un momento catturato dal campo del Centro Sportivo Olympus, dove il nostro eccezionale calciatore, Marco Rossi, dimostra la sua abilità straordinaria nel calcio. 🌐✨ Un calcio potente, una precisione impeccabile - è davvero il cuore pulsante della nostra squadra! 🏆👟 Marco, grazie per ispirarci con la tua dedizione e passione per il gioco. 🙌💙 Se anche tu vuoi far parte di questa incredibile esperienza calcistica, unisciti a noi al Centro Sportivo Olympus! 🏟️⚡   #Talent #CalcioPassion #CentroSportivoOlympus';
   bool selected = false;
   bool edit = false;
   final TextEditingController descriptionController = TextEditingController();
+
 /* List <PopupMenuItem> items = [
     PopupMenuItem(
       child: Text14(text: getCurrentLanguageValue(EDIT) ?? ""),
@@ -51,7 +75,7 @@ class PostDetailState extends State<PostDetail> {
 
   @override
   void initState() {
-    descriptionController.text = description;
+    _postCubit.fetchPost(widget.id);
     super.initState();
   }
 
@@ -60,20 +84,39 @@ class PostDetailState extends State<PostDetail> {
     return ScaffoldWidget(
       paddingTop: 30,
       appBar: 3,
-      showTrailingIcon: false,
+      showFirstTrailingIcon: false,
       title: AppPage.postDetail.toTitle,
-      goHome: () {},
+      firstTrailingIconOnTap: () {},
+      secondTrailingIconOnTap: (){},
       goBack: () {
-        context.push(AppPage.sportsCenterProfile.path);
+        context.push(widget.returnPage);
       },
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            headerSection(),
-            imageSection(),
-            descriptionSection(),
-            buttonsSection()
-          ],
+        child: BlocBuilder<SinglePostCubit,SinglePostPageState>(
+            builder: (_,state) {
+              if (state is SinglePostPageLoading) {
+                return const Center(
+                    child: CircularProgressIndicator());
+              }
+              else if (state is SinglePostPageLoaded) {
+                descriptionController.text = state.post.description;
+                return Column(
+                  children: [
+                    headerSection(),
+                    imageSection(state.post.image),
+                    descriptionSection(state.post.description, state.post.date),
+                    buttonsSection()
+                  ],
+                );
+              }
+              else {
+                // here the state is error
+                return Center(
+                  child: Text18(
+                    text: (state as SinglePostPageError).error.toString(),
+                  ),
+                );
+              }}
         ),
       ),
     );
@@ -125,14 +168,14 @@ class PostDetailState extends State<PostDetail> {
     );
   }
 
-  Widget imageSection() {
+  Widget imageSection(String url) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Image.asset(ImagesConstants.postImg),
     );
   }
 
-  Widget descriptionSection() {
+  Widget descriptionSection(String description, String date) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

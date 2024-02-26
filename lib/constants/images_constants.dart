@@ -37,5 +37,6 @@ class ImagesConstants{
   static String exclamationCircle = '${baseUrl}exclamation_circle.svg';
   static String homeTeamImg = '${baseUrl}home_team.svg';
   static String fileImg = '${baseUrl}file_icon.svg';
+  static String childImg = '${baseUrl}profile_icon.svg';
 
 }

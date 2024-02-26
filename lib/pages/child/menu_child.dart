@@ -1,45 +1,46 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:football_next_gen/constants/app_pages.dart';
+import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/card.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
-import '../../constants/app_pages.dart';
-import '../../constants/images_constants.dart';
-import '../../constants/language.dart';
-import '../../widgets/buttons.dart';
 
-class HomeSportsCenter extends StatefulWidget{
-  const HomeSportsCenter({super.key});
+class MenuChild extends StatefulWidget{
+  const MenuChild({super.key});
   @override
-  State<StatefulWidget> createState() => HomeSportsCenterState();
+  State<StatefulWidget> createState() => MenuChildState();
 }
-class HomeSportsCenterState extends State<HomeSportsCenter>{
 
-  final TextEditingController searchController = TextEditingController();
-  final String sportsCenterName = "Sport Center srl";
+
+class MenuChildState extends State<MenuChild>{
+
+  final String name = "Luigi Rossi";
 
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-        firstTrailingIconOnTap: (){
-          context.push(AppPage.settings.path);
-        },
-        secondTrailingIconOnTap: (){},
-
-        goBack: (){},
-        appBar: 2,
-        paddingTop: 30,
-      //  showSearchInput: true,
-        showBackIcon: false,
-      //  searchController: searchController,
-      //  hintText: 'egg',
-        body: Column(
-          children: [
-            profileSection(),
-            buttonsSection()
-          ],
-        )
+      firstTrailingIconOnTap: (){
+        context.go(AppPage.homeChild.path);
+      },
+      secondTrailingIconOnTap: (){
+        context.push(AppPage.settings.path);
+      },
+      goBack: (){},
+      appBar: 3,
+      showBackIcon: false,
+      showSecondTrailingIcon: true,
+      firstTrailingIcon: Icons.home,
+      secondTrailingIcon: Icons.settings,
+      body:  Column(
+        children: [
+          profileSection(),
+          buttonsSection()
+        ],
+      )
     );
   }
 
@@ -48,18 +49,18 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
       padding: const EdgeInsets.only(bottom: 20),
       child: GestureDetector(
         onTap: (){
-          context.push(AppPage.sportsCenterProfile.path);
+          context.push(AppPage.childProfile.path);
         },
         child: CardWidget(
             child: Row(
               children: [
-                SvgPicture.asset(ImagesConstants.sportsCenterProfileImg,height: 60,width: 60,),
+                SvgPicture.asset(ImagesConstants.childImg,height: 60,width: 60,),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text18(text: sportsCenterName),
+                      Text18(text: name),
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
                         child: Text14(text: getCurrentLanguageValue(VIEW_PROFILE) ?? ""),
