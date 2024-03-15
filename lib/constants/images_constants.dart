@@ -38,5 +38,14 @@ class ImagesConstants{
   static String homeTeamImg = '${baseUrl}home_team.svg';
   static String fileImg = '${baseUrl}file_icon.svg';
   static String childImg = '${baseUrl}profile_icon.svg';
+  static String cakeImg = '${baseUrl}cake.svg';
+  static String userImg = '${baseUrl}badge.svg';
+  static String heightImg = '${baseUrl}height.svg';
+  static String weightImg = '${baseUrl}scale.svg';
+  static String favoriteFootImg = '${baseUrl}football_shoe.svg';
+  static String favoriteTeamImg = '${baseUrl}groups_black.svg';
+  static String roleImg = '${baseUrl}patient_list.svg';
+  static String careerImg = '${baseUrl}date_range.svg';
+  static String favoritePlayerImg = '${baseUrl}directions_run.svg';
 
 }

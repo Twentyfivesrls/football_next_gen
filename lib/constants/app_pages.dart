@@ -30,7 +30,8 @@ enum AppPage {
   //CHILD
   homeChild,
   menuChild,
-  childProfile
+  childProfile,
+  followerList
 }
 
 extension AppPageExtension on AppPage {
@@ -92,6 +93,8 @@ extension AppPageExtension on AppPage {
         return "/menu_child";
         case AppPage.childProfile:
         return "/child_profile";
+        case AppPage.followerList:
+        return "/followers_list";
     }
   }
 
@@ -153,6 +156,8 @@ extension AppPageExtension on AppPage {
         return "Menu Child";
         case AppPage.childProfile:
         return "Child Profile";
+        case AppPage.followerList:
+        return "Follower List";
 
     }
   }
@@ -215,6 +220,8 @@ extension AppPageExtension on AppPage {
         return "Menu";
         case AppPage.childProfile:
         return "Profile";
+        case AppPage.followerList:
+        return "Followers";
     }
   }
 }

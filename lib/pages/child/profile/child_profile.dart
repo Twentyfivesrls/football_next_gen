@@ -90,7 +90,13 @@ class ChildProfileState extends State<ChildProfileWidget> with TickerProviderSta
                               imageProfile: ImagesConstants.childImg,
                               profileName: state.profile.profileName,
                               profileDesc: state.profile.profileDesc,
+                              followed: state.profile.followed,
+                              follower: state.profile.follower,
+                              post: state.profile.post,
                               editProfile: (){},
+                              goToFollowers: (){
+                                context.push(AppPage.followerList.path);
+                              },
                             ),
 
                             TabBarWidget(
@@ -117,7 +123,7 @@ class ChildProfileState extends State<ChildProfileWidget> with TickerProviderSta
                               child: TabbarViewWidget(
                                   tabController: tabController,
                                   firstTab: ChildInfoTab(
-
+                                    profile: state.profile,
                                   ),
                                   secondTab: BlocBuilder<PostListCubit,PostListPageState>(
                                       builder: (_,postState) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
 import 'package:football_next_gen/routing/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:localization/localization.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  KeycloakRepository().init();
   runApp(MyApp());
 }
 

@@ -70,6 +70,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   late final TabController tabController;
   int activeIndex = 0;
   DateTime date = DateTime.now();
+  int id = 0;
 
   @override
   void initState() {
@@ -80,7 +81,9 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
         activeIndex = tabController.index;
       });
     });
-    _profileCubit.fetchUserProfile();
+    _profileCubit.fetchUserProfile(id);
+    print("id");
+    print(id);
     _sportCubit.fetchUserSports();
     _sportFieldsCubit.fetchUserFields();
     _extraServicesCubit.fetchUserServices();
@@ -118,10 +121,15 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileHeader(
+                          isChildProfile: false,
+                          goToFollowers: (){},
                           imageProfile: ImagesConstants.sportsCenterProfileImg,
                           profileName: state.profile.profileName,
                           profileDesc: state.profile.profileDesc,
                           editProfile: () {},
+                          follower: '0',
+                          post: '0',
+                          archive: "0"
                         ),
                         TabBarWidget(
                           tabController: tabController,
@@ -144,7 +152,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
 
                             Tab(
                               child: Text14(
-                                text: 'Media',
+                                text: 'Archivio',
                                 fontWeight: activeIndex == 2 ? FontWeight.w600 : FontWeight.w500,
                                 textColor: activeIndex == 2 ? primary : textProfileGrey,
                               ),
@@ -176,7 +184,8 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                                                       return InfoTab(
                                                           address: state.profile.address,
                                                           phone: state.profile.phone,
-                                                          email: state.profile.email,
+                                                         // email: state.profile.email,
+                                                          email: "state.profile.email",
                                                           fields: sportsFieldsState.fields,
                                                           sports: sportsState.sports,
                                                           services: extraServicesState.services

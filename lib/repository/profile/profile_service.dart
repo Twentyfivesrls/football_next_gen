@@ -1,8 +1,7 @@
 
-
-
 import 'package:football_next_gen/constants/global_application_constants.dart';
 import 'package:football_next_gen/models/profile_entity.dart';
+import 'package:football_next_gen/repository/profile/profile_repository.dart';
 import 'package:football_next_gen/repository/profile/profile_repository_fake.dart';
 
 class ProfileService {
@@ -16,13 +15,22 @@ class ProfileService {
   ProfileService._internal();
 
 
-  Future<ProfileEntity> fetchProfile(){
-    if(GlobalConstants.profileReal){
+  Future<ProfileEntity> fetchProfile(id){
+    if(GlobalConstants.sportsCenterProfileReal){
       // TODO implement it when we need to call the real backend
-      return Future.value(ProfileEntity.defaultValue());
+      return ProfileRepository().getUserProfile(id);
     }else{
       return ProfileRepositoryFake().fetchProfile();
     }
   }
 
+
+  Future <List<ProfileEntityDtoForList>> fetchProfileList(){
+    if(GlobalConstants.profileReal){
+      // TODO implement it when we need to call the real backend
+      return Future.value([]);
+    }else{
+      return ProfileRepositoryFake().fetchProfileList();
+    }
+  }
 }

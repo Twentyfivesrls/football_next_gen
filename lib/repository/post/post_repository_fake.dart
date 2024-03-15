@@ -24,6 +24,18 @@ class PostRepositoryFake {
     throw Exception("Sono un cazzo di messaggio di errore");
   }
 
+  Future<List<PostEntity>> fetchHomePosts(){
+    //sleep(const Duration(seconds:5));
+    // trying with dummy data
+    List<PostEntity> result = [];
+    for(int i = 0; i<10; i++){
+      result.add(PostEntity.defaultValue(favorite: i%2 == 0));
+    }
+    return Future.value(result);
+    // trying with exception
+    throw Exception("Sono un cazzo di messaggio di errore");
+  }
+
 
 
   Future<PostEntity> fetchPost(){

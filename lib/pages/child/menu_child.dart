@@ -27,7 +27,7 @@ class MenuChildState extends State<MenuChild>{
         context.go(AppPage.homeChild.path);
       },
       secondTrailingIconOnTap: (){
-        context.push(AppPage.settings.path);
+        context.push(AppPage.settings.path, extra: AppPage.menuChild.path);
       },
       goBack: (){},
       appBar: 3,
@@ -82,7 +82,7 @@ class MenuChildState extends State<MenuChild>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-              context.push(AppPage.tournamentsList.path);
+              context.push(AppPage.tournamentsList.path,extra: AppPage.menuChild.path);
             },
             text: getCurrentLanguageValue(EVENTS) ?? "",
             rowLayout: false,
@@ -95,7 +95,7 @@ class MenuChildState extends State<MenuChild>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-              context.push(AppPage.trainingsList.path);
+              context.push(AppPage.trainingsList.path,extra: AppPage.menuChild.path);
             },
             text: getCurrentLanguageValue(EXERCISES) ?? "",
             rowLayout: false,
@@ -106,7 +106,7 @@ class MenuChildState extends State<MenuChild>{
         ),
         ActionButton(
           onPressed: (){
-            context.push(AppPage.teamsList.path);
+            context.push(AppPage.teamsList.path,extra: AppPage.menuChild.path);
           },
           text: getCurrentLanguageValue(TEAMS) ?? "",
           rowLayout: false,

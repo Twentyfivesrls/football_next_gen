@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:football_next_gen/models/profile_entity.dart';
@@ -10,31 +7,20 @@ class ProfileCubit extends Cubit<ProfilePageState> {
 
   ProfileCubit() : super(ProfilePageLoading());
 
-
-  void fetchUserProfile() async {
+  void fetchUserProfile(id) async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO
     emit(ProfilePageLoading());
-
     // fetch data
     try{
-      ProfileEntity entity = await ProfileService().fetchProfile();
+      ProfileEntity entity = await ProfileService().fetchProfile(id);
       emit(ProfilePageLoaded(profile: entity));
     }catch(e){
       emit(ProfilePageError(error: e));
     }
   }
-
-
-
-
 }
-
-
-
-
-
 @immutable
 class ProfilePageState{}
 

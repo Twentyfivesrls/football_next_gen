@@ -16,20 +16,25 @@ import '../../../constants/app_pages.dart';
 
 
 class TournamentsList extends StatelessWidget{
-  const TournamentsList({super.key});
+  final String returnPage;
+
+  const TournamentsList({super.key, required this.returnPage});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => TournamentsCubit(),
-      child: const TournamentsListWidget(),
+      child: TournamentsListWidget(returnPage: returnPage,),
     );
   }
 }
 
 
 class TournamentsListWidget extends StatefulWidget{
-  const TournamentsListWidget({super.key});
+  final String returnPage;
+
+  const TournamentsListWidget({super.key, required this.returnPage});
+
   @override
   State<StatefulWidget> createState() => TournamentsListState();
 
@@ -49,9 +54,9 @@ class TournamentsListState extends State<TournamentsListWidget>{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         appBar: 2,
-        goBack: (){context.pop();},
+        goBack: (){},
         paddingTop: 0,
-        firstTrailingIconOnTap: (){context.go(AppPage.homeSportsCenter.path);},
+        firstTrailingIconOnTap: (){context.go(widget.returnPage);},
         secondTrailingIconOnTap: (){},
         title: AppPage.tournamentsList.toTitle,
         firstTrailingIcon: Icons.home,

@@ -23,10 +23,9 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
   Widget build(BuildContext context) {
     return ScaffoldWidget(
         firstTrailingIconOnTap: (){
-          context.push(AppPage.settings.path);
+          context.push(AppPage.settings.path, extra: AppPage.homeSportsCenter.path);
         },
         secondTrailingIconOnTap: (){},
-
         goBack: (){},
         appBar: 2,
         paddingTop: 30,
@@ -81,7 +80,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-              context.push(AppPage.tournamentsList.path);
+              context.push(AppPage.tournamentsList.path,extra: AppPage.homeSportsCenter.path);
             },
             text: getCurrentLanguageValue(EVENTS) ?? "",
             rowLayout: false,
@@ -94,7 +93,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
           padding: const EdgeInsets.only(bottom: 10),
           child: ActionButton(
             onPressed: (){
-              context.push(AppPage.trainingsList.path);
+              context.push(AppPage.trainingsList.path,extra: AppPage.homeSportsCenter.path);
             },
             text: getCurrentLanguageValue(EXERCISES) ?? "",
             rowLayout: false,
@@ -105,7 +104,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
         ),
         ActionButton(
           onPressed: (){
-            context.push(AppPage.teamsList.path);
+            context.push(AppPage.teamsList.path,extra: AppPage.homeSportsCenter.path);
           },
           text: getCurrentLanguageValue(TEAMS) ?? "",
           rowLayout: false,

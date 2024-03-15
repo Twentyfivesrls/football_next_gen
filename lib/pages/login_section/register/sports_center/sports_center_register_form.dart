@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/models/confirm_page_data.dart';
+import 'package:football_next_gen/models/profile_entity.dart';
+import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/pages/login_section/register/sports_center/widgets/sports_center_data.dart';
+import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../constants/app_pages.dart';
 import '../../../../constants/colors.dart';
@@ -23,7 +27,7 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
   final _formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
-  TextEditingController cityController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
@@ -50,7 +54,7 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
       passwordController: passwordController,
       phoneController: phoneController,
       nameController: nameController,
-      cityController: cityController,
+      addressController: addressController,
       suffixIconConfirmPassword: confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
       suffixIconPassword: passwordVisible ? Icons.visibility : Icons.visibility_off,
       obscureTextConfirmPass: !confirmPasswordVisible,
@@ -101,8 +105,29 @@ class SportsCenterRegisterFormState extends State<SportsCenterRegisterForm>{
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: ActionButton(
-        onPressed: (){
-          context.push(AppPage.insertOtp.path);
+        onPressed: () async {
+          //TODO implementare otp
+          // context.push(AppPage.insertOtp.path);
+          var user = UserEntity(
+              username: emailController.text,
+              password: passwordController.text,
+              role: "centro_sportivo",
+              profile: ProfileEntity(
+                  profileName: nameController.text,
+                  phone: phoneController.text,
+                  address: addressController.text,
+                  email: emailController.text,
+              )
+          );
+
+          bool result = await KeycloakRepository().createUser(user);
+          if(result) {
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.otpConfirmed(context)
+            );
+          } else {
+            //TODO IMPLEMENTARE MESSAGGIO DI ERRORE
+            // VAI IN SCHERMATA ERRORE
+          }
         },
         text: getCurrentLanguageValue(CREATE_ACCOUNT) ?? "",
       ),

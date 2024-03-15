@@ -24,5 +24,16 @@ class ProfileRepositoryFake {
     throw Exception("Sono un cazzo di messaggio di errore");
   }
 
+  Future<List<ProfileEntityDtoForList>> fetchProfileList(){
+    //sleep(const Duration(seconds:5));
+    // trying with dummy data
+    List<ProfileEntityDtoForList> result = [];
+    for(int i = 0; i<20; i++){
+      result.add(ProfileEntityDtoForList.defaultValue(isChild: i%2 == 0));
+    }
+    return Future.value(result);
+    // trying with exception
+    throw Exception("Sono un cazzo di messaggio di errore");
+  }
 
 }

@@ -13,6 +13,7 @@ class ActionButton extends StatelessWidget{
   final Color borderColor;
   final double borderRadius; //8
   final double height; //60
+  final double width;
   final FontWeight fontWeight;
   final String? svgPrefixIcon;
   final bool showPrefixIcon;
@@ -37,12 +38,13 @@ class ActionButton extends StatelessWidget{
     this.mainAxisAlignment = MainAxisAlignment.center,
     this.svgSuffixIcon,
     this.showSuffixIcon = false,
+    this.width = 0
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: MediaQuery.of(context).size.width,
+      width: width == 0 ? MediaQuery.of(context).size.width : width,
       height: height,
       child: FilledButton(
           style: ButtonStyle(

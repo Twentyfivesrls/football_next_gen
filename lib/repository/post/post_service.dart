@@ -21,6 +21,15 @@ class PostService {
     }
   }
 
+  Future <List<PostEntity>> fetchHomePosts(){
+    if(GlobalConstants.profileReal){
+      // TODO implement it when we need to call the real backend
+      return Future.value([]);
+    }else{
+      return PostRepositoryFake().fetchHomePosts();
+    }
+  }
+
   Future<PostEntity> fetchPost(String id){
     if(GlobalConstants.profileReal){
       // TODO implement it when we need to call the real backend

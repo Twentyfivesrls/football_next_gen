@@ -133,6 +133,18 @@ const String DELETE = "Elimina";
 const String UPLOADS = "Caricamenti";
 const String ADD_FILE = "Carica file";
 const String GROUP_NAME = "Nome girone";
+const String REGISTRY = "Anagrafica";
+const String WEIGHT = "Peso";
+const String HEIGHT = "Altezza";
+const String FAVORITE_FOOT = "Piede preferito";
+const String FAVORITE_PLAYER = "Giocatore preferito";
+const String FAVORITE_TEAM = "Squadra preferita";
+const String PHYSICAL_DATA = "Dati fisici";
+const String TECHNICAL_DATA = "Dati tecnici";
+const String ROLE = "Ruolo giocato";
+const String CAREER = "Carriera";
+const String CURIOSITY = "Curiosità";
+const String SEASON_PLAYED = "Stagioni giocate";
 
 
 
@@ -342,6 +354,18 @@ final Map<String, String> LANG_IT = {
   UPLOADS:"Caricamenti",
   ADD_FILE:"Carica file",
   GROUP_NAME:"Nome girone",
+  REGISTRY:"Anagrafica",
+  WEIGHT:"Peso",
+  HEIGHT:"Altezza",
+  FAVORITE_FOOT:"Piede preferito",
+  FAVORITE_PLAYER:"Giocatore preferito",
+  FAVORITE_TEAM:"Squadra preferita",
+  PHYSICAL_DATA:"Dati fisici",
+  TECHNICAL_DATA:"Dati tecnici",
+  ROLE:"Ruolo giocato",
+  CAREER:"Carriera",
+  CURIOSITY:"Curiosità",
+  SEASON_PLAYED:"Stagioni giocate",
 
 
 

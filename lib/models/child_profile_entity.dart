@@ -13,6 +13,11 @@ class ChildProfileEntity {
   final String career;
   final String favoriteTeam;
   final String favoritePlayer;
+  final String follower;
+  final String post;
+  final String followed;
+
+
 
   ChildProfileEntity({
     required this.profileName,
@@ -26,6 +31,9 @@ class ChildProfileEntity {
     required this.favoriteTeam,
     required this.role,
     required this.career,
+    required this.post,
+    required this.followed,
+    required this.follower
   });
 
 
@@ -41,5 +49,8 @@ class ChildProfileEntity {
       role: "Attaccante",
       date: "01/01/2012",
       username: "mariorossi@mail.it-kid",
+      followed: "130",
+      follower: "120",
+      post: "20"
   );
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keycloak/flutter_keycloak.dart';
 import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/models/authentication_entity.dart';
+import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/app_pages.dart';
-import '../../../constants/colors.dart';
-import '../../../constants/images_constants.dart';
+
 
 class LoginForm extends StatefulWidget{
   const LoginForm({super.key});
@@ -36,8 +38,6 @@ class LoginFormState extends State<LoginForm>{
           loginWithGoogleOrSpidSection(),
         ],
       ),
-
-
     );
   }
 
@@ -82,12 +82,29 @@ class LoginFormState extends State<LoginForm>{
     );
   }
 
+
+  Map config = {
+    "resource": "fng-app",
+    "realm" : "Fiitball-Next-Gen",
+    "credentials" : {"secret": "CSN0CpvsdyS3vkZ3mzFLdCUujdvJQo9a"},
+    "auth-server-url" : "http://80.211.123.141:8080"
+  };
+
   Widget loginButtonSection() {
     return Column(
       children: [
         ActionButton(
-          onPressed: (){
-            context.go(AppPage.homeSportsCenter.path);
+          onPressed: () async {
+            var user = AuthenticationEntity(
+              username: emailController.text,
+              password: passwordController.text,
+              clientId: "admin-cli",
+              clientSecret: "yotXnLuS4DMVtIPBES0oabzzZdE1Qbzs",
+              grantType: "password",
+            );
+            KeycloakRepository().login(user);
+            context.go(AppPage.homeSportsCenter.path
+            );
           },
           text: getCurrentLanguageValue(ACCEDI) ?? "",
         ),

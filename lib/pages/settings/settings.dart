@@ -10,7 +10,10 @@ import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 
 class Settings extends StatefulWidget{
-  const Settings({super.key});
+  final String returnPage;
+
+  const Settings({super.key, required this.returnPage});
+
   @override
   State<StatefulWidget> createState() => SettingsState();
 }
@@ -22,12 +25,12 @@ class SettingsState extends State<Settings>{
       paddingTop: 30,
       title: AppPage.settings.toTitle,
       appBar: 3,
-        showFirstTrailingIcon: false,
-        firstTrailingIconOnTap: (){},
-       secondTrailingIconOnTap: (){},
+      showFirstTrailingIcon: false,
+      firstTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: (){},
       goBack: (){
-          context.go(AppPage.homeSportsCenter.path);
-        },
+        context.go(widget.returnPage);
+      },
       bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20,vertical: 30),
           child: Column(
@@ -41,25 +44,25 @@ class SettingsState extends State<Settings>{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text18(
-              text: getCurrentLanguageValue(GENERAL) ?? "",
+            text: getCurrentLanguageValue(GENERAL) ?? "",
             textColor: primary,
           ),
 
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: ActionButton(
-                showPrefixIcon: true,
-                svgPrefixIcon: ImagesConstants.lockImg,
-                onPressed: (){
-                  context.push(AppPage.resetPassword.path);
-                },
-                text:  getCurrentLanguageValue(RESET_PASSWORD) ?? "",
-                backgroundColor: white,
-                textColor: black25,
-                borderColor: white,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                showSuffixIcon: true,
-                svgSuffixIcon: ImagesConstants.chevronRightImg,
+              showPrefixIcon: true,
+              svgPrefixIcon: ImagesConstants.lockImg,
+              onPressed: (){
+                context.push(AppPage.resetPassword.path);
+              },
+              text:  getCurrentLanguageValue(RESET_PASSWORD) ?? "",
+              backgroundColor: white,
+              textColor: black25,
+              borderColor: white,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              showSuffixIcon: true,
+              svgSuffixIcon: ImagesConstants.chevronRightImg,
             ),
           ),
         ],
@@ -75,16 +78,16 @@ class SettingsState extends State<Settings>{
             context: context,
             builder: (BuildContext context){
               return DialogWidget(
-                  title: getCurrentLanguageValue(LOGOUT) ?? "",
-                  message: 'Desideri veramente effettuare il logout?',
-                  confirmText: 'Si, effettua il logout',
-                  cancelText: 'No, resta connesso',
-                  onConfirm: () {
-                    context.go(AppPage.login.path);
-                  },
+                title: getCurrentLanguageValue(LOGOUT) ?? "",
+                message: 'Desideri veramente effettuare il logout?',
+                confirmText: 'Si, effettua il logout',
+                cancelText: 'No, resta connesso',
+                onConfirm: () {
+                  context.go(AppPage.login.path);
+                },
               );
             });
-        },
+      },
       text: getCurrentLanguageValue(LOGOUT) ?? "",
       backgroundColor: secondary,
       borderColor: secondary,

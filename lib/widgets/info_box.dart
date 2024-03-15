@@ -12,6 +12,7 @@ class InfoBoxWidget extends StatelessWidget{
   final bool underline;
   final String svgIcon;
   final Color textColor;
+  final CrossAxisAlignment crossAxisAlignment;
 
   const InfoBoxWidget({
     super.key,
@@ -21,13 +22,14 @@ class InfoBoxWidget extends StatelessWidget{
     this.showBottomText = true,
     this.textColor = textProfileGrey,
     this.showIcon = true,
-    this.underline = false
+    this.underline = false,
+    this.crossAxisAlignment = CrossAxisAlignment.start
   });
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.start,

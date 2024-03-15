@@ -20,14 +20,16 @@ class PostEntity {
   final String image;
   final String description;
   final String date;
+  final String likes;
+  bool favorite;
 
 
-  PostEntity({required this.image,required this.description, required this.date, required this.id});
+  PostEntity({required this.image,required this.description,required this.likes, required this.date, required this.id, required this.favorite});
 
 
   @override
   String toString() {
-    return 'PostEntity{id: $id,image: $image, description: $description, date: $date}';
+    return 'PostEntity{id: $id,image: $image, description: $description, date: $date, favorite: $favorite, likes: $likes}';
   }
 
   PostEntity copyWith({
@@ -35,12 +37,16 @@ class PostEntity {
     String? image,
     String? description,
     String? date,
+    String? likes,
+    bool? favorite,
   }) {
     return PostEntity(
       id: id ?? this.id,
       image: image ?? this.image,
       description: description ?? this.description,
       date: date ?? this.date,
+      likes: likes ?? this.likes,
+      favorite: favorite ?? this.favorite,
     );
   }
 
@@ -49,6 +55,8 @@ class PostEntity {
     image: json["image"] ?? "",
     description: json["description"] ?? "",
     date: json["date"] ?? "",
+    favorite: json["favorite"] ?? false,
+    likes: json["likes"] ?? "",
   );
 
   Map<String, dynamic> toJson() => {
@@ -56,7 +64,8 @@ class PostEntity {
     "image": image,
     "description": description,
     "date": date,
-
+    "favorite": favorite,
+    "likes": likes,
   };
 
   @override
@@ -69,11 +78,13 @@ class PostEntity {
   @override
   int get hashCode => image.hashCode;
 
-  factory PostEntity.defaultValue() => PostEntity(
+  factory PostEntity.defaultValue({bool favorite = true}) => PostEntity(
     id: "id",
     image: ImagesConstants.postImg,
     description: "Il talento in azione! 🚀⚽ Un momento catturato dal campo del Centro Sportivo Olympus, dove il nostro eccezionale calciatore, Marco Rossi, dimostra la sua abilità straordinaria nel calcio. 🌐✨ Un calcio potente, una precisione impeccabile - è davvero il cuore pulsante della nostra squadra! 🏆👟 Marco, grazie per ispirarci con la tua dedizione e passione per il gioco. 🙌💙 Se anche tu vuoi far parte di questa incredibile esperienza calcistica, unisciti a noi al Centro Sportivo Olympus! 🏟️⚡   #Talent #CalcioPassion #CentroSportivoOlympus",
     date: "13 agosto 2024",
+    favorite: favorite,
+    likes: "50"
   );
 
 }

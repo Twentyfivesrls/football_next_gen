@@ -7,7 +7,7 @@ class SportCenterData extends StatelessWidget{
 
   final GlobalKey formKey;
   TextEditingController nameController;
-  TextEditingController cityController;
+  TextEditingController addressController;
   TextEditingController emailController;
   TextEditingController phoneController;
   TextEditingController passwordController;
@@ -27,7 +27,7 @@ class SportCenterData extends StatelessWidget{
     required this.passwordController,
     required this.phoneController,
     required this.nameController,
-    required this.cityController,
+    required this.addressController,
     required this.emailController,
     this.confirmPasswordOnTap,
     this.passwordOnTap,
@@ -55,9 +55,9 @@ class SportCenterData extends StatelessWidget{
             ),
 
             InputWidget(
-              controller: cityController,
-              hintText: getCurrentLanguageValue(CITY) ?? "",
-              labelText: getCurrentLanguageValue(CITY) ?? "",
+              controller: addressController,
+              hintText: getCurrentLanguageValue(ADDRESS) ?? "",
+              labelText: getCurrentLanguageValue(ADDRESS) ?? "",
               labelPaddingTop: 20,
             ),
 

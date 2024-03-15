@@ -2,6 +2,7 @@ import 'package:football_next_gen/models/confirm_page_data.dart';
 import 'package:football_next_gen/pages/child/home_child.dart';
 import 'package:football_next_gen/pages/child/menu_child.dart';
 import 'package:football_next_gen/pages/child/profile/child_profile.dart';
+import 'package:football_next_gen/pages/child/profile/followers_list.dart';
 import 'package:football_next_gen/pages/login_section/login/login.dart';
 import 'package:football_next_gen/pages/login_section/recover_password/recover_password.dart';
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
@@ -102,7 +103,7 @@ class RouterManager {
 
       GoRoute(
           path: "/tournaments_list",
-          builder: (context, state) => const TournamentsList()
+          builder: (context, state) => TournamentsList(returnPage: state.extra as String)
       ),
 
       GoRoute(
@@ -154,7 +155,7 @@ class RouterManager {
 
       GoRoute(
           path: "/settings",
-          builder: (context, state) => const Settings()
+          builder: (context, state) => Settings(returnPage: state.extra as String)
       ),
 
       GoRoute(
@@ -195,6 +196,11 @@ class RouterManager {
       GoRoute(
           path: "/child_profile",
           builder: (context, state) => const ChildProfile()
+      ),
+
+      GoRoute(
+          path: "/followers_list",
+          builder: (context, state) => const FollowersList()
       ),
 
 
