@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
+import 'package:football_next_gen/repository/profile/profile_repository.dart';
 import 'package:football_next_gen/routing/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +11,7 @@ import 'package:localization/localization.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   KeycloakRepository().init();
+  ProfileRepository().init();
   runApp(MyApp());
 }
 
@@ -20,6 +23,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<AuthListener>(
+            create: (_) => AuthListener()),
         Provider<RouterManager>(create: (_) => RouterManager()),
       ],
 
@@ -49,7 +54,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
         ),
-        routerConfig: routerManager.goRouter
+        routerConfig: goRouter
     );
   }
 

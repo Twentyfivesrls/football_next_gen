@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keycloak/flutter_keycloak.dart';
+import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/authentication_entity.dart';
+import 'package:football_next_gen/models/profile_entity.dart';
 import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
+import 'package:football_next_gen/repository/profile/profile_service.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/texts.dart';
@@ -94,17 +97,8 @@ class LoginFormState extends State<LoginForm>{
     return Column(
       children: [
         ActionButton(
-          onPressed: () async {
-            var user = AuthenticationEntity(
-              username: emailController.text,
-              password: passwordController.text,
-              clientId: "admin-cli",
-              clientSecret: "yotXnLuS4DMVtIPBES0oabzzZdE1Qbzs",
-              grantType: "password",
-            );
-            KeycloakRepository().login(user);
-            context.go(AppPage.homeSportsCenter.path
-            );
+          onPressed: () {
+            performLogin();
           },
           text: getCurrentLanguageValue(ACCEDI) ?? "",
         ),
@@ -172,5 +166,29 @@ class LoginFormState extends State<LoginForm>{
         )*/
       ],
     );
+  }
+
+
+
+  void performLogin(){
+    var email = emailController.text;
+    var user = AuthenticationEntity(
+      username: email,
+      password: passwordController.text,
+      clientId: "admin-cli",
+      clientSecret: "yotXnLuS4DMVtIPBES0oabzzZdE1Qbzs",
+      grantType: "password",
+    );
+    KeycloakRepository().login(user).then((value) {
+      // verify value if is a Response or another type of object
+      // i assume that is a DIO response, so it has .data
+      var accessToken = value;
+      ProfileService().fetchProfile(email).then((profileEntity) {
+        print("HO RECUPERATO UTENTE");
+        print(profileEntity.toJson());
+        AuthListener().setAuthenticationData(profileEntity, accessToken);
+        // context.go(AppPage.homeSportsCenter.path);
+      });
+    });
   }
 }

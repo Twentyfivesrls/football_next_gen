@@ -70,7 +70,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   late final TabController tabController;
   int activeIndex = 0;
   DateTime date = DateTime.now();
-  int id = 0;
+
 
   @override
   void initState() {
@@ -81,9 +81,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
         activeIndex = tabController.index;
       });
     });
-    _profileCubit.fetchUserProfile(id);
-    print("id");
-    print(id);
+    _profileCubit.fetchUserProfile();
     _sportCubit.fetchUserSports();
     _sportFieldsCubit.fetchUserFields();
     _extraServicesCubit.fetchUserServices();

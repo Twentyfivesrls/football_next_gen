@@ -1,3 +1,5 @@
+import 'package:football_next_gen/auth/auth_listener.dart';
+import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/models/confirm_page_data.dart';
 import 'package:football_next_gen/pages/child/home_child.dart';
 import 'package:football_next_gen/pages/child/menu_child.dart';
@@ -31,11 +33,20 @@ import '../pages/sports_center/trainings/filters.dart';
 import '../pages/sports_center/trainings/training_detail.dart';
 
 
+bool checkIfAuthPath(String location) {
+  if (location == AppPage.login.path ||
+      location == AppPage.register.path) {
+    return false;
+  }
+  return true;
+}
+
 class RouterManager {
   static final RouterManager _router = RouterManager._internal();
   factory RouterManager() {
     return _router;
   }
+
 
   RouterManager._internal();
 
@@ -213,5 +224,39 @@ class RouterManager {
           }
       ),
     ],
+      // Here we manage the user authentication state
+      redirect: (_, state) {
+        print("CALCOLO IL NUOVO ROUTING");
+        var auth = AuthListener().profile;
+        var token = AuthListener().token;
+        print("IL CACCHIO DEL RUOLO");
+        print(auth?.role);
+
+        // return state.location se l'utente può andare nella destinazione richiesta (quella attuale)
+        // if (token == null) return AppPage.login.path;
+        // if (auth?.role == 'bambino') return AppPage.homeChild.path;
+        // if (auth?.role == 'centro_sportivo') return AppPage.homeSportsCenter.path;
+        // if (ruolo.........  .. . .. .
+
+
+        /*if ((auth == null || token == null) && !authPath) {
+          if ( == AppPage.loadingpage.path) {
+            return AppPage.login.path;
+          }
+          return state.location;
+        }
+        if ((auth == null || token == null) && authPath) {
+          return AppPage.login.path;
+        }
+        // HERE I AM LOGGED IN
+        if (state.location == AppPage.login.path) {
+          return AppPage.dashboard.path;
+        }
+        if (state.location == AppPage.loadingpage.path) {
+          return AppPage.dashboard.path;
+        }
+        return state.location; */
+      },
+      refreshListenable: AuthListener()
   );
 }

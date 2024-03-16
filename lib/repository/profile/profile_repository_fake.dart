@@ -4,6 +4,7 @@
 import 'dart:io';
 
 import 'package:football_next_gen/models/profile_entity.dart';
+import 'package:football_next_gen/models/user_entity.dart';
 
 class ProfileRepositoryFake {
 
@@ -16,10 +17,10 @@ class ProfileRepositoryFake {
   ProfileRepositoryFake._internal();
 
 
-  Future<ProfileEntity> fetchProfile(){
+  Future<UserEntity> fetchProfile(){
     //sleep(const Duration(seconds:5));
     // trying with dummy data
-    return Future.value(ProfileEntity.defaultValue());
+    return Future.value(UserEntity.defaultValue());
     // trying with exception
     throw Exception("Sono un cazzo di messaggio di errore");
   }

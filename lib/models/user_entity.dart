@@ -11,6 +11,12 @@ class UserEntity{
     required this.username, required this.password, required this.role, required this.profile
 });
 
+  String get profileName => profileName;
+  String get profileDesc => profileDesc;
+  String get phone => phone;
+  String get address => address;
+
+
   @override
   String toString() {
     return 'UserEntity{username: $username,password: $password, role: $role,  profile: $profile}';
