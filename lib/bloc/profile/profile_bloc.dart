@@ -7,8 +7,8 @@ import 'package:football_next_gen/repository/profile/profile_service.dart';
 class ProfileCubit extends Cubit<ProfilePageState> {
 
   ProfileCubit() : super(ProfilePageLoading());
-
-  void fetchUserProfile() async {
+  get entity => null;
+   fetchUserProfile() async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO
@@ -16,7 +16,9 @@ class ProfileCubit extends Cubit<ProfilePageState> {
     emit(ProfilePageLoading());
     // fetch data
     try{
-      //emit(ProfilePageLoaded(profile: entity));
+      UserEntity result = await ProfileService().fetchProfile();
+      print(result);
+      emit(ProfilePageLoaded(profile: result));
     }catch(e){
       emit(ProfilePageError(error: e));
     }

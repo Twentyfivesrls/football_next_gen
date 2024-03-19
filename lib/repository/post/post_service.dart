@@ -1,5 +1,6 @@
 import 'package:football_next_gen/constants/global_application_constants.dart';
 import 'package:football_next_gen/models/post_entity.dart';
+import 'package:football_next_gen/repository/post/post_repository.dart';
 import 'package:football_next_gen/repository/post/post_repository_fake.dart';
 
 class PostService {
@@ -27,6 +28,14 @@ class PostService {
       return Future.value([]);
     }else{
       return PostRepositoryFake().fetchHomePosts();
+    }
+  }
+
+  Future<dynamic> fetchCreatePost(PostEntity postEntity, int id){
+    if(GlobalConstants.profileReal){
+      return Future.value([]);
+    }else{
+      return PostRepository().createPost(postEntity, id);
     }
   }
 

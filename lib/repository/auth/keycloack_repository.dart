@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:football_next_gen/models/authentication_entity.dart';
 import 'package:football_next_gen/models/user_entity.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'dart:developer';
 
 class KeycloakRepository {
   static final KeycloakRepository _authentication =
@@ -75,6 +76,8 @@ class KeycloakRepository {
 
   Future<dynamic> login(AuthenticationEntity authenticationEntity)async{
     var result = await httpClient!.post('$baseUrl/utente/authenticate', data: authenticationEntity.toJson());
+    var token = result.data;
+    this.httpClient!.options.headers['Authorization'] = 'Bearer $token';
     return result.data;
   }
 
@@ -146,13 +149,11 @@ class KeycloakRepository {
     return userId;
   }*/
 
-  updateUserRole(token, body, clientId, userId) async {
-    Options options = Options(headers: {"Authorization": token});
+  updateUserRole(body, clientId, userId) async {
     var result = await httpClient!
         .post(
         "http://80.211.123.141:8080/admin/realms/Football-Next-Gen/users/$userId/role-mappings/clients/$clientId",
-        data: body,
-        options: options);
+        data: body);
     return result.data;
   }
 

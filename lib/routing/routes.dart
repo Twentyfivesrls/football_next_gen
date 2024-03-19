@@ -226,16 +226,19 @@ class RouterManager {
     ],
       // Here we manage the user authentication state
       redirect: (_, state) {
-        print("CALCOLO IL NUOVO ROUTING");
         var auth = AuthListener().profile;
         var token = AuthListener().token;
-        print("IL CACCHIO DEL RUOLO");
-        print(auth?.role);
 
         // return state.location se l'utente può andare nella destinazione richiesta (quella attuale)
-        // if (token == null) return AppPage.login.path;
-        // if (auth?.role == 'bambino') return AppPage.homeChild.path;
-        // if (auth?.role == 'centro_sportivo') return AppPage.homeSportsCenter.path;
+         if (token == null) return AppPage.login.path;
+         if (auth?.role == 'bambino') return AppPage.homeChild.path;
+         if (auth?.role == 'centro_sportivo') {
+           if(isSportCenterPage(state.uri.path)){
+             return state.uri.path;
+           }else{
+             return AppPage.homeSportsCenter.path;
+           }
+         }
         // if (ruolo.........  .. . .. .
 
 
@@ -259,4 +262,13 @@ class RouterManager {
       },
       refreshListenable: AuthListener()
   );
+
+}
+
+bool isSportCenterPage (String path){
+  if(path.contains(AppPage.sportsCenterProfile.path) || path.contains(AppPage.sportsCenterProfile.path)){
+    return true;
+  }else{
+    return false;
+  }
 }

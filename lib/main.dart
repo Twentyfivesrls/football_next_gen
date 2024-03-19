@@ -11,7 +11,6 @@ import 'package:localization/localization.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   KeycloakRepository().init();
-  ProfileRepository().init();
   runApp(MyApp());
 }
 

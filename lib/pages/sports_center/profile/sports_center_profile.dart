@@ -7,6 +7,7 @@ import 'package:football_next_gen/bloc/profile/sport_fields_bloc.dart';
 import 'package:football_next_gen/bloc/profile/sports_bloc.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/file_entity.dart';
+import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/info_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/media_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/post_tab.dart';
@@ -71,7 +72,6 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   int activeIndex = 0;
   DateTime date = DateTime.now();
 
-
   @override
   void initState() {
     super.initState();
@@ -81,11 +81,14 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
         activeIndex = tabController.index;
       });
     });
+
     _profileCubit.fetchUserProfile();
     _sportCubit.fetchUserSports();
-    _sportFieldsCubit.fetchUserFields();
-    _extraServicesCubit.fetchUserServices();
-    _postCubit.fetchUserPostLists();
+      _sportFieldsCubit.fetchUserFields();
+      _extraServicesCubit.fetchUserServices();
+      _postCubit.fetchUserPostLists();
+
+
   }
 
   @override

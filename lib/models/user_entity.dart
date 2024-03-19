@@ -1,61 +1,62 @@
 import 'package:football_next_gen/models/profile_entity.dart';
 
-class UserEntity{
+class UserEntity {
   String username;
   String password;
   String role;
   ProfileEntity profile;
 
+  UserEntity(
+      {required this.username,
+      required this.password,
+      required this.role,
+      required this.profile});
 
-  UserEntity({
-    required this.username, required this.password, required this.role, required this.profile
-});
+  String get profileName => profile.profileName;
 
-  String get profileName => profileName;
-  String get profileDesc => profileDesc;
-  String get phone => phone;
-  String get address => address;
+  String get profileDesc => profile.profileDesc;
 
+  String get phone => profile.phone;
+
+  String get address => profile.address;
 
   @override
   String toString() {
     return 'UserEntity{username: $username,password: $password, role: $role,  profile: $profile}';
   }
 
-  UserEntity copyWith({
-    String? username,
-    String? password,
-    String? role,
-    ProfileEntity? profile,
-    String? idKeycloak
-
-  }) {
+  UserEntity copyWith(
+      {String? username,
+      String? password,
+      String? role,
+      ProfileEntity? profile,
+      String? idKeycloak}) {
     return UserEntity(
-      username: username ?? this.username,
-      password: password ?? this.password,
-      role: role ?? this.role,
-        profile: profile ?? this.profile
-    );
+        username: username ?? this.username,
+        password: password ?? this.password,
+        role: role ?? this.role,
+        profile: profile ?? this.profile);
   }
 
   factory UserEntity.fromJson(Map<String, dynamic> json) => UserEntity(
-    username: json["username"] ?? "",
-    password: json["password"] ?? "",
-    role: json["role"] ?? "",
-    profile: ProfileEntity.fromJson(json["profile"]) ?? ProfileEntity.defaultValue(),
-  );
+        username: json["username"] ?? "",
+        password: json["password"] ?? "",
+        role: json["role"] ?? "",
+        profile: ProfileEntity.fromJson(json["profile"]) ??
+            ProfileEntity.defaultValue(),
+      );
 
   Map<String, dynamic> toJson() => {
-    "username": username,
-    "password": password,
-    "role": role,
-    "profile": profile.toJson(),
-  };
+        "username": username,
+        "password": password,
+        "role": role,
+        "profile": profile?.toJson(),
+      };
 
   factory UserEntity.defaultValue() => UserEntity(
-    username: "username",
-    password: "password",
-    role: "role",
-    profile: ProfileEntity.defaultValue(),
-  );
+        username: "username",
+        password: "password",
+        role: "role",
+        profile: ProfileEntity.defaultValue(),
+      );
 }

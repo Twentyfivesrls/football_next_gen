@@ -183,9 +183,7 @@ class LoginFormState extends State<LoginForm>{
       // verify value if is a Response or another type of object
       // i assume that is a DIO response, so it has .data
       var accessToken = value;
-      ProfileService().fetchProfile(email).then((profileEntity) {
-        print("HO RECUPERATO UTENTE");
-        print(profileEntity.toJson());
+      ProfileService().fetchProfile().then((profileEntity) {
         AuthListener().setAuthenticationData(profileEntity, accessToken);
         // context.go(AppPage.homeSportsCenter.path);
       });

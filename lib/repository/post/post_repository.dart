@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:football_next_gen/models/post_entity.dart';
-
+import 'package:dio/dio.dart';
+import 'package:football_next_gen/models/post_entity.dart';
 class PostRepository {
 
   static final PostRepository _instance = PostRepository._internal();
@@ -38,5 +39,7 @@ class PostRepository {
       var response = await httpClient!.post('$baseUrl/post/createPost/$id', data: postEntity.toJson());
       return response.data;
   }
+
+
 
 }
