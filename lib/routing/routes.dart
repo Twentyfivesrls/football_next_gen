@@ -266,7 +266,7 @@ class RouterManager {
 }
 
 bool isSportCenterPage (String path){
-  if(path.contains(AppPage.sportsCenterProfile.path) || path.contains(AppPage.sportsCenterProfile.path)){
+  if(path.contains(AppPage.sportsCenterProfile.path) || path.contains(AppPage.settings.path )){
     return true;
   }else{
     return false;

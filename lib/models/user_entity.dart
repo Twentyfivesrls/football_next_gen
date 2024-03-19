@@ -20,6 +20,8 @@ class UserEntity {
 
   String get address => profile.address;
 
+  String get email => profile.email;
+
   @override
   String toString() {
     return 'UserEntity{username: $username,password: $password, role: $role,  profile: $profile}';

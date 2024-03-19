@@ -185,8 +185,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                                                       return InfoTab(
                                                           address: state.profile.address,
                                                           phone: state.profile.phone,
-                                                         // email: state.profile.email,
-                                                          email: "state.profile.email",
+                                                          email: state.profile.email,
                                                           fields: sportsFieldsState.fields,
                                                           sports: sportsState.sports,
                                                           services: extraServicesState.services
