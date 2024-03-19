@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
@@ -6,14 +8,14 @@ import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../../constants/app_pages.dart';
 import '../../../../constants/language.dart';
 import '../../../../models/confirm_page_data.dart';
 import '../../../../widgets/dialog.dart';
 import '../../../../widgets/divider.dart';
 
-class AddPost extends StatefulWidget{
-
+class AddPost extends StatefulWidget {
   final String returnPage;
 
   const AddPost({super.key, required this.returnPage});
@@ -22,73 +24,137 @@ class AddPost extends StatefulWidget{
   State<StatefulWidget> createState() => AddPostState();
 }
 
-class AddPostState extends State<AddPost>{
+class AddPostState extends State<AddPost> {
+  final TextEditingController descriptionController = TextEditingController();
+  XFile? imageFile;
+
   @override
-  Widget build(BuildContext context) {
-
-    final TextEditingController descriptionController = TextEditingController();
-
+  Widget build(BuildContext context) {;
     return ScaffoldWidget(
-        paddingTop: 30,
-        appBar: 3,
-        title: AppPage.addPost.toTitle,
-        showFirstTrailingIcon: false,
-        firstTrailingIconOnTap: (){},
-      secondTrailingIconOnTap: (){},
-      goBack: (){
-          showDialog(
-              context: context,
-              builder: (BuildContext context){
-                return DialogWidget(
-                  title: 'Avviso',
-                  message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
-                  confirmText: 'Elimina post',
-                  cancelText: getCurrentLanguageValue(CANCEL) ?? "",
-                  onConfirm: () {
-                    context.go(widget.returnPage);
-                  },
-                );
-              });
-          },
-        body: Column(
+      paddingTop: 30,
+      appBar: 3,
+      title: AppPage.addPost.toTitle,
+      showFirstTrailingIcon: false,
+      firstTrailingIconOnTap: () {},
+      secondTrailingIconOnTap: () {},
+      goBack: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return DialogWidget(
+                title: 'Avviso',
+                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
+                confirmText: 'Elimina post',
+                cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                onConfirm: () {
+                  context.go(widget.returnPage);
+                },
+              );
+            });
+      },
+      body: SingleChildScrollView(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             Text14(
               text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
               fontWeight: FontWeight.w600,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 10,bottom: 20),
-              child: Text10(text: getCurrentLanguageValue(ACCEPTED_FORMATS) ?? ""),
+              padding: const EdgeInsets.only(top: 10, bottom: 20),
+              child:
+              Text10(text: getCurrentLanguageValue(ACCEPTED_FORMATS) ?? ""),
             ),
-
             ActionButton(
-                onPressed: (){},
-                text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
-                showPrefixIcon: true,
-                svgPrefixIcon: ImagesConstants.uploadImg,
-                backgroundColor: secondary,
-                borderColor: secondary,
+              onPressed: () {
+                showModalBottomSheet<void>(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8)),
+                  context: context,
+                  builder: (BuildContext context) {
+                    return SizedBox(
+                      height: 200,
+                      child: Center(
+                        child: Column(
+                          children: <Widget>[
+                            MaterialButton(
+                              onPressed: openGallery,
+                              minWidth: MediaQuery.of(context).size.width,
+                              height: 80,
+                              elevation: 0,
+                              focusElevation: 0,
+                              highlightElevation: 0,
+                              child: const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: Icon(Icons.photo_library_outlined,size: 30,color: primary,),
+                                  ),
+                                  Text18(
+                                    text: "Galleria",
+                                    textColor: primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            MaterialButton(
+                              onPressed: openCamera,
+                              minWidth: MediaQuery.of(context).size.width,
+                              height: 80,
+                              elevation: 0,
+                              focusElevation: 0,
+                              highlightElevation: 0,
+                              child:const Row(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 10),
+                                    child: Icon(Icons.camera_alt_outlined,size: 30,color: primary,),
+                                  ),
+                                  Text18(
+                                    text: "Camera",
+                                    textColor: primary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
+              showPrefixIcon: true,
+              svgPrefixIcon: ImagesConstants.uploadImg,
+              backgroundColor: secondary,
+              borderColor: secondary,
               textColor: primary,
             ),
+
+
+            imageFile != null ? Padding(
+              padding: const EdgeInsets.only(top: 20),
+                child: Image.file(File(imageFile!.path)
+                )
+            ) : Container(),
 
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: InputWidget(
-                  controller: descriptionController,
-                  labelText: getCurrentLanguageValue(DESCRIPTION) ?? "",
-                  hintText: getCurrentLanguageValue(DESCRIPTION) ?? "",
-                  minLines: 4,
-                  maxLines: 20,
+                controller: descriptionController,
+                labelText: getCurrentLanguageValue(DESCRIPTION) ?? "",
+                hintText: getCurrentLanguageValue(DESCRIPTION) ?? "",
+                minLines: 4,
+                maxLines: 20,
               ),
             ),
-
             buttonsSection()
-
           ],
         ),
-
+      ),
     );
   }
 
@@ -99,24 +165,24 @@ class AddPostState extends State<AddPost>{
           padding: EdgeInsets.symmetric(vertical: 50),
           child: DividerWidget(),
         ),
-
         ActionButton(
           onPressed: () {
-            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addPostConfirmed(context));
+            context.push(AppPage.confirmPage.path,
+                extra: ConfirmPageData.addPostConfirmed(context));
           },
           text: getCurrentLanguageValue(NEXT) ?? "",
         ),
-
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
             onPressed: () {
               showDialog(
                   context: context,
-                  builder: (BuildContext context){
+                  builder: (BuildContext context) {
                     return DialogWidget(
                       title: 'Avviso',
-                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
+                      message:
+                      'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
                       confirmText: 'Elimina post',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
@@ -132,5 +198,23 @@ class AddPostState extends State<AddPost>{
         )
       ],
     );
+  }
+
+  openGallery() {
+    ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
+  }
+
+  openCamera() {
+    ImagePicker().pickImage(source: ImageSource.camera).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
   }
 }
