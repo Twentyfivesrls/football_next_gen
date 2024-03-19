@@ -33,13 +33,6 @@ import '../pages/sports_center/trainings/filters.dart';
 import '../pages/sports_center/trainings/training_detail.dart';
 
 
-bool checkIfAuthPath(String location) {
-  if (location == AppPage.login.path ||
-      location == AppPage.register.path) {
-    return false;
-  }
-  return true;
-}
 
 class RouterManager {
   static final RouterManager _router = RouterManager._internal();
@@ -50,195 +43,197 @@ class RouterManager {
 
   RouterManager._internal();
 
+
+
   final GoRouter goRouter =
   GoRouter(
-    routes: [
-      // Go_router default goes to "/" page
-      GoRoute(
-          path: "/",
-          builder: (context, state) => Login()
-      ),
-      GoRoute(
-          path: "/register",
-          builder: (context, state) => Register()
-      ),
-      GoRoute(
-          path: "/recover_password",
-          builder: (context, state) => RecoverPassword()
-      ),
+      routes: [
+        // Go_router default goes to "/" page
+        GoRoute(
+            path: "/",
+            builder: (context, state) => Login()
+        ),
+        GoRoute(
+            path: "/register",
+            builder: (context, state) => Register()
+        ),
+        GoRoute(
+            path: "/recover_password",
+            builder: (context, state) => RecoverPassword()
+        ),
 
-      GoRoute(
-          path: "/sports_center_register",
-          builder: (context, state) => const SportsCenterRegister()
-      ),
+        GoRoute(
+            path: "/sports_center_register",
+            builder: (context, state) => const SportsCenterRegister()
+        ),
 
-      GoRoute(
-          path: "/parent_register",
-          builder: (context, state) => const ParentRegister()
-      ),
+        GoRoute(
+            path: "/parent_register",
+            builder: (context, state) => const ParentRegister()
+        ),
 
-      GoRoute(
-          path: "/insert_otp",
-          builder: (context, state) => const InsertOtp()
-      ),
+        GoRoute(
+            path: "/insert_otp",
+            builder: (context, state) => const InsertOtp()
+        ),
 
-      GoRoute(
-          path: "/home_sports_center",
-          builder: (context, state) => const HomeSportsCenter()
-      ),
+        GoRoute(
+            path: "/home_sports_center",
+            builder: (context, state) => const HomeSportsCenter()
+        ),
 
-      GoRoute(
-          path: "/sports_center_profile",
-          builder: (context, state) => const SportsCenterProfile()
-      ),
+        GoRoute(
+            path: "/sports_center_profile",
+            builder: (context, state) => const SportsCenterProfile()
+        ),
 
-      GoRoute(
-          path: "/teams_list",
-          builder: (context, state) => const TeamsList()
-      ),
+        GoRoute(
+            path: "/teams_list",
+            builder: (context, state) => const TeamsList()
+        ),
 
-      GoRoute(
-          path: "/add_team",
-          builder: (context, state) => const AddTeam()
-      ),
+        GoRoute(
+            path: "/add_team",
+            builder: (context, state) => const AddTeam()
+        ),
 
-      GoRoute(
-          path: "/team_detail",
-          builder: (context, state)  {
-            var extraObject = state.extra as dynamic;
-            var id = extraObject['id'] ?? "";
-            var isHome = extraObject['isHome'] ?? true;
-            return TeamDetail(id: id, isHome: isHome);
-          }
-      ),
+        GoRoute(
+            path: "/team_detail",
+            builder: (context, state)  {
+              var extraObject = state.extra as dynamic;
+              var id = extraObject['id'] ?? "";
+              var isHome = extraObject['isHome'] ?? true;
+              return TeamDetail(id: id, isHome: isHome);
+            }
+        ),
 
-      GoRoute(
-          path: "/tournaments_list",
-          builder: (context, state) => TournamentsList(returnPage: state.extra as String)
-      ),
+        GoRoute(
+            path: "/tournaments_list",
+            builder: (context, state) => TournamentsList(returnPage: state.extra as String)
+        ),
 
-      GoRoute(
-          path: "/add_tournament",
-          builder: (context, state) => const AddTournament()
-      ),
+        GoRoute(
+            path: "/add_tournament",
+            builder: (context, state) => const AddTournament()
+        ),
 
-      GoRoute(
-          path: "/tournament_detail",
-          builder: (context, state) {
-            return TournamentDetail(tournamentId: state.extra as String);
-          }
-      ),
+        GoRoute(
+            path: "/tournament_detail",
+            builder: (context, state) {
+              return TournamentDetail(tournamentId: state.extra as String);
+            }
+        ),
 
-      GoRoute(
-          path: "/group_detail",
-          builder: (context, state) {
-            var extraObject = state.extra as dynamic;
-            var id = extraObject['id'] ?? "";
-            var tournamentId = extraObject['tournamentId'] ?? "";
-            return GroupDetail(id: id, tournamentId: tournamentId);
-          }
-      ),
+        GoRoute(
+            path: "/group_detail",
+            builder: (context, state) {
+              var extraObject = state.extra as dynamic;
+              var id = extraObject['id'] ?? "";
+              var tournamentId = extraObject['tournamentId'] ?? "";
+              return GroupDetail(id: id, tournamentId: tournamentId);
+            }
+        ),
 
-      GoRoute(
-          path: "/add_group",
-          builder: (context, state) => AddGroup(id: state.extra as String)
-      ),
+        GoRoute(
+            path: "/add_group",
+            builder: (context, state) => AddGroup(id: state.extra as String)
+        ),
 
-      GoRoute(
-          path: "/trainings_list",
-          builder: (context, state) => const TrainingsList()
-      ),
+        GoRoute(
+            path: "/trainings_list",
+            builder: (context, state) => const TrainingsList()
+        ),
 
-      GoRoute(
-          path: "/add_training",
-          builder: (context, state) => const AddTraining()
-      ),
+        GoRoute(
+            path: "/add_training",
+            builder: (context, state) => const AddTraining()
+        ),
 
-      GoRoute(
-          path: "/training_detail",
-          builder: (context, state) => TrainingDetail(id: state.extra as String)
-      ),
+        GoRoute(
+            path: "/training_detail",
+            builder: (context, state) => TrainingDetail(id: state.extra as String)
+        ),
 
-      GoRoute(
-          path: "/filters",
-          builder: (context, state) => const Filters()
-      ),
+        GoRoute(
+            path: "/filters",
+            builder: (context, state) => const Filters()
+        ),
 
-      GoRoute(
-          path: "/settings",
-          builder: (context, state) => Settings(returnPage: state.extra as String)
-      ),
+        GoRoute(
+            path: "/settings",
+            builder: (context, state) => Settings(returnPage: state.extra as String)
+        ),
 
-      GoRoute(
-          path: "/reset_password",
-          builder: (context, state) => const ResetPassword()
-      ),
-
-
-      GoRoute(
-          path: "/add_post",
-          builder: (context, state) {
-            return AddPost(returnPage: state.extra as String);
-          }
-      ),
-
-      GoRoute(
-          path: "/post_detail",
-          builder: (context, state) {
-            var extraObject = state.extra as dynamic;
-            var id = extraObject['id'] ?? "";
-            var path = extraObject['path'] ?? "";
-            return PostDetail(id: id, returnPage: path);
-          }
+        GoRoute(
+            path: "/reset_password",
+            builder: (context, state) => const ResetPassword()
+        ),
 
 
-      ),
+        GoRoute(
+            path: "/add_post",
+            builder: (context, state) {
+              return AddPost(returnPage: state.extra as String);
+            }
+        ),
 
-      GoRoute(
-          path: "/home_child",
-          builder: (context, state) => const HomeChild()
-      ),
-
-      GoRoute(
-          path: "/menu_child",
-          builder: (context, state) => const MenuChild()
-      ),
-
-      GoRoute(
-          path: "/child_profile",
-          builder: (context, state) => const ChildProfile()
-      ),
-
-      GoRoute(
-          path: "/followers_list",
-          builder: (context, state) => const FollowersList()
-      ),
+        GoRoute(
+            path: "/post_detail",
+            builder: (context, state) {
+              var extraObject = state.extra as dynamic;
+              var id = extraObject['id'] ?? "";
+              var path = extraObject['path'] ?? "";
+              return PostDetail(id: id, returnPage: path);
+            }
 
 
+        ),
 
-      GoRoute(
-          path: "/confirm_page",
-          builder: (context, state) {
-            ConfirmPageData confirmPageData = state.extra as ConfirmPageData;
-            return ConfirmPage(data: confirmPageData);
-          }
-      ),
-    ],
+        GoRoute(
+            path: "/home_child",
+            builder: (context, state) => const HomeChild()
+        ),
+
+        GoRoute(
+            path: "/menu_child",
+            builder: (context, state) => const MenuChild()
+        ),
+
+        GoRoute(
+            path: "/child_profile",
+            builder: (context, state) => const ChildProfile()
+        ),
+
+        GoRoute(
+            path: "/followers_list",
+            builder: (context, state) => const FollowersList()
+        ),
+
+
+
+        GoRoute(
+            path: "/confirm_page",
+            builder: (context, state) {
+              ConfirmPageData confirmPageData = state.extra as ConfirmPageData;
+              return ConfirmPage(data: confirmPageData);
+            }
+        ),
+      ],
       // Here we manage the user authentication state
       redirect: (_, state) {
         var auth = AuthListener().profile;
         var token = AuthListener().token;
 
         // return state.location se l'utente può andare nella destinazione richiesta (quella attuale)
-         if (token == null) return AppPage.login.path;
-         if (auth?.role == 'bambino') return AppPage.homeChild.path;
-         if (auth?.role == 'centro_sportivo') {
-           if(isSportCenterPage(state.uri.path)){
-             return state.uri.path;
-           }else{
-             return AppPage.homeSportsCenter.path;
-           }
-         }
+        if (token == null) return AppPage.login.path;
+        if (auth?.role == 'bambino') return AppPage.homeChild.path;
+        if (auth?.role == 'centro_sportivo') {
+          if(isSportCenterPage(state.uri.path)){
+            return state.uri.path;
+          }else{
+            return AppPage.homeSportsCenter.path;
+          }
+        }
         // if (ruolo.........  .. . .. .
 
 
@@ -266,7 +261,13 @@ class RouterManager {
 }
 
 bool isSportCenterPage (String path){
-  if(path.contains(AppPage.sportsCenterProfile.path) || path.contains(AppPage.settings.path )){
+  if(
+  path.contains(AppPage.sportsCenterProfile.path) ||
+      path.contains(AppPage.settings.path) ||
+      path.contains(AppPage.addPost.path) ||
+      path.contains(AppPage.postDetail.path)
+
+  ){
     return true;
   }else{
     return false;

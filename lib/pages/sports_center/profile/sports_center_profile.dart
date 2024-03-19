@@ -126,7 +126,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                           goToFollowers: (){},
                           imageProfile: ImagesConstants.sportsCenterProfileImg,
                           profileName: state.profile.profileName,
-                          profileDesc: state.profile.profileDesc,
+                          profileDesc:  state.profile.profileDesc != "" ? state.profile.profileDesc : "Nessuna descrizione",
                           editProfile: () {},
                           follower: '0',
                           post: '0',

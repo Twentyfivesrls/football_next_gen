@@ -25,20 +25,11 @@ class SportsField extends StatelessWidget{
     return Padding(
       padding: const EdgeInsets.only(right: 20,left:20, top: 30),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text18(
-                text: getCurrentLanguageValue(FIELDS) ?? "",
-                textColor: primary,
-              ),
-
-              GestureDetector(
-                onTap: editSports,
-                child: SvgPicture.asset(ImagesConstants.editImg),
-              )
-            ],
+          Text18(
+            text: getCurrentLanguageValue(FIELDS) ?? "",
+            textColor: primary,
           ),
 
           Column(

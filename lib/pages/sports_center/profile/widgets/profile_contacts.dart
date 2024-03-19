@@ -27,21 +27,13 @@ class ProfileContacts extends StatelessWidget{
     return Padding(
       padding: const EdgeInsets.only(right: 20,left: 20, top: 30),
       child: Column(
+        crossAxisAlignment:  CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text18(
-                text: getCurrentLanguageValue(CONTACTS) ?? "",
-                textColor: primary,
-              ),
-
-              GestureDetector(
-                onTap: editContacts,
-                child: SvgPicture.asset(ImagesConstants.editImg),
-              )
-            ],
+          Text18(
+            text: getCurrentLanguageValue(CONTACTS) ?? "",
+            textColor: primary,
           ),
+
 
           Padding(
             padding: const EdgeInsets.only(top: 30),

@@ -25,20 +25,11 @@ class ProfileSports extends StatelessWidget{
     return Padding(
       padding: const EdgeInsets.only(right: 20,top: 30,left: 20),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text18(
-                text: getCurrentLanguageValue(SPORTS) ?? "",
-                textColor: primary,
-              ),
-
-              GestureDetector(
-                onTap: editSports,
-                child: SvgPicture.asset(ImagesConstants.editImg),
-              )
-            ],
+          Text18(
+            text: getCurrentLanguageValue(SPORTS) ?? "",
+            textColor: primary,
           ),
 
           Column(
