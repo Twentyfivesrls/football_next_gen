@@ -7,7 +7,7 @@ class SingleTournamentCubit extends Cubit<SingleTournamentPageState> {
 
   SingleTournamentCubit() : super(SingleTournamentPageLoading());
 
-  void fetchTournament(String id) async {
+  void fetchTournament(int id) async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO

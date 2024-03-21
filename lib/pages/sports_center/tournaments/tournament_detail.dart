@@ -20,7 +20,7 @@ import '../../../widgets/texts.dart';
 
 class TournamentDetail extends StatelessWidget{
 
-  final String tournamentId;
+  final int tournamentId;
   const TournamentDetail({super.key, required this.tournamentId});
 
   @override
@@ -41,7 +41,7 @@ class TournamentDetail extends StatelessWidget{
 
 
 class TournamentDetailWidget extends StatefulWidget{
-  final String tournamentId;
+  final int tournamentId;
   const TournamentDetailWidget({super.key, required this.tournamentId});
 
   @override
@@ -147,41 +147,52 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
               child: TabbarViewWidget(
                   tabController: tabController,
                   firstTab: SingleChildScrollView(
-                  child: BlocBuilder<GroupCubit,GroupPageState>(
-                     builder: (_,state) {
-                       if (state is GroupPageLoading) {
-                         return const Center(
-                             child: CircularProgressIndicator());
-                       }
-                       else if (state is GroupPageLoaded) {
-                         return Column(
-                           children: [
-                             newGroupsButtonSection(),
-                             ...state.groups.map((e) => groupsListSection(e)),
-                           ],
-                         );
-                       }
-                       else{
-                         // here the state is error
-                         return Center(
-                           child: Text18(
-                             text: (state as GroupPageError).error.toString(),
-                           ),
-                         );
-                       }
-                     }
-                    )
+                      child: BlocBuilder<GroupCubit,GroupPageState>(
+                          builder: (_,state) {
+                            if (state is GroupPageLoading) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                            else if (state is GroupPageLoaded) {
+                              return Column(
+                                children: [
+                                  newGroupsButtonSection(),
+                                  ...state.groups.map((e) => groupsListSection(e)),
+                                ],
+                              );
+                            }
+                            else{
+                              // here the state is error
+                              return Center(
+                                child: Text18(
+                                  text: (state as GroupPageError).error.toString(),
+                                ),
+                              );
+                            }
+                          }
+                      )
                   ),
                   secondTab: SingleChildScrollView(
-                    child: TournamentInfo(
-                        edit: (){},
-                        category: category,
-                        typology: typology,
-                        rules: rules,
-                        info: info,
-                        email: email,
-                        phone: phone
-                    ),
+                    child: BlocBuilder<SingleTournamentCubit,SingleTournamentPageState>(
+                        builder: (_,state) {
+                          if (state is SingleTournamentPageLoading) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          else if (state is SingleTournamentPageLoaded) {
+                          return  TournamentInfo(
+                              edit: () {},
+                              tournament: state.tournament,
+                            );
+                          }   else{
+                            // here the state is error
+                            return Center(
+                              child: Text18(
+                                text: (state as SingleTournamentPageError).error.toString(),
+                              ),
+                            );
+                          }
+                        }),
                   )
               ),
             ),

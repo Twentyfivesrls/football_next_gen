@@ -4,7 +4,7 @@ import '../../../../models/image_entity.dart';
 
 class SingleImage extends StatelessWidget{
 
-  final PostEntityDtoForList image;
+  final PostEntity image;
   final Function(String) onTap;
 
   const SingleImage({super.key, required this.image, required this.onTap});
@@ -12,11 +12,11 @@ class SingleImage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-      onTap: (){onTap(image.id);},
+      onTap: (){onTap(image.id.toString());},
       child: Container(
         padding: EdgeInsets.all(MediaQuery.of(context).size.width / 133),
         width: MediaQuery.of(context).size.width / 3,
-        child:Image.asset(image.url),
+        child:Image.asset(image.url ?? ""),
       ),
     );
   }

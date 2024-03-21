@@ -99,7 +99,7 @@ class TournamentsListState extends State<TournamentsListWidget>{
     );
   }
 
-  Widget tournamentsListSection(TournamentEntityDtoForList tournament){
+  Widget tournamentsListSection(TournamentEntity tournament){
     return TournamentCard(
       tournament:tournament,
       goToDetail: (){

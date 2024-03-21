@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keycloak/flutter_keycloak.dart';
 import 'package:football_next_gen/auth/auth_listener.dart';
@@ -25,6 +26,7 @@ class LoginFormState extends State<LoginForm>{
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   var passwordVisible = false;
+  String error = "";
 
   @override
   Widget build(BuildContext context) {
@@ -111,6 +113,7 @@ class LoginFormState extends State<LoginForm>{
             text: "Bambino",
           ),
         ),
+
       ],
     );
   }
@@ -186,6 +189,10 @@ class LoginFormState extends State<LoginForm>{
       ProfileService().fetchProfile().then((profileEntity) {
         AuthListener().setAuthenticationData(profileEntity, accessToken);
         // context.go(AppPage.homeSportsCenter.path);
+      });
+    }).onError((error, stackTrace) {
+      setState(() {
+        this.error = error.toString();
       });
     });
   }

@@ -10,7 +10,7 @@ import '../widgets/images_gallery.dart';
 
 class PostTab extends StatelessWidget{
 
-  final List<PostEntityDtoForList> images;
+  final List<PostEntity> images;
   final Function() addPost;
   final Function(String) goToDetail;
 

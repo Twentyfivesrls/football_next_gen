@@ -8,7 +8,7 @@ import '../../../../constants/language.dart';
 
 class TeamCard extends StatelessWidget{
 
-  final TeamEntityDtoForList team;
+  final TeamEntity team;
   final Function() goToDetail;
 
   const TeamCard({super.key, required this.team, required this.goToDetail});

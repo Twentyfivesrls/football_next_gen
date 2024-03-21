@@ -16,7 +16,7 @@ import '../../../widgets/buttons.dart';
 
 class GroupDetail extends StatelessWidget{
 
-  final String id;
+  final int id;
   final String tournamentId;
 
   const GroupDetail({super.key, required this.id, required this.tournamentId});
@@ -33,7 +33,7 @@ class GroupDetail extends StatelessWidget{
 
 
 class GroupDetailWidget extends StatefulWidget {
-  final String id;
+  final int id;
   final String tournamentId;
 
   const GroupDetailWidget({super.key, required this.id, required this.tournamentId});

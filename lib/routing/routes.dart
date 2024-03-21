@@ -109,7 +109,7 @@ class RouterManager {
 
         GoRoute(
             path: "/tournaments_list",
-            builder: (context, state) => TournamentsList(returnPage: state.extra as String)
+            builder: (context, state) => TournamentsList(returnPage: state.extra.toString())
         ),
 
         GoRoute(
@@ -120,7 +120,7 @@ class RouterManager {
         GoRoute(
             path: "/tournament_detail",
             builder: (context, state) {
-              return TournamentDetail(tournamentId: state.extra as String);
+              return TournamentDetail(tournamentId: state.extra as int);
             }
         ),
 
@@ -128,7 +128,7 @@ class RouterManager {
             path: "/group_detail",
             builder: (context, state) {
               var extraObject = state.extra as dynamic;
-              var id = extraObject['id'] ?? "";
+              var id = int.tryParse(extraObject['id']) ?? 0; // Converti la stringa ID in un intero
               var tournamentId = extraObject['tournamentId'] ?? "";
               return GroupDetail(id: id, tournamentId: tournamentId);
             }
@@ -136,7 +136,7 @@ class RouterManager {
 
         GoRoute(
             path: "/add_group",
-            builder: (context, state) => AddGroup(id: state.extra as String)
+            builder: (context, state) => AddGroup(id: state.extra.toString())
         ),
 
         GoRoute(
@@ -181,7 +181,7 @@ class RouterManager {
             path: "/post_detail",
             builder: (context, state) {
               var extraObject = state.extra as dynamic;
-              var id = extraObject['id'] ?? "";
+              var id = int.tryParse(extraObject['id']) ?? 0; // Converti la stringa ID in un intero
               var path = extraObject['path'] ?? "";
               return PostDetail(id: id, returnPage: path);
             }
@@ -225,7 +225,13 @@ class RouterManager {
         var token = AuthListener().token;
 
         // return state.location se l'utente può andare nella destinazione richiesta (quella attuale)
-        if (token == null) return AppPage.login.path;
+        if (token == null){
+          if(createAccount(state.uri.path)){
+            return state.uri.path;
+          }else{
+            return AppPage.login.path;
+          }
+        }
         if (auth?.role == 'bambino') return AppPage.homeChild.path;
         if (auth?.role == 'centro_sportivo') {
           if(isSportCenterPage(state.uri.path)){
@@ -259,13 +265,32 @@ class RouterManager {
   );
 
 }
+bool createAccount(String path){
+  if(path.contains(AppPage.register.path) ||
+     path.contains(AppPage.sportsCenterRegister.path)){
+    return true;
+  }else{
+    return false;
+  }
+}
 
 bool isSportCenterPage (String path){
   if(
   path.contains(AppPage.sportsCenterProfile.path) ||
       path.contains(AppPage.settings.path) ||
       path.contains(AppPage.addPost.path) ||
-      path.contains(AppPage.postDetail.path)
+      path.contains(AppPage.postDetail.path) ||
+      path.contains(AppPage.tournamentsList.path)||
+      path.contains(AppPage.tournamentDetail.path) ||
+      path.contains(AppPage.addGroup.path) ||
+      path.contains(AppPage.groupDetail.path) ||
+      path.contains(AppPage.addTournament.path) ||
+      path.contains(AppPage.trainingsList.path) ||
+      path.contains(AppPage.trainingDetail.path) ||
+      path.contains(AppPage.addTraining.path) ||
+      path.contains(AppPage.teamsList.path) ||
+      path.contains(AppPage.addTeam.path) ||
+      path.contains(AppPage.teamDetail.path)
 
   ){
     return true;

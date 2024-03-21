@@ -1,9 +1,4 @@
-import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:football_next_gen/models/profile_entity.dart';
-import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
 
 class ProfileRepository {
@@ -22,10 +17,7 @@ class ProfileRepository {
   Future<Response> getUserProfile() async {
     var url = '$baseUrl/utente/getUserDetails';
     Response response = await KeycloakRepository().httpClient!.get(url);
-    dynamic errorResponse = manageStandardResponseCodes(response);
-    if(errorResponse != null){
-      response.data = errorResponse;
-    }
+
     return response;
   }
 

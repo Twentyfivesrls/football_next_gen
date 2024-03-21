@@ -15,7 +15,7 @@ class TournamentsCubit extends Cubit<TournamentsPageState> {
 
     // fetch data
     try{
-      List<TournamentEntityDtoForList> entity = await TournamentsService().fetchTournamentsList();
+      List<TournamentEntity> entity = await TournamentsService().fetchTournamentsList();
       emit(TournamentsPageLoaded(tournaments: entity));
     }catch(e){
       emit(TournamentsPageError(error: e));
@@ -28,7 +28,7 @@ class TournamentsPageState{}
 
 class TournamentsPageLoading extends TournamentsPageState{}
 class TournamentsPageLoaded extends TournamentsPageState{
-  List<TournamentEntityDtoForList> tournaments;
+  List<TournamentEntity> tournaments;
   TournamentsPageLoaded({required this.tournaments});
 }
 class TournamentsPageError extends TournamentsPageState{

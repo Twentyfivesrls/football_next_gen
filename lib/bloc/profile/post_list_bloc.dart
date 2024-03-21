@@ -14,7 +14,7 @@ class PostListCubit extends Cubit<PostListPageState> {
 
     // fetch data
     try{
-      List<PostEntityDtoForList> entity = await PostService().fetchPostsList();
+      List<PostEntity> entity = await PostService().fetchPostsList();
       emit(PostListPageLoaded(posts: entity));
     }catch(e){
       emit(PostListPageError(error: e));
@@ -27,7 +27,7 @@ class PostListPageState{}
 
 class PostListPageLoading extends PostListPageState{}
 class PostListPageLoaded extends PostListPageState{
-  List<PostEntityDtoForList > posts;
+  List<PostEntity > posts;
   PostListPageLoaded({required this.posts});
 }
 class PostListPageError extends PostListPageState{

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/models/tournament.dart';
 
 import '../../../../constants/colors.dart';
 import '../../../../constants/images_constants.dart';
@@ -9,22 +10,13 @@ import '../../../../widgets/texts.dart';
 
 class TournamentInfo extends StatelessWidget{
   final Function() edit;
-  final String category;
-  final String typology;
-  final String rules;
-  final String info;
-  final String email;
-  final String phone;
+
+  final TournamentEntity tournament;
 
   const TournamentInfo({
     super.key,
     required this.edit,
-    required this.category,
-    required this.typology,
-    required this.rules,
-    required this.info,
-    required this.email,
-    required this.phone
+    required this.tournament
   });
 
   @override
@@ -52,7 +44,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: typology,
+              text: tournament.typology,
               showIcon: false,
               labelText: getCurrentLanguageValue(TYPOLOGY) ?? "",
             ),
@@ -61,7 +53,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: category,
+              text: tournament.category,
               showIcon: false,
               labelText: getCurrentLanguageValue(CATEGORY) ?? "",
             ),
@@ -70,7 +62,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: phone,
+              text: tournament.phone,
               showIcon: false,
               labelText: getCurrentLanguageValue(PHONE_CONTACT) ?? "",
             ),
@@ -79,7 +71,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: email,
+              text: tournament.email,
               showIcon: false,
               labelText: getCurrentLanguageValue(EMAIL_CONTACT) ?? "",
             ),
@@ -88,7 +80,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: rules,
+              text: tournament.rules,
               showIcon: false,
               labelText: getCurrentLanguageValue(RULES) ?? "",
             ),
@@ -97,7 +89,7 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-              text: info,
+              text: tournament.info,
               showIcon: false,
               labelText: getCurrentLanguageValue(OTHER_INFO) ?? "",
             ),

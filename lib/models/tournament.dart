@@ -1,6 +1,6 @@
 
 class TournamentEntityDtoForList {
-  final String id;
+  final int id;
   final String name;
 
   TournamentEntityDtoForList({
@@ -9,13 +9,13 @@ class TournamentEntityDtoForList {
    });
 
   factory TournamentEntityDtoForList.defaultValue() => TournamentEntityDtoForList(
-    id: "1",
+    id: 0,
     name: "name"
   );
 }
 
 class TournamentEntity {
-  final String id;
+  final int? id;
   final String name;
   final String typology;
   final String category;
@@ -26,7 +26,7 @@ class TournamentEntity {
   final String poster;
 
   TournamentEntity({
-    required this.id,
+    this.id,
     required this.typology,
     required this.category,
     required this.phone,
@@ -52,7 +52,7 @@ class TournamentEntity {
   }
 
   TournamentEntity copyWith({
-    String? id,
+    int? id,
     String? name,
     String? typology,
     String? phone,
@@ -76,7 +76,7 @@ class TournamentEntity {
   }
 
   factory TournamentEntity.fromJson(Map<String, dynamic> json) => TournamentEntity(
-    id: json["id"] ?? "",
+    id: json["id"] ?? 0,
     name: json["name"] ?? "",
     typology: json["typology"] ?? "",
     phone: json["phone"] ?? "",
@@ -101,7 +101,7 @@ class TournamentEntity {
   };
 
   factory TournamentEntity.defaultValue() => TournamentEntity(
-    id: "id",
+    id: 0,
     name: "name",
     typology: "typology",
     phone: "phone",
@@ -121,5 +121,7 @@ class TournamentEntity {
 
   @override
   int get hashCode => name.hashCode;
+
+  factory TournamentEntity.emptyPost() => TournamentEntity(typology: '', category: '', phone: '', email: '', rules: '', info: '', poster: '', name: '');
 
 }

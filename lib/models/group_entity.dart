@@ -3,7 +3,7 @@ import 'match_entity.dart';
 
 
 class GroupEntityDtoForList {
-  final String id;
+  final int id;
   final String groupName;
 
   GroupEntityDtoForList({
@@ -12,14 +12,14 @@ class GroupEntityDtoForList {
   });
 
   factory GroupEntityDtoForList.defaultValue() => GroupEntityDtoForList(
-      id: "1",
+      id: 0,
       groupName: "groupName"
   );
 }
 
 
 class GroupEntity {
-  final String id;
+  final int id;
   final String groupName;
   final List<MatchEntity> matches;
 
@@ -34,7 +34,7 @@ class GroupEntity {
   GroupEntity copyWith({
     List<MatchEntity>? matches,
     String? groupName,
-    String? id,
+    int? id,
 
   }) {
     return GroupEntity(
@@ -47,7 +47,7 @@ class GroupEntity {
   factory GroupEntity.fromJson(Map<String, dynamic> json) => GroupEntity(
     matches: json["matches"] ?? [],
     groupName: json["groupName"] ?? "",
-    id: json["id"] ?? "",
+    id: json["id"] ?? 0,
   );
 
   Map<String, dynamic> toJson() => {
@@ -71,7 +71,7 @@ class GroupEntity {
   factory GroupEntity.defaultValue() => GroupEntity(
       matches: [],
       groupName: "groupName",
-      id: "id"
+      id: 0
   );
 }
 

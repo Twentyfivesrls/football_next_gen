@@ -47,7 +47,7 @@ class TeamListState extends State<TeamsListWidget> {
 
   @override
   void initState() {
-    _teamsCubit.fetchTeams();
+    _teamsCubit.fetchAllTeams();
     super.initState();
   }
 
@@ -101,7 +101,7 @@ class TeamListState extends State<TeamsListWidget> {
         ));
   }
 
-  Widget teamsListSection(TeamEntityDtoForList team) {
+  Widget teamsListSection(TeamEntity team) {
     return TeamCard(
       team: team,
       goToDetail: () {

@@ -14,7 +14,7 @@ import 'package:go_router/go_router.dart';
 
 class TeamDetail extends StatelessWidget{
 
-  final String id;
+  final int id;
   final bool isHome;
 
   const TeamDetail({super.key, required this.id, required this.isHome});
@@ -31,7 +31,7 @@ class TeamDetail extends StatelessWidget{
 
 
 class TeamDetailWidget extends StatefulWidget{
-  final String id;
+  final int id;
   final bool isHome;
 
   const TeamDetailWidget({super.key, required this.id, required this.isHome});
@@ -46,7 +46,7 @@ class TeamDetailState extends State<TeamDetailWidget>{
 
   @override
   void initState() {
-    _teamCubit.fetchTournament(widget.id);
+    _teamCubit.fetchTeam(widget.id);
     super.initState();
   }
 

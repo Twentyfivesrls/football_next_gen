@@ -1,8 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/profile/create_post_cubit.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:football_next_gen/models/post_entity.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
@@ -15,18 +18,32 @@ import '../../../../models/confirm_page_data.dart';
 import '../../../../widgets/dialog.dart';
 import '../../../../widgets/divider.dart';
 
-class AddPost extends StatefulWidget {
+class AddPost extends StatelessWidget{
+  const AddPost({super.key, required this.returnPage});
   final String returnPage;
 
-  const AddPost({super.key, required this.returnPage});
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CreatePostCubit(),
+      child:  AddPostWidget(returnPage: returnPage,),
+    );
+  }
+}
+
+class AddPostWidget extends StatefulWidget {
+  final String returnPage;
+
+  const AddPostWidget({super.key, required this.returnPage});
 
   @override
   State<StatefulWidget> createState() => AddPostState();
 }
 
-class AddPostState extends State<AddPost> {
+class AddPostState extends State<AddPostWidget> {
   final TextEditingController descriptionController = TextEditingController();
   XFile? imageFile;
+  CreatePostCubit get _createPostCubit => context.read<CreatePostCubit>();
 
   @override
   Widget build(BuildContext context) {;
@@ -159,45 +176,51 @@ class AddPostState extends State<AddPost> {
   }
 
   Widget buttonsSection() {
-    return Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 50),
-          child: DividerWidget(),
-        ),
-        ActionButton(
-          onPressed: () {
-            context.push(AppPage.confirmPage.path,
-                extra: ConfirmPageData.addPostConfirmed(context));
-          },
-          text: getCurrentLanguageValue(NEXT) ?? "",
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: ActionButton(
-            onPressed: () {
-              showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return DialogWidget(
-                      title: 'Avviso',
-                      message:
-                      'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
-                      confirmText: 'Elimina post',
-                      cancelText: getCurrentLanguageValue(CANCEL) ?? "",
-                      onConfirm: () {
-                        context.go(widget.returnPage);
-                      },
-                    );
-                  });
-            },
-            text: getCurrentLanguageValue(CANCEL) ?? "",
-            backgroundColor: cancelGrey,
-            borderColor: cancelGrey,
+    return BlocBuilder<CreatePostCubit,CreatePostState>(
+        builder: (_,state) {
+
+      return Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 50),
+            child: DividerWidget(),
           ),
-        )
-      ],
-    );
+          ActionButton(
+            onPressed: () {
+              final postEntity = PostEntity(image: "image", description: descriptionController.text, likes: "likes", favorite: false, date:DateTime.now());
+              _createPostCubit.fetchCreatePost(postEntity);
+              context.push(AppPage.confirmPage.path,
+                  extra: ConfirmPageData.addPostConfirmed(context));
+            },
+            text: getCurrentLanguageValue(NEXT) ?? "",
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ActionButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return DialogWidget(
+                        title: 'Avviso',
+                        message:
+                        'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del nuovo post?',
+                        confirmText: 'Elimina post',
+                        cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                        onConfirm: () {
+                          context.go(widget.returnPage);
+                        },
+                      );
+                    });
+              },
+              text: getCurrentLanguageValue(CANCEL) ?? "",
+              backgroundColor: cancelGrey,
+              borderColor: cancelGrey,
+            ),
+          )
+        ],
+      );
+    });
   }
 
   openGallery() {

@@ -1,7 +1,7 @@
 import 'package:football_next_gen/constants/images_constants.dart';
 
 class TeamEntityDtoForList {
-  final String id;
+  final int id;
   final String name;
   final bool isHomeTeam;
   final String svgLogo;
@@ -16,7 +16,7 @@ class TeamEntityDtoForList {
   });
 
   factory TeamEntityDtoForList.defaultValue({bool isHome = true}) => TeamEntityDtoForList(
-      id: "1",
+      id: 0,
       name: "name",
       svgLogo: ImagesConstants.teamLogoImg,
       isHomeTeam: isHome
@@ -24,7 +24,7 @@ class TeamEntityDtoForList {
 }
 
 class TeamEntity {
-  final String id;
+  final int? id;
   final String name;
   final String coach;
   final String description;
@@ -35,7 +35,7 @@ class TeamEntity {
 
   TeamEntity({
     required this.svgLogo,
-    required this.id,
+     this.id,
     required this.coach,
     required this.description,
     required this.manager,
@@ -49,7 +49,7 @@ class TeamEntity {
   }
 
   TeamEntity copyWith({
-    String? id,
+    int? id,
     String? name,
     String? coach,
     String? description,
@@ -88,8 +88,8 @@ class TeamEntity {
     "isHomeTeam": isHomeTeam,
   };
 
-  factory TeamEntity.defaultValue() => TeamEntity(
-    id: "id",
+  factory TeamEntity.defaultValue({required bool isHome}) => TeamEntity(
+    id: 1,
     name: "name",
     coach: "coach",
     description: "description",
@@ -107,4 +107,6 @@ class TeamEntity {
 
   @override
   int get hashCode => name.hashCode;
+
+  factory TeamEntity.emptyPost() => TeamEntity(svgLogo: "svgLogo", coach: "coach", description: "description", manager: "manager", name: "name", isHomeTeam: true);
 }

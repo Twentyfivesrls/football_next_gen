@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/widgets/card.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
 import 'package:football_next_gen/widgets/texts.dart';
@@ -52,7 +51,7 @@ class HomeSportsCenterState extends State<HomeSportsCenter>{
         child: CardWidget(
             child: Row(
               children: [
-                SvgPicture.asset(ImagesConstants.sportsCenterProfileImg,height: 60,width: 60,),
+                Image.network('http://80.211.123.141:8087/TwentyfiveMediaManager/twentyfiveserver/downloadkkk/mauro/sempre/_trapezio.jpeg',height: 60,width: 60,),
                 Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: Column(

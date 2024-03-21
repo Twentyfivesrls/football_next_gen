@@ -7,7 +7,7 @@ class FullTeamCubit extends Cubit<FullTeamPageState> {
 
   FullTeamCubit() : super(FullTeamPageLoading());
 
-  void fetchTournament(String id) async {
+  void fetchTeam(int id) async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO
@@ -16,6 +16,7 @@ class FullTeamCubit extends Cubit<FullTeamPageState> {
     // fetch data
     try{
       TeamEntity entity = await TeamService().fetchTeam(id);
+      print("DETTAGLI SQUADRA: $entity");
       emit(FullTeamPageLoaded(team: entity));
     }catch(e){
       emit(FullTeamPageError(error: e));

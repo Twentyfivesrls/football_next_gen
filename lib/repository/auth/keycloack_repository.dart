@@ -74,12 +74,22 @@ class KeycloakRepository {
     var finalResult = await updateUserRole(token, finalBody, clientId, userId);
   }*/
 
-  Future<dynamic> login(AuthenticationEntity authenticationEntity)async{
-    var result = await httpClient!.post('$baseUrl/utente/authenticate', data: authenticationEntity.toJson());
-    var token = result.data;
-    this.httpClient!.options.headers['Authorization'] = 'Bearer $token';
-    return result.data;
+
+  Future<dynamic> login(AuthenticationEntity authenticationEntity) async {
+    try {
+      var result = await httpClient!.post('$baseUrl/utente/authenticate', data: authenticationEntity.toJson());
+      print("Login avvenuto con successo");
+      print(result.data);
+      var token = result.data;
+      this.httpClient!.options.headers['Authorization'] = 'Bearer $token';
+      return result.data;
+    } catch (e) {
+      print("Si è verificato un errore durante il login: $e");
+      // Puoi lanciare nuovamente l'eccezione qui se desideri che venga gestita altrove
+      throw e;
+    }
   }
+
 
   Future<bool> createUser(UserEntity userEntity)async{
     try {

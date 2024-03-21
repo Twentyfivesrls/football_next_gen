@@ -1,7 +1,8 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:football_next_gen/models/post_entity.dart';
-import 'package:dio/dio.dart';
-import 'package:football_next_gen/models/post_entity.dart';
+import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
 class PostRepository {
 
   static final PostRepository _instance = PostRepository._internal();
@@ -12,34 +13,78 @@ class PostRepository {
 
   PostRepository._internal();
 
-  Dio? httpClient;
 
-  init() {
-    httpClient = Dio();
-  }
-
-  String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  //String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  String baseUrl = 'http://localhost:8080';
 
 
   Future<List<PostEntity>> getAllPost()async{
     Response response;
-    try{
-      response = await httpClient!.get('$baseUrl/post/getAllPost');
-    }on DioError catch(e){
-      return List.empty(growable: true);
-    } if (response.statusCode != 200){
-      return List.empty(growable: true);
-    }
+    response = await KeycloakRepository().httpClient!.get('$baseUrl/post/getAllPost');
     List<PostEntity> postList = (response.data as List).map((posts) => PostEntity.fromJson(posts)).toList();
-    print("TUTTI I POST: $postList");
     return postList;
   }
 
-  Future<dynamic> createPost(PostEntity postEntity, int id) async{
-      var response = await httpClient!.post('$baseUrl/post/createPost/$id', data: postEntity.toJson());
-      return response.data;
+  Future<PostEntity> createPost(PostEntity postEntity) async{
+      try {
+        Response response =  await KeycloakRepository().httpClient!.post('$baseUrl/post/createPost', data: postEntity.toJson());
+        if (response.statusCode == 200) {
+          PostEntity updatedPost = PostEntity.fromJson(response.data);
+          return updatedPost;
+        } else {
+          throw Exception('Failed to update post: ${response.statusCode}');
+        }
+      } catch (e) {
+        print("Error updating post: $e");
+        throw e;
+      }
   }
 
 
+
+  Future<PostEntity> getPostById(int id) async {
+    try {
+      Response response = await KeycloakRepository().httpClient!.get('$baseUrl/post/$id');
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        PostEntity post = PostEntity.fromJson(response.data);
+        return post;
+      } else {
+        throw Exception('Failed to fetch post by ID: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error fetching post by ID: $e");
+      throw e;
+    }
+  }
+
+  Future<PostEntity> updatePost(PostEntity post, int id) async {
+    try {
+      Response response = await KeycloakRepository().httpClient!.put('$baseUrl/post/updatePost/$id', data: post.toJson());
+
+      if (response.statusCode == 200) {
+        PostEntity updatedPost = PostEntity.fromJson(response.data);
+        return updatedPost;
+      } else {
+        throw Exception('Failed to update post: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error updating post: $e");
+      throw e;
+    }
+  }
+
+  Future<void> deletePost(int id) async {
+    try {
+      Response response = await KeycloakRepository().httpClient!.delete('$baseUrl/post/$id');
+      if (response.statusCode! >= 200 && response.statusCode! < 300) {
+        print('Post deleted successfully');
+      } else {
+        throw Exception('Failed to delete post: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error deleting post: $e");
+      throw e;
+    }
+  }
 
 }

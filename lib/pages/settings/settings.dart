@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
@@ -83,7 +84,7 @@ class SettingsState extends State<Settings>{
                 confirmText: 'Si, effettua il logout',
                 cancelText: 'No, resta connesso',
                 onConfirm: () {
-                  context.go(AppPage.login.path);
+                  AuthListener().clearAuthenticationData();
                 },
               );
             });

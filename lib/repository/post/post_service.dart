@@ -13,10 +13,10 @@ class PostService {
 
   PostService._internal();
 
-  Future <List<PostEntityDtoForList>> fetchPostsList(){
-    if(GlobalConstants.profileReal){
+  Future <List<PostEntity>> fetchPostsList(){
+    if(GlobalConstants.sportsCenterProfileReal){
       // TODO implement it when we need to call the real backend
-      return Future.value([]);
+      return PostRepository().getAllPost();
     }else{
       return PostRepositoryFake().fetchPostsList();
     }
@@ -31,20 +31,36 @@ class PostService {
     }
   }
 
-  Future<dynamic> fetchCreatePost(PostEntity postEntity, int id){
-    if(GlobalConstants.profileReal){
-      return Future.value([]);
+  Future<PostEntity> fetchCreatePost(PostEntity postEntity){
+    if(GlobalConstants.sportsCenterProfileReal){
+      return PostRepository().createPost(postEntity);
     }else{
-      return PostRepository().createPost(postEntity, id);
+      return PostRepositoryFake().fetchPost();
     }
   }
 
-  Future<PostEntity> fetchPost(String id){
-    if(GlobalConstants.profileReal){
+  Future<PostEntity> fetchPost(int id){
+    if(GlobalConstants.sportsCenterProfileReal){
       // TODO implement it when we need to call the real backend
-      return Future.value(PostEntity.defaultValue());
+      return PostRepository().getPostById(id);
     }else{
       return PostRepositoryFake().fetchPost();
+    }
+  }
+
+  Future<PostEntity> fetchUpdatePost(PostEntity postEntity, int id){
+    if(GlobalConstants.sportsCenterProfileReal){
+      return PostRepository().updatePost(postEntity, id);
+    }else{
+      return PostRepositoryFake().fetchUpdatePost();
+    }
+  }
+
+  Future<void> fetchDeletePost(int id) {
+    if(GlobalConstants.sportsCenterProfileReal){
+      return PostRepository().deletePost(id);
+    }else{
+      return PostRepositoryFake().fetchDeletePost();
     }
   }
 

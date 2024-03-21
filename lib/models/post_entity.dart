@@ -1,4 +1,6 @@
 import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:intl/intl.dart';
+
 
 class PostEntityDtoForList {
   final String id;
@@ -16,15 +18,18 @@ class PostEntityDtoForList {
 }
 
 class PostEntity {
-  final String id;
+  final int? id;
   final String image;
   final String description;
-  final String date;
+  final DateTime date;
   final String likes;
   bool favorite;
 
 
-  PostEntity({required this.image,required this.description,required this.likes, required this.date, required this.id, required this.favorite});
+  PostEntity({required this.image,required this.description,required this.likes, required this.date,
+    this.id, required this.favorite});
+
+  get url => null;
 
 
   @override
@@ -33,10 +38,10 @@ class PostEntity {
   }
 
   PostEntity copyWith({
-    String? id,
+    int? id,
     String? image,
     String? description,
-    String? date,
+    DateTime? date,
     String? likes,
     bool? favorite,
   }) {
@@ -51,10 +56,10 @@ class PostEntity {
   }
 
   factory PostEntity.fromJson(Map<String, dynamic> json) => PostEntity(
-    id: json["id"] ?? "",
+    id: json["id"] ?? 0,
     image: json["image"] ?? "",
     description: json["description"] ?? "",
-    date: json["date"] ?? "",
+    date: json["date"] != null ? DateTime.parse(json["date"]) : DateTime.now(),
     favorite: json["favorite"] ?? false,
     likes: json["likes"] ?? "",
   );
@@ -63,7 +68,7 @@ class PostEntity {
     "id": id,
     "image": image,
     "description": description,
-    "date": date,
+    "date": DateFormat('yyyy-MM-ddTHH:mm:ss').format(date),
     "favorite": favorite,
     "likes": likes,
   };
@@ -79,13 +84,15 @@ class PostEntity {
   int get hashCode => image.hashCode;
 
   factory PostEntity.defaultValue({bool favorite = true}) => PostEntity(
-    id: "id",
+    id: 1,
     image: ImagesConstants.postImg,
     description: "Il talento in azione! 🚀⚽ Un momento catturato dal campo del Centro Sportivo Olympus, dove il nostro eccezionale calciatore, Marco Rossi, dimostra la sua abilità straordinaria nel calcio. 🌐✨ Un calcio potente, una precisione impeccabile - è davvero il cuore pulsante della nostra squadra! 🏆👟 Marco, grazie per ispirarci con la tua dedizione e passione per il gioco. 🙌💙 Se anche tu vuoi far parte di questa incredibile esperienza calcistica, unisciti a noi al Centro Sportivo Olympus! 🏟️⚡   #Talent #CalcioPassion #CentroSportivoOlympus",
-    date: "13 agosto 2024",
+    date: DateTime.now(),
     favorite: favorite,
     likes: "50"
   );
+
+  factory PostEntity.emptyPost() => PostEntity(image: '', description: '', likes: '', date: DateTime.now(), id: 0, favorite: false);
 
 }
 

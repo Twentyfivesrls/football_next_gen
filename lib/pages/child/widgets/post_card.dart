@@ -73,7 +73,7 @@ class PostCard extends StatelessWidget{
           
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text10(text: post.date),
+            child: Text10(text: post.date as String),
           ),
 
           ExpandableText(

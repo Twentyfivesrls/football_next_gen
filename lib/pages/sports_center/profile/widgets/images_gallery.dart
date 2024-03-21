@@ -5,7 +5,7 @@ import '../../../../models/image_entity.dart';
 
 class ImagesGallery extends StatelessWidget{
 
-  final List<PostEntityDtoForList> images;
+  final List<PostEntity> images;
   final Function(String) onTap;
 
   const ImagesGallery({super.key, required this.images, required this.onTap});

@@ -12,12 +12,12 @@ class PostRepositoryFake {
 
   PostRepositoryFake._internal();
 
-  Future<List<PostEntityDtoForList>> fetchPostsList(){
+  Future<List<PostEntity>> fetchPostsList(){
     //sleep(const Duration(seconds:5));
     // trying with dummy data
-    List<PostEntityDtoForList> result = [];
+    List<PostEntity> result = [];
     for(int i = 0; i<10; i++){
-      result.add(PostEntityDtoForList.defaultValue());
+      result.add(PostEntity.defaultValue());
     }
     return Future.value(result);
     // trying with exception
@@ -45,5 +45,16 @@ class PostRepositoryFake {
     // trying with exception
     throw Exception("Sono un cazzo di messaggio di errore");
   }
+
+  Future<PostEntity> fetchUpdatePost() {
+    return Future.value(PostEntity.defaultValue());
+
+  }
+
+  Future<PostEntity> fetchDeletePost() {
+    return Future.value(PostEntity.defaultValue());
+
+  }
+
 
 }

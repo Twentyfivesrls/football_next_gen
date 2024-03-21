@@ -1,5 +1,6 @@
 import 'package:football_next_gen/constants/global_application_constants.dart';
 import 'package:football_next_gen/models/tournament.dart';
+import 'package:football_next_gen/repository/tournaments/tournaments_repository.dart';
 import 'package:football_next_gen/repository/tournaments/tournaments_repository_fake.dart';
 
 class TournamentsService {
@@ -12,19 +13,27 @@ class TournamentsService {
 
   TournamentsService._internal();
 
-  Future <List<TournamentEntityDtoForList>> fetchTournamentsList(){
-    if(GlobalConstants.profileReal){
+  Future <List<TournamentEntity>> fetchTournamentsList(){
+    if(GlobalConstants.sportsCenterProfileReal){
       // TODO implement it when we need to call the real backend
-      return Future.value([]);
+      return TournamentsRepository().getAllTournaments();
     }else{
       return TournamentsRepositoryFake().fetchTournamentsList();
     }
   }
 
-  Future<TournamentEntity> fetchTournament(String id){
-    if(GlobalConstants.profileReal){
+  Future<TournamentEntity> fetchCreateTournament(TournamentEntity tournamentEntity){
+    if(GlobalConstants.sportsCenterProfileReal){
+      return TournamentsRepository().createTournament(tournamentEntity);
+    }else{
+      return TournamentsRepositoryFake().fetchCreateTournament();
+    }
+  }
+
+  Future<TournamentEntity> fetchTournament(int id){
+    if(GlobalConstants.sportsCenterProfileReal){
       // TODO implement it when we need to call the real backend
-      return Future.value(TournamentEntity.defaultValue());
+      return TournamentsRepository().getTournamentById(id);
     }else{
       return TournamentsRepositoryFake().fetchTournament();
     }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/bloc/profile/single_post_bloc.dart';
+import 'package:football_next_gen/bloc/profile/update_post_cubit.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/models/post_entity.dart';
 import 'package:football_next_gen/widgets/info_box.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
@@ -13,42 +15,50 @@ import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../widgets/buttons.dart';
 
-class PostDetail extends StatelessWidget{
-
-  final String id;
+class PostDetail extends StatelessWidget {
+  final int id;
   final String returnPage;
 
   const PostDetail({super.key, required this.id, required this.returnPage});
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-      create: (_) => SinglePostCubit(),
-      child: PostDetailWidget(id: id, returnPage: returnPage,),
-
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => SinglePostCubit(),
+        ),
+        BlocProvider(
+          create: (_) => UpdatePostCubit(),
+        ),
+      ],
+      child: PostDetailWidget(
+        id: id,
+        returnPage: returnPage,
+      ),
     );
   }
 }
 
 class PostDetailWidget extends StatefulWidget {
-  final String id;
+  final int id;
   final String returnPage;
 
-  const PostDetailWidget({super.key, required this.id, required this.returnPage});
+  const PostDetailWidget(
+      {super.key, required this.id, required this.returnPage});
 
   @override
   State<StatefulWidget> createState() => PostDetailState();
 }
 
 class PostDetailState extends State<PostDetailWidget> {
-
   SinglePostCubit get _postCubit => context.read<SinglePostCubit>();
-
 
   final String sportsCenterName = 'Sport Center srl';
   bool selected = false;
   bool edit = false;
   final TextEditingController descriptionController = TextEditingController();
+  bool _isCubitClosed = false;
 
 /* List <PopupMenuItem> items = [
     PopupMenuItem(
@@ -68,15 +78,18 @@ class PostDetailState extends State<PostDetailWidget> {
     ),
   ]; */
 
-  List<String> list = [
-    'Modifica',
-    'Elimina'
-  ];
+  List<String> list = ['Modifica', 'Elimina'];
 
   @override
   void initState() {
     _postCubit.fetchPost(widget.id);
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _isCubitClosed = true; // Imposta il flag su true quando il cubit viene chiuso
+    super.dispose();
   }
 
   @override
@@ -87,37 +100,32 @@ class PostDetailState extends State<PostDetailWidget> {
       showFirstTrailingIcon: false,
       title: AppPage.postDetail.toTitle,
       firstTrailingIconOnTap: () {},
-      secondTrailingIconOnTap: (){},
+      secondTrailingIconOnTap: () {},
       goBack: () {
         context.push(widget.returnPage);
       },
       body: SingleChildScrollView(
-        child: BlocBuilder<SinglePostCubit,SinglePostPageState>(
-            builder: (_,state) {
-              if (state is SinglePostPageLoading) {
-                return const Center(
-                    child: CircularProgressIndicator());
-              }
-              else if (state is SinglePostPageLoaded) {
-                descriptionController.text = state.post.description;
-                return Column(
-                  children: [
-                    headerSection(),
-                    imageSection(state.post.image),
-                    descriptionSection(state.post.description, state.post.date),
-                    buttonsSection()
-                  ],
-                );
-              }
-              else {
-                // here the state is error
-                return Center(
-                  child: Text18(
-                    text: (state as SinglePostPageError).error.toString(),
-                  ),
-                );
-              }}
-        ),
+        child: BlocBuilder<SinglePostCubit, SinglePostPageState>(
+            builder: (_, state) {
+          if (state is SinglePostPageLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is SinglePostPageLoaded) {
+            descriptionController.text = state.post.description;
+            return Column(
+              children: [
+                headerSection(),
+                imageSection(state.post.image),
+                descriptionSection(state.post.description, state.post.date),
+                buttonsSection(state.post)
+              ],
+            );
+          } else if (state is SinglePostPageDeleted) {
+            return Text('Post deleted successfully');
+          } else if (state is SinglePostPageError) {
+            // Gestione degli errori
+            return Text('Error: ${state.error}');
+          }
+        }),
       ),
     );
   }
@@ -139,29 +147,33 @@ class PostDetailState extends State<PostDetailWidget> {
             )
           ],
         ),
-
         PopupMenuButton(
           elevation: 5,
-          icon: const Icon(Icons.more_vert,color: black25,),
+          icon: const Icon(
+            Icons.more_vert,
+            color: black25,
+          ),
           itemBuilder: (BuildContext context) => <PopupMenuEntry>[
             PopupMenuItem(
-                onTap: (){
+                onTap: () {
                   setState(() {
                     edit = !edit;
                   });
                 },
                 value: getCurrentLanguageValue(EDIT),
-                child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
-            ),
+                child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")),
             PopupMenuItem(
-                onTap: (){},
+                onTap: () {
+                  if (!_isCubitClosed) { // Verifica se il cubit è stato chiuso
+                    _postCubit.fetchDeletePost(widget.id);
+                  }
+                },
                 value: getCurrentLanguageValue(DELETE),
-                child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
-            ),
+                child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")),
           ],
         ),
 
-     /*   PopupMenuWidget(
+        /*   PopupMenuWidget(
             items: items,
         ) */
       ],
@@ -175,7 +187,7 @@ class PostDetailState extends State<PostDetailWidget> {
     );
   }
 
-  Widget descriptionSection(String description, String date) {
+  Widget descriptionSection(String description, DateTime date) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -185,7 +197,7 @@ class PostDetailState extends State<PostDetailWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               GestureDetector(
-                  onTap: (){
+                  onTap: () {
                     setState(() {
                       selected = !selected;
                     });
@@ -194,17 +206,14 @@ class PostDetailState extends State<PostDetailWidget> {
                     selected ? Icons.favorite : Icons.favorite_border_outlined,
                     color: selected ? Colors.red : black25,
                     size: 25,
-                  )
-              ),
+                  )),
               GestureDetector(
-                  onTap: (){},
+                  onTap: () {},
                   child: const Icon(
-                      Icons.share_outlined,
-                      color: black25,
-                      size: 25,
-
-                  )
-              ),
+                    Icons.share_outlined,
+                    color: black25,
+                    size: 25,
+                  )),
             ],
           ),
         ),
@@ -216,7 +225,6 @@ class PostDetailState extends State<PostDetailWidget> {
             text: description,
           ),
         ),
-
         Visibility(
             visible: edit,
             child: InputWidget(
@@ -225,52 +233,57 @@ class PostDetailState extends State<PostDetailWidget> {
               hintText: getCurrentLanguageValue(DESCRIPTION) ?? "",
               minLines: 4,
               maxLines: 20,
-            )
-        ),
-
+            )),
         Visibility(
           visible: !edit,
           child: Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: Text14(text: date),
+            child: Text14(text: date.toString()),
           ),
         ),
       ],
     );
   }
 
-  Widget buttonsSection() {
+  Widget buttonsSection(PostEntity post) {
     return Visibility(
-      visible: edit,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 20),
-        child: Column(
-          children: [
-            ActionButton(
-              onPressed: () {
-                setState(() {
-                  edit = !edit;
-                });
-              },
-              text: getCurrentLanguageValue(SAVE) ?? "",
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: ActionButton(
+        visible: edit,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            children: [
+              ActionButton(
                 onPressed: () {
+                  final postEntity = PostEntity(
+                      image: post.image,
+                      description: descriptionController.text,
+                      likes: post.likes,
+                      favorite: post.favorite,
+                      date: post.date
+                  );
                   setState(() {
+                    _postCubit.fetchUpdatePost(postEntity, widget.id);
                     edit = !edit;
                   });
                 },
-                text: getCurrentLanguageValue(CANCEL) ?? "",
-                backgroundColor: cancelGrey,
-                borderColor: cancelGrey,
+                text: getCurrentLanguageValue(SAVE) ?? "",
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: ActionButton(
+                  onPressed: () {
+                    setState(() {
+                      edit = !edit;
+                    });
+                  },
+                  text: getCurrentLanguageValue(CANCEL) ?? "",
+                  backgroundColor: cancelGrey,
+                  borderColor: cancelGrey,
+                ),
+              )
+            ],
+          ),
         ),
-      ),
-    );
+      );
   }
 }

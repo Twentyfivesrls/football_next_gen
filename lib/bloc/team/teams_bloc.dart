@@ -7,7 +7,7 @@ class TeamsCubit extends Cubit<TeamsPageState> {
 
   TeamsCubit() : super(TeamsPageLoading());
 
-  void fetchTeams() async {
+  void fetchAllTeams() async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO
@@ -15,7 +15,7 @@ class TeamsCubit extends Cubit<TeamsPageState> {
 
     // fetch data
     try{
-      List<TeamEntityDtoForList> entity = await TeamService().fetchTeamsList();
+      List<TeamEntity> entity = await TeamService().fetchTeamsList();
       emit(TeamsPageLoaded(teams: entity));
     }catch(e){
       emit(TeamsPageError(error: e));
@@ -28,7 +28,7 @@ class TeamsPageState{}
 
 class TeamsPageLoading extends TeamsPageState{}
 class TeamsPageLoaded extends TeamsPageState{
-  List<TeamEntityDtoForList> teams;
+  List<TeamEntity> teams;
   TeamsPageLoaded({required this.teams});
 }
 class TeamsPageError extends TeamsPageState{
