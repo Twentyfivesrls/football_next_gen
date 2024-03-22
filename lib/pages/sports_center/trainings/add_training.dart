@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/training/create_training_cubit.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
+import 'package:football_next_gen/models/training_entity.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/add_training_form.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/training_repetition_form.dart';
 import 'package:football_next_gen/widgets/divider.dart';
@@ -14,13 +17,25 @@ import '../../../widgets/dialog.dart';
 
 enum RadioButtons { mai, data, dopo }
 
-class AddTraining extends StatefulWidget{
+class AddTraining extends StatelessWidget{
   const AddTraining({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CreateTrainingCubit(),
+      child: const AddTrainingWidget() ,
+    );
+  }
+}
+
+class AddTrainingWidget extends StatefulWidget{
+  const AddTrainingWidget({super.key});
   @override
   State<StatefulWidget> createState() => AddTrainingState();
 }
 
-class AddTrainingState extends State<AddTraining>{
+class AddTrainingState extends State<AddTrainingWidget>{
 
   final String date = "23/01/2024";
   bool isChecked = false;
@@ -31,11 +46,15 @@ class AddTrainingState extends State<AddTraining>{
   final TextEditingController repetitionController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController occurrenceController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
   bool showRepetition = false;
   bool occurrenceEnabled = false;
   bool dateEnabled = false;
   List<bool> selected = [false,false,false,false,false,false,false];
   RadioButtons? radioValue = RadioButtons.mai;
+
+  CreateTrainingCubit get _createTrainingCubit => context.read<CreateTrainingCubit>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +175,12 @@ class AddTrainingState extends State<AddTraining>{
 
         ActionButton(
           onPressed: () {
-            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTrainingConfirmed(context));
+            final trainingEntity = TrainingEntity(date: DateTime.now(),
+                hour: TimeOfDay.now(),
+                field: fieldController.text,
+                info: infoController.text, weeksToRepeat: 2, name: nameController.text);
+            _createTrainingCubit.fetchCreateTraining(trainingEntity);
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTrainingConfirmed(context, trainingEntity.id ?? 0));
           },
           text: getCurrentLanguageValue(AppPage.addTraining.toTitle) ?? "",
         ),

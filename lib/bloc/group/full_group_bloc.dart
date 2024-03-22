@@ -7,7 +7,7 @@ class FullGroupCubit extends Cubit<FullGroupPageState> {
 
   FullGroupCubit() : super(FullGroupPageLoading());
 
-  void fetchGroup(String id) async {
+  void fetchGroup(int id) async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO

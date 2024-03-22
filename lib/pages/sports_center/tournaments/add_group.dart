@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/group/create_group_cubit.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
+import 'package:football_next_gen/models/group_entity.dart';
+import 'package:football_next_gen/models/match_entity.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/add_match_form.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
@@ -20,16 +24,29 @@ class TextEditingControllerGroup {
   TextEditingController hourController = TextEditingController();
 }
 
-class AddGroup extends StatefulWidget {
-
-  final String id;
+class AddGroup extends StatelessWidget{
   const AddGroup({super.key, required this.id});
+  final int id;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CreateGroupCubit(),
+      child:  AddGroupWidget(id: id),
+    );
+  }
+}
+
+class AddGroupWidget extends StatefulWidget {
+
+  final int id;
+  const AddGroupWidget({super.key, required this.id});
 
   @override
   State<StatefulWidget> createState() => AddGroupState();
 }
 
-class AddGroupState extends State<AddGroup> {
+class AddGroupState extends State<AddGroupWidget> {
 
   TextEditingController homeTeamController = TextEditingController();
   TextEditingController awayTeamController = TextEditingController();
@@ -37,7 +54,11 @@ class AddGroupState extends State<AddGroup> {
   TextEditingController dateController = TextEditingController();
   TextEditingController hourController = TextEditingController();
   TextEditingController groupNameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
   List<TextEditingControllerGroup> matchList = List.empty(growable: true);
+
+  CreateGroupCubit get _createGroupCubit => context.read<CreateGroupCubit>();
+
 
   @override
   void initState() {
@@ -147,11 +168,23 @@ class AddGroupState extends State<AddGroup> {
           padding: const EdgeInsets.only(top: 60),
           child: ActionButton(
             onPressed: () {
+              List<MatchEntity> matches = [
+                MatchEntity(homeTeam: homeTeamController.text,
+                    awayTeam: awayTeamController.text,
+                    place: placeController.text, date: DateTime.now(),
+                    title: titleController.text, hour: TimeOfDay.now()),
+
+              ];
+              final groupEntity = GroupEntity(matches: matches, groupName: groupNameController.text);
+
+              _createGroupCubit.fetchCreateGroup(groupEntity);
+
               context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context));
             },
             text: getCurrentLanguageValue(ADD_GROUP) ?? "",
           ),
         ),
+
         Padding(
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(

@@ -178,7 +178,6 @@ class AddPostState extends State<AddPostWidget> {
   Widget buttonsSection() {
     return BlocBuilder<CreatePostCubit,CreatePostState>(
         builder: (_,state) {
-
       return Column(
         children: [
           const Padding(

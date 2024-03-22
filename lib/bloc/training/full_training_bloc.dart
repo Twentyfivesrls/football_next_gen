@@ -7,7 +7,7 @@ class FullTrainingCubit extends Cubit<FullTrainingPageState> {
 
   FullTrainingCubit() : super(FullTrainingPageLoading());
 
-  void fetchTraining(String id) async {
+  void fetchTraining(int id) async {
     // could be avoided:
     // 1) if there are no modification to this data
     // 2) TODO

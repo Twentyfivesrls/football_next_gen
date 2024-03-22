@@ -42,13 +42,13 @@ class ConfirmPageData{
       );
 
 
-  factory ConfirmPageData.addTrainingConfirmed(BuildContext context) =>
+  factory ConfirmPageData.addTrainingConfirmed(BuildContext context, int id) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(TRAINING_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(TRAINING_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
-          context.push(AppPage.trainingDetail.path);
+          context.push(AppPage.trainingDetail.path, extra: id);
         },
       );
 
@@ -62,13 +62,13 @@ class ConfirmPageData{
         },
       );
 
-  factory ConfirmPageData.addTournamentConfirmed(BuildContext context) =>
+  factory ConfirmPageData.addTournamentConfirmed(BuildContext context, int id) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(TOURNAMENT_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
-          context.go(AppPage.tournamentDetail.path);
+          context.go(AppPage.tournamentDetail.path, extra: id);
         },
       );
 

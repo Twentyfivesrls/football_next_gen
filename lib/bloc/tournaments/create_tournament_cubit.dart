@@ -9,7 +9,7 @@ import 'package:football_next_gen/repository/tournaments/tournaments_service.dar
 class CreateTournamentCubit extends Cubit<CreateTournamentState> {
   CreateTournamentCubit() : super(CreateTournamentState(tournamentEntity: TournamentEntity.emptyPost()));
 
-  fetchCreatePost(TournamentEntity tournamentEntity)async{
+  fetchCreateTournament(TournamentEntity tournamentEntity)async{
     var result = await TournamentsService().fetchCreateTournament(tournamentEntity);
     emit(CreateTournamentState( tournamentEntity: result));
 

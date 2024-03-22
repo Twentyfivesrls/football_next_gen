@@ -108,9 +108,8 @@ class AddTournamentState extends State<AddTournamentWidget>{
                       rules: rulesController.text,
                       info: infoController.text,
                       poster: "poster", name: nameController.text);
-                  _createTournamentCubit.fetchCreatePost(tournamentEntity);
-                  context.push(AppPage.confirmPage.path,
-                      extra: ConfirmPageData.addTournamentConfirmed(context));
+                  _createTournamentCubit.fetchCreateTournament(tournamentEntity);
+                  context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context, tournamentEntity.id ?? 0));
 
                 },
                 text: "Crea torneo",
