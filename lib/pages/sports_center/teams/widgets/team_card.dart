@@ -38,7 +38,7 @@ class TeamCard extends StatelessWidget{
                 children: [
 
                   Visibility(
-                    visible: team.isHomeTeam,
+                    visible: team.isHomeTeam ?? false,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: SvgPicture.asset(ImagesConstants.homeTeamImg),
@@ -72,7 +72,7 @@ class TeamCard extends StatelessWidget{
                     color: white,
                     borderRadius: BorderRadius.all(Radius.circular(8))
                 ),
-                child: SvgPicture.asset(team.svgLogo,width: 30, height: 30,),
+                child: SvgPicture.asset(team.svgLogo ?? "",width: 30, height: 30,),
               ),
 
               Padding(

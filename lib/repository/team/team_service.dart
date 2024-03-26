@@ -1,4 +1,5 @@
 import 'package:football_next_gen/constants/global_application_constants.dart';
+import 'package:football_next_gen/models/autocomplete_entity.dart';
 import 'package:football_next_gen/models/team_entity.dart';
 import 'package:football_next_gen/repository/team/team_repository.dart';
 import 'package:football_next_gen/repository/team/team_repository_fake.dart';
@@ -37,6 +38,13 @@ class TeamService {
     }else{
       return TeamRepositoryFake().fetchCreateTeam();
     }
+  }
+
+  Future<List<AutocompleteEntity>> fetchSearchTeam (String value){
+    if(GlobalConstants.sportsCenterProfileReal){
+      return TeamRepository().searchTeam(value);
+    }
+    return TeamRepositoryFake().fetchAutocompleteTeamsList();
   }
 
 }

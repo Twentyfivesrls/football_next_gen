@@ -53,10 +53,10 @@ Future<List<TournamentEntity>> getAllTournaments()async{
         TournamentEntity tournament = TournamentEntity.fromJson(response.data);
         return tournament;
       } else {
-        throw Exception('Failed to fetch post by ID: ${response.statusCode}');
+        throw Exception('Failed to fetch tournament by ID: ${response.statusCode}');
       }
     } catch (e) {
-      print("Error fetching post by ID: $e");
+      print("Error fetching tournament by ID: $e");
       throw e;
     }
   }

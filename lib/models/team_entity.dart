@@ -26,21 +26,21 @@ class TeamEntityDtoForList {
 class TeamEntity {
   final int? id;
   final String name;
-  final String coach;
-  final String description;
-  final String manager;
-  final String svgLogo;
-  final bool isHomeTeam;
+  final String? coach;
+  final String? description;
+  final String? manager;
+  final String? svgLogo;
+  final bool? isHomeTeam;
 
 
   TeamEntity({
-    required this.svgLogo,
+     this.svgLogo,
      this.id,
-    required this.coach,
-    required this.description,
-    required this.manager,
+     this.coach,
+     this.description,
+     this.manager,
     required this.name,
-    required this.isHomeTeam
+    this.isHomeTeam
   });
 
   @override
@@ -69,7 +69,7 @@ class TeamEntity {
   }
 
   factory TeamEntity.fromJson(Map<String, dynamic> json) => TeamEntity(
-    id: json["id"] ?? "",
+    id: json["id"] ?? 0,
     name: json["name"] ?? "",
     coach: json["coach"] ?? "",
     description: json["description"] ?? "",

@@ -36,6 +36,7 @@ class AddTraining extends StatelessWidget{
 class AddTrainingWidget extends StatefulWidget{
   final DateTime date;
 
+
   const AddTrainingWidget({super.key, required this.date});
   @override
   State<StatefulWidget> createState() => AddTrainingState();

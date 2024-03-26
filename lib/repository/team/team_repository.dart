@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:football_next_gen/models/autocomplete_entity.dart';
 
 import 'package:football_next_gen/models/match_entity.dart';
 import 'package:football_next_gen/models/team_entity.dart';
@@ -16,7 +17,8 @@ class TeamRepository {
 
   TeamRepository._internal();
 
-  String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  //String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  String baseUrl = 'http://localhost:8080';
 
 
   Future<TeamEntity> createTeam(TeamEntity teamEntity) async {
@@ -44,16 +46,37 @@ class TeamRepository {
   Future<TeamEntity> getTeamById(int id) async {
     try {
       Response response = await KeycloakRepository().httpClient!.get('$baseUrl/team/getTeamById/$id');
+      print("ID TEAM");
+      print(response.data);
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
-        TeamEntity post = TeamEntity.fromJson(response.data);
-        return post;
+        TeamEntity teamEntity = TeamEntity.fromJson(response.data);
+        return teamEntity;
       } else {
-        throw Exception('Failed to fetch post by ID: ${response.statusCode}');
+        throw Exception('Failed to fetch team by ID: ${response.statusCode}');
       }
     } catch (e) {
-      print("Error fetching post by ID: $e");
+      print("Error fetching am by ID: $e");
       throw e;
     }
   }
+
+  Future<List<AutocompleteEntity>> searchTeam(String value) async {
+    try {
+      Response response = await KeycloakRepository().httpClient!.get('$baseUrl/team/searchTeam', queryParameters: {'value': value});
+      print("lista autocomplete");
+      print(response.data);
+      if (response.statusCode == 200) {
+        List<Map<String, dynamic>> searchData = List<Map<String, dynamic>>.from(response.data);
+        List<AutocompleteEntity> autocompleteList = searchData.map((data) => AutocompleteEntity.fromJson(data)).toList();
+        return autocompleteList;
+      } else {
+        throw Exception('Failed to search teams: ${response.statusCode}');
+      }
+    } catch (e) {
+      print("Error searching teams: $e");
+      throw e;
+    }
+  }
+
 
 }
