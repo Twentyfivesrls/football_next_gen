@@ -37,11 +37,22 @@ class TeamRepository {
     }
   }
 
-  Future<List<TeamEntity>> getAllTeam()async{
-    var response = await KeycloakRepository().httpClient!.get('$baseUrl/team/getAllTeam');
-    List<TeamEntity> teamList = (response.data as List).map((teams) => TeamEntity.fromJson(teams)).toList();
-    return teamList;
+  Future<List<TeamEntity>> getAllTeam({bool? isHomeTeam}) async {
+    if (isHomeTeam == true) {
+      var response = await KeycloakRepository().httpClient!.get('$baseUrl/team/getAllTeam', queryParameters: {'isHomeTeam': true});
+      List<TeamEntity> homeTeamList = (response.data as List).map((teams) => TeamEntity.fromJson(teams)).toList();
+      return homeTeamList;
+    } else if (isHomeTeam == false) {
+      var response = await KeycloakRepository().httpClient!.get('$baseUrl/team/getAllTeam', queryParameters: {'isHomeTeam': false});
+      List<TeamEntity> awayTeamList = (response.data as List).map((teams) => TeamEntity.fromJson(teams)).toList();
+      return awayTeamList;
+    } else {
+      var response = await KeycloakRepository().httpClient!.get('$baseUrl/team/getAllTeam');
+      List<TeamEntity> allTeamList = (response.data as List).map((teams) => TeamEntity.fromJson(teams)).toList();
+      return allTeamList;
+    }
   }
+
 
   Future<TeamEntity> getTeamById(int id) async {
     try {

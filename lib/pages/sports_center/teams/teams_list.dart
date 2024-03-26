@@ -45,6 +45,7 @@ class TeamListState extends State<TeamsListWidget> {
     false,
   ];
 
+
   @override
   void initState() {
     _teamsCubit.fetchAllTeams();
@@ -137,12 +138,22 @@ class TeamListState extends State<TeamsListWidget> {
 
   Widget chipsSection() {
     return ChoiceChipListWidget(
-        chipsSituation: chipsSituation,
-        textList: textList,
-        changeSelection: (List<bool> value) {
-          setState(() {
-            chipsSituation = value;
-          });
+      chipsSituation: chipsSituation,
+      textList: textList,
+      changeSelection: (List<bool> value) {
+        setState(() {
+          chipsSituation = value;
+          if (chipsSituation[0]) {
+            _teamsCubit.fetchAllTeams(); // Se selezionato 'Tutte'
+          } else if (chipsSituation[1]) {
+            _teamsCubit.fetchAllTeams(isHomeTeam: true); // Se selezionato 'In casa'
+          } else if (chipsSituation[2]) {
+            _teamsCubit.fetchAllTeams(isHomeTeam: false); // Se selezionato 'In trasferta'
+          }
         });
+      },
+    );
   }
+
+
 }
