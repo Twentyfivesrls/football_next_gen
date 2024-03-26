@@ -6,16 +6,15 @@ import 'package:football_next_gen/models/sport.dart';
 import 'package:football_next_gen/models/sport_field.dart';
 import 'package:football_next_gen/pages/sports_center/profile/widgets/single_sport_selection.dart';
 import 'package:football_next_gen/widgets/autocomplete.dart';
-import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 
-class AddSports extends StatelessWidget{
+class AddExtraServices extends StatelessWidget{
 
   final List<String> kOptions;
-  final List<SportEntity> sports;
-  final Function() removeSport;
+  final List<ExtraServiceEntity> extraServices;
+  final Function() removeExtraService;
 
-  const AddSports({super.key, required this.kOptions, required this.sports, required this.removeSport});
+  const AddExtraServices({super.key, required this.kOptions, required this.extraServices,required this.removeExtraService,});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class AddSports extends StatelessWidget{
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text18(
-          text: getCurrentLanguageValue(SPORTS) ?? "",
+          text: getCurrentLanguageValue(EXTRA_SERVICES) ?? "",
           textColor: primary,
         ),
 
@@ -31,22 +30,16 @@ class AddSports extends StatelessWidget{
           padding: const EdgeInsets.only(top: 20),
           child: AutocompleteWidget(
             kOptions: kOptions,
-            hintText: 'Seleziona uno sport da aggiungere',
+            hintText: 'Seleziona un servizio extra da aggiungere',
             labelText: "Sports",
           ),
         ),
-
-        ...sports.map((e) => SingleSelection(
+        ...extraServices.map((e) => SingleSelection(
             name: e.name,
-            labelText: "Sport ${sports.indexOf(e) + 1}",
-            remove: removeSport
+            labelText: "Servizio extra ${extraServices.indexOf(e) + 1}",
+            remove: removeExtraService
         )),
 
-
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
-          child: DividerWidget(),
-        )
       ],
     );
   }

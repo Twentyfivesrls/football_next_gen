@@ -29,66 +29,69 @@ class EditProfileHeader extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            SvgPicture.asset(
-              imageProfile,
-              height: 120,
-              width: 120,
-            ),
-
-            GestureDetector(
-              onTap: goToFollowers,
-              child: Column(
-                children: [
-                  const Text14(text: "Follower"),
-                  Text14(text: follower,fontWeight: FontWeight.w600,),
-                ],
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SvgPicture.asset(
+                imageProfile,
+                height: 120,
+                width: 120,
               ),
-            ),
-            GestureDetector(
-              onTap: goToFollowers,
-              child: Column(
-                children: [
-                  const Text14(text: "Seguiti"),
-                  Text14(text: followed,fontWeight: FontWeight.w600),
-                ],
+
+              GestureDetector(
+                onTap: goToFollowers,
+                child: Column(
+                  children: [
+                    const Text14(text: "Follower"),
+                    Text14(text: follower,fontWeight: FontWeight.w600,),
+                  ],
+                ),
               ),
-            ),
+              GestureDetector(
+                onTap: goToFollowers,
+                child: Column(
+                  children: [
+                    const Text14(text: "Seguiti"),
+                    Text14(text: followed,fontWeight: FontWeight.w600),
+                  ],
+                ),
+              ),
 
-            Column(
-              children: [
-                const Text14(text: "Post"),
-                Text14(text: post,fontWeight: FontWeight.w600),
-              ],
-            )
-          ],
-        ),
+              Column(
+                children: [
+                  const Text14(text: "Post"),
+                  Text14(text: post,fontWeight: FontWeight.w600),
+                ],
+              )
+            ],
+          ),
 
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: TextH1(text: profileName),
-        ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: TextH1(text: profileName),
+          ),
 
-        InputWidget(
-            controller: descriptionController,
-            hintText: getCurrentLanguageValue(BIO) ?? "",
-            labelText:  getCurrentLanguageValue(BIO) ?? "",
-            minLines: 4,
-            maxLines: 999,
+          InputWidget(
+              controller: descriptionController,
+              hintText: getCurrentLanguageValue(BIO) ?? "",
+              labelText:  getCurrentLanguageValue(BIO) ?? "",
+              minLines: 4,
+              maxLines: 999,
 
-        ),
-        const Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
-          child: DividerWidget(),
-        )
+          ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 30),
+            child: DividerWidget(),
+          )
 
 
-      ],
+        ],
+      ),
     );
   }
 

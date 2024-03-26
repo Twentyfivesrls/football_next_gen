@@ -69,7 +69,7 @@ class ProfileContacts extends StatelessWidget{
           ),
 
           const Padding(
-            padding: EdgeInsets.only(top: 30),
+            padding: EdgeInsets.symmetric(vertical: 30),
             child: DividerWidget(),
           )
         ],
