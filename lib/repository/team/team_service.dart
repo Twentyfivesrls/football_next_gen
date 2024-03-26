@@ -14,14 +14,21 @@ class TeamService {
 
   TeamService._internal();
 
-  Future <List<TeamEntity>> fetchTeamsList(){
-    if(GlobalConstants.sportsCenterProfileReal){
-      // TODO implement it when we need to call the real backend
-      return TeamRepository().getAllTeam();
-    }else{
+  Future<List<TeamEntity>> fetchTeamsList({bool? isHomeTeam}) {
+    if (GlobalConstants.sportsCenterProfileReal) {
+      if (isHomeTeam == true) {
+        return TeamRepository().getAllTeam(isHomeTeam: true);
+      } else if (isHomeTeam == false) {
+        return TeamRepository().getAllTeam(isHomeTeam: false);
+      } else {
+        return TeamRepository().getAllTeam(); // Nessun argomento fornito, ottenere tutte le squadre
+      }
+    } else {
       return TeamRepositoryFake().fetchTeamsList();
     }
   }
+
+
 
   Future<TeamEntity> fetchTeam(int id){
     if(GlobalConstants.sportsCenterProfileReal){

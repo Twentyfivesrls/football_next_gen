@@ -93,7 +93,6 @@ class FiltersState extends State<FiltersWiget> {
                       child: AutocompleteWidget(
                         kOptions: teamNames,
                         hintText: 'Seleziona squadra/e',
-
                         labelText: getCurrentLanguageValue(TEAM) ?? "",
                         
                       ),

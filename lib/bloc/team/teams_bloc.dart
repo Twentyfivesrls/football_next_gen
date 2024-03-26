@@ -8,20 +8,18 @@ class TeamsCubit extends Cubit<TeamsPageState> {
 
   TeamsCubit() : super(TeamsPageLoading());
 
-  void fetchAllTeams() async {
-    // could be avoided:
-    // 1) if there are no modification to this data
-    // 2) TODO
+  void fetchAllTeams({bool? isHomeTeam}) async {
     emit(TeamsPageLoading());
 
-    // fetch data
-    try{
-      List<TeamEntity> entity = await TeamService().fetchTeamsList();
+    try {
+      List<TeamEntity> entity = await TeamService().fetchTeamsList(isHomeTeam: isHomeTeam);
       emit(TeamsPageLoaded(teams: entity));
-    }catch(e){
+    } catch (e) {
       emit(TeamsPageError(error: e));
     }
   }
+
+
 
   void searchTeams(String searchValue) async {
     emit(TeamsPageLoading());
