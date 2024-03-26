@@ -16,7 +16,7 @@ class GroupCubit extends Cubit<GroupPageState> {
 
     // fetch data
     try{
-      List<GroupEntityDtoForList> entity = await GroupService().fetchGroupsList();
+      List<GroupEntity> entity = await GroupService().fetchGroupsList();
       emit(GroupPageLoaded(groups: entity));
     }catch(e){
       emit(GroupPageError(error: e));
@@ -28,7 +28,7 @@ class GroupPageState{}
 
 class GroupPageLoading extends GroupPageState{}
 class GroupPageLoaded extends GroupPageState{
-  List<GroupEntityDtoForList> groups;
+  List<GroupEntity> groups;
   GroupPageLoaded({required this.groups});
 }
 

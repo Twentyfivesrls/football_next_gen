@@ -24,5 +24,12 @@ class MatchRepositoryFake {
     throw Exception("Sono un cazzo di messaggio di errore");
   }
 
+  Future<MatchEntity> fetchCreateMatch(MatchEntity matchEntity) {
+    return Future.value(MatchEntity.defaultValue());
+  }
+
+  Future<MatchEntity> fetchMatch(int id) {
+    return Future.value(MatchEntity.defaultValue());
+  }
 
 }

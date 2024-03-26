@@ -71,7 +71,6 @@ class TeamListState extends State<TeamsListWidget> {
                 }
                 else if(state is TeamsPageLoaded){
                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       newTeamButtonSection(),
                       chipsSection(),
@@ -79,8 +78,10 @@ class TeamListState extends State<TeamsListWidget> {
                           visible: state.teams.isEmpty,
                           child: Padding(
                             padding: const EdgeInsets.only(top: 20),
-                            child: Text14(
+                            child: Text18(
                               text: getCurrentLanguageValue(EMPTY_TEAMS_LIST) ?? "",
+                              textAlign: TextAlign.center,
+                              fontWeight: FontWeight.bold,
                             ),
                           )),
                       ...state.teams.map((e) => teamsListSection(e)),

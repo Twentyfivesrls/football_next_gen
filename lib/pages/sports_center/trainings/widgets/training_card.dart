@@ -8,7 +8,7 @@ import '../../../../widgets/texts.dart';
 
 class TrainingCard extends StatelessWidget{
 
-  final TrainingEntityDtoForList training;
+  final TrainingEntity training;
   final Function() goToDetail;
 
   const TrainingCard({super.key, required this.training, required this.goToDetail});
@@ -56,7 +56,7 @@ class TrainingCard extends StatelessWidget{
 
               Padding(
                 padding: const EdgeInsets.only(top: 10),
-                child: Text18(text: training.name,textColor: white,),
+                child: Text18(text: training.name ?? "",textColor: white,),
               ),
 
               Padding(
@@ -71,7 +71,7 @@ class TrainingCard extends StatelessWidget{
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 10),
-                          child: Text14(text: training.hour,textColor: white,fontWeight: FontWeight.w600,),
+                          child: Text14(text: '${training.hour.hour}:${training.hour.minute}',textColor: white,fontWeight: FontWeight.w600,),
                         ),
                       ],
                     ),

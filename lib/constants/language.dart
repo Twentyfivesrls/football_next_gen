@@ -80,6 +80,7 @@ const String TEAM_DETAIL = "Dettagli squadra";
 const String INFO = "Informazioni";
 const String LOGO = "Logo";
 const String EMPTY_TEAMS_LIST = "Non sono ancora state create delle squadre.";
+const String EMPTY_TRAININGS_LIST = "Non sono ancora stati creati degli allenamenti.";
 const String ADD_TOURNAMENT = "Crea nuovo torneo";
 const String EMPTY_TOURNAMENTS_LIST = "Non sono ancora stati creati dei tornei.";
 const String UPLOAD_POSTER = "Carica locandina";
@@ -145,6 +146,7 @@ const String ROLE = "Ruolo giocato";
 const String CAREER = "Carriera";
 const String CURIOSITY = "Curiosità";
 const String SEASON_PLAYED = "Stagioni giocate";
+const String BIO = "Bio";
 
 
 
@@ -309,6 +311,7 @@ final Map<String, String> LANG_IT = {
   TOURNAMENT_DETAIL:"Dettagli torneo",
   ADD_GROUPS:"Crea nuovo girone",
   EMPTY_GROUPS_LIST:"Non sono ancora stati creati dei gironi.",
+  EMPTY_TRAININGS_LIST:"Non sono ancora stati creati degli allenamenti.",
   TYPOLOGY:"Tipologia",
   CATEGORY:"Categoria",
   PHONE_CONTACT:"Contatto telefonico",
@@ -366,6 +369,7 @@ final Map<String, String> LANG_IT = {
   CAREER:"Carriera",
   CURIOSITY:"Curiosità",
   SEASON_PLAYED:"Stagioni giocate",
+  BIO:"Bio",
 
 
 

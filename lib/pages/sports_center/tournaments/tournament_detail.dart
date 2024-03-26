@@ -55,13 +55,6 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
   SingleTournamentCubit get _tournamentCubit => context.read<SingleTournamentCubit>();
   GroupCubit get _groupCubit => context.read<GroupCubit>();
   int activeIndex = 0;
-
-  final String category = 'Juniores (Under 18)';
-  final String rules = 'Ogni partita consiste in due tempi da 45 minuti.Rigori in caso di pareggio alla fine dei tempi regolamentari.Massimo di 15 giocatori per squadra.Cartellino rosso diretto per comportamento antisportivo.';
-  final String typology = 'Torneo ad eliminazione diretta';
-  final String info = 'Il Torneo Calcio d\'Eccellenza è aperto a squadre giovanili di club e scuole calcio.Premi per la squadra vincitrice e il miglior giocatore.Il torneo si tiene presso gli impianti sportivi XYZ in data [data].';
-  final String email = 'info@torneocalciodelleccellenza.com';
-  final String phone = '+39 123 456 789';
   final String title = 'Torneo iper mega super incredibile - Under 19 - Cosenza';
 
   @override
@@ -157,6 +150,20 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
                               return Column(
                                 children: [
                                   newGroupsButtonSection(),
+
+                                  Visibility(
+                                      visible: state.groups.isEmpty,
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 20),
+                                        child: Text18(
+                                          text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
+                                          textAlign: TextAlign.center,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )
+                                  ),
+
+
                                   ...state.groups.map((e) => groupsListSection(e)),
                                 ],
                               );
@@ -229,7 +236,7 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
     );
   }
 
-  Widget groupsListSection(GroupEntityDtoForList group){
+  Widget groupsListSection(GroupEntity group){
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GroupCard(

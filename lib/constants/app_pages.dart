@@ -26,6 +26,7 @@ enum AppPage {
   filters,
   addPost,
   postDetail,
+  editProfile,
 
   //CHILD
   homeChild,
@@ -91,10 +92,12 @@ extension AppPageExtension on AppPage {
         return "/home_child";
       case AppPage.menuChild:
         return "/menu_child";
-        case AppPage.childProfile:
+      case AppPage.childProfile:
         return "/child_profile";
-        case AppPage.followerList:
+      case AppPage.followerList:
         return "/followers_list";
+      case AppPage.editProfile:
+        return "/edit_profile";
     }
   }
 
@@ -154,10 +157,12 @@ extension AppPageExtension on AppPage {
         return "Home Child";
       case AppPage.menuChild:
         return "Menu Child";
-        case AppPage.childProfile:
+      case AppPage.childProfile:
         return "Child Profile";
-        case AppPage.followerList:
+      case AppPage.followerList:
         return "Follower List";
+      case AppPage.editProfile:
+        return "Edit Profile";
 
     }
   }
@@ -218,10 +223,12 @@ extension AppPageExtension on AppPage {
         return "Home";
       case AppPage.menuChild:
         return "Menu";
-        case AppPage.childProfile:
+      case AppPage.childProfile:
         return "Profile";
-        case AppPage.followerList:
+      case AppPage.followerList:
         return "Followers";
+      case AppPage.editProfile:
+        return "Modifica profilo";
     }
   }
 }

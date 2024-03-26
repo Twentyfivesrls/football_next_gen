@@ -1,10 +1,12 @@
+import 'package:intl/intl.dart';
+import 'package:flutter/material.dart';
 
 class MatchEntity {
   final String homeTeam;
   final String awayTeam;
   final String place;
-  final String date;
-  final String hour;
+  final DateTime date;
+  final TimeOfDay hour;
   final String title;
 
 
@@ -27,8 +29,8 @@ class MatchEntity {
     String? homeTeam,
     String? awayTeam,
     String? place,
-    String? date,
-    String? hour,
+    DateTime? date,
+    TimeOfDay? hour,
     String? title,
   }) {
     return MatchEntity(
@@ -41,23 +43,38 @@ class MatchEntity {
     );
   }
 
-  factory MatchEntity.fromJson(Map<String, dynamic> json) => MatchEntity(
-    homeTeam: json["homeTeam"] ?? "",
-    awayTeam: json["awayTeam"] ?? "",
-    place: json["place"] ?? "",
-    date: json["date"] ?? "",
-    hour: json["hour"] ?? "",
-    title: json["title"] ?? "",
-  );
+  factory MatchEntity.fromJson(Map<String, dynamic> json) {
+    // Ottieni la data e l'ora dal JSON
+    String dateStr = json["date"] ?? "";
+    String timeStr = json["hour"] ?? "";
+
+    // Parse della data nel formato "yyyy-MM-dd"
+    DateTime date = dateStr.isNotEmpty ? DateTime.parse(dateStr) : DateTime.now();
+
+    // Parse dell'ora nel formato "HH:mm:ss"
+    TimeOfDay timeOfDay = timeStr.isNotEmpty
+        ? TimeOfDay.fromDateTime(DateTime.parse("1970-01-01 $timeStr"))
+        : TimeOfDay.now();
+
+    return MatchEntity(
+      homeTeam: json["homeTeam"] ?? "",
+      awayTeam: json["awayTeam"] ?? "",
+      place: json["place"] ?? "",
+      date: date,
+      hour: timeOfDay,
+      title: json["title"] ?? "",
+    );
+  }
 
   Map<String, dynamic> toJson() => {
     "homeTeam": homeTeam,
     "awayTeam": awayTeam,
     "place": place,
-    "date": date,
-    "hour": hour,
+    "date": DateFormat('yyyy-MM-dd').format(date),
+    "hour": '${hour.hour}:${hour.minute}:00', // Formato "HH:mm:ss"
     "title": title,
   };
+
 
   @override
   bool operator ==(Object other) =>
@@ -74,9 +91,11 @@ class MatchEntity {
       homeTeam: "homeTeam",
       awayTeam: "awayTeam",
       place: "place",
-      date: "date",
-      hour: "hour",
+      date: DateTime.now(),
+      hour: TimeOfDay.now(),
       title: 'title',
   );
+
+  factory MatchEntity.emptyMatch() => MatchEntity(homeTeam: "homeTeam", awayTeam: "awayTeam", place: "place", date: DateTime.now(), hour: TimeOfDay.now(), title: "title");
 }
 

@@ -12,10 +12,13 @@ class GroupRepositoryFake {
   GroupRepositoryFake._internal();
 
 
-  Future<GroupEntityDtoForList> fetchGroupsList(){
+  Future<List<GroupEntity>> fetchGroupsList(){
     //sleep(const Duration(seconds:5));
     // trying with dummy data
-    return Future.value(GroupEntityDtoForList.defaultValue());
+    List<GroupEntity> result = [];
+    for(int i = 0; i<5; i++){
+      result.add(GroupEntity.defaultValue());
+    }
     // trying with exception
     throw Exception("Sono un cazzo di messaggio di errore");
   }

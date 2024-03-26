@@ -11,12 +11,12 @@ class TrainingRepositoryFake {
 
   TrainingRepositoryFake._internal();
 
-  Future<List<TrainingEntityDtoForList>> fetchTrainingsList(){
+  Future<List<TrainingEntity>> fetchTrainingsList(){
     //sleep(const Duration(seconds:5));
     // trying with dummy data
-    List<TrainingEntityDtoForList> result = [];
+    List<TrainingEntity> result = [];
     for(int i = 0; i<10; i++){
-      result.add(TrainingEntityDtoForList.defaultValue());
+      result.add(TrainingEntity.defaultValue());
     }
     return Future.value(result);
     // trying with exception

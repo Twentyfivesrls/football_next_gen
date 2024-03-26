@@ -13,19 +13,25 @@ class ProfileContacts extends StatelessWidget{
   final String address;
   final String phone;
   final String email;
+  final double paddingRight;
+  final double paddingLeft;
+  final double paddingTop;
 
   const ProfileContacts({
     super.key,
     required this.editContacts,
     required this.address,
     required this.phone,
-    required this.email
+    required this.email,
+    this.paddingLeft = 20,
+    this.paddingRight = 20,
+    this.paddingTop = 30
   });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 20,left: 20, top: 30),
+      padding: EdgeInsets.only(right: paddingRight,left: paddingLeft, top: paddingTop),
       child: Column(
         crossAxisAlignment:  CrossAxisAlignment.start,
         children: [
@@ -38,9 +44,9 @@ class ProfileContacts extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
-                text: address,
-                svgIcon: ImagesConstants.locationImg,
-                labelText: getCurrentLanguageValue(ADDRESS) ?? "",
+              text: address,
+              svgIcon: ImagesConstants.locationImg,
+              labelText: getCurrentLanguageValue(ADDRESS) ?? "",
             ),
           ),
 

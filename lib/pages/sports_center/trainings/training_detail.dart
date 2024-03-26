@@ -12,10 +12,11 @@ import '../../../constants/images_constants.dart';
 import '../../../constants/language.dart';
 import '../../../widgets/texts.dart';
 
+import 'package:intl/intl.dart';
 
 class TrainingDetail extends StatelessWidget{
 
-  final String id;
+  final int id;
   const TrainingDetail({super.key, required this.id});
 
   @override
@@ -30,7 +31,7 @@ class TrainingDetail extends StatelessWidget{
 
 class TrainingDetailWidget extends StatefulWidget {
 
-  final String id;
+  final int id;
   const TrainingDetailWidget({super.key, required this.id});
 
   @override
@@ -121,19 +122,19 @@ class TrainingDetailState extends State<TrainingDetailWidget> {
           padding: const EdgeInsets.only(top: 30),
           child: InfoBoxWidget(labelText: getCurrentLanguageValue(TEAM) ?? "",
               showIcon: false,
-              text: training.name),
+              text: training.name ?? ""),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30),
           child: InfoBoxWidget(labelText: getCurrentLanguageValue(DATE) ?? "",
               showIcon: false,
-              text: training.date),
+              text: DateFormat('dd/MM/yyyy').format(training.date)),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30),
           child: InfoBoxWidget(labelText: getCurrentLanguageValue(HOUR) ?? "",
               showIcon: false,
-              text: training.hour),
+              text: "${training.hour.hour}:${training.hour.minute}"),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 30),

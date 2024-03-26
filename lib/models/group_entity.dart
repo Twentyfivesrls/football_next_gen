@@ -19,12 +19,12 @@ class GroupEntityDtoForList {
 
 
 class GroupEntity {
-  final int id;
+  final int? id;
   final String groupName;
   final List<MatchEntity> matches;
 
 
-  GroupEntity({ required this.matches, required this.groupName, required this.id});
+  GroupEntity({ required this.matches, required this.groupName, this.id});
 
   @override
   String toString() {
@@ -44,17 +44,19 @@ class GroupEntity {
     );
   }
 
-  factory GroupEntity.fromJson(Map<String, dynamic> json) => GroupEntity(
-    matches: json["matches"] ?? [],
-    groupName: json["groupName"] ?? "",
-    id: json["id"] ?? 0,
-  );
+  factory GroupEntity.fromJson(Map<String, dynamic> json) =>
+      GroupEntity(
+        matches: json["matches"]  != null ? (json["matches"] as List).map((data) => MatchEntity.fromJson(data)).toList() : [],
+        groupName: json["groupName"] ?? "",
+        id: json["id"] ?? 0,
+      );
 
-  Map<String, dynamic> toJson() => {
-    "matches": matches,
-    "groupName": groupName,
-    "id": id,
-  };
+  Map<String, dynamic> toJson() =>
+      {
+        "matches": matches.map((e) => e.toJson()).toList() ?? [],
+        "groupName": groupName,
+        "id": id,
+      };
 
 
   @override
@@ -68,10 +70,14 @@ class GroupEntity {
   int get hashCode => matches.hashCode;
 
 
-  factory GroupEntity.defaultValue() => GroupEntity(
-      matches: [],
-      groupName: "groupName",
-      id: 0
-  );
+  factory GroupEntity.defaultValue() =>
+      GroupEntity(
+          matches: [],
+          groupName: "groupName",
+          id: 0
+      );
+
+  factory GroupEntity.emptyGroup() =>
+      GroupEntity(matches: [], groupName: "groupName");
 }
 

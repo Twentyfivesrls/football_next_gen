@@ -8,7 +8,7 @@ import '../../../../models/group_entity.dart';
 
 class GroupCard extends StatelessWidget{
 
-  final GroupEntityDtoForList group;
+  final GroupEntity group;
   final String name;
   final Function() goToDetail;
 

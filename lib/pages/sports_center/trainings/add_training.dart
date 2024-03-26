@@ -14,30 +14,35 @@ import '../../../constants/language.dart';
 import '../../../models/confirm_page_data.dart';
 import '../../../widgets/buttons.dart';
 import '../../../widgets/dialog.dart';
+import 'package:intl/intl.dart';
 
 enum RadioButtons { mai, data, dopo }
 
 class AddTraining extends StatelessWidget{
-  const AddTraining({super.key});
+
+  final DateTime date;
+
+  const AddTraining({super.key, required this.date});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateTrainingCubit(),
-      child: const AddTrainingWidget() ,
+      child: AddTrainingWidget(date: date) ,
     );
   }
 }
 
 class AddTrainingWidget extends StatefulWidget{
-  const AddTrainingWidget({super.key});
+  final DateTime date;
+
+  const AddTrainingWidget({super.key, required this.date});
   @override
   State<StatefulWidget> createState() => AddTrainingState();
 }
 
 class AddTrainingState extends State<AddTrainingWidget>{
 
-  final String date = "23/01/2024";
   bool isChecked = false;
   final TextEditingController hourController = TextEditingController();
   final TextEditingController fieldController = TextEditingController();
@@ -46,7 +51,6 @@ class AddTrainingState extends State<AddTrainingWidget>{
   final TextEditingController repetitionController = TextEditingController();
   final TextEditingController dateController = TextEditingController();
   final TextEditingController occurrenceController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
   bool showRepetition = false;
   bool occurrenceEnabled = false;
   bool dateEnabled = false;
@@ -94,10 +98,11 @@ class AddTrainingState extends State<AddTrainingWidget>{
   }
 
   Widget headerSection(){
+    final formattedDate = DateFormat('dd/MM/yyyy').format(widget.date);
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: Text18(
-        text: 'Allenamento - $date',
+        text: 'Allenamento - $formattedDate',
         fontWeight: FontWeight.w500,
       ),
     );
@@ -128,6 +133,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
         onTap: (index){
           setState(() {
             selected[index] = !selected[index];
+            print("Selected status of chip at index $index: ${selected[index]}");
           });
         },
         selectedList: selected,
@@ -175,10 +181,21 @@ class AddTrainingState extends State<AddTrainingWidget>{
 
         ActionButton(
           onPressed: () {
-            final trainingEntity = TrainingEntity(date: DateTime.now(),
-                hour: TimeOfDay.now(),
-                field: fieldController.text,
-                info: infoController.text, weeksToRepeat: 2, name: nameController.text);
+            Set<DaysOfWeek> selectedDaysOfWeek = selected.asMap().entries
+                .where((entry) => entry.value) // Filtra solo i giorni selezionati
+                .map((entry) => DaysOfWeek.values[entry.key]) // Mappa gli indici selezionati ai valori dell'enum DayOfWeek
+                .toSet();
+
+            final trainingEntity = TrainingEntity(
+              date: widget.date,
+              dateEnd: DateTime.now(),
+              hour: TimeOfDay.now(),
+              field: fieldController.text,
+              info: infoController.text,
+              weeksToRepeat: 2,
+              name: teamController.text,
+              daysOfWeek: selectedDaysOfWeek,
+            );
             _createTrainingCubit.fetchCreateTraining(trainingEntity);
             context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTrainingConfirmed(context, trainingEntity.id ?? 0));
           },

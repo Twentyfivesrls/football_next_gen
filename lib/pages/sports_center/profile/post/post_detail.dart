@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:football_next_gen/bloc/profile/single_post_bloc.dart';
-import 'package:football_next_gen/bloc/profile/update_post_cubit.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
@@ -27,10 +26,7 @@ class PostDetail extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (_) => SinglePostCubit(),
-        ),
-        BlocProvider(
-          create: (_) => UpdatePostCubit(),
-        ),
+        )
       ],
       child: PostDetailWidget(
         id: id,
@@ -119,12 +115,10 @@ class PostDetailState extends State<PostDetailWidget> {
                 buttonsSection(state.post)
               ],
             );
-          } else if (state is SinglePostPageDeleted) {
-            return Text('Post deleted successfully');
-          } else if (state is SinglePostPageError) {
-            // Gestione degli errori
-            return Text('Error: ${state.error}');
-          }
+          } else {
+              return Text('Post deleted successfully');
+            }
+
         }),
       ),
     );

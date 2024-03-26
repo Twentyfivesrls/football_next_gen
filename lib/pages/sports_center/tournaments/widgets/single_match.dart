@@ -7,6 +7,8 @@ import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/info_box.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 import '../../../../constants/language.dart';
+import 'package:intl/intl.dart';
+
 
 class SingleMatch extends StatelessWidget {
   final MatchEntity match;
@@ -69,7 +71,7 @@ class SingleMatch extends StatelessWidget {
           child: InfoBoxWidget(
             showIcon: false,
             labelText: getCurrentLanguageValue(DATE) ?? "",
-            text: match.date,
+            text: DateFormat('dd/MM/yyyy').format(match.date),
           ),
         ),
         Padding(
@@ -77,7 +79,7 @@ class SingleMatch extends StatelessWidget {
           child: InfoBoxWidget(
             showIcon: false,
             labelText: getCurrentLanguageValue(HOUR) ?? "",
-            text: match.hour,
+            text: "${match.hour.hour}:${match.hour.minute}",
           ),
         ),
         Padding(

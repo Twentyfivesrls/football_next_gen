@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:football_next_gen/bloc/group/full_group_bloc.dart';
+import 'package:football_next_gen/bloc/match/create_match_cubit.dart';
 import 'package:football_next_gen/bloc/match/match_bloc.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/single_match.dart';
 import 'package:football_next_gen/widgets/divider.dart';
@@ -17,24 +19,35 @@ import '../../../widgets/buttons.dart';
 class GroupDetail extends StatelessWidget{
 
   final int id;
-  final String tournamentId;
+  final int tournamentId;
 
   const GroupDetail({super.key, required this.id, required this.tournamentId});
 
   @override
   Widget build(BuildContext context) {
-    return  BlocProvider(
-      create: (_) => MatchCubit(),
-      child: GroupDetailWidget(tournamentId: tournamentId, id: id,),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => MatchCubit(),
+        ),
 
-    );
+        BlocProvider(
+          create: (_) => CreateMatchCubit(),
+        ),
+        BlocProvider(
+            create:(_) => FullGroupCubit()
+        ),
+      ],
+      child: GroupDetailWidget(tournamentId: tournamentId, id: id),
+    );;
   }
 }
 
 
+
 class GroupDetailWidget extends StatefulWidget {
   final int id;
-  final String tournamentId;
+  final int tournamentId;
 
   const GroupDetailWidget({super.key, required this.id, required this.tournamentId});
 
@@ -43,15 +56,24 @@ class GroupDetailWidget extends StatefulWidget {
 }
 
 class GroupDetailState extends State<GroupDetailWidget> {
-
+  TextEditingController homeTeamController = TextEditingController();
+  TextEditingController awayTeamController = TextEditingController();
+  TextEditingController placeController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  TextEditingController hourController = TextEditingController();
+  TextEditingController groupNameController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
 
   MatchCubit get _matchCubit => context.read<MatchCubit>();
+  CreateMatchCubit get _createMatchCubit => context.read<CreateMatchCubit>();
+  FullGroupCubit get _fullGroupCubit => context.read<FullGroupCubit>();
 
   final String groupTitle = 'Girone 1';
 
   @override
   void initState() {
     _matchCubit.fetchMatch();
+    _fullGroupCubit.fetchGroup(widget.id);
     super.initState();
   }
 
@@ -73,30 +95,30 @@ class GroupDetailState extends State<GroupDetailWidget> {
         context.push(AppPage.tournamentDetail.path, extra: widget.tournamentId);
       },
       body: SingleChildScrollView(
-        child: BlocBuilder<MatchCubit,MatchPageState>(
-            builder: (_,state) {
-              if (state is MatchPageLoading) {
-                return const Center(
-                    child: CircularProgressIndicator());
-              }
-              else if (state is MatchPageLoaded) {
-                return Column(
-                  children: [
-                    titleSection(),
-                    ...state.matches.map((e) => matchListSection(e)),
-                    newMatchButtonSection()
-                  ],
-                );
-              }
-              else {
-                // here the state is error
-                return Center(
-                  child: Text18(
-                    text: (state as MatchPageError).error.toString(),
-                  ),
-                );
-              }}
-        )
+          child: BlocBuilder<MatchCubit,MatchPageState>(
+              builder: (_,state) {
+                if (state is MatchPageLoading) {
+                  return const Center(
+                      child: CircularProgressIndicator());
+                }
+                else if (state is MatchPageLoaded) {
+                  return Column(
+                    children: [
+                      titleSection(),
+                      ...state.matches.map((e) => matchListSection(e)),
+                      newMatchButtonSection()
+                    ],
+                  );
+                }
+                else {
+                  // here the state is error
+                  return Center(
+                    child: Text18(
+                      text: (state as MatchPageError).error.toString(),
+                    ),
+                  );
+                }}
+          )
       ),
     );
   }
@@ -124,19 +146,23 @@ class GroupDetailState extends State<GroupDetailWidget> {
   }
 
   Widget newMatchButtonSection() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: ActionButton(
-        onPressed: (){},
-        text: getCurrentLanguageValue(ADD_MATCH) ?? "",
-        backgroundColor: white,
-        borderColor: textProfileGrey,
-        rowLayout: false,
-        height: 114,
-        showPrefixIcon: true,
-        textColor: textProfileGrey,
-        svgPrefixIcon: ImagesConstants.addCircleImg,
-      ),
-    );
+    return BlocBuilder<CreateMatchCubit,CreateMatchState>(
+        builder: (_,state) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ActionButton(
+              onPressed: (){
+              },
+              text: getCurrentLanguageValue(ADD_MATCH) ?? "",
+              backgroundColor: white,
+              borderColor: textProfileGrey,
+              rowLayout: false,
+              height: 114,
+              showPrefixIcon: true,
+              textColor: textProfileGrey,
+              svgPrefixIcon: ImagesConstants.addCircleImg,
+            ),
+          );
+        });
   }
 }

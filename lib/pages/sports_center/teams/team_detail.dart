@@ -33,6 +33,7 @@ class TeamDetail extends StatelessWidget{
 class TeamDetailWidget extends StatefulWidget{
   final int id;
   final bool isHome;
+  
 
   const TeamDetailWidget({super.key, required this.id, required this.isHome});
   @override

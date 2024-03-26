@@ -76,8 +76,10 @@ class TournamentsListState extends State<TournamentsListWidget>{
                         visible: state.tournaments.isEmpty,
                         child: Padding(
                           padding: const EdgeInsets.only(top: 20),
-                          child: Text14(
+                          child: Text18(
                             text: getCurrentLanguageValue(EMPTY_TOURNAMENTS_LIST) ?? "",
+                            textAlign: TextAlign.center,
+                            fontWeight: FontWeight.bold,
                           ),
                         )
                     ),

@@ -15,9 +15,22 @@ class TrainingsCubit extends Cubit<TrainingsPageState> {
 
     // fetch data
     try{
-      List<TrainingEntityDtoForList> entity = await TrainingService().fetchTrainingsList();
+      List<TrainingEntity> entity = await TrainingService().fetchTrainingsList();
       emit(TrainingsPageLoaded(trainings: entity));
     }catch(e){
+      emit(TrainingsPageError(error: e));
+    }
+  }
+
+  void fetchTrainingsByDate(DateTime date) async {
+
+    emit(TrainingsPageLoading());
+
+    try{
+      List<TrainingEntity> result = await TrainingService().fetchGetTrainingsByDate(date);
+      emit(TrainingsPageLoaded(trainings: result));
+    }catch(e){
+      print(e);
       emit(TrainingsPageError(error: e));
     }
   }
@@ -28,7 +41,7 @@ class TrainingsPageState{}
 
 class TrainingsPageLoading extends TrainingsPageState{}
 class TrainingsPageLoaded extends TrainingsPageState{
-  List<TrainingEntityDtoForList> trainings;
+  List<TrainingEntity> trainings;
   TrainingsPageLoaded({required this.trainings});
 }
 class TrainingsPageError extends TrainingsPageState{

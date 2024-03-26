@@ -7,7 +7,6 @@ import 'package:football_next_gen/bloc/profile/sport_fields_bloc.dart';
 import 'package:football_next_gen/bloc/profile/sports_bloc.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/file_entity.dart';
-import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/info_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/media_tab.dart';
 import 'package:football_next_gen/pages/sports_center/profile/tabs/post_tab.dart';
@@ -63,6 +62,7 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   ExtraServicesCubit get _extraServicesCubit => context.read<ExtraServicesCubit>();
   PostListCubit get _postCubit => context.read<PostListCubit>();
 
+
   var files = [
     FileEntity(url: '',name: 'Comunicazione_avviso.pdf'),
     FileEntity(url: '',name: 'Comunicazione_avviso.pdf'),
@@ -71,6 +71,8 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
   late final TabController tabController;
   int activeIndex = 0;
   DateTime date = DateTime.now();
+  int updatedPostCount = 0;
+
 
   @override
   void initState() {
@@ -127,7 +129,9 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                           imageProfile: ImagesConstants.sportsCenterProfileImg,
                           profileName: state.profile.profileName,
                           profileDesc:  state.profile.profileDesc != "" ? state.profile.profileDesc : "Nessuna descrizione",
-                          editProfile: () {},
+                          editProfile: () {
+                            context.push(AppPage.editProfile.path);
+                          },
                           follower: '0',
                           post: '0',
                           archive: "0"

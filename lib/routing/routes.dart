@@ -10,6 +10,7 @@ import 'package:football_next_gen/pages/login_section/recover_password/recover_p
 import 'package:football_next_gen/pages/login_section/register/insert_otp.dart';
 import 'package:football_next_gen/pages/settings/reset_password.dart';
 import 'package:football_next_gen/pages/sports_center/home_sports_center.dart';
+import 'package:football_next_gen/pages/sports_center/profile/edit_profile.dart';
 import 'package:football_next_gen/pages/sports_center/profile/post/add_post.dart';
 import 'package:football_next_gen/pages/sports_center/profile/post/post_detail.dart';
 import 'package:football_next_gen/pages/sports_center/profile/sports_center_profile.dart';
@@ -128,15 +129,15 @@ class RouterManager {
             path: "/group_detail",
             builder: (context, state) {
               var extraObject = state.extra as dynamic;
-              var id = int.tryParse(extraObject['id']) ?? 0; // Converti la stringa ID in un intero
-              var tournamentId = extraObject['tournamentId'] ?? "";
-              return GroupDetail(id: id, tournamentId: tournamentId);
+              var id = int.tryParse('id') ?? 0;
+              var tournamentId = int.tryParse('tournamentId') ?? 0;
+              return GroupDetail(id: id, tournamentId: tournamentId,);
             }
         ),
 
         GoRoute(
             path: "/add_group",
-            builder: (context, state) => AddGroup(id: state.extra.toString())
+            builder: (context, state) => AddGroup(id: state.extra as int)
         ),
 
         GoRoute(
@@ -146,12 +147,12 @@ class RouterManager {
 
         GoRoute(
             path: "/add_training",
-            builder: (context, state) => const AddTraining()
+            builder: (context, state) => AddTraining(date: state.extra as DateTime)
         ),
 
         GoRoute(
             path: "/training_detail",
-            builder: (context, state) => TrainingDetail(id: state.extra as String)
+            builder: (context, state) => TrainingDetail(id: state.extra as int)
         ),
 
         GoRoute(
@@ -207,6 +208,11 @@ class RouterManager {
         GoRoute(
             path: "/followers_list",
             builder: (context, state) => const FollowersList()
+        ),
+
+        GoRoute(
+            path: "/edit_profile",
+            builder: (context, state) => const EditProfile()
         ),
 
 
@@ -282,6 +288,7 @@ bool isSportCenterPage (String path){
       path.contains(AppPage.postDetail.path) ||
       path.contains(AppPage.tournamentsList.path)||
       path.contains(AppPage.tournamentDetail.path) ||
+      path.contains(AppPage.confirmPage.path) ||
       path.contains(AppPage.addGroup.path) ||
       path.contains(AppPage.groupDetail.path) ||
       path.contains(AppPage.addTournament.path) ||
@@ -289,8 +296,11 @@ bool isSportCenterPage (String path){
       path.contains(AppPage.trainingDetail.path) ||
       path.contains(AppPage.addTraining.path) ||
       path.contains(AppPage.teamsList.path) ||
+      path.contains(AppPage.filters.path) ||
       path.contains(AppPage.addTeam.path) ||
-      path.contains(AppPage.teamDetail.path)
+      path.contains(AppPage.teamDetail.path) ||
+      path.contains(AppPage.followerList.path) ||
+      path.contains(AppPage.editProfile.path)
 
   ){
     return true;

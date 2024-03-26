@@ -9,12 +9,13 @@ import 'package:football_next_gen/repository/training/training_service.dart';
 class CreateTrainingCubit extends Cubit<CreateTrainingState> {
   CreateTrainingCubit() : super(CreateTrainingState(trainingEntity: TrainingEntity.emptyTraining()));
 
-  fetchCreateTraining(TrainingEntity trainingEntity)async{
-    var result = await TrainingService().fetchCreateTraining(trainingEntity);
-    emit(CreateTrainingState( trainingEntity: result));
-
+  fetchCreateTraining(TrainingEntity trainingEntity) async {
+      var result = await TrainingService().fetchCreateTraining(trainingEntity);
+      print(result);
+      emit(CreateTrainingState(trainingEntity: result));
+    }
   }
-}
+
 @immutable
 class CreateTrainingState {
   TrainingEntity trainingEntity;

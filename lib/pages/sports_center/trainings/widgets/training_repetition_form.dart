@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:football_next_gen/models/training_entity.dart';
 import 'package:football_next_gen/models/weekday_element.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/training_repetition_input.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/weekday_chip.dart';
@@ -7,15 +8,24 @@ import 'package:football_next_gen/widgets/radio_buttons.dart';
 import 'package:football_next_gen/widgets/texts.dart';
 
 class TrainingRepetitionForm extends StatelessWidget {
-  List<WeekdayElement> weekdays = [
-    WeekdayElement(abbreviation:'L', value: 'Lunedì'),
-    WeekdayElement(abbreviation:'M', value: 'Martedì'),
-    WeekdayElement(abbreviation:'M', value: 'Mercoledì'),
-    WeekdayElement(abbreviation:'G', value: 'Giovedì'),
-    WeekdayElement(abbreviation:'V', value: 'Venerdì'),
-    WeekdayElement(abbreviation:'S', value: 'Sabato'),
-    WeekdayElement(abbreviation:'D', value: 'Domenica'),
-  ];
+  String _getDaysAbbreviation(DaysOfWeek day) {
+    switch (day) {
+      case DaysOfWeek.Lunedi:
+        return 'Lun';
+      case DaysOfWeek.Martedi:
+        return 'Mar';
+      case DaysOfWeek.Mercoledi:
+        return 'Mer';
+      case DaysOfWeek.Giovedi:
+        return 'Gio';
+      case DaysOfWeek.Venerdi:
+        return 'Ven';
+      case DaysOfWeek.Sabato:
+        return 'Sab';
+      case DaysOfWeek.Domenica:
+        return 'Dom';
+    }
+  }
   TextEditingController repetitionController;
   TextEditingController dateController;
   TextEditingController occurrenceController;
@@ -94,11 +104,11 @@ class TrainingRepetitionForm extends StatelessWidget {
 
           Row(
             children: [
-              ...weekdays.map((e) => WeekdayChip(
-                text: e.abbreviation,
+              ...DaysOfWeek.values.map((day) => WeekdayChip(
+                text: _getDaysAbbreviation(day),
                 onTap: onTap,
-                index: weekdays.indexOf(e),
-                isSelected: selectedList[weekdays.indexOf(e)],
+                index: DaysOfWeek.values.indexOf(day),
+                isSelected: selectedList[DaysOfWeek.values.indexOf(day)],
               )),
             ],
           ),

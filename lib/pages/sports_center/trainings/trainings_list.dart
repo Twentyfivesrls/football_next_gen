@@ -45,7 +45,7 @@ class TrainingListState extends State<TrainingsListWidget> {
 
   @override
   void initState() {
-    _trainingsCubit.fetchTrainings();
+    _trainingsCubit.fetchTrainingsByDate(_selectedDay!);
     super.initState();
   }
 
@@ -92,11 +92,21 @@ class TrainingListState extends State<TrainingsListWidget> {
                             _selectedDay = selectedDay;
                             _focusedDay = focusedDay;
                           });
+                          _trainingsCubit.fetchTrainingsByDate(selectedDay);
                         }
                       },
                     ),
                     newTrainingButtonSection(),
-
+                    Visibility(
+                        visible: state.trainings.isEmpty,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text18(
+                            text: getCurrentLanguageValue(EMPTY_TRAININGS_LIST) ?? "",
+                            textAlign: TextAlign.center,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                     ...state.trainings.map((e) => trainingList(e)),
 
                   ],
@@ -126,7 +136,7 @@ class TrainingListState extends State<TrainingsListWidget> {
         ),
         ActionButton(
           onPressed: () {
-            context.push(AppPage.addTraining.path);
+            context.push(AppPage.addTraining.path, extra: _selectedDay);
           },
           text: getCurrentLanguageValue(ADD_TRAINING) ?? "",
           backgroundColor: white,
@@ -164,7 +174,7 @@ class TrainingListState extends State<TrainingsListWidget> {
     );
   }
 
-  Widget trainingList (TrainingEntityDtoForList training){
+  Widget trainingList (TrainingEntity training){
     return TrainingCard(
       training: training,
       goToDetail: (){
