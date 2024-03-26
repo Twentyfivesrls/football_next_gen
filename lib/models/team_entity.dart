@@ -75,7 +75,7 @@ class TeamEntity {
     description: json["description"] ?? "",
     manager: json["manager"] ?? "",
     svgLogo: json["svgLogo"] ?? "",
-    isHomeTeam: json["isHomeTeam"] ?? false,
+    isHomeTeam: json["homeTeam"] ?? false,
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,7 +85,7 @@ class TeamEntity {
     "description": description,
     "manager": manager,
     "svgLogo": svgLogo,
-    "isHomeTeam": isHomeTeam,
+    "homeTeam": isHomeTeam,
   };
 
   factory TeamEntity.defaultValue({required bool isHome}) => TeamEntity(
