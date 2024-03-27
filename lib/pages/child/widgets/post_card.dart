@@ -115,7 +115,7 @@ class PostCard extends StatelessWidget{
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 5),
-                    child: Text14(text: post.likes, fontWeight: FontWeight.bold,),
+                    child: Text14(text: post.likes.toString(), fontWeight: FontWeight.bold,),
                   )
                 ],
               )
