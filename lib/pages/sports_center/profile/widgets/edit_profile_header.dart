@@ -11,7 +11,7 @@ class EditProfileHeader extends StatelessWidget{
   final String imageProfile;
   final String post;
   final String follower;
-  final String followed;
+  final String archive;
   final Function() goToFollowers;
   TextEditingController descriptionController;
 
@@ -20,7 +20,7 @@ class EditProfileHeader extends StatelessWidget{
     required this.profileName,
     required this.imageProfile,
     required this.profileDesc,
-    this.followed = "",
+    required this.archive,
     required this.follower,
     required this.post,
     required this.goToFollowers,
@@ -52,20 +52,17 @@ class EditProfileHeader extends StatelessWidget{
                   ],
                 ),
               ),
-              GestureDetector(
-                onTap: goToFollowers,
-                child: Column(
-                  children: [
-                    const Text14(text: "Seguiti"),
-                    Text14(text: followed,fontWeight: FontWeight.w600),
-                  ],
-                ),
-              ),
-
               Column(
                 children: [
                   const Text14(text: "Post"),
                   Text14(text: post,fontWeight: FontWeight.w600),
+                ],
+              ),
+
+              Column(
+                children: [
+                  const Text14(text: "Archivio"),
+                  Text14(text: archive,fontWeight: FontWeight.w600),
                 ],
               )
             ],

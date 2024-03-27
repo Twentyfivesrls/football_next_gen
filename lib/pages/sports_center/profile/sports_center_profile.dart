@@ -124,17 +124,19 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ProfileHeader(
-                          isChildProfile: false,
-                          goToFollowers: (){},
-                          imageProfile: ImagesConstants.sportsCenterProfileImg,
-                          profileName: state.profile.profileName,
-                          profileDesc:  state.profile.profileDesc != "" ? state.profile.profileDesc : "Nessuna descrizione",
-                          editProfile: () {
-                            context.push(AppPage.editProfile.path);
-                          },
-                          follower: '0',
-                          post: '0',
-                          archive: "0"
+                            isChildProfile: false,
+                            goToFollowers: () {
+                              context.push(AppPage.followerList.path);
+                            },
+                            imageProfile: ImagesConstants.sportsCenterProfileImg,
+                            profileName: state.profile.profileName,
+                            profileDesc:  state.profile.profileDesc != "" ? state.profile.profileDesc : "Nessuna descrizione",
+                            editProfile: () {
+                              context.push(AppPage.editProfile.path);
+                            },
+                            follower: '0',
+                            post: '0',
+                            archive: "0"
                         ),
                         TabBarWidget(
                           tabController: tabController,

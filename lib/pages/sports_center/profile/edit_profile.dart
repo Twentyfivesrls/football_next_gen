@@ -72,7 +72,7 @@ class EditProfileState extends State<EditProfile> {
               descriptionController: descriptionController,
               follower: '0',
               post: '0',
-              followed: '0',
+              archive: '0',
               goToFollowers: () {
                 context.push(AppPage.followerList.path);
               },
