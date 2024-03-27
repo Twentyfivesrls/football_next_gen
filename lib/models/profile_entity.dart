@@ -90,7 +90,7 @@ class ProfileEntity {
         "address": address,
         "phone": phone,
         "email": email,
-    "date": DateFormat('yyyy-MM-dd').format(date!),
+        "date": date != null ? DateFormat('yyyy-MM-dd').format(date!) : null,
         "username": username,
         "height": height,
         "weight": weight,
