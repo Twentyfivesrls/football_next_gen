@@ -53,6 +53,8 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
   TextEditingController childPasswordController = TextEditingController();
   TextEditingController childConfirmPasswordController = TextEditingController();
   String error = "";
+  DateTime? selectedDate;
+
 
 
 
@@ -269,6 +271,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
               phone: "childPhoneController.text",
               address: "childAddressController.text",
               email: "childEmailController.text",
+              date: selectedDate,
             ),
           );
 
