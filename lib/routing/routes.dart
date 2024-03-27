@@ -285,9 +285,13 @@ class RouterManager {
 
 }
 bool createAccount(String path){
-  if(path.contains(AppPage.register.path) ||
-     path.contains(AppPage.sportsCenterRegister.path)||
-     path.contains(AppPage.parentRegister.path)){
+  if(
+  path.contains(AppPage.register.path) ||
+      path.contains(AppPage.parentRegister.path) ||
+      path.contains(AppPage.recoverPassword.path) ||
+      path.contains(AppPage.sportsCenterRegister.path
+      )
+  ){
     return true;
   }else{
     return false;
@@ -305,6 +309,7 @@ bool isSportCenterPage (String path){
       path.contains(AppPage.confirmPage.path) ||
       path.contains(AppPage.addGroup.path) ||
       path.contains(AppPage.groupDetail.path) ||
+      path.contains(AppPage.resetPassword.path) ||
       path.contains(AppPage.addTournament.path) ||
       path.contains(AppPage.trainingsList.path) ||
       path.contains(AppPage.trainingDetail.path) ||

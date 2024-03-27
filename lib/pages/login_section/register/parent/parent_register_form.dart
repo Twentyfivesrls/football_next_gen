@@ -187,7 +187,7 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
       confirmPasswordController: childConfirmPasswordController,
       passwordController: childPasswordController,
       dateController: childDateController,
-      nameController: childLastNameController,
+      nameController: childNameController,
       lastNameController: childLastNameController,
       usernameController: childUsernameController,
       suffixIconConfirmPassword: confirmPasswordVisible ? Icons.visibility : Icons.visibility_off,

@@ -38,6 +38,7 @@ const String UPLOAD_A_DOCUMENT = "Carica un documento";
 const String UPLOAD_DOCUMENT = "Carica documento";
 const String UPLOAD_DOCUMENT_SUBTITLE = "Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF";
 const String USERNAME = "Username";
+const String USERNAME_OR_EMAIL = "Username/Email ";
 const String DATE = "Data";
 const String ACCEPT = "accetto i";
 const String TERMS_OF_SERVICE = "Termini e le condizioni indicate";
@@ -261,6 +262,7 @@ final Map<String, String> LANG_IT = {
   UPLOAD_DOCUMENT:"Carica documento",
   UPLOAD_DOCUMENT_SUBTITLE:"Carica le immagini fronte/retro di un documento di identità valido. I formati accettati sono JPG, PNG e PDF",
   USERNAME:"Username",
+  USERNAME_OR_EMAIL:"Username/Email",
   DATE:"Data",
   ACCEPT:"Accetto i",
   TERMS_OF_SERVICE:"Termini e le condizioni indicate",

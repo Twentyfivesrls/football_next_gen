@@ -96,25 +96,12 @@ class LoginFormState extends State<LoginForm>{
   };
 
   Widget loginButtonSection() {
-    return Column(
-      children: [
-        ActionButton(
-          onPressed: () {
-            performLogin();
-          },
-          text: getCurrentLanguageValue(ACCEDI) ?? "",
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: ActionButton(
-            onPressed: (){
-            },
-            text: "Bambino",
-          ),
-        ),
-
-      ],
-    );
+    return ActionButton(
+        onPressed: () {
+          performLogin();
+        },
+        text: getCurrentLanguageValue(ACCEDI) ?? "",
+      );
   }
 
   Widget registerSection() {
@@ -140,7 +127,7 @@ class LoginFormState extends State<LoginForm>{
   Widget loginWithGoogleOrSpidSection() {
     return Column(
       children: [
-       /* Text14(
+        /* Text14(
           text: getCurrentLanguageValue(OR) ?? "",
           textColor: cancelGrey,
           fontWeight: FontWeight.w500,

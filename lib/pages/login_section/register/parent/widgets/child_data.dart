@@ -84,8 +84,8 @@ class ChildDataForm extends StatelessWidget{
 
           InputWidget(
             controller: usernameController,
-            hintText: getCurrentLanguageValue(USERNAME) ?? "",
-            labelText: getCurrentLanguageValue(USERNAME) ?? "",
+            hintText: getCurrentLanguageValue(EMAIL) ?? "",
+            labelText: getCurrentLanguageValue(EMAIL) ?? "",
             labelPaddingTop: 20,
           ),
 
