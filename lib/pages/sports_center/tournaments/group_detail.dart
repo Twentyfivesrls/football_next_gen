@@ -20,8 +20,9 @@ class GroupDetail extends StatelessWidget{
 
   final int id;
   final int tournamentId;
+  final String groupName;
 
-  const GroupDetail({super.key, required this.id, required this.tournamentId});
+  const GroupDetail({super.key, required this.id, required this.tournamentId, required this.groupName});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class GroupDetail extends StatelessWidget{
             create:(_) => FullGroupCubit()
         ),
       ],
-      child: GroupDetailWidget(tournamentId: tournamentId, id: id),
+      child: GroupDetailWidget(tournamentId: tournamentId, id: id, groupName: groupName,),
     );;
   }
 }
@@ -48,8 +49,9 @@ class GroupDetail extends StatelessWidget{
 class GroupDetailWidget extends StatefulWidget {
   final int id;
   final int tournamentId;
+  final String groupName;
 
-  const GroupDetailWidget({super.key, required this.id, required this.tournamentId});
+  const GroupDetailWidget({super.key, required this.id, required this.tournamentId, required this.groupName});
 
   @override
   State<StatefulWidget> createState() => GroupDetailState();
@@ -68,7 +70,6 @@ class GroupDetailState extends State<GroupDetailWidget> {
   CreateMatchCubit get _createMatchCubit => context.read<CreateMatchCubit>();
   FullGroupCubit get _fullGroupCubit => context.read<FullGroupCubit>();
 
-  final String groupTitle = 'Girone 1';
 
   @override
   void initState() {
@@ -134,7 +135,7 @@ class GroupDetailState extends State<GroupDetailWidget> {
       children: [
         Padding(
           padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-          child: TextH1(text: groupTitle),
+          child: TextH1(text: widget.groupName),
         ),
 
         const Padding(

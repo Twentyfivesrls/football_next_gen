@@ -20,31 +20,31 @@ class ConfirmPageData{
     required this.onTap,
   });
 
-  factory ConfirmPageData.addTeamConfirmed(BuildContext context) =>
+  factory ConfirmPageData.addTeamConfirmed(BuildContext context, bool isHome, bool edit) =>
       ConfirmPageData(
-          titleText: getCurrentLanguageValue(TEAM_CREATED) ?? "",
+          titleText: edit ? "Squadra modificata con successo!" : getCurrentLanguageValue(TEAM_CREATED) ?? "",
           navigationText: getCurrentLanguageValue(TEAM_DETAIL) ?? "",
           bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
           onTap: (){
-            context.go(AppPage.teamDetail.path);
+            context.go(AppPage.teamDetail.path, extra: isHome);
             },
       );
 
 
-  factory ConfirmPageData.addGroupConfirmed(BuildContext context) =>
+  factory ConfirmPageData.addGroupConfirmed(BuildContext context, int tournamentId, bool edit) =>
       ConfirmPageData(
-        titleText: getCurrentLanguageValue(GROUP_CREATED) ?? "",
+        titleText: edit ? 'Girone modificato con successo!' : getCurrentLanguageValue(GROUP_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(GROUP_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
-          context.push(AppPage.groupDetail.path);
+          context.push(AppPage.groupDetail.path, extra: tournamentId);
         },
       );
 
 
-  factory ConfirmPageData.addTrainingConfirmed(BuildContext context, int id) =>
+  factory ConfirmPageData.addTrainingConfirmed(BuildContext context, int id, bool edit) =>
       ConfirmPageData(
-        titleText: getCurrentLanguageValue(TRAINING_CREATED) ?? "",
+        titleText: edit ? "Allenamento modificato con successo!" : getCurrentLanguageValue(TRAINING_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(TRAINING_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
@@ -62,9 +62,9 @@ class ConfirmPageData{
         },
       );
 
-  factory ConfirmPageData.addTournamentConfirmed(BuildContext context, int id) =>
+  factory ConfirmPageData.addTournamentConfirmed(BuildContext context, int id, bool edit) =>
       ConfirmPageData(
-        titleText: getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",
+        titleText: edit ? 'Torneo modificato con successo!' : getCurrentLanguageValue(TOURNAMENT_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(TOURNAMENT_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){

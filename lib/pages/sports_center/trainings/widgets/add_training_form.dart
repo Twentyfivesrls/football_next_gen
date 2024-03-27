@@ -12,6 +12,7 @@ class AddTrainingForm extends StatelessWidget{
   TextEditingController infoController;
   final bool isChecked;
   final Function(bool) onChanged;
+  final bool edit;
 
   AddTrainingForm({
     super.key,
@@ -21,6 +22,7 @@ class AddTrainingForm extends StatelessWidget{
     required this.hourController,
     required this.isChecked,
     required this.onChanged,
+    required this.edit
   });
 
   @override
@@ -58,15 +60,17 @@ class AddTrainingForm extends StatelessWidget{
           hintText: getCurrentLanguageValue(INFO) ?? "",
         ),
 
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: CheckboxWidget(
-              isChecked: isChecked,
-              onChanged: onChanged,
-              title: Text14(
-                  text: getCurrentLanguageValue(EVENT_REPETITION) ?? "",
-
-              ),
+        Visibility(
+          visible: !edit,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: CheckboxWidget(
+                isChecked: isChecked,
+                onChanged: onChanged,
+                title: Text14(
+                    text: getCurrentLanguageValue(EVENT_REPETITION) ?? "",
+                ),
+            ),
           ),
         )
       ],

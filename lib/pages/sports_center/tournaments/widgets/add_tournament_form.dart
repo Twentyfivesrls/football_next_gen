@@ -16,6 +16,7 @@ class AddTournamentForm extends StatelessWidget{
   TextEditingController phoneController;
   TextEditingController emailController;
   final Function() uploadPoster;
+  final bool edit;
 
   AddTournamentForm({
     super.key,
@@ -26,7 +27,8 @@ class AddTournamentForm extends StatelessWidget{
     required this.emailController,
     required this.rulesController,
     required this.infoController,
-    required this.uploadPoster});
+    required this.uploadPoster,
+    required this.edit});
 
   @override
   Widget build(BuildContext context) {
@@ -86,28 +88,37 @@ class AddTournamentForm extends StatelessWidget{
           labelText: "Ulteriori info",
           hintText: "Ulteriori info",
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 10,top: 20),
-          child: Text14(
-            text: getCurrentLanguageValue(UPLOAD_POSTER) ?? "",
-            fontWeight: FontWeight.w600,
+        Visibility(
+          visible: !edit,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10,top: 20),
+            child: Text14(
+              text: getCurrentLanguageValue(UPLOAD_POSTER) ?? "",
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
 
-        Text10(
-          text: getCurrentLanguageValue(UPLOAD_POSTER_SUBTITLE) ?? "",
+        Visibility(
+          visible: !edit,
+          child: Text10(
+            text: getCurrentLanguageValue(UPLOAD_POSTER_SUBTITLE) ?? "",
+          ),
         ),
 
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: ActionButton(
-            onPressed: uploadPoster,
-            backgroundColor: secondary,
-            textColor: primary,
-            showPrefixIcon: true,
-            borderColor: secondary,
-            svgPrefixIcon: ImagesConstants.uploadImg,
-            text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
+        Visibility(
+          visible: !edit,
+          child: Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: ActionButton(
+              onPressed: uploadPoster,
+              backgroundColor: secondary,
+              textColor: primary,
+              showPrefixIcon: true,
+              borderColor: secondary,
+              svgPrefixIcon: ImagesConstants.uploadImg,
+              text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
+            ),
           ),
         ),
       ],

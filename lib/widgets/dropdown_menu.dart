@@ -10,12 +10,15 @@ class DropdownMenuWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return DropdownMenu<String>(
-      initialSelection: initialSelection,
-      onSelected: onSelected,
-      dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
-        return DropdownMenuEntry<String>(value: value, label: value);
-      }).toList(),
+    return Padding(
+      padding: const EdgeInsets.only(top: 30),
+      child: DropdownMenu<String>(
+        initialSelection: initialSelection,
+        onSelected: onSelected,
+        dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {
+          return DropdownMenuEntry<String>(value: value, label: value);
+        }).toList(),
+      ),
     );
   }
 

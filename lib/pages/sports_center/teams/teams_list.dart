@@ -105,6 +105,10 @@ class TeamListState extends State<TeamsListWidget> {
 
   Widget teamsListSection(TeamEntity team) {
     return TeamCard(
+      deleteTeam: (){},
+      editTeam: (){
+        context.push(AppPage.addTeam.path, extra: {"edit": true, "isHome": team.isHomeTeam});
+      },
       team: team,
       goToDetail: () {
         context.push(AppPage.teamDetail.path, extra: {"id": team.id, "isHome": team.isHomeTeam} );
@@ -117,7 +121,7 @@ class TeamListState extends State<TeamsListWidget> {
       children: [
         ActionButton(
           onPressed: () {
-            context.push(AppPage.addTeam.path);
+            context.push(AppPage.addTeam.path, extra: {"edit": false, "isHome": true});
           },
           text: getCurrentLanguageValue(ADD_TEAM) ?? "",
           backgroundColor: white,

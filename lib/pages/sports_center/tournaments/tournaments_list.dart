@@ -104,6 +104,10 @@ class TournamentsListState extends State<TournamentsListWidget>{
   Widget tournamentsListSection(TournamentEntity tournament){
     return TournamentCard(
       tournament:tournament,
+      deleteTournament: (){},
+      editTournament: (){
+        context.push(AppPage.addTournament.path, extra: true);
+      },
       goToDetail: (){
         context.push(AppPage.tournamentDetail.path, extra: tournament.id);
       },
@@ -116,7 +120,7 @@ class TournamentsListState extends State<TournamentsListWidget>{
 
         ActionButton(
           onPressed: (){
-            context.push(AppPage.addTournament.path);
+            context.push(AppPage.addTournament.path, extra: false);
           },
           text: getCurrentLanguageValue(ADD_TOURNAMENT) ?? "",
           backgroundColor: white,

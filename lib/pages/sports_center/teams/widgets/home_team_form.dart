@@ -12,6 +12,7 @@ class HomeTeamForm extends StatelessWidget{
   TextEditingController descriptionController;
   TextEditingController coachController;
   final Function() uploadLogo;
+  final bool edit;
 
   HomeTeamForm({
     super.key,
@@ -20,6 +21,7 @@ class HomeTeamForm extends StatelessWidget{
     required this.managerController,
     required this.descriptionController,
     required this.uploadLogo,
+    required this.edit
   });
 
   @override
@@ -36,30 +38,39 @@ class HomeTeamForm extends StatelessWidget{
             ),
           ),
 
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10,top: 20),
-            child: Text14(
-              text: getCurrentLanguageValue(UPLOAD_LOGO) ?? "",
-              fontWeight: FontWeight.w600,
+          Visibility(
+            visible: !edit,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 10,top: 20),
+              child: Text14(
+                text: getCurrentLanguageValue(UPLOAD_LOGO) ?? "",
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
 
-          Text10(
-            text: getCurrentLanguageValue(UPLOAD_LOGO_SUBTITLE) ?? "",
-          ),
-
-          Padding(
-            padding: const EdgeInsets.only(top: 20),
-            child: ActionButton(
-                onPressed: uploadLogo,
-                backgroundColor: secondary,
-                textColor: primary,
-                showPrefixIcon: true,
-                borderColor: secondary,
-                svgPrefixIcon: ImagesConstants.uploadImg,
-                text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
+          Visibility(
+            visible: !edit,
+            child: Text10(
+              text: getCurrentLanguageValue(UPLOAD_LOGO_SUBTITLE) ?? "",
             ),
           ),
+
+         Visibility(
+           visible: !edit,
+           child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: ActionButton(
+                  onPressed: uploadLogo,
+                  backgroundColor: secondary,
+                  textColor: primary,
+                  showPrefixIcon: true,
+                  borderColor: secondary,
+                  svgPrefixIcon: ImagesConstants.uploadImg,
+                  text: getCurrentLanguageValue(UPLOAD_IMAGE) ?? "",
+              ),
+            ),
+         ),
 
 
           InputWidget(

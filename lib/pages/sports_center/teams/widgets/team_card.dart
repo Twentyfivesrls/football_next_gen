@@ -10,8 +10,10 @@ class TeamCard extends StatelessWidget{
 
   final TeamEntity team;
   final Function() goToDetail;
+  final Function() editTeam;
+  final Function() deleteTeam;
 
-  const TeamCard({super.key, required this.team, required this.goToDetail});
+  const TeamCard({super.key, required this.team, required this.goToDetail, required this.editTeam, required this.deleteTeam});
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,6 @@ class TeamCard extends StatelessWidget{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-
-
-
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -52,12 +50,12 @@ class TeamCard extends StatelessWidget{
                         icon: const Icon(Icons.more_vert,color: white,),
                         itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                           PopupMenuItem(
-                              onTap: (){},
+                              onTap: editTeam,
                               value: getCurrentLanguageValue(EDIT),
                               child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
                           ),
                           PopupMenuItem(
-                              onTap: (){},
+                              onTap: deleteTeam,
                               value: getCurrentLanguageValue(DELETE),
                               child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
                           ),

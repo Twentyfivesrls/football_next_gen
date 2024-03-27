@@ -44,6 +44,15 @@ class TournamentInfo extends StatelessWidget{
           Padding(
             padding: const EdgeInsets.only(top: 30),
             child: InfoBoxWidget(
+              text: tournament.name,
+              showIcon: false,
+              labelText: getCurrentLanguageValue(FIRSTNAME) ?? "",
+            ),
+          ),
+
+          Padding(
+            padding: const EdgeInsets.only(top: 30),
+            child: InfoBoxWidget(
               text: tournament.typology,
               showIcon: false,
               labelText: getCurrentLanguageValue(TYPOLOGY) ?? "",

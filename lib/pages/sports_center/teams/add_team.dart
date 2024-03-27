@@ -16,21 +16,28 @@ import '../../../constants/language.dart';
 import '../../../widgets/dialog.dart';
 const List<String> list = <String>['Squadra in casa', 'Squadra in trasferta'];
 
-
 class AddTeam extends StatelessWidget{
-  const AddTeam({super.key});
+
+  final bool edit;
+  bool isHome;
+
+  AddTeam({super.key, required this.edit, required this.isHome});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateTeamCubit(),
-      child: AddTeamWidget() ,
+      child: AddTeamWidget(edit: edit, isHome: isHome) ,
     );
   }
 }
 
 class AddTeamWidget extends StatefulWidget{
-  const AddTeamWidget({super.key});
+
+  final bool edit;
+  bool isHome;
+
+  AddTeamWidget({super.key, required this.edit, required this.isHome});
 
   @override
   State<StatefulWidget> createState() => AddTeamState();
@@ -40,7 +47,6 @@ class AddTeamWidget extends StatefulWidget{
 class AddTeamState extends State<AddTeamWidget>{
 
   CreateTeamCubit get _createTeamCubit => context.read<CreateTeamCubit>();
-
   TextEditingController nameController = TextEditingController();
   TextEditingController coachController = TextEditingController();
   TextEditingController managerController = TextEditingController();
@@ -58,8 +64,8 @@ class AddTeamState extends State<AddTeamWidget>{
             builder: (BuildContext context){
               return DialogWidget(
                 title: 'Avviso',
-                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
-                confirmText: 'Elimina squadra',
+                message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica della squadra?' : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
+                confirmText: widget.edit ? 'Elimina modifiche' :'Elimina squadra',
                 cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                 onConfirm: () {
                   context.go(AppPage.teamsList.path);
@@ -67,10 +73,10 @@ class AddTeamState extends State<AddTeamWidget>{
               );
             });
       },
-      paddingTop: 30,
+      paddingTop: 0,
       appBar: 3,
       showFirstTrailingIcon: false,
-      title: AppPage.addTeam.toTitle,
+      title:  widget.edit ? "Modifica squadra" : AppPage.addTeam.toTitle,
       firstTrailingIconOnTap: (){},
       secondTrailingIconOnTap: (){},
       body: SingleChildScrollView(
@@ -78,16 +84,15 @@ class AddTeamState extends State<AddTeamWidget>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
 
-              dropdownSection(),
-
+              widget.edit ? Container() : dropdownSection(),
 
               Visibility(
-                  visible: showHome,
-                  child: homeTeamSection()
+                  visible: widget.isHome,
+                  child: homeTeamSection(widget.edit)
               ),
 
               Visibility(
-                  visible: !showHome,
+                  visible: !widget.isHome,
                   child: awayTeamSection()
               ),
 
@@ -104,9 +109,9 @@ class AddTeamState extends State<AddTeamWidget>{
           setState(() {
             dropdownValue = value!;
             if(value == list[0]){
-              showHome = true;
+              widget.isHome = true;
             } else {
-              showHome = false;
+              widget.isHome = false;
             }
           });
         },
@@ -126,13 +131,14 @@ class AddTeamState extends State<AddTeamWidget>{
     );
   }
 
-  Widget homeTeamSection() {
+  Widget homeTeamSection(bool edit) {
     return HomeTeamForm(
       nameController: nameController,
       coachController: coachController,
       managerController: managerController,
       descriptionController: descriptionController,
       uploadLogo: () {  },
+      edit: edit,
     );
   }
 
@@ -150,11 +156,12 @@ class AddTeamState extends State<AddTeamWidget>{
                 description: descriptionController.text,
                 manager: managerController.text,
                 name: nameController.text,
-                isHomeTeam: showHome);
+                isHomeTeam: showHome
+            );
             _createTeamCubit.fetchCreatePost(teamEntity);
-            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context));
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTeamConfirmed(context, teamEntity.isHomeTeam!, widget.edit));
           },
-          text: getCurrentLanguageValue(ADD_TEAM) ?? "",
+          text:  widget.edit ? "Modifica squadra" : getCurrentLanguageValue(ADD_TEAM) ?? "",
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -165,8 +172,8 @@ class AddTeamState extends State<AddTeamWidget>{
                   builder: (BuildContext context){
                     return DialogWidget(
                       title: 'Avviso',
-                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
-                      confirmText: 'Elimina squadra',
+                      message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica della squadra?' : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione della squadra?',
+                      confirmText: widget.edit ? 'Elimina modifiche' :'Elimina squadra',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
                         context.go(AppPage.teamsList.path);

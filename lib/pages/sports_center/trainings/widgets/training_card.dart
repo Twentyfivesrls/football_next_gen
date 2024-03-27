@@ -10,8 +10,10 @@ class TrainingCard extends StatelessWidget{
 
   final TrainingEntity training;
   final Function() goToDetail;
+  final Function() editTraining;
+  final Function() deleteTraining;
 
-  const TrainingCard({super.key, required this.training, required this.goToDetail});
+  const TrainingCard({super.key, required this.training, required this.goToDetail, required this.editTraining, required this.deleteTraining});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,12 +39,12 @@ class TrainingCard extends StatelessWidget{
                     icon: const Icon(Icons.more_vert,color: white,),
                     itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                       PopupMenuItem(
-                          onTap: (){},
+                          onTap: editTraining,
                           value: getCurrentLanguageValue(EDIT),
                           child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
                       ),
                       PopupMenuItem(
-                          onTap: (){},
+                          onTap: deleteTraining,
                           value: getCurrentLanguageValue(DELETE),
                           child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
                       ),

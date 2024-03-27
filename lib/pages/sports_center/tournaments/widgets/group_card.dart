@@ -11,8 +11,10 @@ class GroupCard extends StatelessWidget{
   final GroupEntity group;
   final String name;
   final Function() goToDetail;
+  final Function() deleteGroup;
+  final Function() editGroup;
 
-  const GroupCard({super.key, required this.group, required this.goToDetail, required this.name});
+  const GroupCard({super.key, required this.group, required this.goToDetail, required this.name, required this.deleteGroup, required this.editGroup});
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +41,12 @@ class GroupCard extends StatelessWidget{
                     icon: const Icon(Icons.more_vert,color: white,),
                     itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                       PopupMenuItem(
-                          onTap: (){},
+                          onTap: editGroup,
                           value: getCurrentLanguageValue(EDIT),
                           child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
                       ),
                       PopupMenuItem(
-                          onTap: (){},
+                          onTap: deleteGroup,
                           value: getCurrentLanguageValue(DELETE),
                           child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
                       ),

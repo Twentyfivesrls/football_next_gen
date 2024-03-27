@@ -72,7 +72,7 @@ class TrainingDetailState extends State<TrainingDetailWidget> {
                 else if(state is FullTrainingPageLoaded){
                   return  Column(
                     children: [
-                      editSection(),
+                      editSection(state.training.date),
                       trainingDetailInfo(state.training)
                     ],
                   );
@@ -93,7 +93,7 @@ class TrainingDetailState extends State<TrainingDetailWidget> {
   }
 
 
-  Widget editSection() {
+  Widget editSection(DateTime date) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -104,7 +104,7 @@ class TrainingDetailState extends State<TrainingDetailWidget> {
 
         GestureDetector(
           onTap: () {
-            context.push(AppPage.addTeam.path);
+            context.push(AppPage.addTraining.path, extra: {"date": date, "edit": true});
           },
           child: SvgPicture.asset(
               ImagesConstants.editImg

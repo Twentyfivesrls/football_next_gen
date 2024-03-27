@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:football_next_gen/constants/colors.dart';
-import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
-import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
-import 'package:football_next_gen/widgets/texts.dart';
 
 class AwayTeamForm extends StatelessWidget{
   TextEditingController nameController;

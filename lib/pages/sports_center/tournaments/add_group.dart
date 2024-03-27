@@ -25,14 +25,17 @@ class TextEditingControllerGroup {
 }
 
 class AddGroup extends StatelessWidget{
-  const AddGroup({super.key, required this.id});
   final int id;
+  final bool edit;
+
+  const AddGroup({super.key, required this.id, required this.edit});
+
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateGroupCubit(),
-      child:  AddGroupWidget(id: id),
+      child:  AddGroupWidget(id: id, edit: edit),
     );
   }
 }
@@ -40,7 +43,9 @@ class AddGroup extends StatelessWidget{
 class AddGroupWidget extends StatefulWidget {
 
   final int id;
-  const AddGroupWidget({super.key, required this.id});
+  final bool edit;
+
+  const AddGroupWidget({super.key, required this.id, required this.edit});
 
   @override
   State<StatefulWidget> createState() => AddGroupState();
@@ -71,7 +76,7 @@ class AddGroupState extends State<AddGroupWidget> {
     return ScaffoldWidget(
       showFirstTrailingIcon: false,
       paddingTop: 0,
-      title: AppPage.addGroup.toTitle,
+      title: widget.edit ? "Modifica girone" : AppPage.addGroup.toTitle,
       appBar: 3,
       firstTrailingIconOnTap: () {},
       secondTrailingIconOnTap: (){},
@@ -81,8 +86,8 @@ class AddGroupState extends State<AddGroupWidget> {
             builder: (BuildContext context){
               return DialogWidget(
                 title: 'Avviso',
-                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
-                confirmText: 'Elimina girone',
+                message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica del girone?' : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
+                confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina girone',
                 cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                 onConfirm: () {
                   context.go(AppPage.tournamentDetail.path, extra: widget.id);
@@ -179,9 +184,9 @@ class AddGroupState extends State<AddGroupWidget> {
 
               _createGroupCubit.fetchCreateGroup(groupEntity);
 
-              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context));
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context, widget.id, widget.edit));
             },
-            text: getCurrentLanguageValue(ADD_GROUP) ?? "",
+            text: widget.edit ? "Modifica girone" : getCurrentLanguageValue(ADD_GROUP) ?? "",
           ),
         ),
 
@@ -194,8 +199,8 @@ class AddGroupState extends State<AddGroupWidget> {
                   builder: (BuildContext context){
                     return DialogWidget(
                       title: 'Avviso',
-                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
-                      confirmText: 'Elimina girone',
+                      message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica del girone?' : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del girone?',
+                      confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina girone',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
                         context.go(AppPage.tournamentDetail.path, extra: widget.id);

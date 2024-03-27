@@ -78,7 +78,7 @@ class TeamDetailState extends State<TeamDetailWidget>{
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        editSection(),
+                        editSection(state.team.isHomeTeam!),
                         infoSection(state.team)
                       ],
                     );
@@ -97,7 +97,7 @@ class TeamDetailState extends State<TeamDetailWidget>{
   }
 
 
-  Widget editSection(){
+  Widget editSection(bool isHome){
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -108,7 +108,7 @@ class TeamDetailState extends State<TeamDetailWidget>{
 
         GestureDetector(
           onTap: (){
-            context.push(AppPage.addTeam.path);
+            context.push(AppPage.addTeam.path, extra:  {"edit": true, "isHome": isHome});
           },
           child: SvgPicture.asset(
               ImagesConstants.editImg

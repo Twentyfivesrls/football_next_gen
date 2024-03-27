@@ -136,7 +136,7 @@ class TrainingListState extends State<TrainingsListWidget> {
         ),
         ActionButton(
           onPressed: () {
-            context.push(AppPage.addTraining.path, extra: _selectedDay);
+            context.push(AppPage.addTraining.path, extra: {"date": _selectedDay, "edit": false});
           },
           text: getCurrentLanguageValue(ADD_TRAINING) ?? "",
           backgroundColor: white,
@@ -177,6 +177,10 @@ class TrainingListState extends State<TrainingsListWidget> {
   Widget trainingList (TrainingEntity training){
     return TrainingCard(
       training: training,
+      deleteTraining: (){},
+      editTraining: (){
+        context.push(AppPage.addTraining.path, extra: {"date": training.date, "edit": true});
+      },
       goToDetail: (){
         context.push(AppPage.trainingDetail.path, extra: training.id);
       },

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:football_next_gen/bloc/group/group_bloc.dart';
 import 'package:football_next_gen/bloc/tournaments/single_tournament_bloc.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/constants/language.dart';
 import 'package:football_next_gen/models/group_entity.dart';
+import 'package:football_next_gen/models/tournament.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/group_card.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/tournament_info.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
@@ -55,7 +55,6 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
   SingleTournamentCubit get _tournamentCubit => context.read<SingleTournamentCubit>();
   GroupCubit get _groupCubit => context.read<GroupCubit>();
   int activeIndex = 0;
-  final String title = 'Torneo iper mega super incredibile - Under 19 - Cosenza';
 
   @override
   void initState() {
@@ -93,120 +92,115 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
         goBack: (){
           context.go(AppPage.tournamentsList.path);
         },
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 20),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: TextH1(text: title),
+        body:  BlocBuilder<SingleTournamentCubit,SingleTournamentPageState>(
+            builder: (_,state) {
+              if (state is SingleTournamentPageLoading) {
+                return const Center(
+                    child: CircularProgressIndicator());
+              }
+              else if (state is SingleTournamentPageLoaded) {
+                return content(state.tournament);
+              }   else{
+                // here the state is error
+                return Center(
+                  child: Text18(
+                    text: (state as SingleTournamentPageError).error.toString(),
                   ),
-                  Expanded(
-                      flex: 1,
-                      child: Align(
-                          alignment: Alignment.topRight,
-                          child: SvgPicture.asset(ImagesConstants.editImg))
-                  )
-                ],
+                );
+              }
+            }),
+    );
+  }
+
+
+  Widget content(TournamentEntity tournament){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 30,horizontal: 20),
+          child: TextH1(text: tournament.name),
+        ),
+
+        TabBarWidget(
+          tabController: tabController,
+          activeIndex: activeIndex,
+          tabs: <Widget>[
+            Tab(
+              child: Text14(
+                text: 'Gironi',
+                fontWeight: activeIndex == 0 ? FontWeight.w600: FontWeight.w500,
+                textColor: activeIndex == 0 ? primary : textProfileGrey,
               ),
             ),
-
-            TabBarWidget(
-              tabController: tabController,
-              activeIndex: activeIndex,
-              tabs: <Widget>[
-                Tab(
-                  child: Text14(
-                    text: 'Gironi',
-                    fontWeight: activeIndex == 0 ? FontWeight.w600: FontWeight.w500,
-                    textColor: activeIndex == 0 ? primary : textProfileGrey,
-                  ),
-                ),
-                Tab(
-                  child: Text14(
-                    text: 'Informazioni',
-                    fontWeight: activeIndex == 1 ? FontWeight.w600: FontWeight.w500,
-                    textColor: activeIndex == 1 ? primary : textProfileGrey,
-                  ),
-                ),
-              ],
-
-            ),
-
-            Expanded(
-              child: TabbarViewWidget(
-                  tabController: tabController,
-                  firstTab: SingleChildScrollView(
-                      child: BlocBuilder<GroupCubit,GroupPageState>(
-                          builder: (_,state) {
-                            if (state is GroupPageLoading) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                            else if (state is GroupPageLoaded) {
-                              return Column(
-                                children: [
-                                  newGroupsButtonSection(),
-
-                                  Visibility(
-                                      visible: state.groups.isEmpty,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 20),
-                                        child: Text18(
-                                          text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
-                                          textAlign: TextAlign.center,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
-                                  ),
-
-
-                                  ...state.groups.map((e) => groupsListSection(e)),
-                                ],
-                              );
-                            }
-                            else{
-                              // here the state is error
-                              return Center(
-                                child: Text18(
-                                  text: (state as GroupPageError).error.toString(),
-                                ),
-                              );
-                            }
-                          }
-                      )
-                  ),
-                  secondTab: SingleChildScrollView(
-                    child: BlocBuilder<SingleTournamentCubit,SingleTournamentPageState>(
-                        builder: (_,state) {
-                          if (state is SingleTournamentPageLoading) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          }
-                          else if (state is SingleTournamentPageLoaded) {
-                          return  TournamentInfo(
-                              edit: () {},
-                              tournament: state.tournament,
-                            );
-                          }   else{
-                            // here the state is error
-                            return Center(
-                              child: Text18(
-                                text: (state as SingleTournamentPageError).error.toString(),
-                              ),
-                            );
-                          }
-                        }),
-                  )
+            Tab(
+              child: Text14(
+                text: 'Informazioni',
+                fontWeight: activeIndex == 1 ? FontWeight.w600: FontWeight.w500,
+                textColor: activeIndex == 1 ? primary : textProfileGrey,
               ),
             ),
           ],
-        )
+
+        ),
+
+        Expanded(
+          child: TabbarViewWidget(
+              tabController: tabController,
+              firstTab: SingleChildScrollView(
+                  child: BlocBuilder<GroupCubit,GroupPageState>(
+                      builder: (_,state) {
+                        if (state is GroupPageLoading) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                        else if (state is GroupPageLoaded) {
+                          return Column(
+                            children: [
+                              newGroupsButtonSection(),
+
+                              Visibility(
+                                  visible: state.groups.isEmpty,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: Text18(
+                                      text: getCurrentLanguageValue(EMPTY_GROUPS_LIST) ?? "",
+                                      textAlign: TextAlign.center,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  )
+                              ),
+
+
+                              ...state.groups.map((e) => groupsListSection(e)),
+                            ],
+                          );
+                        }
+                        else{
+                          // here the state is error
+                          return Center(
+                            child: Text18(
+                              text: (state as GroupPageError).error.toString(),
+                            ),
+                          );
+                        }
+                      }
+                  )
+              ),
+              secondTab: SingleChildScrollView(
+                  child: TournamentInfo(
+                    edit: () {
+                      context.push(AppPage.addTournament.path, extra: true);
+                    },
+                    tournament: tournament,
+                  )
+              )
+          ),
+        ),
+      ],
     );
   }
+
 
   Widget newGroupsButtonSection(){
     return Padding(
@@ -217,7 +211,7 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
             padding: const EdgeInsets.symmetric(vertical: 30),
             child: ActionButton(
               onPressed: (){
-                context.push(AppPage.addGroup.path, extra: widget.tournamentId);
+                context.push(AppPage.addGroup.path, extra: {"id" : widget.tournamentId, "edit" : false});
               },
               text: getCurrentLanguageValue(ADD_GROUPS) ?? "",
               backgroundColor: white,
@@ -240,10 +234,14 @@ class TournamentDetailState extends State<TournamentDetailWidget> with TickerPro
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GroupCard(
+        deleteGroup: (){},
+        editGroup: (){
+          context.push(AppPage.addGroup.path, extra:  {"id" : widget.tournamentId, "edit" : true});
+        },
         group:group,
         name: group.groupName,
         goToDetail: (){
-          context.push(AppPage.groupDetail.path, extra: {"id": group.id, "tournamentId": widget.tournamentId});
+          context.push(AppPage.groupDetail.path, extra: {"id": group.id, "tournamentId": widget.tournamentId, "name" : group.groupName});
         },
       ),
     );

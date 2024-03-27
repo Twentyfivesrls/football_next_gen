@@ -95,14 +95,19 @@ class RouterManager {
 
         GoRoute(
             path: "/add_team",
-            builder: (context, state) => const AddTeam()
+            builder: (context, state) {
+              var extraObject = state.extra as dynamic;
+              var edit = extraObject['edit'];
+              var isHome = extraObject['isHome'];
+              return AddTeam(edit: edit, isHome: isHome);
+            }
         ),
 
         GoRoute(
             path: "/team_detail",
             builder: (context, state)  {
               var extraObject = state.extra as dynamic;
-              var id = int.tryParse('id') ?? 0;
+              var id = extraObject['id'];
               var isHome = extraObject['isHome'];
               return TeamDetail(id: id, isHome: isHome);
             }
@@ -115,7 +120,9 @@ class RouterManager {
 
         GoRoute(
             path: "/add_tournament",
-            builder: (context, state) => const AddTournament()
+            builder: (context, state) {
+              return AddTournament(edit: state.extra as bool);
+            }
         ),
 
         GoRoute(
@@ -129,15 +136,21 @@ class RouterManager {
             path: "/group_detail",
             builder: (context, state) {
               var extraObject = state.extra as dynamic;
-              var id = int.tryParse('id') ?? 0;
-              var tournamentId = int.tryParse('tournamentId') ?? 0;
-              return GroupDetail(id: id, tournamentId: tournamentId,);
+              var id = extraObject['id'];
+              var tournamentId = extraObject['tournamentId'];
+              var groupName = extraObject['name'];
+              return GroupDetail(id: id, tournamentId: tournamentId, groupName: groupName);
             }
         ),
 
         GoRoute(
             path: "/add_group",
-            builder: (context, state) => AddGroup(id: state.extra as int)
+            builder: (context, state) {
+              var extraObject = state.extra as dynamic;
+              var id = extraObject['id'];
+              var edit = extraObject['edit'];
+              return AddGroup(id: id, edit: edit,);
+            }
         ),
 
         GoRoute(
@@ -147,7 +160,12 @@ class RouterManager {
 
         GoRoute(
             path: "/add_training",
-            builder: (context, state) => AddTraining(date: state.extra as DateTime)
+            builder: (context, state) {
+              var extraObject = state.extra as dynamic;
+              var date = extraObject['date'];
+              var edit = extraObject['edit'];
+              return AddTraining(date: date, edit: edit);
+            }
         ),
 
         GoRoute(
@@ -186,8 +204,6 @@ class RouterManager {
               var path = extraObject['path'] ?? "";
               return PostDetail(id: id, returnPage: path);
             }
-
-
         ),
 
         GoRoute(
@@ -214,7 +230,6 @@ class RouterManager {
             path: "/edit_profile",
             builder: (context, state) => const EditProfile()
         ),
-
 
 
         GoRoute(
@@ -329,27 +344,27 @@ bool isSportCenterPage (String path){
 }
 
 
-  bool isChildProfile(String path){
-    if(
-    path.contains(AppPage.childProfile.path) ||
-        path.contains(AppPage.settings.path) ||
-        path.contains(AppPage.addPost.path) ||
-        path.contains(AppPage.postDetail.path) ||
-        path.contains(AppPage.tournamentsList.path)||
-        path.contains(AppPage.tournamentDetail.path) ||
-        path.contains(AppPage.confirmPage.path) ||
-        path.contains(AppPage.groupDetail.path) ||
-        path.contains(AppPage.trainingsList.path) ||
-        path.contains(AppPage.trainingDetail.path) ||
-        path.contains(AppPage.teamsList.path) ||
-        path.contains(AppPage.filters.path) ||
-        path.contains(AppPage.teamDetail.path) ||
-        path.contains(AppPage.followerList.path) ||
-        path.contains(AppPage.editProfile.path)||
-        path.contains(AppPage.menuChild.path)
-    ){
-      return true;
-    }else{
-      return false;
-    }
+bool isChildProfile(String path){
+  if(
+  path.contains(AppPage.childProfile.path) ||
+      path.contains(AppPage.settings.path) ||
+      path.contains(AppPage.addPost.path) ||
+      path.contains(AppPage.postDetail.path) ||
+      path.contains(AppPage.tournamentsList.path)||
+      path.contains(AppPage.tournamentDetail.path) ||
+      path.contains(AppPage.confirmPage.path) ||
+      path.contains(AppPage.groupDetail.path) ||
+      path.contains(AppPage.trainingsList.path) ||
+      path.contains(AppPage.trainingDetail.path) ||
+      path.contains(AppPage.teamsList.path) ||
+      path.contains(AppPage.filters.path) ||
+      path.contains(AppPage.teamDetail.path) ||
+      path.contains(AppPage.followerList.path) ||
+      path.contains(AppPage.editProfile.path)||
+      path.contains(AppPage.menuChild.path)
+  ){
+    return true;
+  }else{
+    return false;
   }
+}

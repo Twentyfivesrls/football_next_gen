@@ -21,23 +21,24 @@ enum RadioButtons { mai, data, dopo }
 class AddTraining extends StatelessWidget{
 
   final DateTime date;
+  final bool edit;
 
-  const AddTraining({super.key, required this.date});
+  const AddTraining({super.key, required this.date, required this.edit});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateTrainingCubit(),
-      child: AddTrainingWidget(date: date) ,
+      child: AddTrainingWidget(date: date, edit: edit),
     );
   }
 }
 
 class AddTrainingWidget extends StatefulWidget{
   final DateTime date;
+  final bool edit;
 
-
-  const AddTrainingWidget({super.key, required this.date});
+  const AddTrainingWidget({super.key, required this.date, required this.edit});
   @override
   State<StatefulWidget> createState() => AddTrainingState();
 }
@@ -67,7 +68,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
       paddingTop: 0,
       appBar: 3,
       showFirstTrailingIcon: false,
-      title: AppPage.addTraining.toTitle,
+      title: widget.edit ? "Modifica allenamento" : AppPage.addTraining.toTitle,
       firstTrailingIconOnTap: (){},
       secondTrailingIconOnTap: (){},
       goBack: (){
@@ -76,8 +77,8 @@ class AddTrainingState extends State<AddTrainingWidget>{
             builder: (BuildContext context){
               return DialogWidget(
                 title: 'Avviso',
-                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
-                confirmText: 'Elimina allenamento',
+                message: widget.edit ? "Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica dell\'allenamento?" : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
+                confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina allenamento',
                 cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                 onConfirm: () {
                   context.go(AppPage.trainingsList.path);
@@ -111,6 +112,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
 
   Widget formSection(){
     return AddTrainingForm(
+      edit: widget.edit,
       infoController: infoController,
       fieldController: fieldController,
       teamController: teamController,
@@ -198,9 +200,9 @@ class AddTrainingState extends State<AddTrainingWidget>{
               daysOfWeek: selectedDaysOfWeek,
             );
             _createTrainingCubit.fetchCreateTraining(trainingEntity);
-            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTrainingConfirmed(context, trainingEntity.id ?? 0));
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTrainingConfirmed(context, trainingEntity.id ?? 0, widget.edit));
           },
-          text: getCurrentLanguageValue(AppPage.addTraining.toTitle) ?? "",
+          text: widget.edit ? "Modifica allenamento" : getCurrentLanguageValue(AppPage.addTraining.toTitle) ?? "",
         ),
 
         Padding(
@@ -212,8 +214,8 @@ class AddTrainingState extends State<AddTrainingWidget>{
                   builder: (BuildContext context){
                     return DialogWidget(
                       title: 'Avviso',
-                      message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
-                      confirmText: 'Elimina allenamento',
+                      message: widget.edit ? "Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica dell\'allenamento?" : 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione dell\'allenamento?',
+                      confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina allenamento',
                       cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                       onConfirm: () {
                         context.go(AppPage.trainingsList.path);

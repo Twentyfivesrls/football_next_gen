@@ -10,8 +10,10 @@ class TournamentCard extends StatelessWidget{
 
   final TournamentEntity tournament;
   final Function() goToDetail;
+  final Function() editTournament;
+  final Function() deleteTournament;
 
-  const TournamentCard({super.key, required this.tournament, required this.goToDetail});
+  const TournamentCard({super.key, required this.tournament, required this.goToDetail, required this.editTournament, required this.deleteTournament});
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +40,12 @@ class TournamentCard extends StatelessWidget{
                       icon: const Icon(Icons.more_vert,color: white,),
                       itemBuilder: (BuildContext context) => <PopupMenuEntry>[
                         PopupMenuItem(
-                            onTap: (){},
+                            onTap: editTournament,
                             value: getCurrentLanguageValue(EDIT),
                             child: Text14(text: getCurrentLanguageValue(EDIT) ?? "")
                         ),
                         PopupMenuItem(
-                            onTap: (){},
+                            onTap: deleteTournament,
                             value: getCurrentLanguageValue(DELETE),
                             child: Text14(text: getCurrentLanguageValue(DELETE) ?? "")
                         ),

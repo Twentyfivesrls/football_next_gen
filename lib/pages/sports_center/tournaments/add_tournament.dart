@@ -14,19 +14,24 @@ import '../../../widgets/dialog.dart';
 import '../../../widgets/scaffold.dart';
 
 class AddTournament extends StatelessWidget{
-  const AddTournament({super.key});
+
+  final bool edit;
+
+  const AddTournament({super.key, required this.edit});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => CreateTournamentCubit(),
-      child: AddTournamentWidget() ,
+      child: AddTournamentWidget(edit: edit) ,
     );
   }
 }
 
 class AddTournamentWidget extends StatefulWidget{
-  const AddTournamentWidget({super.key});
+  final bool edit;
+
+  const AddTournamentWidget({super.key, required this.edit});
 
   @override
   State<StatefulWidget> createState() => AddTournamentState();
@@ -52,15 +57,15 @@ class AddTournamentState extends State<AddTournamentWidget>{
       appBar: 3,
       paddingTop: 0,
       showFirstTrailingIcon: false,
-      title: AppPage.addTournament.toTitle,
+      title: widget.edit ? "Modifica torneo" : AppPage.addTournament.toTitle,
       goBack: (){
         showDialog(
             context: context,
             builder: (BuildContext context){
               return DialogWidget(
                 title: 'Avviso',
-                message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del torneo?',
-                confirmText: 'Elimina torneo',
+                message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica del torneo?': 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del torneo?',
+                confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina torneo',
                 cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                 onConfirm: () {
                   context.go(AppPage.tournamentsList.path);
@@ -74,6 +79,7 @@ class AddTournamentState extends State<AddTournamentWidget>{
         child: Column(
           children: [
             AddTournamentForm(
+                edit: widget.edit,
                 nameController: nameController,
                 categoryController: categoryController,
                 typologyController: typologyController,
@@ -109,10 +115,10 @@ class AddTournamentState extends State<AddTournamentWidget>{
                       info: infoController.text,
                       poster: "poster", name: nameController.text);
                   _createTournamentCubit.fetchCreateTournament(tournamentEntity);
-                  context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context, tournamentEntity.id ?? 0));
+                  context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context, tournamentEntity.id ?? 0, widget.edit));
 
                 },
-                text: "Crea torneo",
+                text: widget.edit ? "Modifica torneo" : "Crea torneo",
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -123,8 +129,8 @@ class AddTournamentState extends State<AddTournamentWidget>{
                         builder: (BuildContext context) {
                           return DialogWidget(
                             title: 'Avviso',
-                            message: 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del torneo?',
-                            confirmText: 'Elimina torneo',
+                            message: widget.edit ? 'Procedendo in questo modo, tutti i dati modificati andranno persi. Vuoi davvero annullare la modifica del torneo?': 'Procedendo in questo modo, tutti i dati inseriti andranno persi. Vuoi davvero annullare la creazione del torneo?',
+                            confirmText: widget.edit ? 'Elimina modifiche' : 'Elimina torneo',
                             cancelText: getCurrentLanguageValue(CANCEL) ?? "",
                             onConfirm: () {
                               context.go(AppPage.tournamentsList.path);
