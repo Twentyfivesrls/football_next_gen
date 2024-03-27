@@ -28,7 +28,7 @@ class PostRepository {
   Future<PostEntity> createPost(PostEntity postEntity) async{
       try {
         Response response =  await KeycloakRepository().httpClient!.post('$baseUrl/post/createPost', data: postEntity.toJson());
-        if (response.statusCode == 200) {
+        if (response.statusCode! >= 201 && response.statusCode! < 300) {
           PostEntity updatedPost = PostEntity.fromJson(response.data);
           return updatedPost;
         } else {

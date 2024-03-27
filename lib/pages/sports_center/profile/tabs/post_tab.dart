@@ -29,8 +29,7 @@ class PostTab extends StatelessWidget{
               onPressed: addPost,
               text: getCurrentLanguageValue(ADD_POST) ?? "",
               showPrefixIcon: true,
-              svgPrefixIcon:
-              ImagesConstants.addCircleWhiteImg,
+              svgPrefixIcon: ImagesConstants.addCircleWhiteImg,
             ),
           ),
           Padding(
@@ -43,9 +42,15 @@ class PostTab extends StatelessWidget{
 
           Padding(
               padding: const EdgeInsets.only(top: 20),
-              child: ImagesGallery(
+              child: images.isNotEmpty ? ImagesGallery(
                   images: images,
                   onTap: (tapped) {goToDetail(tapped);}
+              ) : const Center(
+                child: Text14(
+                  text: "Nessun post aggiunto!",
+                  fontWeight: FontWeight.bold,
+                  textAlign: TextAlign.center,
+                ),
               )
           )
         ],

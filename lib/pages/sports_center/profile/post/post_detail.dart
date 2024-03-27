@@ -111,12 +111,12 @@ class PostDetailState extends State<PostDetailWidget> {
               children: [
                 headerSection(),
                 imageSection(state.post.image),
-                descriptionSection(state.post.description, state.post.date),
+                descriptionSection(state.post.description, state.post.date, state.post.likes),
                 buttonsSection(state.post)
               ],
             );
           } else {
-              return Text('Post deleted successfully');
+              return const Text('Post deleted successfully');
             }
 
         }),
@@ -151,7 +151,9 @@ class PostDetailState extends State<PostDetailWidget> {
             PopupMenuItem(
                 onTap: () {
                   setState(() {
-                    edit = !edit;
+                    if(!edit){
+                      edit = !edit;
+                    }
                   });
                 },
                 value: getCurrentLanguageValue(EDIT),
@@ -160,6 +162,7 @@ class PostDetailState extends State<PostDetailWidget> {
                 onTap: () {
                   if (!_isCubitClosed) { // Verifica se il cubit è stato chiuso
                     _postCubit.fetchDeletePost(widget.id);
+                    context.pop();
                   }
                 },
                 value: getCurrentLanguageValue(DELETE),
@@ -181,7 +184,7 @@ class PostDetailState extends State<PostDetailWidget> {
     );
   }
 
-  Widget descriptionSection(String description, DateTime date) {
+  Widget descriptionSection(String description, DateTime date, int likes) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -190,17 +193,26 @@ class PostDetailState extends State<PostDetailWidget> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      selected = !selected;
-                    });
-                  },
-                  child: Icon(
-                    selected ? Icons.favorite : Icons.favorite_border_outlined,
-                    color: selected ? Colors.red : black25,
-                    size: 25,
-                  )),
+              Row(
+                children: [
+                  GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selected = !selected;
+                        });
+                      },
+                      child: Icon(
+                        selected ? Icons.favorite : Icons.favorite_border_outlined,
+                        color: selected ? Colors.red : black25,
+                        size: 25,
+                      )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
+                    child: Text14(text: likes.toString(), fontWeight: FontWeight.bold,),
+                  )
+                ],
+              ),
               GestureDetector(
                   onTap: () {},
                   child: const Icon(

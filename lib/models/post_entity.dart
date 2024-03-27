@@ -22,7 +22,7 @@ class PostEntity {
   final String image;
   final String description;
   final DateTime date;
-  final String likes;
+  final int likes;
   bool favorite;
 
 
@@ -42,7 +42,7 @@ class PostEntity {
     String? image,
     String? description,
     DateTime? date,
-    String? likes,
+    int? likes,
     bool? favorite,
   }) {
     return PostEntity(
@@ -61,7 +61,7 @@ class PostEntity {
     description: json["description"] ?? "",
     date: json["date"] != null ? DateTime.parse(json["date"]) : DateTime.now(),
     favorite: json["favorite"] ?? false,
-    likes: json["likes"] ?? "",
+    likes: json["likes"] ?? 0,
   );
 
   Map<String, dynamic> toJson() => {
@@ -89,10 +89,10 @@ class PostEntity {
     description: "Il talento in azione! 🚀⚽ Un momento catturato dal campo del Centro Sportivo Olympus, dove il nostro eccezionale calciatore, Marco Rossi, dimostra la sua abilità straordinaria nel calcio. 🌐✨ Un calcio potente, una precisione impeccabile - è davvero il cuore pulsante della nostra squadra! 🏆👟 Marco, grazie per ispirarci con la tua dedizione e passione per il gioco. 🙌💙 Se anche tu vuoi far parte di questa incredibile esperienza calcistica, unisciti a noi al Centro Sportivo Olympus! 🏟️⚡   #Talent #CalcioPassion #CentroSportivoOlympus",
     date: DateTime.now(),
     favorite: favorite,
-    likes: "50"
+    likes: 50
   );
 
-  factory PostEntity.emptyPost() => PostEntity(image: '', description: '', likes: '', date: DateTime.now(), id: 0, favorite: false);
+  factory PostEntity.emptyPost() => PostEntity(image: '', description: '', likes: 0, date: DateTime.now(), id: 0, favorite: false);
 
 }
 

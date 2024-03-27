@@ -186,10 +186,15 @@ class AddPostState extends State<AddPostWidget> {
           ),
           ActionButton(
             onPressed: () {
-              final postEntity = PostEntity(image: "image", description: descriptionController.text, likes: "likes", favorite: false, date:DateTime.now());
+              final postEntity = PostEntity(
+                  image: "image",
+                  description: descriptionController.text,
+                  likes: 0,
+                  favorite: false,
+                  date:DateTime.now()
+              );
               _createPostCubit.fetchCreatePost(postEntity);
-              context.push(AppPage.confirmPage.path,
-                  extra: ConfirmPageData.addPostConfirmed(context));
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addPostConfirmed(context,postEntity.id!));
             },
             text: getCurrentLanguageValue(NEXT) ?? "",
           ),

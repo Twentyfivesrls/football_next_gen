@@ -72,13 +72,13 @@ class ConfirmPageData{
         },
       );
 
-  factory ConfirmPageData.addPostConfirmed(BuildContext context) =>
+  factory ConfirmPageData.addPostConfirmed(BuildContext context, int id) =>
       ConfirmPageData(
         titleText: getCurrentLanguageValue(POST_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(MEDIA) ?? "",
         bottomText: getCurrentLanguageValue(BACK_TO_SECTION) ?? "",
         onTap: (){
-          context.push(AppPage.postDetail.path);
+          context.push(AppPage.postDetail.path, extra: id);
         },
       );
 
