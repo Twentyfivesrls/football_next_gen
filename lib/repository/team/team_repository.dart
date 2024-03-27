@@ -17,8 +17,8 @@ class TeamRepository {
 
   TeamRepository._internal();
 
-  //String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
-  String baseUrl = 'http://localhost:8080';
+  String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  //String baseUrl = 'http://localhost:8080';
 
 
   Future<TeamEntity> createTeam(TeamEntity teamEntity) async {
