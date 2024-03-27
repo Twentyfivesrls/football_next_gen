@@ -102,8 +102,8 @@ class RouterManager {
             path: "/team_detail",
             builder: (context, state)  {
               var extraObject = state.extra as dynamic;
-              var id = extraObject['id'] ?? "";
-              var isHome = extraObject['isHome'] ?? true;
+              var id = int.tryParse('id') ?? 0;
+              var isHome = extraObject['isHome'];
               return TeamDetail(id: id, isHome: isHome);
             }
         ),
@@ -238,7 +238,20 @@ class RouterManager {
             return AppPage.login.path;
           }
         }
-        if (auth?.role == 'bambino') return AppPage.homeChild.path;
+        if (auth?.role == 'genitore') {
+          if (isChildProfile(state.uri.path)) {
+            return state.uri.path;
+          } else {
+            return AppPage.homeChild.path;
+          }
+        }
+        if (auth?.role == 'bambino') {
+          if (isChildProfile(state.uri.path)) {
+            return state.uri.path;
+          } else {
+            return AppPage.homeChild.path;
+          }
+        }
         if (auth?.role == 'centro_sportivo') {
           if(isSportCenterPage(state.uri.path)){
             return state.uri.path;
@@ -273,7 +286,8 @@ class RouterManager {
 }
 bool createAccount(String path){
   if(path.contains(AppPage.register.path) ||
-     path.contains(AppPage.sportsCenterRegister.path)){
+     path.contains(AppPage.sportsCenterRegister.path)||
+     path.contains(AppPage.parentRegister.path)){
     return true;
   }else{
     return false;
@@ -308,3 +322,29 @@ bool isSportCenterPage (String path){
     return false;
   }
 }
+
+
+  bool isChildProfile(String path){
+    if(
+    path.contains(AppPage.childProfile.path) ||
+        path.contains(AppPage.settings.path) ||
+        path.contains(AppPage.addPost.path) ||
+        path.contains(AppPage.postDetail.path) ||
+        path.contains(AppPage.tournamentsList.path)||
+        path.contains(AppPage.tournamentDetail.path) ||
+        path.contains(AppPage.confirmPage.path) ||
+        path.contains(AppPage.groupDetail.path) ||
+        path.contains(AppPage.trainingsList.path) ||
+        path.contains(AppPage.trainingDetail.path) ||
+        path.contains(AppPage.teamsList.path) ||
+        path.contains(AppPage.filters.path) ||
+        path.contains(AppPage.teamDetail.path) ||
+        path.contains(AppPage.followerList.path) ||
+        path.contains(AppPage.editProfile.path)||
+        path.contains(AppPage.menuChild.path)
+    ){
+      return true;
+    }else{
+      return false;
+    }
+  }

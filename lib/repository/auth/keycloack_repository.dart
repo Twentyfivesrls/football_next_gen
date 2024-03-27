@@ -20,6 +20,7 @@ class KeycloakRepository {
     httpClient = Dio();
   }
   String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  //String baseUrl = 'http://localhost:8080';
 
   var fngAppClientId = "fng-app";
   var fngAppClientSecret = "w29HAjR5szxqr8l2qblKUUQXiDZXYA2U";
@@ -81,25 +82,36 @@ class KeycloakRepository {
       print("Login avvenuto con successo");
       print(result.data);
       var token = result.data;
-      this.httpClient!.options.headers['Authorization'] = 'Bearer $token';
+      httpClient!.options.headers['Authorization'] = 'Bearer $token';
       return result.data;
     } catch (e) {
       print("Si è verificato un errore durante il login: $e");
-      // Puoi lanciare nuovamente l'eccezione qui se desideri che venga gestita altrove
       throw e;
     }
   }
 
 
-  Future<bool> createUser(UserEntity userEntity)async{
+  Future<bool> createUser(UserEntity userEntity) async {
     try {
+      if (httpClient == null) {
+        print('Errore: httpClient non è stato inizializzato correttamente.');
+        return false;
+      }
+
       var result = await httpClient!.post('$baseUrl/utente/createUser', data: userEntity.toJson());
-      return true;
-    }catch(e){
-      print("SIAMO IN ERRORE");
+      if (result.statusCode == 200) {
+        return true;
+      } else {
+        print("Errore durante la creazione dell'utente: ${result.statusCode}");
+        return false;
+      }
+    } catch (e) {
+      print("Si è verificato un errore durante la creazione dell'utente: $e");
       return false;
     }
   }
+
+
 
 
   var adminCliAppClientId = "admin-cli";

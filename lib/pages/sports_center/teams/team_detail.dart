@@ -47,8 +47,8 @@ class TeamDetailState extends State<TeamDetailWidget>{
 
   @override
   void initState() {
-    _teamCubit.fetchTeam(widget.id);
     super.initState();
+    _teamCubit.fetchTeam(widget.id);
   }
 
   @override

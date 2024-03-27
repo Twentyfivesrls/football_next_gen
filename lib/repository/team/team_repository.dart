@@ -66,7 +66,7 @@ class TeamRepository {
         throw Exception('Failed to fetch team by ID: ${response.statusCode}');
       }
     } catch (e) {
-      print("Error fetching am by ID: $e");
+      print("Error fetching team by ID: $e");
       throw e;
     }
   }

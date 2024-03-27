@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
 import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
+import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:football_next_gen/models/authentication_entity.dart';
+import 'package:football_next_gen/models/confirm_page_data.dart';
+import 'package:football_next_gen/models/profile_entity.dart';
+import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/pages/login_section/register/parent/widgets/child_data.dart';
 import 'package:football_next_gen/pages/login_section/register/parent/widgets/parent_data.dart';
+import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
+import 'package:football_next_gen/repository/profile/profile_service.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/checkbox.dart';
 import 'package:football_next_gen/widgets/divider.dart';
@@ -45,6 +52,9 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
   TextEditingController childDateController = TextEditingController();
   TextEditingController childPasswordController = TextEditingController();
   TextEditingController childConfirmPasswordController = TextEditingController();
+  String error = "";
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -235,13 +245,49 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
     return Padding(
       padding: const EdgeInsets.only(top: 50),
       child: ActionButton(
-        onPressed: (){
-          context.push(AppPage.insertOtp.path);
+        onPressed: () async {
+          // Creazione del genitore
+          var parentUser = UserEntity(
+            username: parentEmailController.text,
+            password: parentPasswordController.text,
+            role: "genitore",
+            profile: ProfileEntity(
+              profileName: parentNameController.text,
+              phone: parentPhoneController.text,
+              address: "parentAddressController.text",
+              email: parentEmailController.text,
+            ),
+          );
+
+          // Creazione del bambino
+          var childUser = UserEntity(
+            username: childUsernameController.text,
+            password: childPasswordController.text,
+            role: "bambino",
+            profile: ProfileEntity(
+              profileName: childNameController.text,
+              phone: "childPhoneController.text",
+              address: "childAddressController.text",
+              email: "childEmailController.text",
+            ),
+          );
+
+          // Esegui entrambe le chiamate API contemporaneamente
+          var parentResult = KeycloakRepository().createUser(parentUser);
+          var childResult = KeycloakRepository().createUser(childUser);
+
+          // Attendi il completamento di entrambe le chiamate
+          await Future.wait([parentResult, childResult]);
+
+            // Redirect alla pagina di conferma
+            context.push(AppPage.confirmPage.path, extra: ConfirmPageData.otpConfirmed(context));
+
         },
         text: getCurrentLanguageValue(CREATE_ACCOUNT) ?? "",
       ),
     );
   }
+
 
   Widget goBackSection() {
     return Column(
@@ -295,4 +341,5 @@ class ParentRegisterFormState extends State<ParentRegisterForm>{
       ],
     );
   }
+
 }

@@ -108,7 +108,6 @@ class LoginFormState extends State<LoginForm>{
           padding: const EdgeInsets.only(top: 20),
           child: ActionButton(
             onPressed: (){
-              context.go(AppPage.homeChild.path);
             },
             text: "Bambino",
           ),
@@ -186,6 +185,7 @@ class LoginFormState extends State<LoginForm>{
       // verify value if is a Response or another type of object
       // i assume that is a DIO response, so it has .data
       var accessToken = value;
+      print(value);
       ProfileService().fetchProfile().then((profileEntity) {
         AuthListener().setAuthenticationData(profileEntity, accessToken);
         // context.go(AppPage.homeSportsCenter.path);
@@ -196,4 +196,5 @@ class LoginFormState extends State<LoginForm>{
       });
     });
   }
+
 }

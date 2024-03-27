@@ -1,4 +1,6 @@
 import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:intl/intl.dart';
+
 
 class ProfileEntityDtoForList {
   final String name;
@@ -30,14 +32,30 @@ class ProfileEntity {
   final String address;
   final String phone;
   final String email;
+  final DateTime? date;
+  final String? username;
+  final String? height;
+  final String? weight;
+  final String? role;
+  final String? career;
+  final String? favoriteTeam;
+  final String? favoritePlayer;
 
 
-  ProfileEntity({
+  ProfileEntity( {
     required this.profileName,
     this.profileDesc = "",
     required this.address,
     required this.phone,
-    required this.email
+    required this.email,
+    this.date,
+    this.username,
+    this.height,
+    this.weight,
+    this.role,
+    this.career,
+    this.favoriteTeam,
+    this.favoritePlayer,
   });
 
 
@@ -51,11 +69,18 @@ class ProfileEntity {
 
   factory ProfileEntity.fromJson(Map<String,dynamic> json) =>
       ProfileEntity(
-          profileName: json["profileName"],
-          profileDesc: json["profileDesc"],
-          address: json["address"],
+          profileName: json["profileName"] ?? "",
+          profileDesc: json["profileDesc"] ?? "",
+          address: json["address"] ?? "",
           email: json["email"],
-          phone: json["phone"]
+          phone: json["phone"] ?? "",
+        username: json["username"],
+        height: json["height"],
+        weight: json["weight"],
+        career: json["career"],
+        favoritePlayer: json["favoritePlayer"],
+        favoriteTeam: json["favoriteTeam"],
+        date: json["date"] != null ? DateTime.parse(json["date"]) : DateTime.now(),
       );
 
   Map<String,dynamic> toJson() =>
@@ -65,6 +90,12 @@ class ProfileEntity {
         "address": address,
         "phone": phone,
         "email": email,
-
+    "date": DateFormat('yyyy-MM-dd').format(date!),
+        "username": username,
+        "height": height,
+        "weight": weight,
+        "career": career,
+        "favoritePlayer": favoritePlayer,
+        "favoriteTeam": favoriteTeam
       };
 }

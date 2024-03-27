@@ -5,6 +5,7 @@ import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/models/post_entity.dart';
 import 'package:football_next_gen/widgets/texts.dart';
+import 'package:intl/intl.dart';
 
 class PostCard extends StatelessWidget{
 
@@ -73,7 +74,7 @@ class PostCard extends StatelessWidget{
           
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10),
-            child: Text10(text: post.date as String),
+            child: Text10(text:DateFormat('yyyy-MM-dd').format(post.date)),
           ),
 
           ExpandableText(
