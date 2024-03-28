@@ -12,8 +12,8 @@ class GroupRepository {
   }
 
   GroupRepository._internal();
-  String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
-  //String baseUrl = 'http://localhost:8080';
+  //String baseUrl = 'http://80.211.123.141:8088/football-next-gen-be';
+  String baseUrl = 'http://localhost:8080';
 
 
 
@@ -23,11 +23,11 @@ class GroupRepository {
     return groupList;
   }
 
-  Future<GroupEntity> createGroup(GroupEntity groupEntity) async {
+  Future<GroupEntity> createGroup(GroupEntity groupEntity, int id) async {
     try {
       print("Sto creando un torneo");
       Response response = await KeycloakRepository().httpClient!.post(
-          '$baseUrl/group/createGroupWithMatches', data: groupEntity.toJson());
+          '$baseUrl/group/createGroupWithMatches/$id', data: groupEntity.toJson());
       print(response.data);
       if (response.statusCode == 200 || response.statusCode == 201) {
         GroupEntity groupEntity = GroupEntity.fromJson(response.data);

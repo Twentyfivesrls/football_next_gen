@@ -32,9 +32,9 @@ class GroupService {
     }
   }
 
-  Future<GroupEntity> fetchCreateGroup(GroupEntity groupEntity){
+  Future<GroupEntity> fetchCreateGroup(GroupEntity groupEntity, int id){
     if(GlobalConstants.sportsCenterProfileReal){
-      return GroupRepository().createGroup(groupEntity);
+      return GroupRepository().createGroup(groupEntity, id);
     }else{
       return GroupRepositoryFake().fetchGroup();
     }
