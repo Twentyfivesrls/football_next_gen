@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
-import 'package:football_next_gen/repository/profile/profile_repository.dart';
 import 'package:football_next_gen/routing/routes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:localization/localization.dart';
-
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,8 +13,21 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final RouterManager routerManager = RouterManager();
-  MyApp({super.key});
+  static const int primaryColor = 0xFF04163a;
 
+  final MaterialColor primary =  const MaterialColor(primaryColor,
+      <int, Color>{
+        50: Color(0xFFEDE7F6),
+        100: Color(0xFFD1C4E9),
+        200: Color(0xFFB39DDB),
+        300: Color(0xFF9575CD),
+        400: Color(0xFF7E57C2),
+        500: Color(primaryColor),
+        600: Color(0xFF5E35B1),
+        700: Color(0xFF512DA8),
+        800: Color(0xFF4527A0),
+        900: Color(0xFF311B92),
+      });
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -51,7 +61,7 @@ class MyApp extends StatelessWidget {
         title: 'Football Next Gen',
         theme: ThemeData(
           fontFamily: 'Montserrat',
-          primarySwatch: Colors.blue,
+          primarySwatch: primary
         ),
         routerConfig: goRouter
     );

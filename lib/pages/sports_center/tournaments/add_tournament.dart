@@ -5,7 +5,9 @@ import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/models/tournament.dart';
 import 'package:football_next_gen/pages/sports_center/tournaments/widgets/add_tournament_form.dart';
 import 'package:football_next_gen/widgets/divider.dart';
+import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/language.dart';
 import '../../../models/confirm_page_data.dart';
@@ -14,11 +16,8 @@ import '../../../widgets/dialog.dart';
 import '../../../widgets/scaffold.dart';
 
 class AddTournament extends StatelessWidget{
-
   final bool edit;
-
   const AddTournament({super.key, required this.edit});
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -30,16 +29,12 @@ class AddTournament extends StatelessWidget{
 
 class AddTournamentWidget extends StatefulWidget{
   final bool edit;
-
   const AddTournamentWidget({super.key, required this.edit});
-
   @override
   State<StatefulWidget> createState() => AddTournamentState();
-
 }
 
 class AddTournamentState extends State<AddTournamentWidget>{
-
   TextEditingController nameController = TextEditingController();
   TextEditingController typologyController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
@@ -47,9 +42,8 @@ class AddTournamentState extends State<AddTournamentWidget>{
   TextEditingController emailController = TextEditingController();
   TextEditingController rulesController = TextEditingController();
   TextEditingController infoController = TextEditingController();
-
   CreateTournamentCubit get _createTournamentCubit => context.read<CreateTournamentCubit>();
-
+  XFile? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +81,66 @@ class AddTournamentState extends State<AddTournamentWidget>{
                 emailController: emailController,
                 rulesController: rulesController,
                 infoController: infoController,
-                uploadPoster: (){},
+                uploadPoster: (){
+                  showModalBottomSheet<void>(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    context: context,
+                    builder: (BuildContext context) {
+                      return SizedBox(
+                        height: 200,
+                        child: Center(
+                          child: Column(
+                            children: <Widget>[
+                              MaterialButton(
+                                onPressed: openGallery,
+                                minWidth: MediaQuery.of(context).size.width,
+                                height: 80,
+                                elevation: 0,
+                                focusElevation: 0,
+                                highlightElevation: 0,
+                                child: const Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: Icon(Icons.photo_library_outlined,size: 30,color: primary,),
+                                    ),
+                                    Text18(
+                                      text: "Galleria",
+                                      textColor: primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              MaterialButton(
+                                onPressed: openCamera,
+                                minWidth: MediaQuery.of(context).size.width,
+                                height: 80,
+                                elevation: 0,
+                                focusElevation: 0,
+                                highlightElevation: 0,
+                                child:const Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 10),
+                                      child: Icon(Icons.camera_alt_outlined,size: 30,color: primary,),
+                                    ),
+                                    Text18(
+                                      text: "Camera",
+                                      textColor: primary,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
             ),
             buttonsSection()
           ],
@@ -116,7 +169,6 @@ class AddTournamentState extends State<AddTournamentWidget>{
                       poster: "poster", name: nameController.text);
                   _createTournamentCubit.fetchCreateTournament(tournamentEntity);
                   context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addTournamentConfirmed(context, tournamentEntity.id ?? 0, widget.edit));
-
                 },
                 text: widget.edit ? "Modifica torneo" : "Crea torneo",
               ),
@@ -146,5 +198,23 @@ class AddTournamentState extends State<AddTournamentWidget>{
             ],
           );
         });
+  }
+
+  openGallery() {
+    ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
+  }
+
+  openCamera() {
+    ImagePicker().pickImage(source: ImageSource.camera).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
   }
 }

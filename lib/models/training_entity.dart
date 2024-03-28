@@ -156,7 +156,7 @@ class TrainingEntity {
       "name": name,
       "date": DateFormat('yyyy-MM-ddTHH:mm:ss').format(date),
       "dateEnd": DateFormat('yyyy-MM-ddTHH:mm:ss').format(dateEnd),
-      "hour": '${hour.hour}:${hour.minute}:00', // Formato "HH:mm:ss"
+      "hour": "${hour.hour.toString().padLeft(2,'0')}:${hour.minute.toString().padLeft(2,'0')}", // Formato "HH:mm:ss"
       "field": field,
       "info": info,
       "id": id,

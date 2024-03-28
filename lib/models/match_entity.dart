@@ -71,7 +71,7 @@ class MatchEntity {
     "awayTeam": awayTeam,
     "place": place,
     "date": DateFormat('yyyy-MM-dd').format(date),
-    "hour": '${hour.hour}:${hour.minute}:00', // Formato "HH:mm:ss"
+    "hour": "${hour.hour.toString().padLeft(2,'0')}:${hour.minute.toString().padLeft(2,'0')}", // Formato "HH:mm:ss"
     "title": title,
   };
 

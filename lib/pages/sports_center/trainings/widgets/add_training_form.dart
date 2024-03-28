@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import '../../../../constants/language.dart';
 import '../../../../widgets/checkbox.dart';
@@ -12,6 +13,8 @@ class AddTrainingForm extends StatelessWidget{
   TextEditingController infoController;
   final bool isChecked;
   final Function(bool) onChanged;
+  final Function() onTap;
+  final Function() iconOnTap;
   final bool edit;
 
   AddTrainingForm({
@@ -22,7 +25,9 @@ class AddTrainingForm extends StatelessWidget{
     required this.hourController,
     required this.isChecked,
     required this.onChanged,
-    required this.edit
+    required this.edit,
+    required this.onTap,
+    required this.iconOnTap
   });
 
   @override
@@ -42,6 +47,12 @@ class AddTrainingForm extends StatelessWidget{
           controller: hourController,
           labelText: "Ora*",
           hintText: getCurrentLanguageValue(HOUR) ?? "",
+          onTap: onTap,
+          iconOnTap: iconOnTap,
+          showSuffixIcon: true,
+          readOnly: true,
+          suffixIcon: Icons.timelapse,
+          iconColor: black25,
         ),
 
         InputWidget(

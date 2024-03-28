@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_holo_date_picker/date_picker.dart';
 import 'package:flutter_holo_date_picker/i18n/date_picker_i18n.dart';
-import 'package:football_next_gen/auth/auth_listener.dart';
 import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
-import 'package:football_next_gen/models/authentication_entity.dart';
 import 'package:football_next_gen/models/confirm_page_data.dart';
 import 'package:football_next_gen/models/profile_entity.dart';
 import 'package:football_next_gen/models/user_entity.dart';
 import 'package:football_next_gen/pages/login_section/register/parent/widgets/child_data.dart';
 import 'package:football_next_gen/pages/login_section/register/parent/widgets/parent_data.dart';
 import 'package:football_next_gen/repository/auth/keycloack_repository.dart';
-import 'package:football_next_gen/repository/profile/profile_service.dart';
 import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/checkbox.dart';
 import 'package:football_next_gen/widgets/divider.dart';

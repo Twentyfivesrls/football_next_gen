@@ -39,8 +39,7 @@ class TrainingRepository {
   Future<TrainingEntity> createTraining(TrainingEntity trainingEntity) async {
     try {
       print("Sto creando un allenamneto");
-      Response response = await KeycloakRepository().httpClient!.post(
-          '$baseUrl/training/createTraining', data: trainingEntity.toJson());
+      Response response = await KeycloakRepository().httpClient!.post('$baseUrl/training/createTraining', data: trainingEntity.toJson());
       print(response.data);
       if (response.statusCode == 200) {
         TrainingEntity teamEntity = TrainingEntity.fromJson(response.data);

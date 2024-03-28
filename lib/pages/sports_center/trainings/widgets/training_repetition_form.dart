@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/models/training_entity.dart';
 import 'package:football_next_gen/models/weekday_element.dart';
 import 'package:football_next_gen/pages/sports_center/trainings/widgets/training_repetition_input.dart';
@@ -11,19 +12,19 @@ class TrainingRepetitionForm extends StatelessWidget {
   String _getDaysAbbreviation(DaysOfWeek day) {
     switch (day) {
       case DaysOfWeek.Lunedi:
-        return 'Lun';
+        return 'L';
       case DaysOfWeek.Martedi:
-        return 'Mar';
+        return 'M';
       case DaysOfWeek.Mercoledi:
-        return 'Mer';
+        return 'M';
       case DaysOfWeek.Giovedi:
-        return 'Gio';
+        return 'G';
       case DaysOfWeek.Venerdi:
-        return 'Ven';
+        return 'V';
       case DaysOfWeek.Sabato:
-        return 'Sab';
+        return 'S';
       case DaysOfWeek.Domenica:
-        return 'Dom';
+        return 'D';
     }
   }
   TextEditingController repetitionController;
@@ -42,6 +43,9 @@ class TrainingRepetitionForm extends StatelessWidget {
   final Color selectedTextColor;
   final List<bool> selectedList;
   final Function(int) onTap;
+  final Function() selectDate;
+  final iconOnTap;
+
 
   TrainingRepetitionForm({
     super.key,
@@ -60,7 +64,9 @@ class TrainingRepetitionForm extends StatelessWidget {
     required this.selectedColor,
     required this.selectedTextColor,
     required this.selectedList,
-    required this.onTap
+    required this.onTap,
+    required this.selectDate,
+    required this.iconOnTap
   });
 
   @override
@@ -86,7 +92,9 @@ class TrainingRepetitionForm extends StatelessWidget {
                   width: 60,
                   height: 40,
                   child:  TrainingRepetitionInput(
+                    onTap: (){},
                     hintText: 'N°',
+                    keyboardType: TextInputType.number,
                     controller: repetitionController,
                   )
               ),
@@ -143,12 +151,18 @@ class TrainingRepetitionForm extends StatelessWidget {
                   ),
 
                   SizedBox(
-                      width: 125,
+                      width: 150,
                       height: 40,
                       child: TrainingRepetitionInput(
+                        onTap: selectDate,
                         hintText: 'dd/mm/yyyy',
                         controller: dateController,
                         enabled: dateEnabled,
+                        iconOnTap: iconOnTap,
+                        showSuffixIcon: true,
+                        suffixIcon:  Icons.calendar_today,
+                        iconColor: black25,
+
                       )
                   ),
                 ],
@@ -171,7 +185,9 @@ class TrainingRepetitionForm extends StatelessWidget {
                       width: 60,
                       height: 40,
                       child: TrainingRepetitionInput(
+                        onTap: (){},
                         hintText: 'N°',
+                        keyboardType: TextInputType.number,
                         enabled: occurrenceEnabled,
                         controller: occurrenceController,
                       )

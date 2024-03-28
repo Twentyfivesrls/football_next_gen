@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:football_next_gen/bloc/training/create_training_cubit.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/models/training_entity.dart';
@@ -58,9 +59,9 @@ class AddTrainingState extends State<AddTrainingWidget>{
   bool dateEnabled = false;
   List<bool> selected = [false,false,false,false,false,false,false];
   RadioButtons? radioValue = RadioButtons.mai;
-
   CreateTrainingCubit get _createTrainingCubit => context.read<CreateTrainingCubit>();
-
+  var datePicked;
+  TimeOfDay? selectedTime = TimeOfDay.now();
 
   @override
   Widget build(BuildContext context) {
@@ -85,7 +86,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
                 },
               );
             });
-        },
+      },
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -112,6 +113,38 @@ class AddTrainingState extends State<AddTrainingWidget>{
 
   Widget formSection(){
     return AddTrainingForm(
+      onTap: () async {
+        final TimeOfDay? time = await showTimePicker(
+          context: context,
+          initialTime: selectedTime ?? TimeOfDay.now(),
+          initialEntryMode: TimePickerEntryMode.dialOnly,
+          cancelText: "Annulla",
+          confirmText: "Conferma",
+          hourLabelText: "Ora",
+          minuteLabelText: "Minuti",
+          errorInvalidText: "Carattere non valido",
+        );
+        setState(() {
+          selectedTime = time;
+          hourController.text = "${time!.hour.toString().padLeft(2,'0')}:${time.minute.toString().padLeft(2,'0')}";
+        });
+      },
+      iconOnTap: () async{
+        final TimeOfDay? time = await showTimePicker(
+          context: context,
+          initialTime: selectedTime ?? TimeOfDay.now(),
+          initialEntryMode: TimePickerEntryMode.dialOnly,
+          cancelText: "Annulla",
+          confirmText: "Conferma",
+          hourLabelText: "Ora",
+          minuteLabelText: "Minuti",
+          errorInvalidText: "Carattere non valido",
+        );
+        setState(() {
+          selectedTime = time;
+          hourController.text = "${time!.hour.toString().padLeft(2,'0')}:${time.minute.toString().padLeft(2,'0')}";
+        });
+      },
       edit: widget.edit,
       infoController: infoController,
       fieldController: fieldController,
@@ -131,6 +164,47 @@ class AddTrainingState extends State<AddTrainingWidget>{
     return Visibility(
       visible: showRepetition,
       child: TrainingRepetitionForm(
+        iconOnTap: () async {
+          datePicked = await DatePicker.showSimpleDatePicker(
+            context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now(),
+            dateFormat: "dd-MMMM-yyyy",
+            locale: DateTimePickerLocale.it,
+            titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+            cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+            confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+            textColor: black25,
+          );
+          if(datePicked != null){
+            String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+            setState(() {
+              dateController.text = formattedDate;
+            });
+          }
+        },
+        selectDate: () async {
+          datePicked = await DatePicker.showSimpleDatePicker(
+            context,
+            initialDate: DateTime.now(),
+            firstDate: DateTime(1900),
+            lastDate: DateTime.now(),
+            dateFormat: "dd-MMMM-yyyy",
+            locale: DateTimePickerLocale.it,
+            titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+            cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+            confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+            textColor: black25,
+          );
+          if(datePicked != null){
+            String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+
+            setState(() {
+              dateController.text = formattedDate;
+            });
+          }
+        },
         selectedTextColor: white,
         selectedColor: primary,
         onTap: (index){
@@ -192,7 +266,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
             final trainingEntity = TrainingEntity(
               date: widget.date,
               dateEnd: DateTime.now(),
-              hour: TimeOfDay.now(),
+              hour: selectedTime ?? TimeOfDay.now(),
               field: fieldController.text,
               info: infoController.text,
               weeksToRepeat: 2,
@@ -222,7 +296,7 @@ class AddTrainingState extends State<AddTrainingWidget>{
                       },
                     );
                   });
-              },
+            },
             text: getCurrentLanguageValue(CANCEL) ?? "",
             backgroundColor: cancelGrey,
             borderColor: cancelGrey,
