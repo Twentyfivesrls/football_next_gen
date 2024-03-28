@@ -10,8 +10,8 @@ import 'package:football_next_gen/repository/group/group_service.dart';
 class CreateGroupCubit extends Cubit<CreateGroupState> {
   CreateGroupCubit() : super(CreateGroupState(groupEntity: GroupEntity.emptyGroup()));
 
-  fetchCreateGroup(GroupEntity groupEntity)async{
-    GroupEntity result = await GroupService().fetchCreateGroup(groupEntity);
+  fetchCreateGroup(GroupEntity groupEntity, int id)async{
+    GroupEntity result = await GroupService().fetchCreateGroup(groupEntity, id);
     emit(CreateGroupState( groupEntity: result));
 
   }

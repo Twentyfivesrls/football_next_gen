@@ -185,7 +185,7 @@ class AddGroupState extends State<AddGroupWidget> {
                   groupName: groupNameController.text
               );
 
-              _createGroupCubit.fetchCreateGroup(groupEntity);
+              _createGroupCubit.fetchCreateGroup(groupEntity, widget.id);
 
               context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context, widget.id, widget.edit, groupEntity.id ?? 0, groupEntity.groupName));
             },
