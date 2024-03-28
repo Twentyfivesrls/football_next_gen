@@ -3,7 +3,7 @@ import 'package:football_next_gen/widgets/texts.dart';
 import 'package:football_next_gen/widgets/utilities/autocomplete_element.dart';
 import '../constants/colors.dart';
 
-class AutocompleteWidget<T extends AutocompleteElement> extends StatelessWidget {
+class GenericAutocomplete<T extends AutocompleteElement> extends StatelessWidget {
   List<T> kOptions = [];
   final String hintText;
   final bool showLabel;
@@ -18,7 +18,7 @@ class AutocompleteWidget<T extends AutocompleteElement> extends StatelessWidget 
   final Function(T) onSelected;
 
 
-  AutocompleteWidget({
+  GenericAutocomplete({
     super.key,
     required this.kOptions,
     required this.hintText,

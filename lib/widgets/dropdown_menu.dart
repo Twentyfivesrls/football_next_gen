@@ -13,6 +13,7 @@ class DropdownMenuWidget extends StatelessWidget{
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: DropdownMenu<String>(
+        width: MediaQuery.of(context).size.width * 0.897,
         initialSelection: initialSelection,
         onSelected: onSelected,
         dropdownMenuEntries: list.map<DropdownMenuEntry<String>>((String value) {

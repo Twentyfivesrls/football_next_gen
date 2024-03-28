@@ -11,7 +11,9 @@ import 'package:football_next_gen/widgets/buttons.dart';
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/dropdown_menu.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
+import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 import '../../../constants/language.dart';
 import '../../../widgets/dialog.dart';
 const List<String> list = <String>['Squadra in casa', 'Squadra in trasferta'];
@@ -53,6 +55,7 @@ class AddTeamState extends State<AddTeamWidget>{
   TextEditingController descriptionController = TextEditingController();
   bool showHome = true;
   String dropdownValue = list.first;
+  XFile? imageFile;
 
 
   @override
@@ -123,11 +126,71 @@ class AddTeamState extends State<AddTeamWidget>{
 
   Widget awayTeamSection() {
     return AwayTeamForm(
+      edit: widget.edit,
       nameController: nameController,
       coachController: coachController,
       managerController: managerController,
       descriptionController: descriptionController,
-      uploadLogo: () {  },
+      uploadLogo: () {
+        showModalBottomSheet<void>(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8)),
+          context: context,
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: 200,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    MaterialButton(
+                      onPressed: openGallery,
+                      minWidth: MediaQuery.of(context).size.width,
+                      height: 80,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
+                      child: const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.photo_library_outlined,size: 30,color: primary,),
+                          ),
+                          Text18(
+                            text: "Galleria",
+                            textColor: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: openCamera,
+                      minWidth: MediaQuery.of(context).size.width,
+                      height: 80,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
+                      child:const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.camera_alt_outlined,size: 30,color: primary,),
+                          ),
+                          Text18(
+                            text: "Camera",
+                            textColor: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
@@ -137,7 +200,66 @@ class AddTeamState extends State<AddTeamWidget>{
       coachController: coachController,
       managerController: managerController,
       descriptionController: descriptionController,
-      uploadLogo: () {  },
+      uploadLogo: () {
+        showModalBottomSheet<void>(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8)),
+          context: context,
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: 200,
+              child: Center(
+                child: Column(
+                  children: <Widget>[
+                    MaterialButton(
+                      onPressed: openGallery,
+                      minWidth: MediaQuery.of(context).size.width,
+                      height: 80,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
+                      child: const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.photo_library_outlined,size: 30,color: primary,),
+                          ),
+                          Text18(
+                            text: "Galleria",
+                            textColor: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: openCamera,
+                      minWidth: MediaQuery.of(context).size.width,
+                      height: 80,
+                      elevation: 0,
+                      focusElevation: 0,
+                      highlightElevation: 0,
+                      child:const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(right: 10),
+                            child: Icon(Icons.camera_alt_outlined,size: 30,color: primary,),
+                          ),
+                          Text18(
+                            text: "Camera",
+                            textColor: primary,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
       edit: edit,
     );
   }
@@ -191,4 +313,21 @@ class AddTeamState extends State<AddTeamWidget>{
     );
   }
 
+  openGallery() {
+    ImagePicker().pickImage(source: ImageSource.gallery).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
+  }
+
+  openCamera() {
+    ImagePicker().pickImage(source: ImageSource.camera).then((value) {
+      setState(() {
+        imageFile = value;
+      });
+      context.pop();
+    });
+  }
 }

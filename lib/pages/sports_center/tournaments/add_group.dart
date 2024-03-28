@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:football_next_gen/bloc/group/create_group_cubit.dart';
+import 'package:football_next_gen/bloc/team/teams_bloc.dart';
 import 'package:football_next_gen/constants/app_pages.dart';
 import 'package:football_next_gen/models/group_entity.dart';
 import 'package:football_next_gen/models/match_entity.dart';
@@ -8,6 +10,7 @@ import 'package:football_next_gen/pages/sports_center/tournaments/widgets/add_ma
 import 'package:football_next_gen/widgets/divider.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/scaffold.dart';
+import 'package:football_next_gen/widgets/texts.dart';
 import 'package:go_router/go_router.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/images_constants.dart';
@@ -15,6 +18,7 @@ import '../../../constants/language.dart';
 import '../../../models/confirm_page_data.dart';
 import '../../../widgets/buttons.dart';
 import '../../../widgets/dialog.dart';
+import 'package:intl/intl.dart';
 
 class TextEditingControllerGroup {
   TextEditingController homeTeamController = TextEditingController();
@@ -33,9 +37,16 @@ class AddGroup extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => CreateGroupCubit(),
-      child:  AddGroupWidget(id: id, edit: edit),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => CreateGroupCubit(),
+        ),
+        BlocProvider(
+          create: (_) => TeamsCubit(),
+        ),
+      ],
+      child: AddGroupWidget(id: id, edit: edit),
     );
   }
 }
@@ -61,13 +72,17 @@ class AddGroupState extends State<AddGroupWidget> {
   TextEditingController groupNameController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   List<TextEditingControllerGroup> matchList = List.empty(growable: true);
+  TimeOfDay? selectedTime = TimeOfDay.now();
+  var datePicked;
 
   CreateGroupCubit get _createGroupCubit => context.read<CreateGroupCubit>();
+  TeamsCubit get _teamsCubit => context.read<TeamsCubit>();
 
 
   @override
   void initState() {
     matchList.add(TextEditingControllerGroup());
+    _teamsCubit.fetchAllTeams();
     super.initState();
   }
 
@@ -94,31 +109,120 @@ class AddGroupState extends State<AddGroupWidget> {
                 },
               );
             });
-        },
+      },
       body: SingleChildScrollView(
         child: Column(
           children: [
-
             groupNameSection(),
+            ...matchList.map((e) => BlocBuilder<TeamsCubit,TeamsPageState>(
+                builder: (_,teamState) {
+                  if(teamState is TeamsPageLoading){
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  else if(teamState is TeamsPageLoaded){
+                    return AddMatchForm(
+                      onSelected: (AutocompleteElement) {
 
-            ...matchList.map((e) =>
-                AddMatchForm(
-                    matchTitle: "Partita 1",
-                    awayTeamController: awayTeamController,
-                    homeTeamController: homeTeamController,
-                    placeController: placeController,
-                    dateController: dateController,
-                    hourController: hourController,
-                    cancellable: matchList.indexOf(e) == 0 ? false : true,
-                    deleteMatch: (){
-                      setState(() {
-                        matchList.remove(e);
-                      });
-                    },
-                    addNewTeam: () {
-                      context.push(AppPage.addTeam.path);
-                    }
-                )
+                      },
+                      kOptions: teamState.teams,
+                      onTap: () async {
+                        final TimeOfDay? time = await showTimePicker(
+                          context: context,
+                          initialTime: selectedTime ?? TimeOfDay.now(),
+                          initialEntryMode: TimePickerEntryMode.dialOnly,
+                          cancelText: "Annulla",
+                          confirmText: "Conferma",
+                          hourLabelText: "Ora",
+                          minuteLabelText: "Minuti",
+                          errorInvalidText: "Carattere non valido",
+                        );
+                        setState(() {
+                          selectedTime = time;
+                          hourController.text = "${time!.hour.toString().padLeft(2,'0')}:${time.minute.toString().padLeft(2,'0')}";
+                        });
+                      },
+                      iconOnTap:  () async {
+                        final TimeOfDay? time = await showTimePicker(
+                          context: context,
+                          initialTime: selectedTime ?? TimeOfDay.now(),
+                          initialEntryMode: TimePickerEntryMode.dialOnly,
+                          cancelText: "Annulla",
+                          confirmText: "Conferma",
+                          hourLabelText: "Ora",
+                          minuteLabelText: "Minuti",
+                          errorInvalidText: "Carattere non valido",
+                        );
+                        setState(() {
+                          selectedTime = time;
+                          hourController.text = "${time!.hour.toString().padLeft(2,'0')}:${time.minute.toString().padLeft(2,'0')}";
+                        });
+                      },
+                      dateIconOnTap: () async {
+                        datePicked = await DatePicker.showSimpleDatePicker(
+                          context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                          dateFormat: "dd-MM-yyyy",
+                          locale: DateTimePickerLocale.it,
+                          titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+                          cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                          confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+                          textColor: black25,
+                        );
+                        if(datePicked != null){
+                          String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+                          setState(() {
+                            dateController.text = formattedDate;
+                          });
+                        }
+                      },
+                      dateOnTap: () async {
+                        datePicked = await DatePicker.showSimpleDatePicker(
+                          context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                          dateFormat: "dd-MMMM-yyyy",
+                          locale: DateTimePickerLocale.it,
+                          titleText: getCurrentLanguageValue(SELECT_DATE) ?? "",
+                          cancelText: getCurrentLanguageValue(CANCEL) ?? "",
+                          confirmText: getCurrentLanguageValue(CONFIRM) ?? "",
+                          textColor: black25,
+                        );
+                        if(datePicked != null){
+                          String formattedDate = DateFormat('dd/MM/yyyy').format(datePicked);
+                          setState(() {
+                            dateController.text = formattedDate;
+                          });
+                        }
+                      },
+                      matchTitle: "Partita 1",
+                      awayTeamController: awayTeamController,
+                      homeTeamController: homeTeamController,
+                      placeController: placeController,
+                      dateController: dateController,
+                      hourController: hourController,
+                      cancellable: matchList.indexOf(e) == 0 ? false : true,
+                      deleteMatch: (){
+                        setState(() {
+                          matchList.remove(e);
+                        });
+                      },
+                      addNewTeam: () {
+                        context.push(AppPage.addTeam.path);
+                      },
+                    );
+                  }  else{
+                    // here the state is error
+                    return Center(
+                      child: Text18(
+                        text: (teamState as TeamsPageError).error.toString(),
+                      ),
+                    );
+                  }
+                }
+            )
             ),
             newMatchButtonSection(),
             buttonsSection()
@@ -174,10 +278,14 @@ class AddGroupState extends State<AddGroupWidget> {
           child: ActionButton(
             onPressed: () {
               List<MatchEntity> matches = [
-                MatchEntity(homeTeam: homeTeamController.text,
-                    awayTeam: awayTeamController.text,
-                    place: placeController.text, date: DateTime.now(),
-                    title: titleController.text, hour: TimeOfDay.now()),
+                MatchEntity(
+                  homeTeam: homeTeamController.text,
+                  awayTeam: awayTeamController.text,
+                  place: placeController.text,
+                  date: datePicked,
+                  title: titleController.text,
+                  hour: selectedTime ?? TimeOfDay.now(),
+                ),
 
               ];
               final groupEntity = GroupEntity(
@@ -210,7 +318,7 @@ class AddGroupState extends State<AddGroupWidget> {
                       },
                     );
                   });
-              },
+            },
             text: getCurrentLanguageValue(CANCEL) ?? "",
             backgroundColor: cancelGrey,
             borderColor: cancelGrey,

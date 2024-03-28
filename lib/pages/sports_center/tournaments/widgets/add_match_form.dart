@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:football_next_gen/constants/colors.dart';
 import 'package:football_next_gen/constants/images_constants.dart';
 import 'package:football_next_gen/constants/language.dart';
+import 'package:football_next_gen/models/team_entity.dart';
+import 'package:football_next_gen/widgets/autocomplete.dart';
+import 'package:football_next_gen/widgets/generic_autocomplete.dart';
 import 'package:football_next_gen/widgets/inputs.dart';
 import 'package:football_next_gen/widgets/texts.dart';
+import 'package:football_next_gen/widgets/utilities/autocomplete_element.dart';
 
 import '../../../../widgets/divider.dart';
 
@@ -17,7 +22,13 @@ class AddMatchForm extends StatelessWidget{
   final String matchTitle;
   final Function() addNewTeam;
   final Function() deleteMatch;
+  final Function() onTap;
+  final Function() iconOnTap;
+  final Function() dateOnTap;
+  final Function() dateIconOnTap;
   final bool cancellable;
+  final Function(AutocompleteElement) onSelected;
+  final List<TeamEntity> kOptions;
 
 
   AddMatchForm({
@@ -30,7 +41,13 @@ class AddMatchForm extends StatelessWidget{
     required this.hourController,
     required this.addNewTeam,
     this.cancellable = false,
-    required this.deleteMatch
+    required this.deleteMatch,
+    required this.onTap,
+    required this.iconOnTap,
+    required this.dateOnTap,
+    required this.dateIconOnTap,
+    required this.onSelected,
+    required this.kOptions
   });
 
 
@@ -54,6 +71,13 @@ class AddMatchForm extends StatelessWidget{
                       child: SvgPicture.asset(ImagesConstants.closeImg)
                   ))
             ],
+          ),
+
+          GenericAutocomplete<TeamEntity>(
+              kOptions: kOptions,
+              hintText: "hintText",
+              labelText: "labeltext",
+              onSelected: onSelected,
           ),
 
 
@@ -96,18 +120,34 @@ class AddMatchForm extends StatelessWidget{
             labelText: getCurrentLanguageValue(PLACE) ?? "",
             hintText: getCurrentLanguageValue(PLACE) ?? "",
           ),
+
           InputWidget(
-            labelPaddingTop: 20,
             controller: dateController,
-            labelText: getCurrentLanguageValue(DATE) ?? "",
             hintText: getCurrentLanguageValue(DATE) ?? "",
+            labelText: getCurrentLanguageValue(DATE) ?? "",
+            labelPaddingTop: 20,
+            showSuffixIcon: true,
+            suffixIcon: Icons.calendar_today,
+            iconOnTap: dateIconOnTap,
+            readOnly: true,
+            onTap: dateOnTap,
+            iconColor: black25,
+
           ),
+
           InputWidget(
             labelPaddingTop: 20,
             controller: hourController,
-            labelText: getCurrentLanguageValue(HOUR) ?? "",
+            labelText: "Ora*",
             hintText: getCurrentLanguageValue(HOUR) ?? "",
+            onTap: onTap,
+            iconOnTap: iconOnTap,
+            showSuffixIcon: true,
+            readOnly: true,
+            suffixIcon: Icons.timelapse,
+            iconColor: black25,
           ),
+
 
           const Padding(
             padding: EdgeInsets.only(top: 30),

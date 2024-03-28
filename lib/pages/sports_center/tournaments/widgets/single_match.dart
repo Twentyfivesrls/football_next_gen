@@ -79,7 +79,7 @@ class SingleMatch extends StatelessWidget {
           child: InfoBoxWidget(
             showIcon: false,
             labelText: getCurrentLanguageValue(HOUR) ?? "",
-            text: "${match.hour.hour}:${match.hour.minute}",
+            text: "${match.hour.hour.toString().padLeft(2,"0")}:${match.hour.minute.toString().padLeft(2,"0")}",
           ),
         ),
         Padding(

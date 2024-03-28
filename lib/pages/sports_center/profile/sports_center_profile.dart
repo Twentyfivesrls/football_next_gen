@@ -89,8 +89,6 @@ class SportsCenterProfileState extends State<SportsCenterProfileWidget> with Tic
       _sportFieldsCubit.fetchUserFields();
       _extraServicesCubit.fetchUserServices();
       _postCubit.fetchUserPostLists();
-
-
   }
 
   @override

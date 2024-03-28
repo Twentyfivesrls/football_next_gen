@@ -1,4 +1,5 @@
 import 'package:football_next_gen/constants/images_constants.dart';
+import 'package:football_next_gen/widgets/utilities/autocomplete_element.dart';
 
 class TeamEntityDtoForList {
   final int id;
@@ -15,15 +16,16 @@ class TeamEntityDtoForList {
 
   });
 
-  factory TeamEntityDtoForList.defaultValue({bool isHome = true}) => TeamEntityDtoForList(
-      id: 0,
-      name: "name",
-      svgLogo: ImagesConstants.teamLogoImg,
-      isHomeTeam: isHome
-  );
+  factory TeamEntityDtoForList.defaultValue({bool isHome = true}) =>
+      TeamEntityDtoForList(
+          id: 0,
+          name: "name",
+          svgLogo: ImagesConstants.teamLogoImg,
+          isHomeTeam: isHome
+      );
 }
 
-class TeamEntity {
+class TeamEntity with AutocompleteElement{
   final int? id;
   final String name;
   final String? coach;
@@ -109,4 +111,16 @@ class TeamEntity {
   int get hashCode => name.hashCode;
 
   factory TeamEntity.emptyPost() => TeamEntity(svgLogo: "svgLogo", coach: "coach", description: "description", manager: "manager", name: "name", isHomeTeam: true);
+
+  @override
+  String getDisplayString() {
+    // TODO: implement getDisplayString
+    return name ?? "";
+  }
+
+  @override
+  String getOptionStringValue() {
+    // TODO: implement getOptionStringValue
+    return name ?? "";
+  }
 }
