@@ -31,13 +31,13 @@ class ConfirmPageData{
       );
 
 
-  factory ConfirmPageData.addGroupConfirmed(BuildContext context, int tournamentId, bool edit) =>
+  factory ConfirmPageData.addGroupConfirmed(BuildContext context, int tournamentId, bool edit, int id, String groupName) =>
       ConfirmPageData(
         titleText: edit ? 'Girone modificato con successo!' : getCurrentLanguageValue(GROUP_CREATED) ?? "",
         navigationText: getCurrentLanguageValue(GROUP_DETAIL) ?? "",
         bottomText: getCurrentLanguageValue(GO_TO_PAGE) ?? "",
         onTap: (){
-          context.push(AppPage.groupDetail.path, extra: tournamentId);
+          context.push(AppPage.groupDetail.path, extra: {"id" : id, "tournamentId" : tournamentId,"groupName" : groupName});
         },
       );
 

@@ -180,11 +180,14 @@ class AddGroupState extends State<AddGroupWidget> {
                     title: titleController.text, hour: TimeOfDay.now()),
 
               ];
-              final groupEntity = GroupEntity(matches: matches, groupName: groupNameController.text);
+              final groupEntity = GroupEntity(
+                  matches: matches,
+                  groupName: groupNameController.text
+              );
 
               _createGroupCubit.fetchCreateGroup(groupEntity);
 
-              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context, widget.id, widget.edit));
+              context.push(AppPage.confirmPage.path, extra: ConfirmPageData.addGroupConfirmed(context, widget.id, widget.edit, groupEntity.id ?? 0, groupEntity.groupName));
             },
             text: widget.edit ? "Modifica girone" : getCurrentLanguageValue(ADD_GROUP) ?? "",
           ),
